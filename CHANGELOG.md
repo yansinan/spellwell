@@ -1,5 +1,51 @@
 # CHANGELOG
 
+## [0.9.0] — 2026-11-11 · P8 前台学习分析 + 后台单词编辑
+
+### Added
+
+- **新增 P8 学习分析阶段**（输入适配顺延 P9）：
+  - `src/ui/analytics.js`：session/attempts/按日/按词/状态/probe 纯统计；
+  - Header `Stats` 报告页：本次练习、历史总览、最近 5 天、Word states、最近 10 次答案；
+  - Done 页显示本次 `correct / total` 与正确率；
+  - 只读报告，无积分/排行榜，不参与调度。
+- 后台单词库/unit 编辑器：
+  - 新增单词、编辑 text/level/reviewStatus；
+  - 增删改 unit，人工选择 grapheme；
+  - 保存到本机 IndexedDB，学习端刷新可见；
+  - 下载当前草稿 JSON；reviewed-only 导出仍阻断未审核内容。
+- `tests/p7/editor.test.js`、`tests/p8/analytics.test.js`。
+- ADR-0014：前台学习分析与历史统计。
+
+### Changed
+
+- `package.json` 版本 `0.8.0` → `0.9.0`；新增 `test:p8`。
+- 阶段重排：P8 学习分析、P9 输入适配、P10 挑战、P11 平移。
+- 后台从只读统计升级为单词/unit 编辑 + 导出控制台。
+- `README` / `ROADMAP` / `TRACEABILITY` / `AGENTS` / `FILE_SPEC` 状态推进到 P9。
+
+### Verification
+
+```bash
+node tests/runTests.js --phase=p7
+# PASS  p7 gate · 170 passed · 0 failed · 30 files
+
+node tests/runTests.js --phase=p8
+# PASS  p8 gate · 173 passed · 0 failed · 31 files
+```
+
+- Stats：4 answers / 50%，按日正确率、词状态、最近 4 条答案均显示。
+- 后台：新增/编辑 word + units，保存到 IndexedDB；当前种子仍 38 条 unreviewed，导出阻断。
+- 390px Stats 无横向滚动。
+
+### Known limitations
+
+- Stats 固定最近 10 条/5 天，无筛选/导出。
+- 后台句子库/混淆项仍只读；完整可视化标注编辑器待后续。
+- 不做积分/排行榜/家长端完整报表。
+
+---
+
 ## [0.8.0] — 2026-11-11 · P7 内容后台与导出校验
 
 ### Added

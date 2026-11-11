@@ -1,6 +1,6 @@
 # 文件与工程规范 · FILE_SPEC
 
-**适用版本**：DESIGN v1.1 / 仓库 v0.8.0（P7）
+**适用版本**：DESIGN v1.1 / 仓库 v0.9.0（P8）
 **地位**：本文件是 `docs/DESIGN.md` 的工程实施细则。与 DESIGN 冲突时，以 DESIGN 为准；本文件负责把 DESIGN 翻译成可机械检查的规则。
 
 ---
@@ -70,6 +70,7 @@
 │   │   ├── PracticeScreen.js    # P1—P4 学习端（点选/拖拽/交换/编辑/间隙）
 │   │   ├── dragGeometry.js      # 64px 吸附半径与最近槽位
 │   │   ├── sequenceOrder.js     # 已到位块插入式重排
+│   │   ├── analytics.js        # P8 纯统计：session/历史/按日/状态
 │   │   ├── sound.js             # Web Audio 轻音效 + 静音开关
 │   │   ├── ParentScreen.js
 │   │   └── skins/              # P8；皮肤只换 token，不换行为
@@ -81,6 +82,7 @@
 │   └── admin/                  # P7；内容生产，不写学习状态
 │       ├── index.html
 │       ├── AdminApp.js
+│       ├── ContentEditor.js    # 单词/unit 编辑纯函数
 │       └── ContentValidator.js # V1—V10 + buildExport
 ├── tests/
 │   ├── runTests.js             # 阶段门 runner；无测试框架
@@ -94,7 +96,7 @@
 │   ├── DESIGN.md               # 唯一需求源
 │   ├── FILE_SPEC.md            # 本文件
 │   ├── TRACEABILITY.md         # 条款 → 代码 → 测试
-│   ├── ROADMAP.md              # P0—P10 门禁与状态
+│   ├── ROADMAP.md              # P0—P11 门禁与状态
 │   ├── CONTENT_SPEC.md         # 内容数据规范
 │   └── decisions/              # ADR，一次偏离一篇
 ├── AGENTS.md                   # agent/贡献者执行契约
@@ -217,7 +219,7 @@ questionTypes  ←  scheduler
 - `core/contracts.js` 导出 `CONTRACT_VERSION`；跨层结构变更必须 +1，并写 ADR。
 - 存储 `schema.js` 导出 `DB_VERSION`；IndexedDB 升级必须写迁移函数与测试（P2 起）。
 - 内容 JSON 顶层带 `"version": 1`；内容格式变更 +1，并更新 `CONTENT_SPEC.md`。
-- `package.json` 版本跟阶段走：P0 `0.1.0`，P1 `0.2.0`，P2 `0.3.0`，P3 `0.4.0`，P4 `0.5.0`，P5 `0.6.0`，P6 `0.7.0`，P7 `0.8.0`，以此类推；P10 `1.0.0`。
+- `package.json` 版本跟阶段走：P0 `0.1.0`，P1 `0.2.0`，P2 `0.3.0`，P3 `0.4.0`，P4 `0.5.0`，P5 `0.6.0`，P6 `0.7.0`，P7 `0.8.0`，P8 `0.9.0`，P9 `0.10.0`，P10 `0.11.0`，P11 `1.0.0`。
 
 ---
 

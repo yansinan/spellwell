@@ -601,3 +601,50 @@
   font-size: 18px;
   color: var(--sw-ink);
 }
+
+/* P8 学习分析 */
+.sw-report {
+  gap: 14px;
+}
+
+.sw-report__block {
+  width: 100%;
+  max-width: 360px;
+  padding: 14px 18px;
+  border-radius: var(--sw-radius-sm);
+  background: var(--sw-surface);
+  border: 1px solid var(--sw-line);
+}
+
+.sw-report__block h2 {
+  margin: 0 0 6px;
+  font-family: var(--sw-font-body);
+  font-size: 17px;
+}
+
+.sw-report__block p {
+  margin: 4px 0;
+}
+
+.sw-report__list {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sw-report__list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--sw-line);
+}
+
+.sw-report__list li:last-child {
+  border-bottom: 0;
+}
+
+.sw-report__list small {
+  color: var(--sw-ink-soft);
+}

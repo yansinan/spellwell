@@ -1,19 +1,19 @@
 # 开发路线图 · ROADMAP
 
-**当前阶段**：P7 ✅（2026-11-11）
-**下一阶段**：P8（输入适配与移动端）
-**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P7 不通过不进入 P8。
+**当前阶段**：P8 ✅（2026-11-11）
+**下一阶段**：P9（输入适配与移动端）
+**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P8 不通过不进入 P9。
 
 ---
 
 ## 1. 门禁命令
 
 ```bash
-# 当前阶段（P7，累计 p0..p7）
-node tests/runTests.js --phase=p7
+# 当前阶段（P8，累计 p0..p8）
+node tests/runTests.js --phase=p8
 
 # 后续阶段（累计运行 p0..pN）
-node tests/runTests.js --phase=p8
+node tests/runTests.js --phase=p9
 
 # 默认：自动跑到仓库中已存在的最高阶段
 node tests/runTests.js
@@ -40,9 +40,10 @@ node tools/serve.mjs
 | **P5** | 组合强化与配对（T-MATCH） | `--phase=p5` PASS + 跨 2 词连续正确 | ✅ 完成 |
 | **P6** | 判断纠错与语境抽查（T-JUDGE-FIX/T-CLOZE） | `--phase=p6` PASS + 假掌握被拦下 | ✅ 完成 |
 | **P7** | 人工标注后台系统 | `--phase=p7` PASS + 错误切分阻断导出 | ✅ 完成 |
-| **P8** | 输入适配与体验（PC/移动） | `--phase=p8` PASS + 同 spec+seed 双端一致 | ⏳ 下一步 |
-| **P9** | 挑战旁路与变换预留 | `--phase=p9` PASS + 挑战不写主状态 | ⏳ |
-| **P10** | 平移准备 | `--phase=p10` PASS + 换 adapter 仓库零改动 | ⏳ |
+| **P8** | 前台学习分析（新增） | `--phase=p8` PASS + 本次/历史报告 | ✅ 完成 |
+| **P9** | 输入适配与体验（PC/移动） | `--phase=p9` PASS + 同 spec+seed 双端一致 | ⏳ 下一步 |
+| **P10** | 挑战旁路与变换预留 | `--phase=p10` PASS + 挑战不写主状态 | ⏳ |
+| **P11** | 平移准备 | `--phase=p11` PASS + 换 adapter 仓库零改动 | ⏳ |
 
 ---
 
@@ -239,7 +240,7 @@ node tests/runTests.js --phase=p4
 
 - 不做 T-MATCH / T-CLOZE（P5/P6）。
 - 不做 P5 组合强化、家长端完整报表。
-- 不做拖拽版 T-REORDER（点选已等价；P8 再扩 PointerAdapter）。
+- 不做拖拽版 T-REORDER（点选已等价；P9 再扩 PointerAdapter）。
 
 ---
 
@@ -324,6 +325,7 @@ node tests/runTests.js --phase=p6
 - [x] `ContentValidator`：V1—V9 结构校验 + V10 reviewed-only。
 - [x] `buildExport`：无效/未审核内容阻断，返回可定位 `unreviewed[]`。
 - [x] `AdminApp`：同源加载 4 库、显示计数/错误、导出按钮；后台不 import 状态仓库。
+- [x] 单词库/unit 编辑器：新增单词、编辑 text/unit、选择 grapheme、保存到本机 IndexedDB、下载草稿。
 - [x] `/src/admin/index.html` 可访问；学习端不暴露入口。
 - [x] `tests/p7/content.test.js`、`tests/p7/adminArchitecture.test.js`。
 - [x] ADR-0013：ContentValidator、后台与导出阻断。
@@ -332,7 +334,7 @@ node tests/runTests.js --phase=p6
 
 ```bash
 node tests/runTests.js --phase=p7
-# PASS  p7 gate · 168 passed · 0 failed · 29 files
+# PASS  p7 gate · 170 passed · 0 failed · 30 files
 ```
 
 - 当前种子：V1—V9 通过；V10 阻断 38 条 unreviewed，导出按钮 disabled。
@@ -340,16 +342,51 @@ node tests/runTests.js --phase=p7
 - 切分不闭合、缺组合、重复 ID、句子答案错、混淆项重复均能定位。
 - 后台浏览器：words 10 / graphemes 22 / sentences 4 / confusables 2；显示 `CONTENT_EXPORT_UNREVIEWED`。
 - 后台模块不触碰 wordStates/graphemeStates/attempts。
+- 后台新增单词/unit 编辑、IndexedDB 保存与草稿下载；当前种子 unreviewed 仍阻断 reviewed-only 导出。
 
 ### P7 明确不做
 
-- 不做 P8 输入适配/移动端专项。
-- 不做 P9 挑战模式。
-- 当前后台是只读校验+导出，不是完整可视化标注编辑器。
+- 不做 P9 输入适配/移动端专项。
+- 不做 P10 挑战模式。
+- 句子库/混淆项编辑仍待后续；当前重点已覆盖单词与 unit 切分。
 
 ---
 
-## 11. P8 任务书（下一阶段）
+## 11. P8 任务书（已完成）
+
+**目标**：新增前台学习分析：本次练习效果、历史答题、按日/按词/错误类型、词状态分布。
+
+### 交付物
+
+- [x] `src/ui/analytics.js` 纯统计：session、attempts、按日、按词、状态、probe。
+- [x] Header `Stats` 入口：历史报告；Back 返回练习。
+- [x] Done 页显示本次 `correct / total` 与正确率。
+- [x] 报告包含：本次练习、历史总览、最近 5 天、Word states、最近 10 次答题。
+- [x] `loadReport` 从 AttemptRepository/StateRepository/adapter 只读加载。
+- [x] `tests/p8/analytics.test.js`。
+- [x] ADR-0014：前台学习分析与历史统计。
+
+### 验收结果
+
+```bash
+node tests/runTests.js --phase=p8
+# PASS  p8 gate · 173 passed · 0 failed · 31 files
+```
+
+- 浏览器 Stats：4 answers / 50%，最近 4 天按日正确率，learning/reviewing 分布，最近 4 条答案。
+- 本次练习在 Done 页汇总；不显示积分/排行榜。
+- Stats 页只读；Back 返回当前题/结束页。
+- 390px 无横向滚动。
+
+### P8 明确不做
+
+- 不做积分、连胜、排行榜。
+- 不做筛选/导出报告；固定最近 10 条/5 天。
+- 不做 P9 输入适配、P10 挑战。
+
+---
+
+## 12. P9 任务书（下一阶段）
 
 **目标**：把输入适配器抽成 Pointer/Keyboard 双端，统一鼠标/触摸/键盘行为，完成移动端体验。
 
@@ -359,25 +396,25 @@ node tests/runTests.js --phase=p7
 2. T-SEQUENCE 等题型的点选/拖拽/键盘等价；触摸与鼠标同 spec+seed 一致。
 3. 移动端布局、点击热区、滚动/安全区；不引入手势库。
 4. 键盘解锁（连续正确后）作为升级仪式，不改变难度语义。
-5. `tests/p8/` + 双端浏览器验收；P1—P7 不回退。
-6. 不做 P9 挑战、不做 P10 Node adapter。
+5. `tests/p9/` + 双端浏览器验收；P1—P8 不回退。
+6. 不做 P10 挑战、不做 P11 Node adapter。
 
 ### 验收
 
-- `node tests/runTests.js --phase=p8` PASS。
+- `node tests/runTests.js --phase=p9` PASS。
 - 同 spec+seed 在鼠标/触摸/键盘下判定一致。
 - 390px 无横向滚动；无手势库/新依赖。
 - 现有题型交互不回退。
 
 ### 启动提示词（可直接交给 agent）
 
-> 只做 P8，不提前做 P9。先读 `AGENTS.md`、`docs/DESIGN.md §3.2/§6.2`、`docs/TRACEABILITY.md` 的 R-UI-03/R-INPUT-*。
+> 只做 P9，不提前做 P10。先读 `AGENTS.md`、`docs/DESIGN.md §3.2/§6.2`、`docs/TRACEABILITY.md` 的 R-UI-03/R-INPUT-*。
 > 抽取 PointerAdapter/KeyboardAdapter，保持题型只消费 InputEvent；完成双端验收。
-> 每步运行 `node tests/runTests.js --phase=p8`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+> 每步运行 `node tests/runTests.js --phase=p9`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
 
 ---
 
-## 12. 后续阶段要点（防止提前实现）
+## 13. 后续阶段要点（防止提前实现）
 
 | 阶段 | 关键新增 | 不得提前做的事 |
 |---|---|---|
@@ -387,9 +424,10 @@ node tests/runTests.js --phase=p7
 | P5 | 组合阶梯、T-MATCH | 不要做家长端完整报表 |
 | P6 | T-JUDGE-FIX/T-CLOZE、假掌握抽查 | 不要做后台 |
 | P7 | 标注后台、ContentValidator、导出阻断 | 后台不得写学习状态 |
-| P8 | Pointer/Keyboard 双适配、移动端 | 不得引入手势库 |
-| P9 | 挑战旁路、morphMode | 挑战不得写主状态 |
-| P10 | Node adapter、调度层 Node 运行 | 不得改仓库层接口 |
+| P8 | 学习分析 Stats/历史/状态报告 | 不做积分/排行榜/筛选导出 |
+| P9 | Pointer/Keyboard 双适配、移动端 | 不得引入手势库 |
+| P10 | 挑战旁路、morphMode | 挑战不得写主状态 |
+| P11 | Node adapter、调度层 Node 运行 | 不得改仓库层接口 |
 
 **P3/P4 预留：选择粒度**。当前 T-SEQUENCE 只按人工标注的 grapheme 整块选择。
 后续通过 `spec.params.unitGranularity`（`grapheme | letter | mixed`）和 `splitUnitIds`
@@ -404,7 +442,7 @@ P1 不实现字母级/混合粒度。
 
 ---
 
-## 13. 阶段完成检查
+## 14. 阶段完成检查
 
 - [ ] 本阶段门禁 PASS，且低阶段测试未回退。
 - [ ] `TRACEABILITY.md` 中本阶段条目从 ⏳/🧪 改为 ✅。

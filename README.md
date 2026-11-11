@@ -4,7 +4,7 @@
 不做听力、不做选择题（判断+改错除外）、不做图片配对、不做积分/排行榜。
 
 - **定位**：纯前端 ES Modules，无构建、无框架、无运行时依赖；后期可平移 Node 后端。
-- **当前阶段**：**P7 内容后台与导出校验 ✅**；下一步 P8 输入适配与移动端。
+- **当前阶段**：**P8 前台学习分析 ✅**；下一步 P9 输入适配与移动端。
 - **需求源**：[`docs/DESIGN.md`](docs/DESIGN.md)（定稿 v1.1）。
 
 ---
@@ -14,8 +14,8 @@
 需要 Node 18+（仅用于测试与本地静态服务器，应用本身跑在浏览器）。
 
 ```bash
-# P7 阶段门禁（累计 P0..P7）
-node tests/runTests.js --phase=p7
+# P8 阶段门禁（累计 P0..P8）
+node tests/runTests.js --phase=p8
 
 # 本地预览：ESM 不能走 file://，必须用 HTTP
 node tools/serve.mjs
@@ -51,11 +51,11 @@ npm start
 |---|---|---|
 | 唯一需求源 | [`docs/DESIGN.md`](docs/DESIGN.md) | 产品决策、架构铁律、阶段划分；改动先写 ADR |
 | 条款追溯 | [`docs/TRACEABILITY.md`](docs/TRACEABILITY.md) | 每条规则 → 代码 → 测试 → 阶段 → 状态 |
-| 阶段门禁 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | P0—P10 验收标准；当前阶段只做当前阶段 |
+| 阶段门禁 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | P0—P11 验收标准；当前阶段只做当前阶段 |
 | 工程规范 | [`docs/FILE_SPEC.md`](docs/FILE_SPEC.md) | 目录、命名、依赖方向、测试与禁止清单 |
 | 内容规范 | [`docs/CONTENT_SPEC.md`](docs/CONTENT_SPEC.md) | 人工切分、ID 稳定性、校验规则 V1—V10 |
-| 执行契约 | [`AGENTS.md`](AGENTS.md) | agent/贡献者必读顺序、铁律、完成定义、P8 启动提示词 |
-| 决策记录 | [`docs/decisions/`](docs/decisions/) | 对文档歧义的裁决；ADR-0001—ADR-0013 |
+| 执行契约 | [`AGENTS.md`](AGENTS.md) | agent/贡献者必读顺序、铁律、完成定义、P9 启动提示词 |
+| 决策记录 | [`docs/decisions/`](docs/decisions/) | 对文档歧义的裁决；ADR-0001—ADR-0014 |
 | 代码头 | 每个 `src/**/*.js` | `@layer` / `@phase` / `@doc §x.y`，由测试校验 |
 | 架构守卫 | `tests/p0/architecture.test.js` | 无 `Math.random`、无越层 import、无 DOM 泄漏、无循环依赖、仓库只用 7 个存储方法 |
 | 文档守卫 | `tests/p0/traceability.test.js` | 枚举/阶段/token/ADR/零依赖与文档一致 |
@@ -73,10 +73,10 @@ src/storage       StorageAdapter / MemoryAdapter / IndexedDBAdapter / contentImp
 src/repositories  词条、组合、句子、混淆项、状态、尝试
 src/scheduler     间隔策略、错误画像、题型选择、每日队列/状态写入
 src/questionTypes 9 个题型注册表；P1—P6 全部题型已实现
-src/input         指针/键盘/挑战适配器（P8/P9 骨架）
+src/input         指针/键盘/挑战适配器（P9/P10 骨架）
 src/ui            P3 学习端、PracticeSession、bootstrap 每日队列；P0 状态页
 src/content       人工切分种子内容（全部 unreviewed）
-tests/p0..p7      累计门禁：骨架 + P1—P7 题型/调度/后台
+tests/p0..p8      累计门禁：骨架 + P1—P7 题型/调度/后台 + P8 统计
 docs              设计、规范、路线图、ADR
 tools/serve.mjs   零依赖静态服务器
 ```
@@ -172,7 +172,7 @@ tools/serve.mjs   零依赖静态服务器
 ## P7 已实现
 
 - `ContentValidator`：V1—V9 内容结构校验；V10 只导出 reviewed。
-- 内容后台 `/src/admin/index.html`：显示 4 库计数、校验错误、导出阻断。
+- 内容后台 `/src/admin/index.html`：单词库/unit 编辑器、4 库计数、校验错误、IndexedDB 保存、导出阻断。
 - 当前种子全部 `unreviewed` → 导出按钮禁用，38 条内容阻断。
 - 后台不 import 状态仓库，不触碰 wordStates/graphemeStates/attempts。
 
@@ -180,8 +180,19 @@ tools/serve.mjs   零依赖静态服务器
 
 ---
 
+## P8 已实现
+
+- 每题 Header `Stats`：查看历史报告；Back 返回。
+- Done 页显示本次 `correct / total` 与正确率。
+- 报告：本次练习、历史总览、最近 5 天、Word states、最近 10 次答案。
+- 纯统计 `src/ui/analytics.js`，只读，不参与调度；无积分/排行榜。
+
+![P8 学习分析](docs/p8-preview.png)
+
+---
+
 ## 下一步
 
-P8：抽取 Pointer/Keyboard 输入适配器，完成鼠标/触摸/键盘双端一致与移动端体验；
+P9：抽取 Pointer/Keyboard 输入适配器，完成鼠标/触摸/键盘双端一致与移动端体验；
 不新增依赖，不提前做挑战模式。
 任务书与启动提示词见 [`docs/ROADMAP.md`](docs/ROADMAP.md) 与 [`AGENTS.md`](AGENTS.md)。

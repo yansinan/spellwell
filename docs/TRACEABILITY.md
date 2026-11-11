@@ -99,6 +99,11 @@
 | R-P7-02 | V10 只导出 reviewed，未审核阻断 | `buildExport` | `tests/p7/content.test.js` | P7 | ✅ |
 | R-P7-03 | 后台不写学习状态 | `src/admin/**` | `tests/p7/adminArchitecture.test.js` | P7 | ✅ |
 | R-P7-04 | 后台可访问并显示校验/阻断 | `/src/admin/index.html` | 浏览器 admin 验收 | P7 | ✅ |
+| R-P7-05 | 后台维护单词与 unit 切分 | `ContentEditor` + AdminApp | `tests/p7/editor.test.js` + 浏览器 | P7 | ✅ |
+| R-P8-01 | 本次练习效果统计 | `summarizeSession` + Done 页 | `tests/p8/analytics.test.js` + 浏览器 | P8 | ✅ |
+| R-P8-02 | 历史答题汇总/按日/按词 | `summarizeAttempts` / `groupAttemptsByDay` | `tests/p8/analytics.test.js` + Stats 页 | P8 | ✅ |
+| R-P8-03 | 词状态与 probe 分布 | `summarizeWordStates` | `tests/p8/analytics.test.js` | P8 | ✅ |
+| R-P8-04 | Stats 只读，不写状态/不参与调度 | `PracticeScreen.loadReport` | P8 浏览器 + 架构检查 | P8 | ✅ |
 
 ### 5.1 九题型覆盖（与 `QUESTION_TYPE_IDS` 一一对应）
 
@@ -153,7 +158,7 @@
 | ID | 设计条款 | 实现位置 | 验证方式 | 阶段 | 状态 |
 |---|---|---|---|---|---|
 | R-UI-01 | §6.2 色彩/圆角/动效 token | `styles/tokens.css` | `tests/p0/traceability.test.js` 检查 token 存在 | P0 | ✅ |
-| R-UI-02 | §6.2 学习端不出现中文 | `PracticeScreen` | P1 静态扫描；P8 再扩到全部学习视图 | P1/P8 | ✅ |
+| R-UI-02 | §6.2 学习端不出现中文 | `PracticeScreen` | P1 静态扫描；P9 再扩到全部学习视图 | P1/P9 | ✅ |
 | R-UI-03 | §6.2 点选与拖拽等价（全部题型/适配器） | PointerAdapter / 其余题型；T-SEQUENCE 已由 R-P1-11 覆盖 | P8 双端测试 | P8 | ⏳ |
 | R-UI-04 | §6.2 答错温和反馈，无红色/弹窗 | `styles/practice.css` + PracticeScreen | 👁 评审 + 浏览器 | P1 | 👁 |
 | R-CHALLENGE-01 | §2.1 挑战模式不写主状态 | `RapidTapChallenge` | P9 测试 | P9 | ⏳ |
@@ -183,6 +188,7 @@
 | A-13 | 组合独立阶梯与 T-MATCH 形态 | 多选分类、wordsPassed、跨 2 词 probe、每日 1 组 | ADR-0011 |
 | A-14 | 判断纠错、语境抽查与 probe 迁移 | claim 判断+改错、句子挖空、60 天 probe、答错退回 | ADR-0012 |
 | A-15 | 后台校验与生产导出如何阻断 | V1—V10、只读后台、只导出 reviewed、后台不碰状态 | ADR-0013 |
+| A-16 | 前台学习分析包含什么、如何避免游戏化 | 本次/历史/按日/状态；无积分排名；只读报告 | ADR-0014 |
 
 ---
 

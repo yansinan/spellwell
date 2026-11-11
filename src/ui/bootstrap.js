@@ -142,11 +142,18 @@ export async function createP1Session({ wordIds = null, seed = 20261111, size = 
     specs,
   });
 
+  const loadReport = async () => ({
+    attempts: await attemptRepository.recent(200),
+    wordStates: await stateRepository.listWordStates(),
+    graphemeStates: await adapter.query('graphemeStates', {}),
+  });
+
   return {
     session,
     adapter,
     scheduler,
     storage,
     contentSeeded: content.seeded,
+    loadReport,
   };
 }

@@ -12,6 +12,7 @@
 import { findNearestSlot } from './dragGeometry.js';
 import { insertUnit, insertionIndexForPoint, previewInsertUnit } from './sequenceOrder.js';
 import { createSoundPlayer } from './sound.js';
+import { buildReport, summarizeSession } from './analytics.js';
 
 const TYPE_COPY = Object.freeze({
   'T-SEQUENCE': {
@@ -54,6 +55,7 @@ export class PracticeScreen {
   #previewGap = null;
   #previewKey = null;
   #onResult;
+  #loadReport;
   #reorderOrder = [];
   #reorderInitial = [];
   #reorderSelected = null;
@@ -65,17 +67,20 @@ export class PracticeScreen {
    *   root: HTMLElement,
    *   session: import('./PracticeSession.js').PracticeSession,
    *   debug?: boolean,
-   *   onResult?: (result: import('../core/contracts.js').AttemptResult) => Promise<void>|void
+   *   onResult?: (result: import('../core/contracts.js').AttemptResult) => Promise<void>|void,
+   *   loadReport?: () => Promise<{attempts: any[], wordStates: any[], graphemeStates: any[]}>
    * }} input
    */
-  constructor({ root, session, debug = false, onResult = null }) {
+  constructor({ root, session, debug = false, onResult = null, loadReport = null }) {
     if (!root) throw new Error('PracticeScreen needs a root element');
     if (!session) throw new Error('PracticeScreen needs a PracticeSession');
     if (onResult !== null && typeof onResult !== 'function') throw new Error('onResult must be a function');
+    if (loadReport !== null && typeof loadReport !== 'function') throw new Error('loadReport must be a function');
     this.#root = root;
     this.#session = session;
     this.#debug = debug;
     this.#onResult = onResult;
+    this.#loadReport = loadReport;
   }
 
   mount() {
@@ -121,6 +126,7 @@ export class PracticeScreen {
     this.#root.innerHTML = this.#questionTemplate();
     this.#bindQuestion();
     this.#bindSoundToggle();
+    this.#bindProgressButton();
   }
 
   #typeCopy() {
@@ -159,13 +165,14 @@ export class PracticeScreen {
    * @param {string} progress
    * @returns {string}
    */
-  #headerTemplate(progress) {
+  #headerTemplate(progress, { showStats = true } = {}) {
     const muted = this.#sound.isMuted();
     return `
       <header class="sw-practice__header">
         <span class="sw-brand">SpellWell</span>
         <div class="sw-practice__tools">
           <span class="sw-progress" aria-label="Progress">${progress}</span>
+          ${showStats ? '<button type="button" class="sw-sound" data-action="progress" aria-label="Progress report">Stats</button>' : ''}
           <button type="button" class="sw-sound" data-action="sound" aria-pressed="${muted}" aria-label="Sound effects">${muted ? 'Muted' : 'Sound'}</button>
         </div>
       </header>
@@ -969,6 +976,7 @@ export class PracticeScreen {
     this.#root.innerHTML = this.#questionTemplate();
     this.#bindQuestion();
     this.#bindSoundToggle();
+    this.#bindProgressButton();
   }
 
   async #submit() {
@@ -1047,6 +1055,86 @@ export class PracticeScreen {
     }, null, 2);
   }
 
+  #bindProgressButton() {
+    this.#root.querySelector('[data-action="progress"]')?.addEventListener('click', () => {
+      this.#openProgress();
+    });
+  }
+
+  async #openProgress() {
+    this.#clearTimers();
+    this.#clearDrag();
+    this.#root.innerHTML = `
+      <div class="sw-practice sw-practice--progress">
+        ${this.#headerTemplate('Progress', { showStats: false })}
+        <main class="sw-practice__stage"><p class="sw-practice__hint">Loading progress…</p></main>
+      </div>
+    `;
+    this.#bindSoundToggle();
+    let report;
+    try {
+      report = this.#loadReport ? await this.#loadReport() : { attempts: [], wordStates: [], graphemeStates: [] };
+    } catch (error) {
+      console.error('[SpellWell] failed to load progress', error);
+      report = { attempts: [], wordStates: [], graphemeStates: [] };
+    }
+    this.#renderProgress(buildReport(report));
+  }
+
+  #renderProgress(report) {
+    const session = summarizeSession(this.#session.results);
+    const errorTypes = Object.entries(report.attempts.errors)
+      .sort((a, b) => b[1] - a[1])
+      .map(([type, count]) => `<li><span>${escapeHtml(type)}</span><strong>${count}</strong></li>`)
+      .join('') || '<li>No errors yet.</li>';
+    const days = report.days.slice(0, 5).map((day) => `<li><span>${day.date}</span><strong>${day.accuracy}%</strong><small>${day.correct}/${day.total}</small></li>`).join('') || '<li>No history yet.</li>';
+    const recent = report.recent.slice(0, 10).map((attempt) => `
+      <li>
+        <span>${escapeHtml(String(attempt.wordId).replace(/^w\./, ''))}</span>
+        <strong>${attempt.wordCorrect ? '✓' : '•'}</strong>
+        <small>${attempt.wordCorrect ? 'correct' : escapeHtml(attempt.firstError?.type ?? 'wrong')}</small>
+      </li>
+    `).join('') || '<li>No answers yet.</li>';
+    const states = Object.entries(report.states).map(([status, count]) => `<li><span>${status}</span><strong>${count}</strong></li>`).join('');
+
+    this.#root.innerHTML = `
+      <div class="sw-practice sw-practice--progress" data-type="progress">
+        ${this.#headerTemplate('Progress', { showStats: false })}
+        <main class="sw-practice__stage sw-report">
+          <p class="sw-eyebrow">YOUR PROGRESS</p>
+          <h1 class="sw-done__title">Practice report</h1>
+          <section class="sw-report__block">
+            <h2>This session</h2>
+            <p><strong>${session.correct} / ${session.total}</strong> correct · ${session.accuracy}%</p>
+            <p>${session.topError ? `Most frequent: ${escapeHtml(session.topError)}` : 'No errors in this session.'}</p>
+          </section>
+          <section class="sw-report__block">
+            <h2>All attempts</h2>
+            <p><strong>${report.attempts.total}</strong> answers · ${report.attempts.accuracy}% correct</p>
+            <ul class="sw-report__list">${errorTypes}</ul>
+          </section>
+          <section class="sw-report__block">
+            <h2>Recent days</h2>
+            <ul class="sw-report__list">${days}</ul>
+          </section>
+          <section class="sw-report__block">
+            <h2>Word states</h2>
+            <ul class="sw-report__list">${states}</ul>
+            <p class="sw-practice__hint">${report.graphemeProbe} sound${report.graphemeProbe === 1 ? '' : 's'} in probe</p>
+          </section>
+          <section class="sw-report__block">
+            <h2>Recent answers</h2>
+            <ul class="sw-report__list">${recent}</ul>
+          </section>
+          <button type="button" class="sw-check" data-action="back">Back</button>
+        </main>
+      </div>
+    `;
+    this.#bindSoundToggle();
+    this.#bindProgressButton();
+    this.#root.querySelector('[data-action="back"]')?.addEventListener('click', () => this.#renderCurrent());
+  }
+
   #renderDone() {
     this.#clearDrag();
     this.#root.innerHTML = `
@@ -1056,6 +1144,7 @@ export class PracticeScreen {
           <p class="sw-eyebrow">SESSION COMPLETE</p>
           <h1 class="sw-done__title">Done.</h1>
           <p class="sw-practice__hint">${this.#session.size} spellings.</p>
+          <p class="sw-practice__hint">${summarizeSession(this.#session.results).correct} / ${this.#session.size} correct · ${summarizeSession(this.#session.results).accuracy}%</p>
           <button type="button" class="sw-check" data-action="again">Again</button>
         </main>
       </div>
@@ -1065,6 +1154,7 @@ export class PracticeScreen {
       this.#renderCurrent();
     });
     this.#bindSoundToggle();
+    this.#bindProgressButton();
     this.#sound.complete();
   }
 }
