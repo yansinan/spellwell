@@ -1,7 +1,7 @@
 # AGENTS.md · 项目执行契约
 
 > 任何 agent、贡献者进入本仓库，先读本文件。它规定“怎么做事”，`docs/DESIGN.md` 规定“做什么”。
-> 当前阶段：**P8 已完成，P9 是下一步**。不要提前实现 P9 及以后的功能。
+> 当前阶段：**P9 已完成，P10 是下一步**。不要提前实现 P10 及以后的功能。
 
 ---
 
@@ -28,19 +28,20 @@
 | P4 | ✅ 完成 | 修 P4 题型/映射缺陷 | 做 T-MATCH/T-CLOZE、后台、P5 组合阶梯 |
 | P5 | ✅ 完成 | 修 T-MATCH/组合状态缺陷 | 做 T-JUDGE-FIX/T-CLOZE、后台 |
 | P6 | ✅ 完成 | 修 P6 题型/probe 缺陷 | 做 P7 后台、导出阻断 |
-| P7 | ✅ 完成 | 修 ContentValidator/后台/导出缺陷 | 做 P9 输入适配、P10 挑战 |
-| P8 | ✅ 完成 | 修 Stats/统计口径缺陷 | 做 P9 输入适配、P10 挑战 |
-| P9 | ⏳ 下一步 | Pointer/Keyboard 双适配、移动端 | 做 P10 挑战、P11 Node adapter |
+| P7 | ✅ 完成 | 修 ContentValidator/后台/导出缺陷 | 做 P10 输入适配、P11 挑战 |
+| P8 | ✅ 完成 | 修 Stats/统计口径缺陷 | 做 P10 输入适配、P11 挑战 |
+| P9 | ✅ 完成 | 修内容计划/练习设计/设置缺陷 | 做 P10 输入适配、P11 挑战 |
+| P10 | ⏳ 下一步 | Pointer/Keyboard 双适配、移动端 | 做 P11 挑战、P12 Node adapter |
 
-**判断标准**：如果你写的代码在 `docs/ROADMAP.md` 的“P8 明确不做”或“后续阶段要点”里，停手。
+**判断标准**：如果你写的代码在 `docs/ROADMAP.md` 的“P9 明确不做”或“后续阶段要点”里，停手。
 
 ---
 
 ## 2. 命令
 
 ```bash
-# 阶段门禁（唯一验收标准；当前 P8）
-node tests/runTests.js --phase=p8
+# 阶段门禁（唯一验收标准；当前 P9）
+node tests/runTests.js --phase=p9
 
 # 本地预览（必须 HTTP）
 node tools/serve.mjs
@@ -80,7 +81,7 @@ node tools/serve.mjs
 10. **偏离 DESIGN 必须先写 ADR。** 先改文档再改代码；禁止“代码即文档”。
 11. **后台不写学习状态。** `src/admin/**` 不得写 `wordStates/graphemeStates/attempts`；单词列表可只读 `attempts` 聚合错/对次数。
 12. **挑战模式不写主状态。** `RapidTapChallenge` 的结果不得进入调度/错误画像。
-13. **阶段顺序不可跳。** P8 不通过不进入 P9；当前 P8 已完成，只允许修 P8 缺陷，不提前写 P9 输入适配。
+13. **阶段顺序不可跳。** P9 不通过不进入 P10；当前 P9 已完成，只允许修 P9 缺陷，不提前写 P10 输入适配。
 
 这些规则中 2/3/4/5/6/10 有自动检查（`architecture.test.js`、`traceability.test.js`、`content.test.js`）；其余靠评审。
 
@@ -139,10 +140,10 @@ node tools/serve.mjs
 
 ## 8. 下一阶段启动提示词（复制给 agent）
 
-> 只做 P9，不提前做 P10。先读 `AGENTS.md`、`docs/DESIGN.md §3.2/§6.2`、`docs/TRACEABILITY.md` 的 R-UI-03/R-INPUT-*。
+> 只做 P10，不提前做 P11。先读 `AGENTS.md`、`docs/DESIGN.md §3.2/§6.2`、`docs/TRACEABILITY.md` 的 R-UI-03/R-INPUT-*。
 > 抽取 PointerAdapter/KeyboardAdapter，保持题型只消费 InputEvent；完成鼠标/触摸/键盘双端验收。
-> 每步运行 `node tests/runTests.js --phase=p9`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
-> 不新增依赖、不做 P10 挑战、不做 P11 Node adapter。
+> 每步运行 `node tests/runTests.js --phase=p10`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+> 不新增依赖、不做 P11 挑战、不做 P12 Node adapter。
 
 ---
 
@@ -155,7 +156,7 @@ node tools/serve.mjs
 - P1 的内容装配是“同源 JSON → MemoryAdapter”；P2 已切到 IndexedDBAdapter，P3 才接 Scheduler：见 ADR-0003、ADR-0008。
 - P1 的 judge 上下文为 `{ spec, renderModel, events, bundle, now }`；`bundle` 只读，`now` 可注入：见 ADR-0003。
 - P2 持久化内容与 8 个 store；P3 才写学习状态。不要提前写调度状态。
-- T-SEQUENCE 的点选/拖拽/取消是 P1 UI 行为；P9 再扩到 PointerAdapter 与全部题型。
+- T-SEQUENCE 的点选/拖拽/取消是 P1 UI 行为；P10 再扩到 PointerAdapter 与全部题型。
 - 组合拆分粒度用 spec 参数，不由题型层猜；当前只 grapheme，P3/P4 支持 letter/mixed：见 ADR-0004。
 - 拖拽 64px 吸附、未命中 240ms 弹回；音效是低音量 Web Audio 合成音，不引入音频资源：见 ADR-0005。
 - 同词同脚手架：grapheme 块选 < mixed < letter；难度是多维向量，P3 才校准权重：见 DESIGN §3.5 与 ADR-0006。
@@ -168,4 +169,5 @@ node tools/serve.mjs
 - P7 ContentValidator V1—V10；单词/unit 编辑器；导出只放行 reviewed，未审核阻断：见 ADR-0013。
 - P8 前台 Stats：本次/历史/按日/状态报告；纯统计只读，不参与调度：见 ADR-0014。
 - 后台自动切分只生成草稿建议；组合库 96 项；批量格式 `w,ea,th,er | 中文 | 音标`；见 ADR-0016。
-- 后台列表按 level 折叠，展示错/对次数；只读 attempts，不写学习状态。
+- 后台列表按 unit 折叠，展示错/对次数；只读 attempts，不写学习状态。
+- P9 练习设计：单元多选 + Review/Effort；题量由后台设置（默认20）；计划项带 reason；`revise()` 预留但不实时改题。

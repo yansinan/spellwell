@@ -1,0 +1,118 @@
+/**
+ * @layer ui
+ * @phase P9
+ * @doc §2.1 孩子端（学习模块）
+ *
+ * 练习设计：只保留孩子需要理解的两个选择——单元（多选）和复习/努力。
+ * 题量由后台设置决定，前台不选。
+ */
+
+function escape(value) {
+  return String(value)
+    .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+}
+
+export class PracticeSetupScreen {
+  /**
+   * @param {{
+   *   root: HTMLElement,
+   *   workspace: Awaited<ReturnType<typeof import('./bootstrap.js').createPracticeWorkspace>>,
+   *   onStart: (result: any) => void
+   * }} input
+   */
+  constructor({ root, workspace, onStart }) {
+    this.root = root;
+    this.workspace = workspace;
+    this.onStart = onStart;
+    this.selectedUnits = new Set(workspace.units.map((unit) => unit.id));
+    this.mode = workspace.settings.defaultMode;
+    this.loading = false;
+  }
+
+  mount() {
+    this.render();
+  }
+
+  render(message = '') {
+    const units = this.workspace.units;
+    const available = units
+      .filter((unit) => this.selectedUnits.has(unit.id))
+      .reduce((sum, unit) => sum + unit.count, 0);
+    const questions = Math.min(this.workspace.settings.questionsPerPractice, available);
+    this.root.innerHTML = `
+      <div class="sw-practice sw-setup">
+        <header class="sw-practice__header">
+          <span class="sw-brand">SpellWell</span>
+          <div class="sw-practice__tools">
+            <span class="sw-progress">${questions} questions</span>
+          </div>
+        </header>
+        <main class="sw-practice__stage sw-setup__stage">
+          <p class="sw-eyebrow">PRACTICE SETUP</p>
+          <h1 class="sw-done__title">Ready to spell?</h1>
+          <p class="sw-practice__hint">Choose your units and how hard to work.</p>
+
+          <section class="sw-setup__section">
+            <h2>Units</h2>
+            <div class="sw-setup__units">
+              ${units.map((unit) => `
+                <label class="sw-setup__unit ${this.selectedUnits.has(unit.id) ? 'is-selected' : ''}">
+                  <input type="checkbox" data-setup-unit="${escape(unit.id)}" ${this.selectedUnits.has(unit.id) ? 'checked' : ''} />
+                  <span>${escape(unit.label)}</span>
+                  <small>${unit.count} words</small>
+                </label>
+              `).join('')}
+            </div>
+          </section>
+
+          <section class="sw-setup__section">
+            <h2>Mode</h2>
+            <div class="sw-setup__modes">
+              <button type="button" class="sw-setup__mode ${this.mode === 'review' ? 'is-selected' : ''}" data-setup-mode="review">
+                <strong>Review</strong><span>Keep it steady</span>
+              </button>
+              <button type="button" class="sw-setup__mode ${this.mode === 'effort' ? 'is-selected' : ''}" data-setup-mode="effort">
+                <strong>Effort</strong><span>Try harder</span>
+              </button>
+            </div>
+          </section>
+
+          <button type="button" class="sw-check" data-setup-start ${this.selectedUnits.size === 0 || this.loading ? 'disabled' : ''}>
+            ${this.loading ? 'Starting…' : 'Start practice'}
+          </button>
+          ${message ? `<p class="sw-setup__error">${escape(message)}</p>` : ''}
+        </main>
+      </div>
+    `;
+
+    for (const input of this.root.querySelectorAll('[data-setup-unit]')) {
+      input.addEventListener('change', () => {
+        if (input.checked) this.selectedUnits.add(input.dataset.setupUnit);
+        else this.selectedUnits.delete(input.dataset.setupUnit);
+        this.render();
+      });
+    }
+    for (const button of this.root.querySelectorAll('[data-setup-mode]')) {
+      button.addEventListener('click', () => {
+        this.mode = button.dataset.setupMode;
+        this.render();
+      });
+    }
+    this.root.querySelector('[data-setup-start]')?.addEventListener('click', async () => {
+      if (this.loading || this.selectedUnits.size === 0) return;
+      this.loading = true;
+      this.render();
+      try {
+        const result = await this.workspace.startPractice({
+          units: [...this.selectedUnits],
+          mode: this.mode,
+        });
+        this.onStart(result);
+      } catch (error) {
+        this.loading = false;
+        this.render(String(error.message ?? error));
+      }
+    });
+  }
+}

@@ -57,13 +57,13 @@ test('TRACEABILITY 覆盖 9 题型、9 错误类型与 7 存储方法', () => {
   assertMatch(traceability, /--phase=p0/);
 });
 
-test('ROADMAP 覆盖 P0—P11，P8 已完成、P9 为下一步', () => {
-  for (let index = 0; index <= 11; index += 1) {
+test('ROADMAP 覆盖 P0—P12，P9 已完成、P10 为下一步', () => {
+  for (let index = 0; index <= 12; index += 1) {
     assert(roadmap.includes(`P${index}`), `ROADMAP missing P${index}`);
   }
   assertMatch(roadmap, /P0\*\*.*✅ 完成/s);
   assertMatch(roadmap, /P1\*\*.*✅ 完成/s);
-  assertMatch(roadmap, /P9\*\*.*⏳ 下一步/s);
+  assertMatch(roadmap, /P10\*\*.*⏳ 下一步/s);
   assertMatch(roadmap, /node tests\/runTests\.js --phase=p0/);
 });
 
@@ -71,10 +71,10 @@ test('AGENTS 是执行入口：必读顺序、门禁命令、完成定义都在'
   assertMatch(agents, /docs\/DESIGN\.md/);
   assertMatch(agents, /docs\/TRACEABILITY\.md/);
   assertMatch(agents, /docs\/ROADMAP\.md/);
-  assertMatch(agents, /node tests\/runTests\.js --phase=p8/);
+  assertMatch(agents, /node tests\/runTests\.js --phase=p9/);
   assertMatch(agents, /完成定义/);
   assertMatch(agents, /不新增依赖/);
-  assertMatch(agents, /P8 不通过不进入 P9/);
+  assertMatch(agents, /P9 不通过不进入 P10/);
 });
 
 test('ADR：偏离设计的裁决已入库，并被追溯矩阵引用', async () => {
@@ -95,6 +95,7 @@ test('ADR：偏离设计的裁决已入库，并被追溯矩阵引用', async ()
   assert(decisionFiles.includes('0015-shared-content-migration.md'));
   assert(decisionFiles.includes('0016-auto-segmentation-batch.md'));
   assert(decisionFiles.includes('0017-admin-list-stats-levels.md'));
+  assert(decisionFiles.includes('0018-content-driven-practice.md'));
   const adr1 = await read('docs/decisions/0001-storage-contract.md');
   const adr2 = await read('docs/decisions/0002-docs-as-code.md');
   assertMatch(adr1, /状态\*\*：Accepted/);
@@ -135,17 +136,17 @@ test('视觉 token：DESIGN §6.2 的核心颜色/圆角/动效均存在', () =>
   assertMatch(tokens, /#444444/i);
 });
 
-test('零依赖与阶段版本：package.json 无 dependencies，版本 0.9.0', () => {
+test('零依赖与阶段版本：package.json 无 dependencies，版本 0.10.0', () => {
   assertEqual(packageJson.dependencies, undefined);
   assertEqual(packageJson.devDependencies, undefined);
   assertEqual(packageJson.type, 'module');
-  assertEqual(packageJson.version, '0.9.0');
+  assertEqual(packageJson.version, '0.10.0');
   assertEqual(packageJson.scripts['test:p0'], 'node tests/runTests.js --phase=p0');
 });
 
 test('README 与 CHANGELOG 交代当前阶段与运行方式', () => {
   assertMatch(readme, /P0/);
-  assertMatch(readme, /node tests\/runTests\.js --phase=p8/);
+  assertMatch(readme, /node tests\/runTests\.js --phase=p9/);
   assertMatch(readme, /docs\/DESIGN\.md/);
   assertMatch(changelog, /P0/);
   assertMatch(changelog, /2026-11-11/);

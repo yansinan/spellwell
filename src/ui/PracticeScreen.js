@@ -56,6 +56,7 @@ export class PracticeScreen {
   #previewKey = null;
   #onResult;
   #loadReport;
+  #onNewPractice;
   #reorderOrder = [];
   #reorderInitial = [];
   #reorderSelected = null;
@@ -68,19 +69,22 @@ export class PracticeScreen {
    *   session: import('./PracticeSession.js').PracticeSession,
    *   debug?: boolean,
    *   onResult?: (result: import('../core/contracts.js').AttemptResult) => Promise<void>|void,
-   *   loadReport?: () => Promise<{attempts: any[], wordStates: any[], graphemeStates: any[]}>
+   *   loadReport?: () => Promise<{attempts: any[], wordStates: any[], graphemeStates: any[]}>,
+   *   onNewPractice?: (() => void)|null
    * }} input
    */
-  constructor({ root, session, debug = false, onResult = null, loadReport = null }) {
+  constructor({ root, session, debug = false, onResult = null, loadReport = null, onNewPractice = null }) {
     if (!root) throw new Error('PracticeScreen needs a root element');
     if (!session) throw new Error('PracticeScreen needs a PracticeSession');
     if (onResult !== null && typeof onResult !== 'function') throw new Error('onResult must be a function');
     if (loadReport !== null && typeof loadReport !== 'function') throw new Error('loadReport must be a function');
+    if (onNewPractice !== null && typeof onNewPractice !== 'function') throw new Error('onNewPractice must be a function');
     this.#root = root;
     this.#session = session;
     this.#debug = debug;
     this.#onResult = onResult;
     this.#loadReport = loadReport;
+    this.#onNewPractice = onNewPractice;
   }
 
   mount() {
@@ -1146,13 +1150,19 @@ export class PracticeScreen {
           <h1 class="sw-done__title">Done.</h1>
           <p class="sw-practice__hint">${this.#session.size} spellings.</p>
           <p class="sw-practice__hint">${summarizeSession(this.#session.results).correct} / ${this.#session.size} correct · ${summarizeSession(this.#session.results).accuracy}%</p>
-          <button type="button" class="sw-check" data-action="again">Again</button>
+          <div class="sw-done__actions">
+            <button type="button" class="sw-check" data-action="again">Again</button>
+            ${this.#onNewPractice ? '<button type="button" class="sw-text-button" data-action="new-practice">New practice</button>' : ''}
+          </div>
         </main>
       </div>
     `;
     this.#root.querySelector('[data-action="again"]')?.addEventListener('click', () => {
       this.#session.restart();
       this.#renderCurrent();
+    });
+    this.#root.querySelector('[data-action="new-practice"]')?.addEventListener('click', () => {
+      this.#onNewPractice?.();
     });
     this.#bindSoundToggle();
     this.#bindProgressButton();

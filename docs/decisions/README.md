@@ -21,6 +21,7 @@
 | [0015](0015-shared-content-migration.md) | 后台与前台共享 IndexedDB；迁移独立 | Accepted | 内容直写共享库；BroadcastChannel 提示；迁移全量快照 |
 | [0016](0016-auto-segmentation-batch.md) | 后台自动切分建议、组合库扩充与批量录入 | Accepted | 最长匹配建议、人工确认、批量格式、翻译/音标 |
 | [0017](0017-admin-list-stats-levels.md) | 后台列表按 level 折叠、显示错/对次数 | Accepted | 只读 attempts 聚合；教学分组；搜索展开 |
+| [0018](0018-content-driven-practice.md) | 内容驱动计划、练习设计页与 20 题默认 | Accepted | 单元多选、Review/Effort、后台题量、revision、revise 预留 |
 
 新增 ADR 的模板：
 

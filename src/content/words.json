@@ -6,128 +6,581 @@
       "text": "cat",
       "level": 1,
       "units": [
-        { "text": "c", "graphemeId": "g.c" },
-        { "text": "a", "graphemeId": "g.a" },
-        { "text": "t", "graphemeId": "g.t" }
+        {
+          "text": "c",
+          "graphemeId": "g.c"
+        },
+        {
+          "text": "a",
+          "graphemeId": "g.a"
+        },
+        {
+          "text": "t",
+          "graphemeId": "g.t"
+        }
       ],
-      "tags": ["animal"],
+      "tags": [
+        "animal"
+      ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "unitId": "u1-1",
+      "unitLabel": "一年级下学期 · 第1单元",
+      "translation": "猫"
     },
     {
       "id": "w.fish",
       "text": "fish",
       "level": 1,
       "units": [
-        { "text": "f", "graphemeId": "g.f" },
-        { "text": "i", "graphemeId": "g.i" },
-        { "text": "sh", "graphemeId": "g.sh" }
+        {
+          "text": "f",
+          "graphemeId": "g.f"
+        },
+        {
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "sh",
+          "graphemeId": "g.sh"
+        }
       ],
-      "tags": ["animal", "water"],
-      "sentenceIds": ["s.fish.01"],
-      "reviewStatus": "unreviewed"
+      "tags": [
+        "animal",
+        "water"
+      ],
+      "sentenceIds": [
+        "s.fish.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "unitId": "u1-1",
+      "unitLabel": "一年级下学期 · 第1单元",
+      "translation": "鱼"
     },
     {
       "id": "w.ship",
       "text": "ship",
       "level": 1,
       "units": [
-        { "text": "sh", "graphemeId": "g.sh" },
-        { "text": "i", "graphemeId": "g.i" },
-        { "text": "p", "graphemeId": "g.p" }
+        {
+          "text": "sh",
+          "graphemeId": "g.sh"
+        },
+        {
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "p",
+          "graphemeId": "g.p"
+        }
       ],
-      "tags": ["transport"],
-      "sentenceIds": ["s.ship.01"],
-      "reviewStatus": "unreviewed"
+      "tags": [
+        "transport"
+      ],
+      "sentenceIds": [
+        "s.ship.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "unitId": "u1-1",
+      "unitLabel": "一年级下学期 · 第1单元",
+      "translation": "船"
     },
     {
       "id": "w.chip",
       "text": "chip",
       "level": 1,
       "units": [
-        { "text": "ch", "graphemeId": "g.ch" },
-        { "text": "i", "graphemeId": "g.i" },
-        { "text": "p", "graphemeId": "g.p" }
+        {
+          "text": "ch",
+          "graphemeId": "g.ch"
+        },
+        {
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "p",
+          "graphemeId": "g.p"
+        }
       ],
-      "tags": ["food"],
+      "tags": [
+        "food"
+      ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "unitId": "u1-1",
+      "unitLabel": "一年级下学期 · 第1单元",
+      "translation": "薯条"
     },
     {
       "id": "w.duck",
       "text": "duck",
       "level": 1,
       "units": [
-        { "text": "d", "graphemeId": "g.d" },
-        { "text": "u", "graphemeId": "g.u" },
-        { "text": "ck", "graphemeId": "g.ck" }
+        {
+          "text": "d",
+          "graphemeId": "g.d"
+        },
+        {
+          "text": "u",
+          "graphemeId": "g.u"
+        },
+        {
+          "text": "ck",
+          "graphemeId": "g.ck"
+        }
       ],
-      "tags": ["animal"],
+      "tags": [
+        "animal"
+      ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "unitId": "u1-1",
+      "unitLabel": "一年级下学期 · 第1单元",
+      "translation": "鸭子"
     },
     {
       "id": "w.rain",
       "text": "rain",
       "level": 1,
       "units": [
-        { "text": "r", "graphemeId": "g.r" },
-        { "text": "ai", "graphemeId": "g.ai" },
-        { "text": "n", "graphemeId": "g.n" }
+        {
+          "text": "r",
+          "graphemeId": "g.r"
+        },
+        {
+          "text": "ai",
+          "graphemeId": "g.ai"
+        },
+        {
+          "text": "n",
+          "graphemeId": "g.n"
+        }
       ],
-      "tags": ["weather"],
-      "sentenceIds": ["s.rain.01"],
-      "reviewStatus": "unreviewed"
+      "tags": [
+        "weather"
+      ],
+      "sentenceIds": [
+        "s.rain.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "unitId": "u1-2",
+      "unitLabel": "一年级下学期 · 第2单元",
+      "translation": "雨"
     },
     {
       "id": "w.night",
       "text": "night",
-      "level": 2,
+      "level": 1,
       "units": [
-        { "text": "n", "graphemeId": "g.n" },
-        { "text": "igh", "graphemeId": "g.igh" },
-        { "text": "t", "graphemeId": "g.t" }
+        {
+          "text": "n",
+          "graphemeId": "g.n"
+        },
+        {
+          "text": "igh",
+          "graphemeId": "g.igh"
+        },
+        {
+          "text": "t",
+          "graphemeId": "g.t"
+        }
       ],
-      "tags": ["time"],
-      "sentenceIds": ["s.night.01"],
-      "reviewStatus": "unreviewed"
+      "tags": [
+        "time"
+      ],
+      "sentenceIds": [
+        "s.night.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "unitId": "u1-2",
+      "unitLabel": "一年级下学期 · 第2单元",
+      "translation": "夜晚"
     },
     {
       "id": "w.tree",
       "text": "tree",
       "level": 1,
       "units": [
-        { "text": "t", "graphemeId": "g.t" },
-        { "text": "r", "graphemeId": "g.r" },
-        { "text": "ee", "graphemeId": "g.ee" }
+        {
+          "text": "t",
+          "graphemeId": "g.t"
+        },
+        {
+          "text": "r",
+          "graphemeId": "g.r"
+        },
+        {
+          "text": "ee",
+          "graphemeId": "g.ee"
+        }
       ],
-      "tags": ["nature"],
+      "tags": [
+        "nature"
+      ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "unitId": "u1-1",
+      "unitLabel": "一年级下学期 · 第1单元",
+      "translation": "树"
     },
     {
       "id": "w.book",
       "text": "book",
       "level": 1,
       "units": [
-        { "text": "b", "graphemeId": "g.b" },
-        { "text": "oo", "graphemeId": "g.oo" },
-        { "text": "k", "graphemeId": "g.k" }
+        {
+          "text": "b",
+          "graphemeId": "g.b"
+        },
+        {
+          "text": "oo",
+          "graphemeId": "g.oo"
+        },
+        {
+          "text": "k",
+          "graphemeId": "g.k"
+        }
       ],
-      "tags": ["object"],
+      "tags": [
+        "object"
+      ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "unitId": "u1-1",
+      "unitLabel": "一年级下学期 · 第1单元",
+      "translation": "书"
     },
     {
       "id": "w.sun",
       "text": "sun",
       "level": 1,
       "units": [
-        { "text": "s", "graphemeId": "g.s" },
-        { "text": "u", "graphemeId": "g.u" },
-        { "text": "n", "graphemeId": "g.n" }
+        {
+          "text": "s",
+          "graphemeId": "g.s"
+        },
+        {
+          "text": "u",
+          "graphemeId": "g.u"
+        },
+        {
+          "text": "n",
+          "graphemeId": "g.n"
+        }
       ],
-      "tags": ["nature"],
+      "tags": [
+        "nature"
+      ],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed",
+      "unitId": "u1-1",
+      "unitLabel": "一年级下学期 · 第1单元",
+      "translation": "太阳"
+    },
+    {
+      "id": "w.weather",
+      "text": "weather",
+      "units": [
+        {
+          "text": "w",
+          "graphemeId": "g.w"
+        },
+        {
+          "text": "ea",
+          "graphemeId": "g.ea"
+        },
+        {
+          "text": "th",
+          "graphemeId": "g.th"
+        },
+        {
+          "text": "er",
+          "graphemeId": "g.er"
+        }
+      ],
+      "level": 1,
+      "unitId": "u1-2",
+      "unitLabel": "一年级下学期 · 第2单元",
+      "translation": "天气",
+      "phonetic": "/ˈweðər/",
+      "tags": [
+        "seed"
+      ],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.teacher",
+      "text": "teacher",
+      "units": [
+        {
+          "text": "t",
+          "graphemeId": "g.t"
+        },
+        {
+          "text": "ea",
+          "graphemeId": "g.ea"
+        },
+        {
+          "text": "ch",
+          "graphemeId": "g.ch"
+        },
+        {
+          "text": "er",
+          "graphemeId": "g.er"
+        }
+      ],
+      "level": 1,
+      "unitId": "u1-2",
+      "unitLabel": "一年级下学期 · 第2单元",
+      "translation": "老师",
+      "phonetic": "/ˈtiːtʃər/",
+      "tags": [
+        "seed"
+      ],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.chair",
+      "text": "chair",
+      "units": [
+        {
+          "text": "ch",
+          "graphemeId": "g.ch"
+        },
+        {
+          "text": "air",
+          "graphemeId": "g.air"
+        }
+      ],
+      "level": 1,
+      "unitId": "u1-2",
+      "unitLabel": "一年级下学期 · 第2单元",
+      "translation": "椅子",
+      "phonetic": "/tʃeər/",
+      "tags": [
+        "seed"
+      ],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.cloud",
+      "text": "cloud",
+      "units": [
+        {
+          "text": "c",
+          "graphemeId": "g.c"
+        },
+        {
+          "text": "l",
+          "graphemeId": "g.l"
+        },
+        {
+          "text": "ou",
+          "graphemeId": "g.ou"
+        },
+        {
+          "text": "d",
+          "graphemeId": "g.d"
+        }
+      ],
+      "level": 1,
+      "unitId": "u1-2",
+      "unitLabel": "一年级下学期 · 第2单元",
+      "translation": "云",
+      "phonetic": "/klaʊd/",
+      "tags": [
+        "seed"
+      ],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.green",
+      "text": "green",
+      "units": [
+        {
+          "text": "g",
+          "graphemeId": "g.g"
+        },
+        {
+          "text": "r",
+          "graphemeId": "g.r"
+        },
+        {
+          "text": "ee",
+          "graphemeId": "g.ee"
+        },
+        {
+          "text": "n",
+          "graphemeId": "g.n"
+        }
+      ],
+      "level": 2,
+      "unitId": "u2-1",
+      "unitLabel": "二年级上学期 · 第1单元",
+      "translation": "绿色",
+      "phonetic": "/ɡriːn/",
+      "tags": [
+        "seed"
+      ],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.light",
+      "text": "light",
+      "units": [
+        {
+          "text": "l",
+          "graphemeId": "g.l"
+        },
+        {
+          "text": "igh",
+          "graphemeId": "g.igh"
+        },
+        {
+          "text": "t",
+          "graphemeId": "g.t"
+        }
+      ],
+      "level": 2,
+      "unitId": "u2-1",
+      "unitLabel": "二年级上学期 · 第1单元",
+      "translation": "光",
+      "phonetic": "/laɪt/",
+      "tags": [
+        "seed"
+      ],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.boat",
+      "text": "boat",
+      "units": [
+        {
+          "text": "b",
+          "graphemeId": "g.b"
+        },
+        {
+          "text": "oa",
+          "graphemeId": "g.oa"
+        },
+        {
+          "text": "t",
+          "graphemeId": "g.t"
+        }
+      ],
+      "level": 2,
+      "unitId": "u2-1",
+      "unitLabel": "二年级上学期 · 第1单元",
+      "translation": "船",
+      "phonetic": "/bəʊt/",
+      "tags": [
+        "seed"
+      ],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.train",
+      "text": "train",
+      "units": [
+        {
+          "text": "t",
+          "graphemeId": "g.t"
+        },
+        {
+          "text": "r",
+          "graphemeId": "g.r"
+        },
+        {
+          "text": "ai",
+          "graphemeId": "g.ai"
+        },
+        {
+          "text": "n",
+          "graphemeId": "g.n"
+        }
+      ],
+      "level": 2,
+      "unitId": "u2-1",
+      "unitLabel": "二年级上学期 · 第1单元",
+      "translation": "火车",
+      "phonetic": "/treɪn/",
+      "tags": [
+        "seed"
+      ],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.sweet",
+      "text": "sweet",
+      "units": [
+        {
+          "text": "s",
+          "graphemeId": "g.s"
+        },
+        {
+          "text": "w",
+          "graphemeId": "g.w"
+        },
+        {
+          "text": "ee",
+          "graphemeId": "g.ee"
+        },
+        {
+          "text": "t",
+          "graphemeId": "g.t"
+        }
+      ],
+      "level": 2,
+      "unitId": "u2-1",
+      "unitLabel": "二年级上学期 · 第1单元",
+      "translation": "甜的",
+      "phonetic": "/swiːt/",
+      "tags": [
+        "seed"
+      ],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.dream",
+      "text": "dream",
+      "units": [
+        {
+          "text": "d",
+          "graphemeId": "g.d"
+        },
+        {
+          "text": "r",
+          "graphemeId": "g.r"
+        },
+        {
+          "text": "ea",
+          "graphemeId": "g.ea"
+        },
+        {
+          "text": "m",
+          "graphemeId": "g.m"
+        }
+      ],
+      "level": 2,
+      "unitId": "u2-1",
+      "unitLabel": "二年级上学期 · 第1单元",
+      "translation": "梦",
+      "phonetic": "/driːm/",
+      "tags": [
+        "seed"
+      ],
       "sentenceIds": [],
       "reviewStatus": "unreviewed"
     }

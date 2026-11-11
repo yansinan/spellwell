@@ -4,7 +4,7 @@
 不做听力、不做选择题（判断+改错除外）、不做图片配对、不做积分/排行榜。
 
 - **定位**：纯前端 ES Modules，无构建、无框架、无运行时依赖；后期可平移 Node 后端。
-- **当前阶段**：**P8 前台学习分析 ✅**；下一步 P9 输入适配与移动端。
+- **当前阶段**：**P9 内容驱动题目生成与练习设计 ✅**；下一步 P10 输入适配与移动端。
 - **需求源**：[`docs/DESIGN.md`](docs/DESIGN.md)（定稿 v1.2）。
 
 ---
@@ -14,8 +14,8 @@
 需要 Node 18+（仅用于测试与本地静态服务器，应用本身跑在浏览器）。
 
 ```bash
-# P8 阶段门禁（累计 P0..P8）
-node tests/runTests.js --phase=p8
+# P9 阶段门禁（累计 P0..P9）
+node tests/runTests.js --phase=p9
 
 # 本地预览：ESM 不能走 file://，必须用 HTTP
 node tools/serve.mjs
@@ -33,6 +33,7 @@ npm start
 打开预览页会进入学习端：每日 5—8 个词，默认 6 个。
 `?dev=1` 仍可查看 P0 开发状态页；`?debug=1` 会在学习端显示 AttemptResult 调试面板并暴露 `__SPELLWELL_DEBUG__`（含 scheduler）。
 内容后台：`/src/admin/index.html`。
+练习设置：`/src/admin/settings.html`。
 本机数据迁移：`/migration/index.html`。
 
 ![P1 学习端](docs/p1-preview.png)
@@ -52,11 +53,11 @@ npm start
 |---|---|---|
 | 唯一需求源 | [`docs/DESIGN.md`](docs/DESIGN.md) | 产品决策、架构铁律、阶段划分；改动先写 ADR |
 | 条款追溯 | [`docs/TRACEABILITY.md`](docs/TRACEABILITY.md) | 每条规则 → 代码 → 测试 → 阶段 → 状态 |
-| 阶段门禁 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | P0—P11 验收标准；当前阶段只做当前阶段 |
+| 阶段门禁 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | P0—P12 验收标准；当前阶段只做当前阶段 |
 | 工程规范 | [`docs/FILE_SPEC.md`](docs/FILE_SPEC.md) | 目录、命名、依赖方向、测试与禁止清单 |
 | 内容规范 | [`docs/CONTENT_SPEC.md`](docs/CONTENT_SPEC.md) | 人工切分、ID 稳定性、校验规则 V1—V10 |
-| 执行契约 | [`AGENTS.md`](AGENTS.md) | agent/贡献者必读顺序、铁律、完成定义、P9 启动提示词 |
-| 决策记录 | [`docs/decisions/`](docs/decisions/) | 对文档歧义的裁决；ADR-0001—ADR-0014 |
+| 执行契约 | [`AGENTS.md`](AGENTS.md) | agent/贡献者必读顺序、铁律、完成定义、P10 启动提示词 |
+| 决策记录 | [`docs/decisions/`](docs/decisions/) | 对文档歧义的裁决；ADR-0001—ADR-0018 |
 | 代码头 | 每个 `src/**/*.js` | `@layer` / `@phase` / `@doc §x.y`，由测试校验 |
 | 架构守卫 | `tests/p0/architecture.test.js` | 无 `Math.random`、无越层 import、无 DOM 泄漏、无循环依赖、仓库只用 7 个存储方法 |
 | 文档守卫 | `tests/p0/traceability.test.js` | 枚举/阶段/token/ADR/零依赖与文档一致 |
@@ -74,10 +75,10 @@ src/storage       StorageAdapter / MemoryAdapter / IndexedDBAdapter / contentImp
 src/repositories  词条、组合、句子、混淆项、状态、尝试
 src/scheduler     间隔策略、错误画像、题型选择、每日队列/状态写入
 src/questionTypes 9 个题型注册表；P1—P6 全部题型已实现
-src/input         指针/键盘/挑战适配器（P9/P10 骨架）
+src/input         指针/键盘/挑战适配器（P10/P11 骨架）
 src/ui            P3 学习端、PracticeSession、bootstrap 每日队列；P0 状态页
 src/content       人工切分种子内容（全部 unreviewed）
-tests/p0..p8      累计门禁：骨架 + P1—P7 题型/调度/后台 + P8 统计
+tests/p0..p9      累计门禁：骨架 + P1—P8 + P9 计划/练习设计
 docs              设计、规范、路线图、ADR
 tools/serve.mjs   零依赖静态服务器
 ```
@@ -200,8 +201,20 @@ tools/serve.mjs   零依赖静态服务器
 
 ---
 
+## P9 已实现
+
+- 20 个词、3 个单元（一年级下学期 2 单元、二年级上学期 1 单元）。
+- 练习设计页：单元多选、Review/Effort；不选题量。
+- 后台题量默认 20，设置页 `/src/admin/settings.html`，面包屑返回内容库。
+- 题量、单元、模式进入 Scheduler；当前会话不因内容更新中断。
+- 每个计划项带 `reason/mode/policyVersion`；`revise()` 接口预留。
+
+![P9 练习设计](docs/p9-preview.png)
+
+---
+
 ## 下一步
 
-P9：抽取 Pointer/Keyboard 输入适配器，完成鼠标/触摸/键盘双端一致与移动端体验；
+P10：抽取 Pointer/Keyboard 输入适配器，完成鼠标/触摸/键盘双端一致与移动端体验；
 不新增依赖，不提前做挑战模式。
 任务书与启动提示词见 [`docs/ROADMAP.md`](docs/ROADMAP.md) 与 [`AGENTS.md`](AGENTS.md)。

@@ -1,5 +1,45 @@
 # CHANGELOG
 
+## [0.10.0] — 2026-11-11 · P9 内容驱动题目生成与练习设计
+
+### Added
+
+- 单元模型 `unitId` / `unitLabel`：3 个单元、20 个词。
+- 练习设计页：单元多选、Review/Effort、后台题量；前台不选题量。
+- 题量设置 `meta.practiceSettings`，默认 20，范围 5—30。
+- 后台练习设置页 `/src/admin/settings.html`，面包屑“内容库 / 练习设置”。
+- Scheduler 支持 unit 过滤、retired 过滤、Review/Effort 侧重。
+- `contentRevision`：后台保存递增；下一轮重新读内容。
+- 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
+- 计划项带 `params.plan.reason/mode/policyVersion`。
+- `PlanPolicy.revise()` 兼容接口，P9 不实时改题。
+- `tests/p9/`：题量、单元、mode、retired、plan hook。
+
+### Changed
+
+- `package.json` 版本 `0.9.0` → `0.10.0`；新增 `test:p9`。
+- 阶段重排：P9 内容驱动、P10 输入、P11 挑战、P12 平移。
+- 内容从 10 词扩到 20 词；组合库 96 项。
+- 后台单词列表按 unit 折叠，显示错/对次数。
+
+### Verification
+
+```bash
+node tests/runTests.js --phase=p9
+# PASS  p9 gate · 186 passed · 0 failed · 36 files
+```
+
+- 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。
+- 单 unit 选择只生成该 unit 的题；retired 不进入。
+- Review 新词首题 T-FILL；Effort 新词首题 T-TYPE。
+- 后台设置页保存后下一轮练习生效。
+- 当前会话不因后台保存中断。
+
+### Known limitations
+
+- 选择目前是规则优先级 + mode 侧重，未做权重校准。
+- 实时改题只预留 `revise()`，未实现。
+- 内容不足 20 时实际题数少于 20。
 ## [0.9.0] — 2026-11-11 · P8 前台学习分析 + 后台单词编辑
 
 ### Added

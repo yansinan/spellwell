@@ -1,6 +1,6 @@
 # 文件与工程规范 · FILE_SPEC
 
-**适用版本**：DESIGN v1.2 / 仓库 v0.9.0（P8）
+**适用版本**：DESIGN v1.2 / 仓库 v0.10.0（P9）
 **地位**：本文件是 `docs/DESIGN.md` 的工程实施细则。与 DESIGN 冲突时，以 DESIGN 为准；本文件负责把 DESIGN 翻译成可机械检查的规则。
 
 ---
@@ -41,6 +41,7 @@
 │   │   ├── MemoryAdapter.js    # P0 测试/演示用；支持事务回滚与导出导入
 │   │   ├── IndexedDBAdapter.js # P2 实现：7 方法、事务、导出导入
 │   │   ├── contentImport.js    # P2 内容导入：4 库 + meta.contentVersion
+│   │   ├── practiceSettings.js # P9 后台题量/默认模式
 │   │   └── schema.js           # store 名、keyPath、索引、DB 版本
 │   ├── repositories/           # 领域查询；只调用 StorageAdapter 的 7 个方法
 │   │   ├── BaseRepository.js
@@ -69,7 +70,8 @@
 │   │   ├── App.js               # P0 状态页（?dev=1）
 │   │   ├── PracticeSession.js   # P1 9 题 / P3 注入每日 specs
 │   │   ├── bootstrap.js         # P3：每日队列；IndexedDB 优先，失败回退 Memory
-│   │   ├── PracticeScreen.js    # P1—P6/P8 学习端 + Stats
+│   │   ├── PracticeScreen.js    # P1—P8 学习端 + Stats
+│   │   ├── PracticeSetupScreen.js # P9 单元/模式选择
 │   │   ├── MigrationApp.js      # P8 本机全量数据迁移（非内容发布）
 │   │   ├── dragGeometry.js      # 64px 吸附半径与最近槽位
 │   │   ├── sequenceOrder.js     # 已到位块插入式重排
@@ -86,6 +88,7 @@
 │       ├── index.html
 │       ├── AdminApp.js
 │       ├── ContentEditor.js    # 单词/unit 编辑纯函数
+│       ├── PracticeSettingsApp.js # P9 练习设置页
 │       ├── WordImporter.js     # 批量/自动切分建议
 │       ├── AttemptStats.js     # 后台只读错/对次数聚合
 │       └── ContentValidator.js # V1—V10 + buildExport
@@ -224,7 +227,7 @@ questionTypes  ←  scheduler
 - `core/contracts.js` 导出 `CONTRACT_VERSION`；跨层结构变更必须 +1，并写 ADR。
 - 存储 `schema.js` 导出 `DB_VERSION`；IndexedDB 升级必须写迁移函数与测试（P2 起）。
 - 内容 JSON 顶层带 `"version": 1`；内容格式变更 +1，并更新 `CONTENT_SPEC.md`。
-- `package.json` 版本跟阶段走：P0 `0.1.0`，P1 `0.2.0`，P2 `0.3.0`，P3 `0.4.0`，P4 `0.5.0`，P5 `0.6.0`，P6 `0.7.0`，P7 `0.8.0`，P8 `0.9.0`，P9 `0.10.0`，P10 `0.11.0`，P11 `1.0.0`。
+- `package.json` 版本跟阶段走：P0 `0.1.0`，P1 `0.2.0`，P2 `0.3.0`，P3 `0.4.0`，P4 `0.5.0`，P5 `0.6.0`，P6 `0.7.0`，P7 `0.8.0`，P8 `0.9.0`，P9 `0.10.0`，P10 `0.11.0`，P11 `0.12.0`，P12 `1.0.0`。
 
 ---
 

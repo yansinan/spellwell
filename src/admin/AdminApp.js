@@ -127,16 +127,19 @@ export async function mountAdmin(root) {
     const report = validateContent(content);
     if (!report.valid) return false;
     if (!adapter) throw new Error('本机 IndexedDB 不可用，不能保存');
+    const revisionRecord = await adapter.get('meta', 'contentRevision');
+    const revision = Number(revisionRecord?.value ?? 0) + 1;
     await adapter.transaction(['words', 'graphemes', 'sentences', 'confusables', 'meta'], async (tx) => {
       for (const store of ['words', 'graphemes', 'sentences', 'confusables']) {
         for (const item of content[store].items) await tx.put(store, item);
       }
       await tx.put('meta', { key: 'contentVersion', value: CONTENT_VERSION });
+      await tx.put('meta', { key: 'contentRevision', value: revision });
     });
     saved = cloneContent(content);
     if (typeof BroadcastChannel === 'function') {
       const channel = new BroadcastChannel('spellwell-content');
-      channel.postMessage({ type: 'content-updated' });
+      channel.postMessage({ type: 'content-updated', revision });
       channel.close();
     }
     return true;
@@ -149,19 +152,26 @@ export async function mountAdmin(root) {
     const word = currentWord();
     const dirty = isDirty(word);
     const tokens = word ? (word.units ?? []).map((unit) => unit.text) : [];
-    const levelLabels = {
-      1: '1 单元 · 一年级下学期',
-      2: '2 单元 · 二年级上学期',
-    };
-    const levels = [...new Set(content.words.items.map((item) => Number(item.level) || 1))]
-      .sort((a, b) => a - b);
-    const wordItems = levels.map((level) => {
-      const items = content.words.items.filter((item) => (Number(item.level) || 1) === level);
-      const open = !collapsedLevels.has(level)
+    const unitGroups = new Map();
+    for (const item of content.words.items) {
+      const key = String(item.unitId ?? `level-${item.level ?? 1}`);
+      if (!unitGroups.has(key)) {
+        unitGroups.set(key, {
+          id: key,
+          label: String(item.unitLabel ?? `Level ${item.level ?? 1}`),
+          items: [],
+        });
+      }
+      unitGroups.get(key).items.push(item);
+    }
+    const units = [...unitGroups.values()].sort((a, b) => a.id.localeCompare(b.id));
+    const wordItems = units.map((unit) => {
+      const items = unit.items;
+      const open = !collapsedLevels.has(unit.id)
         || items.some((item) => item.id === selectedWordId);
       return `
-        <details class="sw-admin__level-group" data-level-group="${level}" ${open ? 'open' : ''}>
-          <summary><span>${escape(levelLabels[level] ?? `Level ${level}`)}</span><strong>${items.length}</strong></summary>
+        <details class="sw-admin__level-group" data-level-group="${escape(unit.id)}" ${open ? 'open' : ''}>
+          <summary><span>${escape(unit.label)}</span><strong>${items.length}</strong></summary>
           <ul class="sw-admin__word-list">
             ${items.map((item) => {
               const active = item.id === selectedWordId;
@@ -232,6 +242,7 @@ export async function mountAdmin(root) {
           <p class="sw-admin__muted">words ${content.words.items.length} · graphemes ${content.graphemes.items.length} · sentences ${content.sentences.items.length} · confusables ${content.confusables.items.length}</p>
         </div>
         <div class="sw-admin__overview-actions">
+          <a class="sw-text-button" href="/src/admin/settings.html">练习设置</a>
           <a class="sw-text-button" href="/migration/index.html">本机数据迁移</a>
           <span class="sw-admin__badge ${report.valid ? 'is-ok' : 'is-bad'}">${report.valid ? 'V1—V9 通过' : `${report.errors.length} 个问题`}</span>
         </div>
@@ -288,6 +299,8 @@ export async function mountAdmin(root) {
 
             <div class="sw-admin__field-row">
               <label>单词 <input data-word-text value="${escape(word.text)}" /></label>
+              <label>Unit ID <input data-word-unit-id value="${escape(word.unitId ?? '')}" placeholder="u1-1" /></label>
+              <label>Unit 标签 <input data-word-unit-label value="${escape(word.unitLabel ?? '')}" placeholder="一年级下学期 · 第1单元" /></label>
               <label>中文 <input data-word-translation value="${escape(word.translation ?? '')}" placeholder="可选" /></label>
               <label>音标 <input data-word-phonetic value="${escape(word.phonetic ?? '')}" placeholder="可选，如 /ˈweðər/" /></label>
               <label>Level
@@ -344,7 +357,7 @@ export async function mountAdmin(root) {
 
     for (const details of root.querySelectorAll('[data-level-group]')) {
       details.addEventListener('toggle', () => {
-        const level = Number(details.dataset.levelGroup);
+        const level = details.dataset.levelGroup;
         if (details.open) collapsedLevels.delete(level);
         else collapsedLevels.add(level);
       });
@@ -367,7 +380,13 @@ export async function mountAdmin(root) {
       if (!batchPreview || batchActions.length === 0) return;
       const counts = { created: 0, merged: 0, replaced: 0, skipped: 0 };
       for (const { entry } of batchActions) {
-        const result = importWord(content, entry, duplicateMode);
+        const baseUnit = currentWord();
+        const result = importWord(content, {
+          ...entry,
+          level: baseUnit?.level ?? 1,
+          unitId: baseUnit?.unitId ?? 'u1-1',
+          unitLabel: baseUnit?.unitLabel ?? '一年级下学期 · 第1单元',
+        }, duplicateMode);
         counts[result === 'created' ? 'created' : result === 'merged' ? 'merged' : result === 'replaced' ? 'replaced' : 'skipped'] += 1;
       }
       const changed = counts.created + counts.merged + counts.replaced;
@@ -389,7 +408,18 @@ export async function mountAdmin(root) {
       event.preventDefault();
       const text = String(new FormData(event.currentTarget).get('text') ?? '').trim().toLowerCase();
       if (!/^[a-z]+$/.test(text)) { notice = '新单词只接受小写字母。'; render(); return; }
-      const created = addWord(content, { id: nextWordId(content, text), text, translation: '', phonetic: '', level: 1, units: [], reviewStatus: 'unreviewed' });
+      const baseUnit = currentWord();
+      const created = addWord(content, {
+        id: nextWordId(content, text),
+        text,
+        translation: '',
+        phonetic: '',
+        level: baseUnit?.level ?? 1,
+        unitId: baseUnit?.unitId ?? 'u1-1',
+        unitLabel: baseUnit?.unitLabel ?? '一年级下学期 · 第1单元',
+        units: [],
+        reviewStatus: 'unreviewed',
+      });
       selectedWordId = created.id;
       adding = false;
       notice = '已创建；填写切分后保存。';
@@ -455,6 +485,8 @@ export async function mountAdmin(root) {
         }
         updateWord(content, word.id, {
           text,
+          unitId: root.querySelector('[data-word-unit-id]').value.trim(),
+          unitLabel: root.querySelector('[data-word-unit-label]').value.trim(),
           translation,
           phonetic,
           level: Number(root.querySelector('[data-word-level]').value),

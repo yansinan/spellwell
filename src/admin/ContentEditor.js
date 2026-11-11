@@ -141,7 +141,9 @@ export function importWord(content, entry, mode = 'merge') {
       units: entry.units,
       translation: entry.translation ?? '',
       phonetic: entry.phonetic ?? '',
-      level: 1,
+      level: entry.level ?? 1,
+      unitId: entry.unitId ?? 'u1-1',
+      unitLabel: entry.unitLabel ?? '一年级下学期 · 第1单元',
       reviewStatus: 'unreviewed',
     });
     return 'created';

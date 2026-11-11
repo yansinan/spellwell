@@ -80,7 +80,7 @@ test('Scheduler：队列大小限制在 5—8', async () => {
   assertEqual((await scheduler.buildDailyQueue({ size: 5 })).length, 5);
   assertEqual((await scheduler.buildDailyQueue({ size: 8 })).length, 8);
   await assertRejects(() => scheduler.buildDailyQueue({ size: 4 }), RangeError);
-  await assertRejects(() => scheduler.buildDailyQueue({ size: 9 }), RangeError);
+  await assertRejects(() => scheduler.buildDailyQueue({ size: 31 }), RangeError);
   assertThrows(() => new Scheduler({}), 'SCHEDULER_DEPS_INVALID');
 });
 

@@ -857,3 +857,45 @@ code {
 .sw-admin__word-stats strong {
   color: var(--sw-ink);
 }
+
+/* P9 后台面包屑/练习设置 */
+.sw-admin__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: var(--sw-ink-soft);
+  font-size: 13px;
+}
+
+.sw-admin__breadcrumb a {
+  color: var(--sw-ink-soft);
+}
+
+.sw-admin__settings {
+  display: grid;
+  gap: 16px;
+  max-width: 360px;
+}
+
+.sw-admin__settings label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--sw-ink-soft);
+}
+
+.sw-admin__settings input,
+.sw-admin__settings select {
+  min-height: 38px;
+  padding: 6px 8px;
+  border: 1px solid var(--sw-line-strong);
+  border-radius: 8px;
+  background: var(--sw-surface-strong);
+  color: var(--sw-ink);
+  font: inherit;
+}
+
+.sw-admin__settings small {
+  color: var(--sw-ink-faint);
+}

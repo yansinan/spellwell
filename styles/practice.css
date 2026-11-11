@@ -675,3 +675,108 @@
   font: inherit;
   cursor: pointer;
 }
+
+/* P9 练习设计页 */
+.sw-setup__stage {
+  align-content: start;
+  padding-top: 32px;
+}
+
+.sw-setup__section {
+  width: 100%;
+  max-width: 360px;
+  margin-top: 18px;
+}
+
+.sw-setup__section h2 {
+  margin: 0 0 8px;
+  font-family: var(--sw-font-body);
+  font-size: 15px;
+  color: var(--sw-ink-soft);
+}
+
+.sw-setup__units {
+  display: grid;
+  gap: 8px;
+}
+
+.sw-setup__unit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 2px solid var(--sw-line);
+  border-radius: var(--sw-radius-sm);
+  background: var(--sw-surface);
+  cursor: pointer;
+}
+
+.sw-setup__unit.is-selected {
+  border-color: var(--sw-mint-deep);
+  background: var(--sw-mint-soft);
+}
+
+.sw-setup__unit input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--sw-mint-deep);
+}
+
+.sw-setup__unit span {
+  flex: 1;
+  font-family: var(--sw-font-display);
+  font-size: 17px;
+}
+
+.sw-setup__unit small {
+  color: var(--sw-ink-soft);
+  font-size: 12px;
+}
+
+.sw-setup__modes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.sw-setup__mode {
+  display: grid;
+  gap: 2px;
+  padding: 12px;
+  border: 2px solid var(--sw-line);
+  border-radius: var(--sw-radius-sm);
+  background: var(--sw-surface);
+  color: var(--sw-ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.sw-setup__mode.is-selected {
+  border-color: var(--sw-mint-deep);
+  background: var(--sw-mint-soft);
+}
+
+.sw-setup__mode strong {
+  font-family: var(--sw-font-display);
+  font-size: 18px;
+}
+
+.sw-setup__mode span {
+  color: var(--sw-ink-soft);
+  font-size: 12px;
+}
+
+.sw-setup__error {
+  max-width: 360px;
+  margin-top: 10px;
+  color: var(--sw-ink);
+  font-size: 13px;
+}
+
+.sw-done__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}

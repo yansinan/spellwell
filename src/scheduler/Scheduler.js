@@ -27,7 +27,7 @@ import { P4_AVAILABLE_TYPES, P6_AVAILABLE_TYPES, buildWordSpec } from './Questio
 import { NEW_WORD_ROTATION, candidatesForError } from './TypeSelector.js';
 
 export const MIN_QUEUE_SIZE = 5;
-export const MAX_QUEUE_SIZE = 8;
+export const MAX_QUEUE_SIZE = 30;
 export const DEFAULT_QUEUE_SIZE = 6;
 
 /** @param {unknown} size */
@@ -86,12 +86,12 @@ export class Scheduler {
    * 每天最多 1 个组合强化：选一个到期组合，构造 T-MATCH 分类题。
    * @param {string} today
    * @param {number|string} seed
+   * @param {Record<string, any>[]} words
    * @returns {Promise<import('../core/contracts.js').QuestionSpec|null>}
    */
-  async #buildGraphemeDrill(today, seed) {
+  async #buildGraphemeDrill(today, seed, words) {
     const due = await this.stateRepository.listDueGraphemes(today);
     if (due.length === 0) return null;
-    const words = await this.wordRepository.all();
 
     for (const state of due) {
       const grapheme = this.graphemeMap[state.graphemeId];
@@ -144,10 +144,22 @@ export class Scheduler {
     if (!isDayKey(today)) throw new RangeError(`invalid date: ${String(today)}`);
     const target = normalizeSize(options.size ?? this.size);
     const seed = options.seed ?? this.seed;
+    const mode = options.mode ?? 'review';
+    if (mode !== 'review' && mode !== 'effort') {
+      throw new RangeError('mode must be review or effort');
+    }
+    const unitFilter = Array.isArray(options.units) && options.units.length > 0
+      ? new Set(options.units.map(String))
+      : null;
 
-    const words = await this.wordRepository.all();
+    const allWords = await this.wordRepository.all();
+    const words = allWords.filter((word) => {
+      if (word.reviewStatus === 'retired') return false;
+      if (unitFilter && !unitFilter.has(String(word.unitId))) return false;
+      return true;
+    });
     if (words.length === 0) {
-      throw new ContractError('SCHEDULER_CONTENT_EMPTY', 'no words available for the daily queue');
+      throw new ContractError('SCHEDULER_CONTENT_EMPTY', 'no active words available for the daily queue');
     }
     const states = await this.stateRepository.listWordStates();
     const stateByWord = new Map(states.map((state) => [state.wordId, state]));
@@ -191,8 +203,13 @@ export class Scheduler {
     for (const state of dueReviews) {
       push(words.find((word) => String(word.id) === state.wordId));
     }
-    for (const word of newWords) push(word);
-    for (const word of fillers) push(word);
+    if (mode === 'effort') {
+      for (const word of newWords) push(word);
+      for (const word of fillers) push(word);
+    } else {
+      for (const word of fillers) push(word);
+      for (const word of newWords) push(word);
+    }
     for (const word of words) push(word);
 
     if (selected.length === 0) {
@@ -209,13 +226,16 @@ export class Scheduler {
       } else if (latestError) {
         typeId = candidatesForError(latestError.type).find((candidate) => P4_AVAILABLE_TYPES.includes(candidate));
       } else {
-        typeId = NEW_WORD_ROTATION[index % NEW_WORD_ROTATION.length];
+        const rotation = mode === 'effort'
+          ? ['T-TYPE', 'T-SEQUENCE', 'T-FILL']
+          : ['T-FILL', 'T-SEQUENCE', 'T-TYPE'];
+        typeId = rotation[index % rotation.length];
       }
       if (!typeId || !P6_AVAILABLE_TYPES.includes(typeId)) {
         typeId = NEW_WORD_ROTATION[index % NEW_WORD_ROTATION.length];
       }
 
-      return buildWordSpec({
+      const spec = buildWordSpec({
         word: /** @type {{id: string, text: string, units: {text: string, graphemeId: string}[]}} */ (word),
         typeId,
         graphemeMap: this.graphemeMap,
@@ -226,8 +246,21 @@ export class Scheduler {
         claim: String(word.text),
         specId: `spec.daily.${String(word.id)}.${typeId}.${index}`,
       });
+      const reason = state?.status === 'probe'
+        ? 'probe'
+        : latestError
+          ? `due-error:${latestError.type}`
+          : state
+            ? (typeof state.dueDate === 'string' && state.dueDate <= today ? 'due-review' : 'filler')
+            : 'new-word';
+      spec.params.plan = {
+        reason,
+        mode,
+        policyVersion: 1,
+      };
+      return spec;
     });
-    const drill = await this.#buildGraphemeDrill(today, seed);
+    const drill = await this.#buildGraphemeDrill(today, seed, words);
     if (drill && specs.length < MAX_QUEUE_SIZE) specs.push(drill);
     return specs;
   }

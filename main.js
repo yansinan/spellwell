@@ -1,25 +1,24 @@
 /**
  * @layer app
- * @phase P1
+ * @phase P9
  * @doc §5.1 目录结构
  *
- * 组合根：只负责装配与启动，不含业务规则。
- * - `/`        → P1 学习端
+ * 组合根：只负责装配与启动。
+ * - `/`        → 练习设计页 → 学习端
  * - `/?dev=1`  → P0 骨架自检页
  * - `/?debug=1`→ 学习端 + 开发调试面板
  */
 
 import { mountApp } from './src/ui/App.js';
-import { createP1Session } from './src/ui/bootstrap.js';
+import { createPracticeWorkspace } from './src/ui/bootstrap.js';
 import { PracticeScreen } from './src/ui/PracticeScreen.js';
+import { PracticeSetupScreen } from './src/ui/PracticeSetupScreen.js';
 
 const root = document.getElementById('app');
-
-if (!root) {
-  throw new Error('Missing #app root element');
-}
+if (!root) throw new Error('Missing #app root element');
 
 const params = new URLSearchParams(window.location.search);
+let showSetup = null;
 
 async function boot() {
   if (params.get('dev') === '1') {
@@ -30,17 +29,39 @@ async function boot() {
   }
 
   document.documentElement.lang = 'en';
-  const { session, adapter, scheduler, storage, contentSeeded, loadReport } = await createP1Session();
-  if (params.get('debug') === '1') {
-    window.__SPELLWELL_DEBUG__ = { session, adapter, scheduler, storage, contentSeeded, loadReport };
-  }
-  new PracticeScreen({
-    root,
-    session,
-    debug: params.get('debug') === '1',
-    onResult: (result) => scheduler.recordAttempt(result),
-    loadReport,
-  }).mount();
+  const workspace = await createPracticeWorkspace();
+
+  showSetup = async () => {
+    await workspace.refresh();
+    new PracticeSetupScreen({
+      root,
+      workspace,
+      onStart: ({ session, scheduler, loadReport }) => {
+        if (params.get('debug') === '1') {
+          window.__SPELLWELL_DEBUG__ = {
+            session,
+            adapter: workspace.adapter,
+            scheduler,
+            storage: workspace.storage,
+            contentSeeded: workspace.contentSeeded,
+            units: workspace.units,
+            settings: workspace.settings,
+            loadReport,
+          };
+        }
+        new PracticeScreen({
+          root,
+          session,
+          debug: params.get('debug') === '1',
+          onResult: (result) => scheduler.recordAttempt(result),
+          loadReport,
+          onNewPractice: showSetup,
+        }).mount();
+      },
+    }).mount();
+  };
+
+  await showSetup();
 }
 
 function showContentBanner() {
@@ -48,8 +69,13 @@ function showContentBanner() {
   const banner = document.createElement('div');
   banner.id = 'content-update-banner';
   banner.className = 'sw-content-banner';
-  banner.innerHTML = '<span>Content updated.</span><button type="button">Reload</button>';
-  banner.querySelector('button').addEventListener('click', () => window.location.reload());
+  banner.innerHTML = '<span>Content updated.</span><button type="button">New practice</button><button type="button" aria-label="Dismiss">×</button>';
+  const buttons = banner.querySelectorAll('button');
+  buttons[0].addEventListener('click', async () => {
+    banner.remove();
+    if (showSetup) await showSetup();
+  });
+  buttons[1].addEventListener('click', () => banner.remove());
   document.body.append(banner);
 }
 
@@ -64,9 +90,7 @@ boot().catch((error) => {
   console.error('[SpellWell] boot failed', error);
   root.innerHTML = `
     <div class="sw-practice">
-      <header class="sw-practice__header">
-        <span class="sw-brand">SpellWell</span>
-      </header>
+      <header class="sw-practice__header"><span class="sw-brand">SpellWell</span></header>
       <main class="sw-practice__stage">
         <p class="sw-eyebrow">LOAD FAILED</p>
         <h1 class="sw-done__title">Could not start.</h1>

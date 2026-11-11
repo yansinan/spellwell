@@ -102,7 +102,11 @@
 | R-P7-05 | 后台维护单词与 unit 切分 | `ContentEditor` + AdminApp | `tests/p7/editor.test.js` + 浏览器 | P7 | ✅ |
 | R-P7-06 | 后台保存到共享 IndexedDB，学习端可见 | `AdminApp` + BroadcastChannel | 浏览器双页验收 | P7/P8 | ✅ |
 | R-P7-07 | 批量录入 + 自动切分建议 + 翻译/音标 | `WordImporter` + AdminApp | `tests/p7/import.test.js` + 浏览器 | P7 | ✅ |
-| R-P7-08 | 后台列表按 level 折叠，显示错/对次数 | `AttemptStats` + AdminApp | `tests/p7/attemptStats.test.js` | P7 | ✅ |
+| R-P7-08 | 后台列表按 unit 折叠，显示错/对次数 | `AttemptStats` + AdminApp | `tests/p7/attemptStats.test.js` | P7 | ✅ |
+| R-P9-01 | 内容 revision 与下一轮重新读取 | `bootstrap` / AdminApp | `tests/p9/practiceSettings.test.js` + 浏览器 | P9 | ✅ |
+| R-P9-02 | 单元多选、Review/Effort、前台不选题量 | `PracticeSetupScreen` | 浏览器 setup + `tests/p9/unitSelection.test.js` | P9 | ✅ |
+| R-P9-03 | 后台题量默认20、范围5—30 | `practiceSettings.js` + settings 页 | `tests/p9/practiceSettings.test.js` | P9 | ✅ |
+| R-P9-04 | 计划项 reason/mode/policyVersion | `Scheduler` + `PlanPolicy` | `tests/p9/unitSelection.test.js` + `planPolicy.test.js` | P9 | ✅ |
 | R-P8-05 | 本机数据全量迁移独立于内容编辑 | `MigrationApp` | 浏览器迁移页 | P8 | ✅ |
 | R-P8-01 | 本次练习效果统计 | `summarizeSession` + Done 页 | `tests/p8/analytics.test.js` + 浏览器 | P8 | ✅ |
 | R-P8-02 | 历史答题汇总/按日/按词 | `summarizeAttempts` / `groupAttemptsByDay` | `tests/p8/analytics.test.js` + Stats 页 | P8 | ✅ |
@@ -196,6 +200,7 @@
 | A-17 | 后台编辑如何进入学习端、迁移是否内容发布 | 共享 IndexedDB + BroadcastChannel；全量迁移独立 | ADR-0015 |
 | A-18 | 后台自动切分与人工确认边界 | 最长匹配仅后台草稿；保存校验；批量/翻译/音标 | ADR-0016 |
 | A-19 | 后台列表如何展示学习情况 | 错/对次数只读聚合；level 折叠；隐藏内部 ID | ADR-0017 |
+| A-20 | 练习入口/题量/单元/内容更新如何决定 | 单元多选+Review/Effort；后台20题；下一轮读新 revision；revise 预留 | ADR-0018 |
 
 ---
 

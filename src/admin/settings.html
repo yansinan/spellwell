@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SpellWell · 练习设置</title>
+    <link rel="stylesheet" href="../../styles/tokens.css" />
+    <link rel="stylesheet" href="../../styles/app.css" />
+  </head>
+  <body class="sw-app">
+    <main class="sw-shell">
+      <header class="sw-hero">
+        <p class="sw-eyebrow">CONTENT ADMIN</p>
+        <h1 class="sw-title">练习设置</h1>
+        <p class="sw-lede">题量与默认模式由后台决定，学习端只选择单元和复习/努力。</p>
+      </header>
+      <div id="settings-root"><p class="sw-lede">加载中…</p></div>
+    </main>
+    <script type="module">
+      import { mountPracticeSettings } from './PracticeSettingsApp.js';
+      mountPracticeSettings(document.getElementById('settings-root')).catch((error) => {
+        document.getElementById('settings-root').textContent = String(error);
+      });
+    </script>
+  </body>
+</html>
