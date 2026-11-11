@@ -173,3 +173,4 @@ node tools/serve.mjs
 - P9 练习设计：年级学期折叠 + unit 多选 + Review/Effort；题量后台设置（默认20，5—30）；计划项带 reason；`revise()` 预留但不实时改题。
 - P9 权重：按真实 attempts 的词/题型错误率 + 小样本平滑；同层排序，约束优先；见 ADR-0019。
 - P9 提示词：句子 → 音标 → 中文 → 单词；CLOZE 句子即题面；见 ADR-0020。
+- 词库可单独导入/导出（只含 words）；重复词合并/替换/不动；全量迁移仍走 migration；见 ADR-0021。

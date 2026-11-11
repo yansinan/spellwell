@@ -136,7 +136,9 @@ export function importWord(content, entry, mode = 'merge') {
   const existing = content.words.items.find((item) => item.text === entry.text);
   if (!existing) {
     addWord(content, {
-      id: nextWordId(content, entry.text),
+      id: typeof entry.id === 'string' && /^w\.[a-z0-9.-]+$/.test(entry.id) && !content.words.items.some((item) => item.id === entry.id)
+        ? entry.id
+        : nextWordId(content, entry.text),
       text: entry.text,
       units: entry.units,
       translation: entry.translation ?? '',

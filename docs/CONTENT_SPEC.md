@@ -232,3 +232,41 @@ node tests/runTests.js --phase=p0
 - 词条废弃：`reviewStatus: "retired"`，从学习队列排除，但保留引用以免历史 attempt 断链。
 - 组合合并：新建新 ID，旧 ID 标记 retired，并迁移引用；不得直接改 `text`。
 - 句子改写：若挖空词不变可保留 ID；若目标词变化，新建 ID 并退休旧句。
+
+---
+
+## 词库单独导入/导出
+
+后台“词库导入 / 导出”只处理 `words`，文件格式：
+
+```json
+{
+  "schema": "spellwell.words.v1",
+  "version": 1,
+  "items": [
+    {
+      "id": "w.weather",
+      "text": "weather",
+      "units": [{ "text": "w", "graphemeId": "g.w" }],
+      "grade": 1,
+      "term": "下",
+      "unit": 2,
+      "unitId": "g1-s2-u2",
+      "unitLabel": "一年级下 · 第2单元",
+      "translation": "天气",
+      "phonetic": "/ˈweðər/",
+      "reviewStatus": "unreviewed"
+    }
+  ]
+}
+```
+
+重复词按 `text` 判断：
+
+- **合并**：保留原 ID/切分/复习状态，补空中文/音标；显式单元可更新；
+- **替换**：覆盖切分/中文/音标/单元，标记 `unreviewed`；
+- **不动**：跳过。
+
+导入后走 V1—V9 校验，通过才写入共享 IndexedDB。学习状态不在词库文件中；
+换机/完整备份仍使用 `/migration/index.html`。
+

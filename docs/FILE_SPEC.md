@@ -90,6 +90,7 @@
 │       ├── AdminApp.js
 │       ├── ContentEditor.js    # 单词/unit 编辑纯函数
 │       ├── PracticeSettingsApp.js # P9 练习设置页
+│       ├── WordLibrary.js      # P9 词库单独导入/导出
 │       ├── WordImporter.js     # 批量/自动切分建议
 │       ├── AttemptStats.js     # 后台只读错/对次数聚合
 │       └── ContentValidator.js # V1—V10 + buildExport

@@ -19,6 +19,7 @@ import {
   updateWord,
 } from './ContentEditor.js';
 import { countAttemptsByWord } from './AttemptStats.js';
+import { applyWordLibrary, buildWordLibrary, parseWordLibrary } from './WordLibrary.js';
 import { buildExport, validateContent } from './ContentValidator.js';
 import { autoSegment, parseBatch } from './WordImporter.js';
 
@@ -107,6 +108,8 @@ export async function mountAdmin(root) {
   let batchText = '';
   let batchPreview = null;
   let duplicateMode = 'merge';
+  let wordImportMode = 'merge';
+  let wordLibraryStatus = '';
   let notice = '';
 
   const graphemeByText = () => Object.fromEntries(content.graphemes.items.map((item) => [item.text, item.id]));
@@ -270,6 +273,29 @@ export async function mountAdmin(root) {
         ` : ''}
       </section>
 
+      <section class="sw-panel sw-admin__library">
+        <div class="sw-admin__batch-head">
+          <div>
+            <h2>词库导入 / 导出</h2>
+            <p class="sw-admin__muted">只导入/导出 words，不含学习状态；重复词按下方方式处理。</p>
+          </div>
+          <button type="button" class="sw-text-button" data-export-words>导出词库 JSON</button>
+        </div>
+        <div class="sw-admin__toolbar">
+          <label class="sw-admin__inline-field">重复词
+            <select data-word-import-mode>
+              <option value="merge" ${wordImportMode === 'merge' ? 'selected' : ''}>合并（保留已有切分，补空字段）</option>
+              <option value="replace" ${wordImportMode === 'replace' ? 'selected' : ''}>替换（覆盖切分/中文/音标/单元）</option>
+              <option value="skip" ${wordImportMode === 'skip' ? 'selected' : ''}>不动（跳过）</option>
+            </select>
+          </label>
+          <label class="sw-text-button sw-admin__file-button">选择词库文件
+            <input type="file" accept="application/json,.json" data-import-words />
+          </label>
+        </div>
+        ${wordLibraryStatus ? `<p class="sw-admin__notice">${escape(wordLibraryStatus)}</p>` : ''}
+      </section>
+
       <div class="sw-admin__layout">
         <aside class="sw-panel sw-admin__sidebar">
           <div class="sw-admin__sidebar-head">
@@ -383,6 +409,54 @@ export async function mountAdmin(root) {
     });
     root.querySelector('[data-duplicate-mode]')?.addEventListener('change', (event) => {
       duplicateMode = event.target.value;
+      render();
+    });
+    root.querySelector('[data-word-import-mode]')?.addEventListener('change', (event) => {
+      wordImportMode = event.target.value;
+      render();
+    });
+    root.querySelector('[data-export-words]')?.addEventListener('click', () => {
+      const library = buildWordLibrary(content.words.items);
+      const blob = new Blob([JSON.stringify(library, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `spellwell-words-${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.append(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      wordLibraryStatus = `已导出 ${library.items.length} 个词。`;
+      render();
+    });
+    root.querySelector('[data-import-words]')?.addEventListener('change', async (event) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const parsed = parseWordLibrary(await file.text());
+      if (parsed.errors.length > 0) {
+        wordLibraryStatus = `导入失败：${parsed.errors.slice(0, 3).join('；')}`;
+        render();
+        return;
+      }
+      const before = cloneContent(content);
+      try {
+        const counts = applyWordLibrary(content, parsed.items, wordImportMode);
+        const report = validateContent(content);
+        if (!report.valid || counts.errors.length > 0) {
+          content = before;
+          const details = counts.errors.slice(0, 3).map((item) => `${item.text || '?'}: ${item.message}`).join('；');
+          wordLibraryStatus = `导入失败${details ? `：${details}` : ''}（${report.errors.length} 个校验问题）`;
+          render();
+          return;
+        }
+        const ok = await persistContent();
+        wordLibraryStatus = ok
+          ? `导入完成：新增 ${counts.created} · 合并 ${counts.merged} · 替换 ${counts.replaced} · 不动 ${counts.skipped}。`
+          : '导入已生成草稿，但校验未通过，未写入本机数据库。';
+      } catch (error) {
+        content = before;
+        wordLibraryStatus = `导入失败：${String(error.message ?? error)}`;
+      }
       render();
     });
     root.querySelector('[data-batch-commit]')?.addEventListener('click', async () => {

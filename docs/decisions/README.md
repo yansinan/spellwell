@@ -24,6 +24,7 @@
 | [0018](0018-content-driven-practice.md) | 内容驱动计划、练习设计页与 20 题默认 | Accepted | 单元多选、Review/Effort、后台题量、revision、revise 预留 |
 | [0019](0019-attempt-calibrated-weights.md) | 用真实 attempts 校准选词权重 | Accepted | 按词/题型错误率、小样本平滑、同层排序、约束优先 |
 | [0020](0020-prompt-resource-priority.md) | 提示词资源优先级 | Accepted | 句子→音标→中文→单词；只读；CLOZE 不重复 |
+| [0021](0021-word-library-import-export.md) | 词库单独导入/导出 | Accepted | 只含 words；合并/替换/不动；导入校验后落库 |
 
 新增 ADR 的模板：
 

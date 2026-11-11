@@ -899,3 +899,20 @@ code {
 .sw-admin__settings small {
   color: var(--sw-ink-faint);
 }
+
+/* P9 词库单独导入/导出 */
+.sw-admin__library {
+  margin-bottom: 8px;
+}
+
+.sw-admin__file-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.sw-admin__file-button input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
