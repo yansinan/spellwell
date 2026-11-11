@@ -1,6 +1,6 @@
 # 文件与工程规范 · FILE_SPEC
 
-**适用版本**：DESIGN v1.1 / 仓库 v0.7.0（P6）
+**适用版本**：DESIGN v1.1 / 仓库 v0.8.0（P7）
 **地位**：本文件是 `docs/DESIGN.md` 的工程实施细则。与 DESIGN 冲突时，以 DESIGN 为准；本文件负责把 DESIGN 翻译成可机械检查的规则。
 
 ---
@@ -81,9 +81,7 @@
 │   └── admin/                  # P7；内容生产，不写学习状态
 │       ├── index.html
 │       ├── AdminApp.js
-│       ├── AnnotationEditor.js
-│       ├── ContentValidator.js
-│       └── ExportImport.js
+│       └── ContentValidator.js # V1—V10 + buildExport
 ├── tests/
 │   ├── runTests.js             # 阶段门 runner；无测试框架
 │   ├── harness.js              # test/assert/run
@@ -104,7 +102,7 @@
 └── README.md
 ```
 
-**暂不创建的空目录**（避免占位文件污染）：`src/ui/skins/`、`src/admin/AnnotationEditor.js` 等，到对应阶段再建。目录树中的 P7/P8 文件在 P0 不提前实现。
+**暂不创建的空目录**（避免占位文件污染）：`src/ui/skins/` 等，到对应阶段再建。目录树中的 P7/P8 文件在 P0 不提前实现。
 
 ---
 
@@ -219,7 +217,7 @@ questionTypes  ←  scheduler
 - `core/contracts.js` 导出 `CONTRACT_VERSION`；跨层结构变更必须 +1，并写 ADR。
 - 存储 `schema.js` 导出 `DB_VERSION`；IndexedDB 升级必须写迁移函数与测试（P2 起）。
 - 内容 JSON 顶层带 `"version": 1`；内容格式变更 +1，并更新 `CONTENT_SPEC.md`。
-- `package.json` 版本跟阶段走：P0 `0.1.0`，P1 `0.2.0`，P2 `0.3.0`，P3 `0.4.0`，P4 `0.5.0`，P5 `0.6.0`，P6 `0.7.0`，以此类推；P10 `1.0.0`。
+- `package.json` 版本跟阶段走：P0 `0.1.0`，P1 `0.2.0`，P2 `0.3.0`，P3 `0.4.0`，P4 `0.5.0`，P5 `0.6.0`，P6 `0.7.0`，P7 `0.8.0`，以此类推；P10 `1.0.0`。
 
 ---
 

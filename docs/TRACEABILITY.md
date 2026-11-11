@@ -95,6 +95,10 @@
 | R-P6-02 | T-CLOZE 句子挖空拼写 | `TCloze` + PracticeScreen | `tests/p6/types.test.js` + 浏览器 | P6 | ✅ |
 | R-P6-03 | probe 到期、答错退回、答对 mastered | `Scheduler.recordAttempt` | `tests/p6/probe.test.js` | P6 | ✅ |
 | R-P6-04 | probe 队列优先 T-CLOZE/T-JUDGE-FIX | `Scheduler.buildDailyQueue` | `tests/p6/probe.test.js` | P6 | ✅ |
+| R-P7-01 | ContentValidator V1—V9 | `src/admin/ContentValidator.js` | `tests/p7/content.test.js` | P7 | ✅ |
+| R-P7-02 | V10 只导出 reviewed，未审核阻断 | `buildExport` | `tests/p7/content.test.js` | P7 | ✅ |
+| R-P7-03 | 后台不写学习状态 | `src/admin/**` | `tests/p7/adminArchitecture.test.js` | P7 | ✅ |
+| R-P7-04 | 后台可访问并显示校验/阻断 | `/src/admin/index.html` | 浏览器 admin 验收 | P7 | ✅ |
 
 ### 5.1 九题型覆盖（与 `QUESTION_TYPE_IDS` 一一对应）
 
@@ -140,7 +144,7 @@
 | R-CONTENT-02 | §2.3 混淆项成对，禁止单边 | `src/content/confusables.json` | `tests/p0/content.test.js` 对称/重复检查 | P0 | ✅ |
 | R-CONTENT-03 | §2.3 句子语义唯一 | `src/content/sentences.json` | `tests/p0/content.test.js` 挖空恰好一次；语义唯一 👁 | P0 | 🧪 |
 | R-CONTENT-04 | §2.3 T1—T4 分层 | `graphemes.json` 的 `tier` | `tests/p0/content.test.js` | P0 | ✅ |
-| R-CONTENT-05 | 未审核内容不得生产导出 | `reviewStatus` 字段 | P0 断言字段存在；P7 导出阻断 | P0/P7 | 🧪 |
+| R-CONTENT-05 | 未审核内容不得生产导出 | `reviewStatus` + `buildExport` | `tests/p7/content.test.js` | P0/P7 | ✅ |
 | R-ADMIN-01 | §2.3 后台只产内容、只校验 | `src/admin/*`（P7） | P7 测试：不写学习状态 | P7 | ⏳ |
 | R-ADMIN-02 | §2.3 切分校验阻断错误导出 | `ContentValidator`（P7） | P7 测试 | P7 | ⏳ |
 
@@ -178,6 +182,7 @@
 | A-12 | P4 三种修复题型如何交互与定位 | 点击交换、预填修错、字母间隙；P4 错误映射 | ADR-0010 |
 | A-13 | 组合独立阶梯与 T-MATCH 形态 | 多选分类、wordsPassed、跨 2 词 probe、每日 1 组 | ADR-0011 |
 | A-14 | 判断纠错、语境抽查与 probe 迁移 | claim 判断+改错、句子挖空、60 天 probe、答错退回 | ADR-0012 |
+| A-15 | 后台校验与生产导出如何阻断 | V1—V10、只读后台、只导出 reviewed、后台不碰状态 | ADR-0013 |
 
 ---
 

@@ -1,19 +1,19 @@
 # 开发路线图 · ROADMAP
 
-**当前阶段**：P6 ✅（2026-11-11）
-**下一阶段**：P7（内容后台与导出校验）
-**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P6 不通过不进入 P7。
+**当前阶段**：P7 ✅（2026-11-11）
+**下一阶段**：P8（输入适配与移动端）
+**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P7 不通过不进入 P8。
 
 ---
 
 ## 1. 门禁命令
 
 ```bash
-# 当前阶段（P6，累计 p0..p6）
-node tests/runTests.js --phase=p6
+# 当前阶段（P7，累计 p0..p7）
+node tests/runTests.js --phase=p7
 
 # 后续阶段（累计运行 p0..pN）
-node tests/runTests.js --phase=p7
+node tests/runTests.js --phase=p8
 
 # 默认：自动跑到仓库中已存在的最高阶段
 node tests/runTests.js
@@ -39,8 +39,8 @@ node tools/serve.mjs
 | **P4** | 顺序/边界错闭环（T-REORDER/T-EDIT/T-SEGMENT） | `--phase=p4` PASS + 三类错误触发对应修复 | ✅ 完成 |
 | **P5** | 组合强化与配对（T-MATCH） | `--phase=p5` PASS + 跨 2 词连续正确 | ✅ 完成 |
 | **P6** | 判断纠错与语境抽查（T-JUDGE-FIX/T-CLOZE） | `--phase=p6` PASS + 假掌握被拦下 | ✅ 完成 |
-| **P7** | 人工标注后台系统 | `--phase=p7` PASS + 错误切分阻断导出 | ⏳ 下一步 |
-| **P8** | 输入适配与体验（PC/移动） | `--phase=p8` PASS + 同 spec+seed 双端一致 | ⏳ |
+| **P7** | 人工标注后台系统 | `--phase=p7` PASS + 错误切分阻断导出 | ✅ 完成 |
+| **P8** | 输入适配与体验（PC/移动） | `--phase=p8` PASS + 同 spec+seed 双端一致 | ⏳ 下一步 |
 | **P9** | 挑战旁路与变换预留 | `--phase=p9` PASS + 挑战不写主状态 | ⏳ |
 | **P10** | 平移准备 | `--phase=p10` PASS + 换 adapter 仓库零改动 | ⏳ |
 
@@ -315,35 +315,69 @@ node tests/runTests.js --phase=p6
 
 ---
 
-## 10. P7 任务书（下一阶段）
+## 10. P7 任务书（已完成）
 
 **目标**：实现内容标注后台、ContentValidator V1—V10 与生产导出阻断。
 
-### 范围
+### 交付物
 
-1. `ContentValidator`：校验 4 个内容库的 V1—V10（ID/切分/引用/句子/混淆项/reviewStatus）。
-2. `ContentExportService`：只导出 `reviewed`；任何 `unreviewed`/无效内容阻断，返回可定位错误。
-3. `AdminApp`：同源加载内容、显示校验结果、导出按钮；后台不写 wordStates/graphemeStates/attempts。
-4. `/src/admin/index.html` 可访问；学习端不暴露后台入口。
-5. `tests/p7/`：V1—V10、导出阻断/放行、后台不写状态。
-6. 不实现 P8 输入适配、P9 挑战。
+- [x] `ContentValidator`：V1—V9 结构校验 + V10 reviewed-only。
+- [x] `buildExport`：无效/未审核内容阻断，返回可定位 `unreviewed[]`。
+- [x] `AdminApp`：同源加载 4 库、显示计数/错误、导出按钮；后台不 import 状态仓库。
+- [x] `/src/admin/index.html` 可访问；学习端不暴露入口。
+- [x] `tests/p7/content.test.js`、`tests/p7/adminArchitecture.test.js`。
+- [x] ADR-0013：ContentValidator、后台与导出阻断。
 
-### 验收
+### 验收结果
 
-- `node tests/runTests.js --phase=p7` PASS。
-- 当前种子全部 unreviewed → 导出被阻断，错误能定位到条目/字段。
-- 把测试内容标为 reviewed 后导出成功，且只含 reviewed。
-- 后台模块不 import 状态仓库、不触碰学习状态。
+```bash
+node tests/runTests.js --phase=p7
+# PASS  p7 gate · 168 passed · 0 failed · 29 files
+```
 
-### 启动提示词（可直接交给 agent）
+- 当前种子：V1—V9 通过；V10 阻断 38 条 unreviewed，导出按钮 disabled。
+- 全部 reviewed 的测试副本：导出 10/22/4/2，只含 reviewed。
+- 切分不闭合、缺组合、重复 ID、句子答案错、混淆项重复均能定位。
+- 后台浏览器：words 10 / graphemes 22 / sentences 4 / confusables 2；显示 `CONTENT_EXPORT_UNREVIEWED`。
+- 后台模块不触碰 wordStates/graphemeStates/attempts。
 
-> 只做 P7，不提前做 P8。先读 `AGENTS.md`、`docs/DESIGN.md §2.3`、`docs/CONTENT_SPEC.md §6`、`docs/TRACEABILITY.md` 的 R-CONTENT-*。
-> 实现 ContentValidator/ExportService/AdminApp，导出仅 reviewed；后台不得写学习状态。
-> 每步运行 `node tests/runTests.js --phase=p7`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+### P7 明确不做
+
+- 不做 P8 输入适配/移动端专项。
+- 不做 P9 挑战模式。
+- 当前后台是只读校验+导出，不是完整可视化标注编辑器。
 
 ---
 
-## 11. 后续阶段要点（防止提前实现）
+## 11. P8 任务书（下一阶段）
+
+**目标**：把输入适配器抽成 Pointer/Keyboard 双端，统一鼠标/触摸/键盘行为，完成移动端体验。
+
+### 范围
+
+1. `PointerAdapter` / `KeyboardAdapter`：DOM 事件 → InputEvent；不判定、不写状态。
+2. T-SEQUENCE 等题型的点选/拖拽/键盘等价；触摸与鼠标同 spec+seed 一致。
+3. 移动端布局、点击热区、滚动/安全区；不引入手势库。
+4. 键盘解锁（连续正确后）作为升级仪式，不改变难度语义。
+5. `tests/p8/` + 双端浏览器验收；P1—P7 不回退。
+6. 不做 P9 挑战、不做 P10 Node adapter。
+
+### 验收
+
+- `node tests/runTests.js --phase=p8` PASS。
+- 同 spec+seed 在鼠标/触摸/键盘下判定一致。
+- 390px 无横向滚动；无手势库/新依赖。
+- 现有题型交互不回退。
+
+### 启动提示词（可直接交给 agent）
+
+> 只做 P8，不提前做 P9。先读 `AGENTS.md`、`docs/DESIGN.md §3.2/§6.2`、`docs/TRACEABILITY.md` 的 R-UI-03/R-INPUT-*。
+> 抽取 PointerAdapter/KeyboardAdapter，保持题型只消费 InputEvent；完成双端验收。
+> 每步运行 `node tests/runTests.js --phase=p8`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+
+---
+
+## 12. 后续阶段要点（防止提前实现）
 
 | 阶段 | 关键新增 | 不得提前做的事 |
 |---|---|---|
@@ -370,7 +404,7 @@ P1 不实现字母级/混合粒度。
 
 ---
 
-## 12. 阶段完成检查
+## 13. 阶段完成检查
 
 - [ ] 本阶段门禁 PASS，且低阶段测试未回退。
 - [ ] `TRACEABILITY.md` 中本阶段条目从 ⏳/🧪 改为 ✅。

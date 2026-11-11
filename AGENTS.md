@@ -1,7 +1,7 @@
 # AGENTS.md · 项目执行契约
 
 > 任何 agent、贡献者进入本仓库，先读本文件。它规定“怎么做事”，`docs/DESIGN.md` 规定“做什么”。
-> 当前阶段：**P6 已完成，P7 是下一步**。不要提前实现 P7 及以后的功能。
+> 当前阶段：**P7 已完成，P8 是下一步**。不要提前实现 P8 及以后的功能。
 
 ---
 
@@ -28,17 +28,18 @@
 | P4 | ✅ 完成 | 修 P4 题型/映射缺陷 | 做 T-MATCH/T-CLOZE、后台、P5 组合阶梯 |
 | P5 | ✅ 完成 | 修 T-MATCH/组合状态缺陷 | 做 T-JUDGE-FIX/T-CLOZE、后台 |
 | P6 | ✅ 完成 | 修 P6 题型/probe 缺陷 | 做 P7 后台、导出阻断 |
-| P7 | ⏳ 下一步 | 内容后台、ContentValidator、导出阻断 | 做 P8 输入适配、P9 挑战 |
+| P7 | ✅ 完成 | 修 ContentValidator/后台/导出缺陷 | 做 P8 输入适配、P9 挑战 |
+| P8 | ⏳ 下一步 | Pointer/Keyboard 双适配、移动端 | 做 P9 挑战、P10 Node adapter |
 
-**判断标准**：如果你写的代码在 `docs/ROADMAP.md` 的“P6 明确不做”或“后续阶段要点”里，停手。
+**判断标准**：如果你写的代码在 `docs/ROADMAP.md` 的“P7 明确不做”或“后续阶段要点”里，停手。
 
 ---
 
 ## 2. 命令
 
 ```bash
-# 阶段门禁（唯一验收标准；当前 P6）
-node tests/runTests.js --phase=p6
+# 阶段门禁（唯一验收标准；当前 P7）
+node tests/runTests.js --phase=p7
 
 # 本地预览（必须 HTTP）
 node tools/serve.mjs
@@ -78,7 +79,7 @@ node tools/serve.mjs
 10. **偏离 DESIGN 必须先写 ADR。** 先改文档再改代码；禁止“代码即文档”。
 11. **后台不写学习状态。** `src/admin/**` 不得触碰 `wordStates/graphemeStates/attempts`。
 12. **挑战模式不写主状态。** `RapidTapChallenge` 的结果不得进入调度/错误画像。
-13. **阶段顺序不可跳。** P6 不通过不进入 P7；当前 P6 已完成，只允许修 P6 缺陷，不提前写后台或 P8 适配。
+13. **阶段顺序不可跳。** P7 不通过不进入 P8；当前 P7 已完成，只允许修 P7 缺陷，不提前写 P8 输入适配。
 
 这些规则中 2/3/4/5/6/10 有自动检查（`architecture.test.js`、`traceability.test.js`、`content.test.js`）；其余靠评审。
 
@@ -137,10 +138,10 @@ node tools/serve.mjs
 
 ## 8. 下一阶段启动提示词（复制给 agent）
 
-> 只做 P7，不提前做 P8。先读 `AGENTS.md`、`docs/DESIGN.md §2.3`、`docs/CONTENT_SPEC.md §6`、`docs/TRACEABILITY.md` 的 R-CONTENT-*。
-> 实现 ContentValidator/ExportService/AdminApp，导出仅 reviewed；后台不得写学习状态。
-> 每步运行 `node tests/runTests.js --phase=p7`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
-> 不新增依赖、不做 P8 输入适配、不做 P9 挑战。
+> 只做 P8，不提前做 P9。先读 `AGENTS.md`、`docs/DESIGN.md §3.2/§6.2`、`docs/TRACEABILITY.md` 的 R-UI-03/R-INPUT-*。
+> 抽取 PointerAdapter/KeyboardAdapter，保持题型只消费 InputEvent；完成鼠标/触摸/键盘双端验收。
+> 每步运行 `node tests/runTests.js --phase=p8`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+> 不新增依赖、不做 P9 挑战、不做 P10 Node adapter。
 
 ---
 
@@ -163,3 +164,4 @@ node tools/serve.mjs
 - P4 修复题：T-REORDER 点击交换、T-EDIT 预填修错、T-SEGMENT 字母间隙；错误映射见 ADR-0010。
 - P5 组合独立阶梯 + T-MATCH 多选分类；跨 2 词 3 次正确进 probe；每日最多 1 组：见 ADR-0011。
 - P6 T-JUDGE-FIX 判断+改错、T-CLOZE 句子填空；probe 60 天，答错退回、答对 mastered：见 ADR-0012。
+- P7 ContentValidator V1—V10；后台只读；导出只放行 reviewed，未审核阻断：见 ADR-0013。

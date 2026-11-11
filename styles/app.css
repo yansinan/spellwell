@@ -454,3 +454,27 @@ code {
   font-family: var(--sw-font-cn);
   color: var(--sw-ink-soft);
 }
+
+/* P7 内容后台 */
+.sw-admin__counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.sw-admin__errors {
+  max-height: 280px;
+  overflow: auto;
+  padding-left: 20px;
+  color: var(--sw-ink);
+}
+
+.sw-admin__blocked {
+  color: var(--sw-ink-soft);
+}
+
+.sw-admin__ok {
+  color: var(--sw-mint-deep);
+}

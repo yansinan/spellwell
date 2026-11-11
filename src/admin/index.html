@@ -14,11 +14,14 @@
         <h1 class="sw-title">内容后台 <span class="sw-title__cn">P7</span></h1>
         <p class="sw-lede">人工标注切分、组合库、混淆项、句子库与导出校验。</p>
       </header>
-      <section class="sw-panel">
-        <h2>尚未启用</h2>
-        <p>P7 之前没有标注编辑器。当前内容位于 <code>src/content/*.json</code>，仅用于 P0 结构验证。</p>
-        <p>后台不得写学习状态；生产导出只放行 <code>reviewStatus: "reviewed"</code> 的内容。</p>
-      </section>
+      <div id="admin-root"><p class="sw-lede">加载中…</p></div>
     </main>
+    <script type="module">
+      import { mountAdmin } from './AdminApp.js';
+      mountAdmin(document.getElementById('admin-root')).catch((error) => {
+        console.error(error);
+        document.getElementById('admin-root').textContent = String(error);
+      });
+    </script>
   </body>
 </html>

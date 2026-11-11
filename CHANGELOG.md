@@ -1,5 +1,42 @@
 # CHANGELOG
 
+## [0.8.0] — 2026-11-11 · P7 内容后台与导出校验
+
+### Added
+
+- `ContentValidator`：V1—V9 校验 + V10 reviewed-only 导出。
+- `buildExport`：未审核/无效内容阻断，返回可定位 `unreviewed[]`。
+- `AdminApp` + `/src/admin/index.html`：同源加载 4 库、显示计数/错误、导出按钮。
+- 后台不 import 状态仓库，不触碰 wordStates/graphemeStates/attempts。
+- `tests/p7/content.test.js`、`tests/p7/adminArchitecture.test.js`。
+- ADR-0013：ContentValidator、后台与导出阻断。
+
+### Changed
+
+- `package.json` 版本 `0.7.0` → `0.8.0`；新增 `test:p7`。
+- `README` / `ROADMAP` / `TRACEABILITY` / `AGENTS` / `FILE_SPEC` 状态推进到 P8。
+
+### Verification
+
+```bash
+node tests/runTests.js --phase=p7
+# PASS  p7 gate · 168 passed · 0 failed · 29 files
+```
+
+- 当前种子：V1—V9 通过；V10 阻断 38 条 unreviewed；导出按钮 disabled。
+- reviewed 副本：导出 10/22/4/2，只含 reviewed。
+- 切分不闭合、缺组合、重复 ID、句子答案错、混淆项重复均可定位。
+- 后台浏览器：words 10 / graphemes 22 / sentences 4 / confusables 2；显示 `CONTENT_EXPORT_UNREVIEWED`。
+- 后台无学习状态访问；无控制台异常。
+
+### Known limitations
+
+- 后台目前是只读校验+导出，不是完整可视化标注编辑器。
+- V6 语义唯一仍靠人工评审；自动只校验答案出现一次。
+- P8 输入适配/P9 挑战未实现。
+
+---
+
 ## [0.7.0] — 2026-11-11 · P6 判断纠错与语境抽查
 
 ### Added
