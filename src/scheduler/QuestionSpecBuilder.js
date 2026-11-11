@@ -12,6 +12,7 @@ import { createRng, hashSeed } from '../core/seedRandom.js';
 
 export const P1_AVAILABLE_TYPES = Object.freeze(['T-SEQUENCE', 'T-FILL', 'T-TYPE']);
 export const P4_AVAILABLE_TYPES = Object.freeze([...P1_AVAILABLE_TYPES, 'T-REORDER', 'T-EDIT', 'T-SEGMENT']);
+export const P6_AVAILABLE_TYPES = Object.freeze([...P4_AVAILABLE_TYPES, 'T-JUDGE-FIX', 'T-CLOZE']);
 
 /**
  * @param {{units: {text: string, graphemeId: string}[]}} word
@@ -111,6 +112,8 @@ function initialEditText({ word, focusIndex, errorType, distractorPool = [] }) {
  *   distractorPool?: {id: string, text: string}[],
  *   seed?: number|string,
  *   errorType?: string,
+ *   sentence?: { text: string }|null,
+ *   claim?: string,
  *   specId: string
  * }} input
  * @returns {import('../core/contracts.js').QuestionSpec}
@@ -122,13 +125,15 @@ export function buildWordSpec({
   distractorPool = [],
   seed = 20261111,
   errorType,
+  sentence = null,
+  claim,
   specId,
 }) {
   if (!word || typeof word.id !== 'string' || !Array.isArray(word.units) || word.units.length === 0) {
     throw new ContractError('SPEC_BUILD_INVALID', 'word with at least one unit is required');
   }
-  if (!P4_AVAILABLE_TYPES.includes(typeId)) {
-    throw new ContractError('SPEC_BUILD_INVALID', `P4 cannot build type ${typeId}`);
+  if (!P6_AVAILABLE_TYPES.includes(typeId)) {
+    throw new ContractError('SPEC_BUILD_INVALID', `P6 cannot build type ${typeId}`);
   }
 
   const focusIndex = chooseFocusIndex(word);
@@ -148,7 +153,11 @@ export function buildWordSpec({
           }),
           operation: errorType ?? 'replace',
         }
-        : {};
+        : typeId === 'T-JUDGE-FIX'
+          ? { claim: claim ?? word.text }
+          : typeId === 'T-CLOZE'
+            ? { sentence: sentence?.text ?? word.text }
+            : {};
 
   params.difficulty = {
     scaffold: scaffoldOf(typeId),
@@ -161,7 +170,7 @@ export function buildWordSpec({
     ),
     distractorCount: ['T-SEQUENCE', 'T-FILL'].includes(typeId) ? distractors.length : 0,
     confusableCount: 0,
-    inputMode: typeId === 'T-TYPE' || typeId === 'T-EDIT' ? 'keyboard' : 'tap',
+    inputMode: ['T-TYPE', 'T-EDIT', 'T-CLOZE', 'T-JUDGE-FIX'].includes(typeId) ? 'keyboard' : 'tap',
   };
 
   const spec = {

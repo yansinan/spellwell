@@ -1,19 +1,19 @@
 # 开发路线图 · ROADMAP
 
-**当前阶段**：P5 ✅（2026-11-11）
-**下一阶段**：P6（判断纠错与语境抽查）
-**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P5 不通过不进入 P6。
+**当前阶段**：P6 ✅（2026-11-11）
+**下一阶段**：P7（内容后台与导出校验）
+**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P6 不通过不进入 P7。
 
 ---
 
 ## 1. 门禁命令
 
 ```bash
-# 当前阶段（P5，累计 p0..p5）
-node tests/runTests.js --phase=p5
+# 当前阶段（P6，累计 p0..p6）
+node tests/runTests.js --phase=p6
 
 # 后续阶段（累计运行 p0..pN）
-node tests/runTests.js --phase=p6
+node tests/runTests.js --phase=p7
 
 # 默认：自动跑到仓库中已存在的最高阶段
 node tests/runTests.js
@@ -38,8 +38,8 @@ node tools/serve.mjs
 | **P3** | 记忆曲线与错词调度 | `--phase=p3` PASS + 次日必现 | ✅ 完成 |
 | **P4** | 顺序/边界错闭环（T-REORDER/T-EDIT/T-SEGMENT） | `--phase=p4` PASS + 三类错误触发对应修复 | ✅ 完成 |
 | **P5** | 组合强化与配对（T-MATCH） | `--phase=p5` PASS + 跨 2 词连续正确 | ✅ 完成 |
-| **P6** | 判断纠错与语境抽查（T-JUDGE-FIX/T-CLOZE） | `--phase=p6` PASS + 假掌握被拦下 | ⏳ 下一步 |
-| **P7** | 人工标注后台系统 | `--phase=p7` PASS + 错误切分阻断导出 | ⏳ |
+| **P6** | 判断纠错与语境抽查（T-JUDGE-FIX/T-CLOZE） | `--phase=p6` PASS + 假掌握被拦下 | ✅ 完成 |
+| **P7** | 人工标注后台系统 | `--phase=p7` PASS + 错误切分阻断导出 | ⏳ 下一步 |
 | **P8** | 输入适配与体验（PC/移动） | `--phase=p8` PASS + 同 spec+seed 双端一致 | ⏳ |
 | **P9** | 挑战旁路与变换预留 | `--phase=p9` PASS + 挑战不写主状态 | ⏳ |
 | **P10** | 平移准备 | `--phase=p10` PASS + 换 adapter 仓库零改动 | ⏳ |
@@ -279,36 +279,71 @@ node tests/runTests.js --phase=p5
 
 ---
 
-## 9. P6 任务书（下一阶段）
+## 9. P6 任务书（已完成）
 
 **目标**：用 T-JUDGE-FIX 与 T-CLOZE 做判断纠错/语境抽查，并让 60 天 probe 拦截假掌握。
 
-### 范围
+### 交付物
 
-1. `T-JUDGE-FIX`：展示一个声称答案，孩子判断对错并在错时修改；judge 区分判断与修正。
-2. `T-CLOZE`：英文句子挖空，孩子输入目标词；不提供选择题。
-3. `probe`：3 次连续正确 + 跨 2 词后进入抽查；60 天后用更高粒度/更少脚手架验证。
-4. 抽查答错退回 `learning`，答对才 `mastered`；错误画像回写。
-5. Scheduler 对 `probe` 状态优先 T-JUDGE-FIX/T-CLOZE；T-CLOZE 需要 sentence 内容。
-6. `tests/p6/`：判断纠错、语境拼写、probe 到期/退回/通过、60 天固定时钟。
-7. 不做 P7 后台/导出阻断。
+- [x] `T-JUDGE-FIX`：claim + Correct/Wrong；判错时预填输入框改对；区分假接受/假拒绝。
+- [x] `T-CLOZE`：句子挖空 + 拼写输入，不做选项。
+- [x] probe：30 天满档连续 3 次正确 → `status=probe`，`dueDate=today+60`。
+- [x] probe 答错退回 `learning`/次日；答对 → `mastered`/`dueDate=null`。
+- [x] Scheduler 对 probe 优先 T-CLOZE（有句子）或 T-JUDGE-FIX。
+- [x] `PracticeScreen` P6 判断/改错、句子填空 UI。
+- [x] `tests/p6/types.test.js`、`tests/p6/probe.test.js`。
+- [x] ADR-0012：判断纠错、语境抽查与 probe 迁移。
 
-### 验收
+### 验收结果
 
-- `node tests/runTests.js --phase=p6` PASS。
-- 假掌握词 60 天后进入抽查；答错退回学习，答对才掌握。
-- T-JUDGE-FIX 能区分“判断对但拼错”和“判断错但改对”。
-- T-CLOZE 只做拼写输入，不做选项。
+```bash
+node tests/runTests.js --phase=p6
+# PASS  p6 gate · 162 passed · 0 failed · 27 files
+```
 
-### 启动提示词（可直接交给 agent）
+- 浏览器 T-CLOZE：`A ____ can swim.`，输入 `fish` 后 `status=mastered`、`dueDate=null`。
+- 浏览器 T-JUDGE-FIX：claim `cat`，选 Correct 后 Check，状态 mastered。
+- 固定时钟：probe 答错 → `learning`、`dueDate=2026-11-12`；答对 → `mastered`。
+- 30 天满档 + 3 连对 → probe，dueDate `2027-01-10`（60 天）。
+- 390px 无横向滚动。
 
-> 只做 P6，不提前做 P7。先读 `AGENTS.md`、`docs/DESIGN.md §1.3/§2.1/§3.3/§3.4`、`docs/TRACEABILITY.md` 的 R-SCHED-05。
-> 实现 T-JUDGE-FIX/T-CLOZE 与 probe 状态迁移，用固定时钟测试 60 天抽查；不新增 P7 后台。
-> 每步运行 `node tests/runTests.js --phase=p6`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+### P6 明确不做
+
+- 不做 P7 标注后台/ContentValidator/导出阻断。
+- 不做家长端完整报表、挑战模式。
+- 不做 T-MATCH 之外的组合扩展。
 
 ---
 
-## 10. 后续阶段要点（防止提前实现）
+## 10. P7 任务书（下一阶段）
+
+**目标**：实现内容标注后台、ContentValidator V1—V10 与生产导出阻断。
+
+### 范围
+
+1. `ContentValidator`：校验 4 个内容库的 V1—V10（ID/切分/引用/句子/混淆项/reviewStatus）。
+2. `ContentExportService`：只导出 `reviewed`；任何 `unreviewed`/无效内容阻断，返回可定位错误。
+3. `AdminApp`：同源加载内容、显示校验结果、导出按钮；后台不写 wordStates/graphemeStates/attempts。
+4. `/src/admin/index.html` 可访问；学习端不暴露后台入口。
+5. `tests/p7/`：V1—V10、导出阻断/放行、后台不写状态。
+6. 不实现 P8 输入适配、P9 挑战。
+
+### 验收
+
+- `node tests/runTests.js --phase=p7` PASS。
+- 当前种子全部 unreviewed → 导出被阻断，错误能定位到条目/字段。
+- 把测试内容标为 reviewed 后导出成功，且只含 reviewed。
+- 后台模块不 import 状态仓库、不触碰学习状态。
+
+### 启动提示词（可直接交给 agent）
+
+> 只做 P7，不提前做 P8。先读 `AGENTS.md`、`docs/DESIGN.md §2.3`、`docs/CONTENT_SPEC.md §6`、`docs/TRACEABILITY.md` 的 R-CONTENT-*。
+> 实现 ContentValidator/ExportService/AdminApp，导出仅 reviewed；后台不得写学习状态。
+> 每步运行 `node tests/runTests.js --phase=p7`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+
+---
+
+## 11. 后续阶段要点（防止提前实现）
 
 | 阶段 | 关键新增 | 不得提前做的事 |
 |---|---|---|
@@ -335,7 +370,7 @@ P1 不实现字母级/混合粒度。
 
 ---
 
-## 11. 阶段完成检查
+## 12. 阶段完成检查
 
 - [ ] 本阶段门禁 PASS，且低阶段测试未回退。
 - [ ] `TRACEABILITY.md` 中本阶段条目从 ⏳/🧪 改为 ✅。

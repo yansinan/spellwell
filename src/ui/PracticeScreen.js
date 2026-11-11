@@ -24,6 +24,8 @@ const TYPE_COPY = Object.freeze({
   'T-EDIT': { title: 'Fix the word', hint: 'Edit the letters, then check.' },
   'T-SEGMENT': { title: 'Mark the sounds', hint: 'Tap the gaps between sounds.' },
   'T-MATCH': { title: 'Find the sound', hint: 'Tap every word with this sound.' },
+  'T-JUDGE-FIX': { title: 'Judge the spelling', hint: 'Is it right? If not, fix it.' },
+  'T-CLOZE': { title: 'Finish the sentence', hint: 'Type the missing word.' },
 });
 
 /**
@@ -55,6 +57,7 @@ export class PracticeScreen {
   #reorderOrder = [];
   #reorderInitial = [];
   #reorderSelected = null;
+  #judgeDecision = null;
   #sound = createSoundPlayer();
 
   /**
@@ -112,6 +115,7 @@ export class PracticeScreen {
     this.#events = [];
     this.#locked = false;
     this.#reorderSelected = null;
+    this.#judgeDecision = null;
     this.#reorderOrder = this.#current.renderModel.slots.map((slot) => slot.unitId ?? '');
     this.#reorderInitial = [...this.#reorderOrder];
     this.#root.innerHTML = this.#questionTemplate();
@@ -177,6 +181,8 @@ export class PracticeScreen {
     const isEdit = spec.typeId === 'T-EDIT';
     const isSegment = spec.typeId === 'T-SEGMENT';
     const isMatch = spec.typeId === 'T-MATCH';
+    const isJudge = spec.typeId === 'T-JUDGE-FIX';
+    const isCloze = spec.typeId === 'T-CLOZE';
     const slots = isType
       ? this.#typeInputTemplate()
       : isEdit
@@ -185,15 +191,21 @@ export class PracticeScreen {
           ? this.#segmentTemplate()
           : isMatch
             ? this.#matchTemplate()
-            : this.#slotsTemplate();
+            : isJudge
+              ? this.#judgeTemplate()
+              : isCloze
+                ? this.#clozeTemplate()
+                : this.#slotsTemplate();
     const tiles = spec.typeId === 'T-SEQUENCE' || spec.typeId === 'T-FILL'
       ? this.#tilesTemplate()
       : '';
-    const clear = isType || isEdit
+    const clear = isType || isEdit || isJudge || isCloze
       ? ''
       : `<button type="button" class="sw-text-button" data-action="clear" ${this.#events.length === 0 ? 'disabled' : ''}>Clear</button>`;
-    const showCheck = ['T-TYPE', 'T-EDIT', 'T-SEQUENCE', 'T-REORDER', 'T-SEGMENT', 'T-MATCH'].includes(spec.typeId);
+    const showCheck = ['T-TYPE', 'T-EDIT', 'T-SEQUENCE', 'T-REORDER', 'T-SEGMENT', 'T-MATCH', 'T-JUDGE-FIX', 'T-CLOZE'].includes(spec.typeId);
     const checkDisabled = spec.typeId === 'T-TYPE'
+      || spec.typeId === 'T-CLOZE'
+      || (spec.typeId === 'T-JUDGE-FIX' && !this.#judgeDecision)
       || (spec.typeId === 'T-SEQUENCE' && !this.#allSlotsFilled());
     const check = showCheck
       ? `<button type="button" class="sw-check" data-action="check" ${checkDisabled ? 'disabled' : ''}>Check</button>`
@@ -348,6 +360,57 @@ export class PracticeScreen {
     `;
   }
 
+  #judgeTemplate() {
+    const claim = escapeHtml(this.#current.renderModel.fixedText ?? '');
+    const decision = this.#judgeDecision;
+    const wrong = decision === 'wrong';
+    return `
+      <div class="sw-judge" data-role="judge">
+        <p class="sw-judge__claim">${claim}</p>
+        <div class="sw-judge__choices">
+          <button type="button" class="sw-judge__choice ${decision === 'correct' ? 'is-selected' : ''}" data-judge="correct" aria-pressed="${decision === 'correct'}">Correct</button>
+          <button type="button" class="sw-judge__choice ${wrong ? 'is-selected' : ''}" data-judge="wrong" aria-pressed="${wrong}">Wrong</button>
+        </div>
+        ${wrong ? `
+          <div class="sw-type-row">
+            <input
+              class="sw-type-input"
+              data-role="judge-input"
+              type="text"
+              inputmode="text"
+              autocomplete="off"
+              autocapitalize="none"
+              spellcheck="false"
+              aria-label="Fix the word"
+              value="${claim}"
+            />
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }
+
+  #clozeTemplate() {
+    return `
+      <div class="sw-cloze" data-role="cloze">
+        <p class="sw-cloze__sentence">${escapeHtml(this.#current.renderModel.fixedText ?? '')}</p>
+        <div class="sw-type-row">
+          <input
+            class="sw-type-input"
+            data-role="cloze-input"
+            type="text"
+            inputmode="text"
+            autocomplete="off"
+            autocapitalize="none"
+            spellcheck="false"
+            aria-label="Type the missing word"
+            placeholder="type the word"
+          />
+        </div>
+      </div>
+    `;
+  }
+
   #bindQuestion() {
     const spec = this.#current.spec;
     for (const button of this.#root.querySelectorAll('[data-unit-id]')) {
@@ -420,6 +483,38 @@ export class PracticeScreen {
         }
       });
       sync();
+    }
+
+    if (spec.typeId === 'T-JUDGE-FIX') {
+      for (const button of this.#root.querySelectorAll('[data-judge]')) {
+        button.addEventListener('click', () => {
+          this.#judgeDecision = /** @type {HTMLElement} */ (button).dataset.judge ?? null;
+          this.#sound.tap();
+          this.#afterSelectionChange();
+        });
+      }
+      const input = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="judge-input"]'));
+      const check = /** @type {HTMLButtonElement|null} */ (this.#root.querySelector('[data-action="check"]'));
+      if (input && check) {
+        const sync = () => { check.disabled = input.value.trim().length === 0; };
+        input.addEventListener('input', sync);
+        sync();
+      }
+    }
+
+    if (spec.typeId === 'T-CLOZE') {
+      const input = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="cloze-input"]'));
+      const check = /** @type {HTMLButtonElement|null} */ (this.#root.querySelector('[data-action="check"]'));
+      if (input && check) {
+        const sync = () => { check.disabled = input.value.trim().length === 0; };
+        input.addEventListener('input', sync);
+        input.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            this.#submit();
+          }
+        });
+      }
     }
 
     const clear = this.#root.querySelector('[data-action="clear"]');
@@ -883,6 +978,20 @@ export class PracticeScreen {
 
     if (spec.typeId === 'T-TYPE') {
       const input = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="type-input"]'));
+      const text = input?.value ?? '';
+      if (text.trim().length === 0) return;
+      events = [{ kind: 'key-text', text }];
+    } else if (spec.typeId === 'T-JUDGE-FIX') {
+      if (!this.#judgeDecision) return;
+      events = [{ kind: 'tap-unit', unitId: `judge:${this.#judgeDecision}` }];
+      if (this.#judgeDecision === 'wrong') {
+        const input = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="judge-input"]'));
+        const text = input?.value ?? '';
+        if (text.trim().length === 0) return;
+        events.push({ kind: 'edit', text });
+      }
+    } else if (spec.typeId === 'T-CLOZE') {
+      const input = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="cloze-input"]'));
       const text = input?.value ?? '';
       if (text.trim().length === 0) return;
       events = [{ kind: 'key-text', text }];

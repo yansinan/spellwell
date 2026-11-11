@@ -1,5 +1,45 @@
 # CHANGELOG
 
+## [0.7.0] — 2026-11-11 · P6 判断纠错与语境抽查
+
+### Added
+
+- `T-JUDGE-FIX`：claim + Correct/Wrong；判错时预填输入框改对；区分假接受/假拒绝。
+- `T-CLOZE`：句子挖空 + 拼写输入，不做选项。
+- probe：30 天满档连续 3 次正确 → `status=probe`，`dueDate=today+60`。
+- probe 答错退回 `learning`/次日；答对 → `mastered`/`dueDate=null`。
+- Scheduler probe 优先 T-CLOZE（有句子）或 T-JUDGE-FIX。
+- `PracticeScreen` P6 判断/改错、句子填空 UI。
+- `tests/p6/types.test.js`、`tests/p6/probe.test.js`。
+- ADR-0012：判断纠错、语境抽查与 probe 迁移。
+
+### Changed
+
+- `package.json` 版本 `0.6.0` → `0.7.0`；新增 `test:p6`。
+- P0 注册表守卫不再要求任何题型抛未实现。
+- `README` / `ROADMAP` / `TRACEABILITY` / `AGENTS` / `FILE_SPEC` 状态推进到 P7。
+
+### Verification
+
+```bash
+node tests/runTests.js --phase=p6
+# PASS  p6 gate · 162 passed · 0 failed · 27 files
+```
+
+- 浏览器 T-CLOZE：`A ____ can swim.` → 输入 fish → mastered、dueDate null。
+- 浏览器 T-JUDGE-FIX：claim cat → Correct → mastered。
+- probe 答错 → learning/dueDate 2026-11-12；答对 → mastered。
+- 满档 3 连对 → probe，dueDate 2027-01-10（60 天）。
+- 390px 无横向滚动。
+
+### Known limitations
+
+- T-JUDGE-FIX 的 claim 由 Scheduler 生成，未直接回放真实错误历史。
+- 只有 4 条 sentences；P7 后台补内容。
+- probe 只作用于词状态，组合 probe 仍作候选。
+
+---
+
 ## [0.6.0] — 2026-11-11 · P5 组合强化与 T-MATCH
 
 ### Added

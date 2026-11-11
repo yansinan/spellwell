@@ -14,6 +14,7 @@ import { GraphemeRepository } from '../repositories/GraphemeRepository.js';
 import { WordRepository } from '../repositories/WordRepository.js';
 import { StateRepository } from '../repositories/StateRepository.js';
 import { AttemptRepository } from '../repositories/AttemptRepository.js';
+import { SentenceRepository } from '../repositories/SentenceRepository.js';
 import { Scheduler } from '../scheduler/Scheduler.js';
 import { PracticeSession } from './PracticeSession.js';
 
@@ -94,10 +95,13 @@ export async function createP1Session({ wordIds = null, seed = 20261111, size = 
   const graphemeRepository = new GraphemeRepository(adapter);
   const stateRepository = new StateRepository(adapter);
   const attemptRepository = new AttemptRepository(adapter);
+  const sentenceRepository = new SentenceRepository(adapter);
 
   const allGraphemes = await graphemeRepository.all();
   const graphemeMap = Object.fromEntries(allGraphemes.map((grapheme) => [grapheme.id, grapheme]));
   const allWords = await wordRepository.all();
+  const allSentences = await sentenceRepository.all();
+  const sentenceByWord = Object.fromEntries(allSentences.map((sentence) => [String(sentence.wordId), sentence]));
   const allowedIds = wordIds ? new Set(wordIds) : null;
   const words = allowedIds ? allWords.filter((word) => allowedIds.has(String(word.id))) : allWords;
 
@@ -125,6 +129,7 @@ export async function createP1Session({ wordIds = null, seed = 20261111, size = 
     attemptRepository,
     graphemeMap,
     distractorPool,
+    sentences: sentenceByWord,
     seed,
     size,
   });
@@ -132,6 +137,7 @@ export async function createP1Session({ wordIds = null, seed = 20261111, size = 
   const session = new PracticeSession({
     bundles,
     distractorPool,
+    sentences: sentenceByWord,
     seed,
     specs,
   });

@@ -21,7 +21,7 @@ import {
 } from '../harness.js';
 
 const IMPLEMENTED_THROUGH_P4 = new Set([
-  'T-SEQUENCE', 'T-FILL', 'T-TYPE', 'T-REORDER', 'T-EDIT', 'T-SEGMENT', 'T-MATCH',
+  'T-SEQUENCE', 'T-FILL', 'T-TYPE', 'T-REORDER', 'T-EDIT', 'T-SEGMENT', 'T-MATCH', 'T-JUDGE-FIX', 'T-CLOZE',
 ]);
 
 const EXPECTED_PHASES = {

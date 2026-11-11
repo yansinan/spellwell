@@ -12,11 +12,18 @@
 
 import { validateAttemptResult, validateQuestionSpec } from '../core/contracts.js';
 import { ContractError } from '../core/errors.js';
-import { isDayKey, toDayKey } from '../core/time.js';
+import { addDays, isDayKey, toDayKey } from '../core/time.js';
 import { createRng, hashSeed } from '../core/seedRandom.js';
-import { applyWordReview, dueDateFor, isProbeEligible, nextReview } from './IntervalPolicy.js';
+import {
+  applyWordReview,
+  dueDateFor,
+  isProbeEligible,
+  MAX_INTERVAL_INDEX,
+  nextReview,
+  PROBE_INTERVAL_DAYS,
+} from './IntervalPolicy.js';
 import { appendErrorProfile } from './ErrorProfile.js';
-import { P4_AVAILABLE_TYPES, buildWordSpec } from './QuestionSpecBuilder.js';
+import { P4_AVAILABLE_TYPES, P6_AVAILABLE_TYPES, buildWordSpec } from './QuestionSpecBuilder.js';
 import { NEW_WORD_ROTATION, candidatesForError } from './TypeSelector.js';
 
 export const MIN_QUEUE_SIZE = 5;
@@ -69,6 +76,7 @@ export class Scheduler {
     this.attemptRepository = deps.attemptRepository;
     this.graphemeMap = deps.graphemeMap ?? {};
     this.distractorPool = deps.distractorPool ?? [];
+    this.sentences = deps.sentences ?? {};
     this.seed = deps.seed ?? 20261111;
     this.size = normalizeSize(deps.size);
     this.now = deps.now ?? (() => new Date());
@@ -194,10 +202,16 @@ export class Scheduler {
     const specs = selected.map((word, index) => {
       const state = stateByWord.get(String(word.id));
       const latestError = state?.errorProfile?.at(-1);
-      let typeId = latestError
-        ? candidatesForError(latestError.type).find((candidate) => P4_AVAILABLE_TYPES.includes(candidate))
-        : NEW_WORD_ROTATION[index % NEW_WORD_ROTATION.length];
-      if (!typeId || !P4_AVAILABLE_TYPES.includes(typeId)) {
+      const sentence = this.sentences[String(word.id)] ?? null;
+      let typeId;
+      if (state?.status === 'probe') {
+        typeId = sentence ? 'T-CLOZE' : 'T-JUDGE-FIX';
+      } else if (latestError) {
+        typeId = candidatesForError(latestError.type).find((candidate) => P4_AVAILABLE_TYPES.includes(candidate));
+      } else {
+        typeId = NEW_WORD_ROTATION[index % NEW_WORD_ROTATION.length];
+      }
+      if (!typeId || !P6_AVAILABLE_TYPES.includes(typeId)) {
         typeId = NEW_WORD_ROTATION[index % NEW_WORD_ROTATION.length];
       }
 
@@ -208,6 +222,8 @@ export class Scheduler {
         distractorPool: this.distractorPool,
         seed,
         errorType: latestError?.type,
+        sentence,
+        claim: String(word.text),
         specId: `spec.daily.${String(word.id)}.${typeId}.${index}`,
       });
     });
@@ -235,9 +251,20 @@ export class Scheduler {
       : latestError
         ? appendErrorProfile(state.errorProfile, latestError)
         : [...state.errorProfile];
-    next.status = result.wordCorrect
-      ? next.consecutiveCorrect >= 2 ? 'reviewing' : 'learning'
-      : 'learning';
+    if (state.status === 'probe') {
+      next.status = result.wordCorrect ? 'mastered' : 'learning';
+      next.intervalIndex = result.wordCorrect ? next.intervalIndex : 0;
+      next.dueDate = result.wordCorrect
+        ? null
+        : addDays(toDayKey(now), 1);
+    } else if (result.wordCorrect && next.intervalIndex === MAX_INTERVAL_INDEX && next.consecutiveCorrect >= 3) {
+      next.status = 'probe';
+      next.dueDate = addDays(toDayKey(now), PROBE_INTERVAL_DAYS);
+    } else {
+      next.status = result.wordCorrect
+        ? next.consecutiveCorrect >= 2 ? 'reviewing' : 'learning'
+        : 'learning';
+    }
     await this.stateRepository.saveWordState(next);
 
     const word = await this.wordRepository.get(result.wordId);

@@ -78,7 +78,7 @@
 | R-SCHED-02 | 错词次日强制再现 | `Scheduler.recordAttempt` | `tests/p3/scheduler.test.js` 固定时钟 | P3 | ✅ |
 | R-SCHED-03 | 按错误类型选修复题型 | `TypeSelector` + Scheduler | `tests/p3/scheduler.test.js` + `tests/p4/schedulerTypes.test.js` | P0/P4 | ✅ |
 | R-SCHED-04 | 组合独立阶梯、跨 2 词 | `GraphemeRepository` / `Scheduler` | `tests/p5/match.test.js` | P5 | ✅ |
-| R-SCHED-05 | 假掌握抽查 60 天 | `IntervalPolicy` 常量 | P6 测试 | P6 | ⏳ |
+| R-SCHED-05 | 假掌握抽查 60 天 | `Scheduler` + `PROBE_INTERVAL_DAYS` | `tests/p6/probe.test.js` | P6 | ✅ |
 | R-P3-01 | 尝试落库、wordState 升降档与错误画像 | `Scheduler.recordAttempt` | `tests/p3/scheduler.test.js` | P3 | ✅ |
 | R-P3-02 | 每日队列优先错词/到期/新词 | `Scheduler.buildDailyQueue` | `tests/p3/scheduler.test.js` | P3 | ✅ |
 | R-P3-03 | 每个 spec 记录 P3 难度向量 | `QuestionSpecBuilder` | `tests/p3/scheduler.test.js` | P3 | ✅ |
@@ -91,6 +91,10 @@
 | R-P5-02 | 组合独立间隔与 wordsPassed | `Scheduler.recordAttempt` + StateRepository | `tests/p5/match.test.js` | P5 | ✅ |
 | R-P5-03 | 跨 2 词连续 3 次进入 probe | `isProbeEligible` | `tests/p5/match.test.js` | P5 | ✅ |
 | R-P5-04 | 每日最多 1 个 T-MATCH 强化包 | `Scheduler.buildGraphemeDrill` | `tests/p5/match.test.js` | P5 | ✅ |
+| R-P6-01 | T-JUDGE-FIX 判断对错并改对 | `TJudgeFix` + PracticeScreen | `tests/p6/types.test.js` + 浏览器 | P6 | ✅ |
+| R-P6-02 | T-CLOZE 句子挖空拼写 | `TCloze` + PracticeScreen | `tests/p6/types.test.js` + 浏览器 | P6 | ✅ |
+| R-P6-03 | probe 到期、答错退回、答对 mastered | `Scheduler.recordAttempt` | `tests/p6/probe.test.js` | P6 | ✅ |
+| R-P6-04 | probe 队列优先 T-CLOZE/T-JUDGE-FIX | `Scheduler.buildDailyQueue` | `tests/p6/probe.test.js` | P6 | ✅ |
 
 ### 5.1 九题型覆盖（与 `QUESTION_TYPE_IDS` 一一对应）
 
@@ -100,10 +104,10 @@
 | `T-FILL` | P1 | 已实现 | `tests/p1/tfill.test.js` |
 | `T-REORDER` | P4 | 已实现 | `tests/p4/types.test.js` |
 | `T-TYPE` | P1 | 已实现 | `tests/p1/ttype.test.js` |
-| `T-JUDGE-FIX` | P6 | 骨架 | `tests/p0/registry.test.js` 抛错断言 |
+| `T-JUDGE-FIX` | P6 | 已实现 | `tests/p6/types.test.js` |
 | `T-EDIT` | P4 | 已实现 | `tests/p4/types.test.js` |
 | `T-MATCH` | P5 | 骨架 | 同上 |
-| `T-CLOZE` | P6 | 骨架 | 同上 |
+| `T-CLOZE` | P6 | 已实现 | `tests/p6/types.test.js` |
 | `T-SEGMENT` | P4 | 已实现 | `tests/p4/types.test.js` |
 
 ### 5.2 P1 最小闭环
@@ -173,6 +177,7 @@
 | A-11 | 每日队列排序、错词优先级与状态迁移 | 5—8 队列；错词→到期→新词→填充；答错次日；答对清错；P3 难度向量 | ADR-0009 |
 | A-12 | P4 三种修复题型如何交互与定位 | 点击交换、预填修错、字母间隙；P4 错误映射 | ADR-0010 |
 | A-13 | 组合独立阶梯与 T-MATCH 形态 | 多选分类、wordsPassed、跨 2 词 probe、每日 1 组 | ADR-0011 |
+| A-14 | 判断纠错、语境抽查与 probe 迁移 | claim 判断+改错、句子挖空、60 天 probe、答错退回 | ADR-0012 |
 
 ---
 

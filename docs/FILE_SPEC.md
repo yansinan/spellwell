@@ -1,6 +1,6 @@
 # 文件与工程规范 · FILE_SPEC
 
-**适用版本**：DESIGN v1.1 / 仓库 v0.6.0（P5）
+**适用版本**：DESIGN v1.1 / 仓库 v0.7.0（P6）
 **地位**：本文件是 `docs/DESIGN.md` 的工程实施细则。与 DESIGN 冲突时，以 DESIGN 为准；本文件负责把 DESIGN 翻译成可机械检查的规则。
 
 ---
@@ -58,7 +58,7 @@
 │   │   ├── QuestionType.js     # defineQuestionType 契约与元数据校验
 │   │   ├── shared.js           # P1 共享判定：错误定位、整词输入分析
 │   │   ├── registry.js         # 9 个题型的唯一注册表
-│   │   └── T*.js               # 每个题型一个文件；P1/P4/P5 七题型已实现
+│   │   └── T*.js               # 每个题型一个文件；P1—P6 九题型全部实现
 │   ├── input/                  # DOM 事件 → InputEvent；不得判定对错
 │   │   ├── PointerAdapter.js
 │   │   ├── KeyboardAdapter.js
@@ -219,7 +219,7 @@ questionTypes  ←  scheduler
 - `core/contracts.js` 导出 `CONTRACT_VERSION`；跨层结构变更必须 +1，并写 ADR。
 - 存储 `schema.js` 导出 `DB_VERSION`；IndexedDB 升级必须写迁移函数与测试（P2 起）。
 - 内容 JSON 顶层带 `"version": 1`；内容格式变更 +1，并更新 `CONTENT_SPEC.md`。
-- `package.json` 版本跟阶段走：P0 `0.1.0`，P1 `0.2.0`，P2 `0.3.0`，P3 `0.4.0`，P4 `0.5.0`，P5 `0.6.0`，以此类推；P10 `1.0.0`。
+- `package.json` 版本跟阶段走：P0 `0.1.0`，P1 `0.2.0`，P2 `0.3.0`，P3 `0.4.0`，P4 `0.5.0`，P5 `0.6.0`，P6 `0.7.0`，以此类推；P10 `1.0.0`。
 
 ---
 

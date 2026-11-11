@@ -549,3 +549,55 @@
   border-color: var(--sw-mint-deep);
   background: var(--sw-mint-soft);
 }
+
+/* P6：T-JUDGE-FIX 判断 + 改错。 */
+.sw-judge {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.sw-judge__claim {
+  margin: 0;
+  font-family: var(--sw-font-display);
+  font-size: 30px;
+  color: var(--sw-ink);
+}
+
+.sw-judge__choices {
+  display: flex;
+  gap: 12px;
+}
+
+.sw-judge__choice {
+  appearance: none;
+  min-width: 96px;
+  padding: 12px 18px;
+  border: 2px solid var(--sw-line);
+  border-radius: var(--sw-radius-sm);
+  background: var(--sw-surface);
+  color: var(--sw-ink);
+  font-family: var(--sw-font-body);
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.sw-judge__choice.is-selected {
+  border-color: var(--sw-mint-deep);
+  background: var(--sw-mint-soft);
+}
+
+/* P6：T-CLOZE 句子挖空。 */
+.sw-cloze {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.sw-cloze__sentence {
+  max-width: 340px;
+  margin: 0;
+  text-align: center;
+  font-size: 18px;
+  color: var(--sw-ink);
+}
