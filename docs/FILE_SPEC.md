@@ -72,6 +72,7 @@
 │   │   ├── bootstrap.js         # P3：每日队列；IndexedDB 优先，失败回退 Memory
 │   │   ├── PracticeScreen.js    # P1—P8 学习端 + Stats
 │   │   ├── PracticeSetupScreen.js # P9 单元/模式选择
+│   │   ├── promptSelector.js    # P9 句子/音标/中文/单词提示
 │   │   ├── MigrationApp.js      # P8 本机全量数据迁移（非内容发布）
 │   │   ├── dragGeometry.js      # 64px 吸附半径与最近槽位
 │   │   ├── sequenceOrder.js     # 已到位块插入式重排

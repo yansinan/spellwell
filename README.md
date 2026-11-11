@@ -208,8 +208,13 @@ tools/serve.mjs   零依赖静态服务器
 - 后台题量默认 20，设置页 `/src/admin/settings.html`，面包屑返回内容库。
 - 题量、单元、模式进入 Scheduler；真实 attempts 校准选词权重；当前会话不因内容更新中断。
 - 每个计划项带 `reason/mode/policyVersion/score/calibration`；`revise()` 接口预留。
+- 提示词优先级：句子 → 音标 → 中文翻译 → 单词保底。
 
 ![P9 练习设计](docs/p9-preview.png)
+
+提示词示例（音标）：
+
+![P9 音标提示](docs/p9-prompt.png)
 
 ---
 

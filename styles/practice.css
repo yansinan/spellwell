@@ -824,3 +824,39 @@
 .sw-setup__term .sw-setup__units {
   padding: 0 0 8px;
 }
+
+/* P9 提示词：句子 → 音标 → 中文 → 单词 */
+.sw-practice__prompt {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  max-width: 560px;
+  margin: 0;
+  font-family: var(--sw-font-en);
+  font-size: clamp(28px, 7vw, 44px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+.sw-practice__prompt.is-sentence {
+  font-family: var(--sw-font-body);
+  font-size: clamp(18px, 4.4vw, 24px);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.sw-practice__prompt.is-translation {
+  font-family: var(--sw-font-body);
+  font-size: clamp(30px, 7vw, 44px);
+}
+
+.sw-practice__prompt-label {
+  color: var(--sw-ink-faint);
+  font-family: var(--sw-font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}

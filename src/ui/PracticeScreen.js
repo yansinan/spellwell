@@ -13,6 +13,7 @@ import { findNearestSlot } from './dragGeometry.js';
 import { insertUnit, insertionIndexForPoint, previewInsertUnit } from './sequenceOrder.js';
 import { createSoundPlayer } from './sound.js';
 import { buildReport, summarizeSession } from './analytics.js';
+import { selectPrompt } from './promptSelector.js';
 
 const TYPE_COPY = Object.freeze({
   'T-SEQUENCE': {
@@ -187,13 +188,16 @@ export class PracticeScreen {
     const { spec, bundle } = this.#current;
     const copy = this.#typeCopy();
     const progress = `${this.#session.currentIndex + 1} / ${this.#session.size}`;
-    const word = escapeHtml(bundle.word.text);
     const isType = spec.typeId === 'T-TYPE';
     const isEdit = spec.typeId === 'T-EDIT';
     const isSegment = spec.typeId === 'T-SEGMENT';
     const isMatch = spec.typeId === 'T-MATCH';
     const isJudge = spec.typeId === 'T-JUDGE-FIX';
     const isCloze = spec.typeId === 'T-CLOZE';
+    const prompt = isCloze ? null : selectPrompt({ word: bundle.word, sentences: bundle.sentences });
+    const promptHtml = prompt
+      ? `<p class="sw-practice__prompt is-${prompt.kind}" aria-label="${escapeHtml(prompt.label)} clue"><span class="sw-practice__prompt-label">${escapeHtml(prompt.label)}</span>${escapeHtml(prompt.text)}</p>`
+      : '';
     const slots = isType
       ? this.#typeInputTemplate()
       : isEdit
@@ -228,7 +232,7 @@ export class PracticeScreen {
 
         <main class="sw-practice__stage">
           <p class="sw-practice__kind">${copy.title}</p>
-          <p class="sw-practice__word" aria-label="Word to spell">${word}</p>
+          ${promptHtml}
           <p class="sw-practice__hint">${copy.hint}</p>
 
           ${slots}

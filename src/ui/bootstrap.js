@@ -106,7 +106,7 @@ async function readContent(adapter) {
   };
 }
 
-function buildBundles(words, graphemeMap) {
+function buildBundles(words, graphemeMap, sentenceByWord) {
   return words.map((word) => {
     if (!word || typeof word.id !== 'string' || !Array.isArray(word.units)) {
       throw new Error('invalid word content');
@@ -116,7 +116,8 @@ function buildBundles(words, graphemeMap) {
         throw new Error(`${word.id} references missing grapheme ${unit.graphemeId}`);
       }
     }
-    return { word, graphemes: graphemeMap };
+    const sentence = sentenceByWord[String(word.id)];
+    return { word, graphemes: graphemeMap, sentences: sentence ? [sentence] : [] };
   });
 }
 
@@ -153,7 +154,7 @@ export async function createPracticeWorkspace() {
     );
     if (words.length === 0) throw new Error('no words in selected units');
     const selectedMode = mode ?? snapshot.settings.defaultMode;
-    const bundles = buildBundles(words, snapshot.graphemeMap);
+    const bundles = buildBundles(words, snapshot.graphemeMap, snapshot.sentenceByWord);
     const wordRepository = new WordRepository(adapter);
     const stateRepository = new StateRepository(adapter);
     const attemptRepository = new AttemptRepository(adapter);

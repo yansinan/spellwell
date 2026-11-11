@@ -17,7 +17,8 @@
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
 - 计划项带 `params.plan.reason/mode/policyVersion`。
 - `PlanPolicy.revise()` 兼容接口，P9 不实时改题。
-- `tests/p9/`：题量、单元、mode、retired、plan hook、权重校准。
+- `tests/p9/`：题量、单元、mode、retired、plan hook、权重校准、提示词优先级。
+- 提示词按句子 → 音标 → 中文 → 单词保底；CLOZE 不重复句子。
 
 ### Changed
 
@@ -30,7 +31,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 190 passed · 0 failed · 38 files
+# PASS  p9 gate · 191 passed · 0 failed · 39 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。

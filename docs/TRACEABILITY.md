@@ -109,6 +109,7 @@
 | R-P9-04 | 计划项 reason/mode/policyVersion | `Scheduler` + `PlanPolicy` | `tests/p9/unitSelection.test.js` + `planPolicy.test.js` | P9 | ✅ |
 | R-P9-05 | 真实 attempts 校准选词权重 | `SelectionWeights` + Scheduler | `tests/p9/selectionWeights.test.js` + `unitSelection.test.js` | P9 | ✅ |
 | R-P9-06 | 年级/学期/单元多选与出题范围 | `bootstrap` + PracticeSetupScreen + Scheduler | `tests/p9/unitSelection.test.js` + 浏览器 | P9 | ✅ |
+| R-P9-07 | 提示词句子/音标/中文/单词优先级 | `promptSelector` + PracticeScreen | `tests/p9/promptSelector.test.js` | P9 | ✅ |
 | R-P8-05 | 本机数据全量迁移独立于内容编辑 | `MigrationApp` | 浏览器迁移页 | P8 | ✅ |
 | R-P8-01 | 本次练习效果统计 | `summarizeSession` + Done 页 | `tests/p8/analytics.test.js` + 浏览器 | P8 | ✅ |
 | R-P8-02 | 历史答题汇总/按日/按词 | `summarizeAttempts` / `groupAttemptsByDay` | `tests/p8/analytics.test.js` + Stats 页 | P8 | ✅ |
@@ -204,6 +205,7 @@
 | A-19 | 后台列表如何展示学习情况 | 错/对次数只读聚合；level 折叠；隐藏内部 ID | ADR-0017 |
 | A-20 | 练习入口/题量/单元/内容更新如何决定 | 单元多选+Review/Effort；后台20题；下一轮读新 revision；revise 预留 | ADR-0018 |
 | A-21 | 选词权重如何从真实数据校准 | 按词/题型错误率、小样本平滑、约束优先、下一次计划生效 | ADR-0019 |
+| A-22 | 提示词优先用哪种资源 | 句子→音标→中文→单词；只读；CLOZE 句子即题面 | ADR-0020 |
 
 ---
 

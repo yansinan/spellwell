@@ -405,13 +405,14 @@ node tests/runTests.js --phase=p8
 - [x] `contentRevision`：后台保存递增；下一轮重新读内容。
 - [x] 当前会话保持；内容更新只提示 `New practice`，不中途换题。
 - [x] `PlanPolicy.revise()` 兼容接口；P9 不实时改当前计划。
-- [x] `tests/p9/`：默认题量、单元过滤、retired、Review/Effort、plan hook、权重校准。
+- [x] 提示词按句子 → 音标 → 中文 → 单词保底；CLOZE 句子即题面。
+- [x] `tests/p9/`：默认题量、单元过滤、retired、Review/Effort、plan hook、权重校准、提示词。
 
 ### 验收结果
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 190 passed · 0 failed · 38 files
+# PASS  p9 gate · 191 passed · 0 failed · 39 files
 ```
 
 - 练习设计页：3 个单元全选、Review 默认、`20 questions`。
