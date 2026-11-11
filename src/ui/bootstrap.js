@@ -119,6 +119,7 @@ export async function createP1Session({ wordIds = null, seed = 20261111, size = 
   const scheduler = new Scheduler({
     wordRepository: {
       all: async () => words,
+      get: async (id) => words.find((word) => String(word.id) === String(id)),
     },
     stateRepository,
     attemptRepository,

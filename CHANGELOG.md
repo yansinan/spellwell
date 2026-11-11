@@ -1,5 +1,45 @@
 # CHANGELOG
 
+## [0.6.0] — 2026-11-11 · P5 组合强化与 T-MATCH
+
+### Added
+
+- `T-MATCH` 多选分类：focus 组合 + 2—3 个包含词 + 1—2 个不包含词；非四选一。
+- 组合状态独立阶梯：`intervalIndex`、`consecutiveCorrect`、`wordsPassed`、`dueDate`、`status`。
+- 答对整词更新全部 unit 组合；答错只更新错误画像指向的组合。
+- 跨 2 个不同词、连续 3 次正确 → `probe`。
+- Scheduler 每日最多追加 1 道 T-MATCH 强化包，队列不超过 8。
+- `PracticeScreen` T-MATCH 多选、Check、Clear。
+- `tests/p5/match.test.js`。
+- ADR-0011：组合强化包与 T-MATCH。
+
+### Changed
+
+- `package.json` 版本 `0.5.0` → `0.6.0`；新增 `test:p5`。
+- P0 注册表守卫只要求 P6 题型继续抛未实现。
+- `README` / `ROADMAP` / `TRACEABILITY` / `AGENTS` / `FILE_SPEC` 状态推进到 P6。
+
+### Verification
+
+```bash
+node tests/runTests.js --phase=p5
+# PASS  p5 gate · 157 passed · 0 failed · 25 files
+```
+
+- fish 正确后 `g.sh`：`wordsPassed=['w.fish']`、`intervalIndex=1`、`dueDate=2026-11-14`。
+- fish/ship/fish：`wordsPassed` 跨 2 词、`consecutiveCorrect=3`、`status=probe`。
+- 到期组合追加 1 道 T-MATCH；选项顺序可复现。
+- 浏览器 T-MATCH：focus `sh`，选中 `ship` + `fish` 后 Check 完成。
+- 390px 无横向滚动。
+
+### Known limitations
+
+- T-MATCH 是词形分类，不直接要求拼写；作为组合强化包。
+- 初始没有 graphemeState 时不会生成 T-MATCH；需先做过整词。
+- T-JUDGE-FIX/T-CLOZE 仍为 P6 骨架。
+
+---
+
 ## [0.5.0] — 2026-11-11 · P4 顺序/边界错闭环
 
 ### Added

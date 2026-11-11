@@ -1,7 +1,7 @@
 # AGENTS.md · 项目执行契约
 
 > 任何 agent、贡献者进入本仓库，先读本文件。它规定“怎么做事”，`docs/DESIGN.md` 规定“做什么”。
-> 当前阶段：**P4 已完成，P5 是下一步**。不要提前实现 P5 及以后的功能。
+> 当前阶段：**P5 已完成，P6 是下一步**。不要提前实现 P6 及以后的功能。
 
 ---
 
@@ -26,17 +26,18 @@
 | P2 | ✅ 完成 | 修 P2 测试、IndexedDB 适配器/导入缺陷 | 写学习状态、做调度队列、做 P4 题型 |
 | P3 | ✅ 完成 | 修 P3 测试、队列/状态/题型映射缺陷 | 做 P4 题型、后台、家长端完整报表 |
 | P4 | ✅ 完成 | 修 P4 题型/映射缺陷 | 做 T-MATCH/T-CLOZE、后台、P5 组合阶梯 |
-| P5 | ⏳ 下一步 | T-MATCH、组合独立阶梯、跨 2 词 | 做 T-JUDGE-FIX/T-CLOZE、后台 |
+| P5 | ✅ 完成 | 修 T-MATCH/组合状态缺陷 | 做 T-JUDGE-FIX/T-CLOZE、后台 |
+| P6 | ⏳ 下一步 | T-JUDGE-FIX/T-CLOZE、probe 抽查 | 做 P7 后台、导出阻断 |
 
-**判断标准**：如果你写的代码在 `docs/ROADMAP.md` 的“P4 明确不做”或“后续阶段要点”里，停手。
+**判断标准**：如果你写的代码在 `docs/ROADMAP.md` 的“P5 明确不做”或“后续阶段要点”里，停手。
 
 ---
 
 ## 2. 命令
 
 ```bash
-# 阶段门禁（唯一验收标准；当前 P4）
-node tests/runTests.js --phase=p4
+# 阶段门禁（唯一验收标准；当前 P5）
+node tests/runTests.js --phase=p5
 
 # 本地预览（必须 HTTP）
 node tools/serve.mjs
@@ -76,7 +77,7 @@ node tools/serve.mjs
 10. **偏离 DESIGN 必须先写 ADR。** 先改文档再改代码；禁止“代码即文档”。
 11. **后台不写学习状态。** `src/admin/**` 不得触碰 `wordStates/graphemeStates/attempts`。
 12. **挑战模式不写主状态。** `RapidTapChallenge` 的结果不得进入调度/错误画像。
-13. **阶段顺序不可跳。** P4 不通过不进入 P5；当前 P4 已完成，只允许修 P4 缺陷，不提前写 P5 题型。
+13. **阶段顺序不可跳。** P5 不通过不进入 P6；当前 P5 已完成，只允许修 P5 缺陷，不提前写 P6 题型或后台。
 
 这些规则中 2/3/4/5/6/10 有自动检查（`architecture.test.js`、`traceability.test.js`、`content.test.js`）；其余靠评审。
 
@@ -135,10 +136,10 @@ node tools/serve.mjs
 
 ## 8. 下一阶段启动提示词（复制给 agent）
 
-> 只做 P5，不提前做 P6。先读 `AGENTS.md`、`docs/DESIGN.md §2.1/§3.3/§3.4`、`docs/TRACEABILITY.md` 的 R-SCHED-04/R-TYPE-06。
-> 实现 T-MATCH 与组合独立阶梯，复用 P3 队列/P4 错误画像；不新增 P6 题型。
-> 每步运行 `node tests/runTests.js --phase=p5`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
-> 不新增依赖、不做 T-JUDGE-FIX/T-CLOZE、不做后台。
+> 只做 P6，不提前做 P7。先读 `AGENTS.md`、`docs/DESIGN.md §1.3/§2.1/§3.3/§3.4`、`docs/TRACEABILITY.md` 的 R-SCHED-05。
+> 实现 T-JUDGE-FIX/T-CLOZE 与 probe 状态迁移，用固定时钟测试 60 天抽查；不新增 P7 后台。
+> 每步运行 `node tests/runTests.js --phase=p6`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+> 不新增依赖、不做后台/导出阻断。
 
 ---
 
@@ -159,3 +160,4 @@ node tools/serve.mjs
 - P2 内容导入按 meta.contentVersion 幂等；IndexedDB 不可用回退 MemoryAdapter：见 ADR-0008。
 - P3 队列 5—8：错词/错误画像 → 到期 → 新词 → 填充；答错次日、答对清错：见 ADR-0009。
 - P4 修复题：T-REORDER 点击交换、T-EDIT 预填修错、T-SEGMENT 字母间隙；错误映射见 ADR-0010。
+- P5 组合独立阶梯 + T-MATCH 多选分类；跨 2 词 3 次正确进 probe；每日最多 1 组：见 ADR-0011。

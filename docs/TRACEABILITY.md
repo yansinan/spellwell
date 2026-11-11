@@ -73,11 +73,11 @@
 | R-TYPE-03 | §3.4 题型 ID 与修复信号对应 | `REPAIR_PREFERENCE` / 各 meta | `tests/p0/scheduler.test.js` | P0 | ✅ |
 | R-TYPE-04 | P1 三题型可出题判定 | `TSequence/TFill/TType` | `tests/p1/*.test.js` + 浏览器 3×3 | P1 | ✅ |
 | R-TYPE-05 | `ai→ia` 顺序修复 | `TReorder` | `tests/p4/types.test.js` + 浏览器 | P4 | ✅ |
-| R-TYPE-06 | `sh→ch`、`ck/k` 边界修复 | `TSegment/TEdit/TMatch` | `tests/p4/types.test.js` + 浏览器；T-MATCH 待 P5 | P4/P5 | 🧪 |
+| R-TYPE-06 | `sh→ch`、`ck/k` 边界修复 | `TSegment/TEdit/TMatch` | `tests/p4/types.test.js` + `tests/p5/match.test.js` | P4/P5 | ✅ |
 | R-SCHED-01 | §2.1 每日 5—8 词队列 | `Scheduler.buildDailyQueue` | `tests/p3/scheduler.test.js` | P3 | ✅ |
 | R-SCHED-02 | 错词次日强制再现 | `Scheduler.recordAttempt` | `tests/p3/scheduler.test.js` 固定时钟 | P3 | ✅ |
 | R-SCHED-03 | 按错误类型选修复题型 | `TypeSelector` + Scheduler | `tests/p3/scheduler.test.js` + `tests/p4/schedulerTypes.test.js` | P0/P4 | ✅ |
-| R-SCHED-04 | 组合独立阶梯、跨 2 词 | `GraphemeRepository` / `Scheduler` | P5 测试 | P5 | ⏳ |
+| R-SCHED-04 | 组合独立阶梯、跨 2 词 | `GraphemeRepository` / `Scheduler` | `tests/p5/match.test.js` | P5 | ✅ |
 | R-SCHED-05 | 假掌握抽查 60 天 | `IntervalPolicy` 常量 | P6 测试 | P6 | ⏳ |
 | R-P3-01 | 尝试落库、wordState 升降档与错误画像 | `Scheduler.recordAttempt` | `tests/p3/scheduler.test.js` | P3 | ✅ |
 | R-P3-02 | 每日队列优先错词/到期/新词 | `Scheduler.buildDailyQueue` | `tests/p3/scheduler.test.js` | P3 | ✅ |
@@ -87,6 +87,10 @@
 | R-P4-02 | T-EDIT 预填错词、编辑修错、错误定位 | `TEdit` + PracticeScreen | `tests/p4/types.test.js` + 浏览器 | P4 | ✅ |
 | R-P4-03 | T-SEGMENT 字母间隙、过度/不足/错位 | `TSegment` + PracticeScreen | `tests/p4/types.test.js` + 浏览器 | P4 | ✅ |
 | R-P4-04 | P4 错误类型映射到 P4 题型 | `Scheduler` + `TypeSelector` | `tests/p4/schedulerTypes.test.js` | P4 | ✅ |
+| R-P5-01 | T-MATCH 多选分类 build/judge | `TMatch` | `tests/p5/match.test.js` | P5 | ✅ |
+| R-P5-02 | 组合独立间隔与 wordsPassed | `Scheduler.recordAttempt` + StateRepository | `tests/p5/match.test.js` | P5 | ✅ |
+| R-P5-03 | 跨 2 词连续 3 次进入 probe | `isProbeEligible` | `tests/p5/match.test.js` | P5 | ✅ |
+| R-P5-04 | 每日最多 1 个 T-MATCH 强化包 | `Scheduler.buildGraphemeDrill` | `tests/p5/match.test.js` | P5 | ✅ |
 
 ### 5.1 九题型覆盖（与 `QUESTION_TYPE_IDS` 一一对应）
 
@@ -168,6 +172,7 @@
 | A-10 | 内容如何进入 IndexedDB、失败如何降级 | meta.contentVersion 幂等；IndexedDB 优先、Memory 回退；导出导入覆盖 8 库 | ADR-0008 |
 | A-11 | 每日队列排序、错词优先级与状态迁移 | 5—8 队列；错词→到期→新词→填充；答错次日；答对清错；P3 难度向量 | ADR-0009 |
 | A-12 | P4 三种修复题型如何交互与定位 | 点击交换、预填修错、字母间隙；P4 错误映射 | ADR-0010 |
+| A-13 | 组合独立阶梯与 T-MATCH 形态 | 多选分类、wordsPassed、跨 2 词 probe、每日 1 组 | ADR-0011 |
 
 ---
 

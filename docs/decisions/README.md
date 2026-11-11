@@ -14,6 +14,7 @@
 | [0008](0008-indexeddb-content.md) | IndexedDB 内容导入与降级 | Accepted | contentVersion 幂等、IndexedDB 优先、Memory 回退、8 库导出导入 |
 | [0009](0009-daily-queue-state.md) | 每日队列、错词优先级与状态写入 | Accepted | 5—8 队列、错词优先、答错次日、题型映射、P3 难度向量 |
 | [0010](0010-p4-repair-types.md) | P4 顺序/边界修复题型与交互 | Accepted | 点击交换、预填修错、字母间隙、P4 题型映射 |
+| [0011](0011-grapheme-strengthening.md) | 组合强化包与 T-MATCH | Accepted | 多选分类、独立组合阶梯、跨 2 词 probe、每日 1 组 |
 
 新增 ADR 的模板：
 

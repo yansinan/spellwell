@@ -23,6 +23,7 @@ const TYPE_COPY = Object.freeze({
   'T-REORDER': { title: 'Put the sounds in order', hint: 'Tap two sounds to swap them.' },
   'T-EDIT': { title: 'Fix the word', hint: 'Edit the letters, then check.' },
   'T-SEGMENT': { title: 'Mark the sounds', hint: 'Tap the gaps between sounds.' },
+  'T-MATCH': { title: 'Find the sound', hint: 'Tap every word with this sound.' },
 });
 
 /**
@@ -175,20 +176,23 @@ export class PracticeScreen {
     const isType = spec.typeId === 'T-TYPE';
     const isEdit = spec.typeId === 'T-EDIT';
     const isSegment = spec.typeId === 'T-SEGMENT';
+    const isMatch = spec.typeId === 'T-MATCH';
     const slots = isType
       ? this.#typeInputTemplate()
       : isEdit
         ? this.#editInputTemplate()
         : isSegment
           ? this.#segmentTemplate()
-          : this.#slotsTemplate();
+          : isMatch
+            ? this.#matchTemplate()
+            : this.#slotsTemplate();
     const tiles = spec.typeId === 'T-SEQUENCE' || spec.typeId === 'T-FILL'
       ? this.#tilesTemplate()
       : '';
     const clear = isType || isEdit
       ? ''
       : `<button type="button" class="sw-text-button" data-action="clear" ${this.#events.length === 0 ? 'disabled' : ''}>Clear</button>`;
-    const showCheck = ['T-TYPE', 'T-EDIT', 'T-SEQUENCE', 'T-REORDER', 'T-SEGMENT'].includes(spec.typeId);
+    const showCheck = ['T-TYPE', 'T-EDIT', 'T-SEQUENCE', 'T-REORDER', 'T-SEGMENT', 'T-MATCH'].includes(spec.typeId);
     const checkDisabled = spec.typeId === 'T-TYPE'
       || (spec.typeId === 'T-SEQUENCE' && !this.#allSlotsFilled());
     const check = showCheck
@@ -326,6 +330,24 @@ export class PracticeScreen {
     return `<div class="sw-segments" data-role="segments">${parts.join('')}</div>`;
   }
 
+  #matchTemplate() {
+    const focusText = escapeHtml(this.#current.spec.params?.focusText ?? '');
+    const selected = new Set(
+      this.#events.filter((event) => event.kind === 'tap-unit').map((event) => event.unitId),
+    );
+    return `
+      <div class="sw-match" data-role="match">
+        <p class="sw-match__focus">Words with <strong>${focusText}</strong>?</p>
+        <div class="sw-match__options">
+          ${this.#current.renderModel.units.map((unit) => {
+            const on = selected.has(unit.unitId);
+            return `<button type="button" class="sw-match__option ${on ? 'is-selected' : ''}" data-match-id="${escapeHtml(unit.unitId)}" aria-pressed="${on}">${escapeHtml(unit.text)}</button>`;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }
+
   #bindQuestion() {
     const spec = this.#current.spec;
     for (const button of this.#root.querySelectorAll('[data-unit-id]')) {
@@ -372,6 +394,14 @@ export class PracticeScreen {
       for (const gap of this.#root.querySelectorAll('[data-gap-index]')) {
         gap.addEventListener('click', () => {
           this.#toggleGap(Number(/** @type {HTMLElement} */ (gap).dataset.gapIndex));
+        });
+      }
+    }
+
+    if (spec.typeId === 'T-MATCH') {
+      for (const button of this.#root.querySelectorAll('[data-match-id]')) {
+        button.addEventListener('click', () => {
+          this.#toggleMatch(/** @type {HTMLElement} */ (button).dataset.matchId ?? '');
         });
       }
     }
@@ -771,6 +801,17 @@ export class PracticeScreen {
     [this.#reorderOrder[from], this.#reorderOrder[to]] = [this.#reorderOrder[to], this.#reorderOrder[from]];
     this.#events.push({ kind: 'reorder', fromIndex: from, toIndex: to });
     this.#reorderSelected = null;
+    this.#sound.tap();
+    this.#afterSelectionChange();
+  }
+
+  #toggleMatch(unitId) {
+    if (this.#locked || !unitId) return;
+    const at = this.#events.findIndex(
+      (event) => event.kind === 'tap-unit' && event.unitId === unitId,
+    );
+    if (at >= 0) this.#events.splice(at, 1);
+    else this.#events.push({ kind: 'tap-unit', unitId });
     this.#sound.tap();
     this.#afterSelectionChange();
   }

@@ -1,19 +1,19 @@
 # 开发路线图 · ROADMAP
 
-**当前阶段**：P4 ✅（2026-11-11）
-**下一阶段**：P5（组合强化与配对）
-**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P4 不通过不进入 P5。
+**当前阶段**：P5 ✅（2026-11-11）
+**下一阶段**：P6（判断纠错与语境抽查）
+**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P5 不通过不进入 P6。
 
 ---
 
 ## 1. 门禁命令
 
 ```bash
-# 当前阶段（P4，累计 p0..p4）
-node tests/runTests.js --phase=p4
+# 当前阶段（P5，累计 p0..p5）
+node tests/runTests.js --phase=p5
 
 # 后续阶段（累计运行 p0..pN）
-node tests/runTests.js --phase=p5
+node tests/runTests.js --phase=p6
 
 # 默认：自动跑到仓库中已存在的最高阶段
 node tests/runTests.js
@@ -37,8 +37,8 @@ node tools/serve.mjs
 | **P2** | IndexedDB 持久化与内容导入 | `--phase=p2` PASS + 刷新不丢、导出导入一致 | ✅ 完成 |
 | **P3** | 记忆曲线与错词调度 | `--phase=p3` PASS + 次日必现 | ✅ 完成 |
 | **P4** | 顺序/边界错闭环（T-REORDER/T-EDIT/T-SEGMENT） | `--phase=p4` PASS + 三类错误触发对应修复 | ✅ 完成 |
-| **P5** | 组合强化与配对（T-MATCH） | `--phase=p5` PASS + 跨 2 词连续正确 | ⏳ 下一步 |
-| **P6** | 判断纠错与语境抽查（T-JUDGE-FIX/T-CLOZE） | `--phase=p6` PASS + 假掌握被拦下 | ⏳ |
+| **P5** | 组合强化与配对（T-MATCH） | `--phase=p5` PASS + 跨 2 词连续正确 | ✅ 完成 |
+| **P6** | 判断纠错与语境抽查（T-JUDGE-FIX/T-CLOZE） | `--phase=p6` PASS + 假掌握被拦下 | ⏳ 下一步 |
 | **P7** | 人工标注后台系统 | `--phase=p7` PASS + 错误切分阻断导出 | ⏳ |
 | **P8** | 输入适配与体验（PC/移动） | `--phase=p8` PASS + 同 spec+seed 双端一致 | ⏳ |
 | **P9** | 挑战旁路与变换预留 | `--phase=p9` PASS + 挑战不写主状态 | ⏳ |
@@ -243,35 +243,72 @@ node tests/runTests.js --phase=p4
 
 ---
 
-## 8. P5 任务书（下一阶段）
+## 8. P5 任务书（已完成）
 
-**目标**：补组合强化包与 T-MATCH，让易混组合（sh/ch、ck/k、ai/ee 等）独立复习，并用配对/分类建立组合家族。
+**目标**：补组合强化包与 T-MATCH，让易混组合独立复习，并用分类建立组合家族。
 
-### 范围
+### 交付物
 
-1. `T-MATCH` build/judge：组合与词例配对/分类；不引入纯四选一。
-2. 组合独立阶梯：`graphemeStates` 的 interval、wordsPassed、dueDate；每天最多 1 个强化组合，2—3 个词。
-3. 跨 2 个不同词连续正确才进入 `probe` 候选；组合块选 → 键盘整词的过渡。
-4. Scheduler 每日队列包含组合强化包；难度向量标记 grapheme 层级。
-5. `tests/p5/`：T-MATCH、组合状态、跨词条件、每日 1 组、P4 不回归。
-6. 不实现 P6 的 T-JUDGE-FIX/T-CLOZE；不做后台。
+- [x] `T-MATCH`：focus 组合 + 2—3 个包含词 + 1—2 个不包含词；多选分类，非四选一。
+- [x] 组合独立状态：`intervalIndex`、`consecutiveCorrect`、`wordsPassed`、`dueDate`、`status`。
+- [x] 答对整词更新全部 unit 组合；答错只更新错误画像指向的组合。
+- [x] 跨 2 个不同词、连续 3 次正确 → `probe`。
+- [x] `buildGraphemeDrill`：每天最多 1 个 T-MATCH，队列不超过 8。
+- [x] `PracticeScreen` T-MATCH 多选/Check/Clear。
+- [x] `tests/p5/match.test.js`。
+- [x] ADR-0011：组合强化包与 T-MATCH。
 
-### 验收
+### 验收结果
 
-- `node tests/runTests.js --phase=p5` PASS。
-- sh/ch 配对正确；同一组合跨 2 词连续正确后进入 probe 候选。
-- 每天组合强化不超过 1 组；刷新后组合状态仍在。
-- 不引入选择题、听力、图片配对。
+```bash
+node tests/runTests.js --phase=p5
+# PASS  p5 gate · 157 passed · 0 failed · 25 files
+```
 
-### 启动提示词（可直接交给 agent）
+- fish 正确后 `g.sh`：`wordsPassed=['w.fish']`、`intervalIndex=1`、`dueDate=2026-11-14`。
+- fish/ship/fish 三次正确：`wordsPassed` 跨 2 词、`consecutiveCorrect=3`、`status=probe`。
+- 到期组合追加 1 道 T-MATCH；选项 `ship/cat/book/fish` 顺序可复现。
+- 浏览器 T-MATCH：focus `sh`，正确选中 `ship` + `fish`，Check 后完成。
+- 390px 无横向滚动。
 
-> 只做 P5，不提前做 P6。先读 `AGENTS.md`、`docs/DESIGN.md §2.1/§3.3/§3.4`、`docs/TRACEABILITY.md` 的 R-SCHED-04/R-TYPE-06。
-> 实现 T-MATCH 与组合独立阶梯，复用 P3 队列/P4 错误画像；不新增 P6 题型。
-> 每步运行 `node tests/runTests.js --phase=p5`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+### P5 明确不做
+
+- 不做 P6 的 T-JUDGE-FIX/T-CLOZE。
+- 不做家长端完整报表、后台。
+- 不做四选一；T-MATCH 只做多选分类。
 
 ---
 
-## 9. 后续阶段要点（防止提前实现）
+## 9. P6 任务书（下一阶段）
+
+**目标**：用 T-JUDGE-FIX 与 T-CLOZE 做判断纠错/语境抽查，并让 60 天 probe 拦截假掌握。
+
+### 范围
+
+1. `T-JUDGE-FIX`：展示一个声称答案，孩子判断对错并在错时修改；judge 区分判断与修正。
+2. `T-CLOZE`：英文句子挖空，孩子输入目标词；不提供选择题。
+3. `probe`：3 次连续正确 + 跨 2 词后进入抽查；60 天后用更高粒度/更少脚手架验证。
+4. 抽查答错退回 `learning`，答对才 `mastered`；错误画像回写。
+5. Scheduler 对 `probe` 状态优先 T-JUDGE-FIX/T-CLOZE；T-CLOZE 需要 sentence 内容。
+6. `tests/p6/`：判断纠错、语境拼写、probe 到期/退回/通过、60 天固定时钟。
+7. 不做 P7 后台/导出阻断。
+
+### 验收
+
+- `node tests/runTests.js --phase=p6` PASS。
+- 假掌握词 60 天后进入抽查；答错退回学习，答对才掌握。
+- T-JUDGE-FIX 能区分“判断对但拼错”和“判断错但改对”。
+- T-CLOZE 只做拼写输入，不做选项。
+
+### 启动提示词（可直接交给 agent）
+
+> 只做 P6，不提前做 P7。先读 `AGENTS.md`、`docs/DESIGN.md §1.3/§2.1/§3.3/§3.4`、`docs/TRACEABILITY.md` 的 R-SCHED-05。
+> 实现 T-JUDGE-FIX/T-CLOZE 与 probe 状态迁移，用固定时钟测试 60 天抽查；不新增 P7 后台。
+> 每步运行 `node tests/runTests.js --phase=p6`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+
+---
+
+## 10. 后续阶段要点（防止提前实现）
 
 | 阶段 | 关键新增 | 不得提前做的事 |
 |---|---|---|
@@ -298,7 +335,7 @@ P1 不实现字母级/混合粒度。
 
 ---
 
-## 10. 阶段完成检查
+## 11. 阶段完成检查
 
 - [ ] 本阶段门禁 PASS，且低阶段测试未回退。
 - [ ] `TRACEABILITY.md` 中本阶段条目从 ⏳/🧪 改为 ✅。

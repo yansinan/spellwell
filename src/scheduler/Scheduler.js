@@ -10,10 +10,11 @@
  * 调度层不渲染、不判定、不依赖 DOM。
  */
 
-import { validateAttemptResult } from '../core/contracts.js';
+import { validateAttemptResult, validateQuestionSpec } from '../core/contracts.js';
 import { ContractError } from '../core/errors.js';
 import { isDayKey, toDayKey } from '../core/time.js';
-import { applyWordReview } from './IntervalPolicy.js';
+import { createRng, hashSeed } from '../core/seedRandom.js';
+import { applyWordReview, dueDateFor, isProbeEligible, nextReview } from './IntervalPolicy.js';
 import { appendErrorProfile } from './ErrorProfile.js';
 import { P4_AVAILABLE_TYPES, buildWordSpec } from './QuestionSpecBuilder.js';
 import { NEW_WORD_ROTATION, candidatesForError } from './TypeSelector.js';
@@ -71,6 +72,55 @@ export class Scheduler {
     this.seed = deps.seed ?? 20261111;
     this.size = normalizeSize(deps.size);
     this.now = deps.now ?? (() => new Date());
+  }
+
+  /**
+   * 每天最多 1 个组合强化：选一个到期组合，构造 T-MATCH 分类题。
+   * @param {string} today
+   * @param {number|string} seed
+   * @returns {Promise<import('../core/contracts.js').QuestionSpec|null>}
+   */
+  async #buildGraphemeDrill(today, seed) {
+    const due = await this.stateRepository.listDueGraphemes(today);
+    if (due.length === 0) return null;
+    const words = await this.wordRepository.all();
+
+    for (const state of due) {
+      const grapheme = this.graphemeMap[state.graphemeId];
+      if (!grapheme) continue;
+      const containing = words.filter((word) => word.units.some((unit) => unit.graphemeId === state.graphemeId));
+      if (containing.length < 2) continue;
+      const correctWords = containing.slice(0, 3);
+      const distractors = words
+        .filter((word) => !containing.some((item) => item.id === word.id))
+        .slice(0, 2);
+      if (distractors.length === 0) continue;
+
+      const options = [
+        ...correctWords.map((word) => ({ wordId: String(word.id), text: String(word.text), correct: true })),
+        ...distractors.map((word) => ({ wordId: String(word.id), text: String(word.text), correct: false })),
+      ];
+      const order = createRng(`${seed}|match|${state.graphemeId}`).shuffle(options);
+      const target = correctWords[0];
+      const spec = {
+        specId: `spec.match.${state.graphemeId}.${today}`,
+        typeId: 'T-MATCH',
+        target: { kind: /** @type {const} */ ('word'), id: String(target.id) },
+        focus: { kind: /** @type {const} */ ('grapheme'), id: state.graphemeId },
+        params: {
+          options: order,
+          focusText: grapheme.text,
+        },
+        resourceHints: {
+          wordIds: order.map((option) => option.wordId),
+          graphemeIds: [state.graphemeId],
+        },
+        seed: hashSeed(`${seed}|match|${state.graphemeId}|${today}`),
+      };
+      validateQuestionSpec(spec);
+      return spec;
+    }
+    return null;
   }
 
   /**
@@ -141,7 +191,7 @@ export class Scheduler {
       throw new ContractError('SCHEDULER_QUEUE_EMPTY', 'daily queue has no words');
     }
 
-    return selected.map((word, index) => {
+    const specs = selected.map((word, index) => {
       const state = stateByWord.get(String(word.id));
       const latestError = state?.errorProfile?.at(-1);
       let typeId = latestError
@@ -161,6 +211,9 @@ export class Scheduler {
         specId: `spec.daily.${String(word.id)}.${typeId}.${index}`,
       });
     });
+    const drill = await this.#buildGraphemeDrill(today, seed);
+    if (drill && specs.length < MAX_QUEUE_SIZE) specs.push(drill);
+    return specs;
   }
 
   /**
@@ -186,6 +239,36 @@ export class Scheduler {
       ? next.consecutiveCorrect >= 2 ? 'reviewing' : 'learning'
       : 'learning';
     await this.stateRepository.saveWordState(next);
+
+    const word = await this.wordRepository.get(result.wordId);
+    const units = Array.isArray(word?.units) ? word.units : [];
+    const touched = result.wordCorrect
+      ? units
+      : units.filter((unit) => unit.graphemeId === result.firstError?.unitId);
+    const seen = new Set();
+    for (const unit of touched) {
+      if (!unit?.graphemeId || seen.has(unit.graphemeId)) continue;
+      seen.add(unit.graphemeId);
+      const before = await this.stateRepository.getGraphemeState(unit.graphemeId);
+      const review = nextReview(before, result.wordCorrect);
+      const wordsPassed = result.wordCorrect
+        ? [...new Set([...before.wordsPassed, result.wordId])]
+        : before.wordsPassed;
+      const status = result.wordCorrect
+        ? isProbeEligible({ consecutiveCorrect: review.consecutiveCorrect, wordsPassed })
+          ? 'probe'
+          : review.consecutiveCorrect > 0 ? 'reviewing' : 'learning'
+        : 'learning';
+      await this.stateRepository.saveGraphemeState({
+        ...before,
+        ...review,
+        wordsPassed,
+        status,
+        dueDate: dueDateFor(review.intervalIndex, now),
+        updatedAt: now.toISOString(),
+      });
+    }
+
     await this.attemptRepository.record(result);
     return next;
   }

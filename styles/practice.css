@@ -509,3 +509,43 @@
   width: 5px;
   background: var(--sw-mint-deep);
 }
+
+/* P5：T-MATCH 组合分类。 */
+.sw-match {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.sw-match__focus {
+  margin: 0;
+  font-family: var(--sw-font-display);
+  font-size: 22px;
+  color: var(--sw-ink);
+}
+
+.sw-match__options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 340px;
+}
+
+.sw-match__option {
+  appearance: none;
+  min-width: 84px;
+  padding: 14px 18px;
+  border: 2px solid var(--sw-line);
+  border-radius: var(--sw-radius-sm);
+  background: var(--sw-surface);
+  color: var(--sw-ink);
+  font-family: var(--sw-font-display);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.sw-match__option.is-selected {
+  border-color: var(--sw-mint-deep);
+  background: var(--sw-mint-soft);
+}

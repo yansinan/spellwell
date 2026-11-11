@@ -4,7 +4,7 @@
 不做听力、不做选择题（判断+改错除外）、不做图片配对、不做积分/排行榜。
 
 - **定位**：纯前端 ES Modules，无构建、无框架、无运行时依赖；后期可平移 Node 后端。
-- **当前阶段**：**P4 顺序/边界错闭环 ✅**；下一步 P5 组合强化与配对。
+- **当前阶段**：**P5 组合强化与配对 ✅**；下一步 P6 判断纠错与语境抽查。
 - **需求源**：[`docs/DESIGN.md`](docs/DESIGN.md)（定稿 v1.1）。
 
 ---
@@ -14,8 +14,8 @@
 需要 Node 18+（仅用于测试与本地静态服务器，应用本身跑在浏览器）。
 
 ```bash
-# P4 阶段门禁（累计 P0..P4）
-node tests/runTests.js --phase=p4
+# P5 阶段门禁（累计 P0..P5）
+node tests/runTests.js --phase=p5
 
 # 本地预览：ESM 不能走 file://，必须用 HTTP
 node tools/serve.mjs
@@ -53,8 +53,8 @@ npm start
 | 阶段门禁 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | P0—P10 验收标准；当前阶段只做当前阶段 |
 | 工程规范 | [`docs/FILE_SPEC.md`](docs/FILE_SPEC.md) | 目录、命名、依赖方向、测试与禁止清单 |
 | 内容规范 | [`docs/CONTENT_SPEC.md`](docs/CONTENT_SPEC.md) | 人工切分、ID 稳定性、校验规则 V1—V10 |
-| 执行契约 | [`AGENTS.md`](AGENTS.md) | agent/贡献者必读顺序、铁律、完成定义、P5 启动提示词 |
-| 决策记录 | [`docs/decisions/`](docs/decisions/) | 对文档歧义的裁决；ADR-0001—ADR-0010 |
+| 执行契约 | [`AGENTS.md`](AGENTS.md) | agent/贡献者必读顺序、铁律、完成定义、P6 启动提示词 |
+| 决策记录 | [`docs/decisions/`](docs/decisions/) | 对文档歧义的裁决；ADR-0001—ADR-0011 |
 | 代码头 | 每个 `src/**/*.js` | `@layer` / `@phase` / `@doc §x.y`，由测试校验 |
 | 架构守卫 | `tests/p0/architecture.test.js` | 无 `Math.random`、无越层 import、无 DOM 泄漏、无循环依赖、仓库只用 7 个存储方法 |
 | 文档守卫 | `tests/p0/traceability.test.js` | 枚举/阶段/token/ADR/零依赖与文档一致 |
@@ -71,11 +71,11 @@ src/core          契约、seed 随机、时间、事件总线、错误
 src/storage       StorageAdapter / MemoryAdapter / IndexedDBAdapter / contentImport / schema
 src/repositories  词条、组合、句子、混淆项、状态、尝试
 src/scheduler     间隔策略、错误画像、题型选择、每日队列/状态写入
-src/questionTypes 9 个题型注册表；P1 三题型 + P4 三修复题型已实现
+src/questionTypes 9 个题型注册表；P1/P4/P5 七题型已实现
 src/input         指针/键盘/挑战适配器（P8/P9 骨架）
 src/ui            P3 学习端、PracticeSession、bootstrap 每日队列；P0 状态页
 src/content       人工切分种子内容（全部 unreviewed）
-tests/p0..p4      累计门禁：骨架 + P1 题型 + P2 持久化 + P3 队列 + P4 修复题
+tests/p0..p5      累计门禁：骨架 + P1 题型 + P2 持久化 + P3 队列 + P4/P5 题型
 docs              设计、规范、路线图、ADR
 tools/serve.mjs   零依赖静态服务器
 ```
@@ -144,8 +144,20 @@ tools/serve.mjs   零依赖静态服务器
 
 ---
 
+## P5 已实现
+
+- `T-MATCH`：focus 组合 + 2—3 个包含词 + 1—2 个不包含词；多选分类，不是四选一。
+- 组合独立状态：`intervalIndex`、`consecutiveCorrect`、`wordsPassed`、`dueDate`、`status`。
+- 跨 2 个不同词、连续 3 次正确 → `probe` 候选。
+- 每日最多 1 个 T-MATCH 强化包；队列不超过 8。
+- 学习端 T-MATCH 多选/Check/Clear，结果继续写入 P3 状态。
+
+![P5 组合分类](docs/p5-preview.png)
+
+---
+
 ## 下一步
 
-P5：实现 T-MATCH 与组合独立阶梯，让 sh/ch、ck/k 等易混组合跨 2 个词复习；
-复用 P3 每日队列/P4 错误画像，不新增 T-JUDGE-FIX/T-CLOZE。
+P6：实现 T-JUDGE-FIX/T-CLOZE 与 60 天 probe 抽查，拦截假掌握；
+复用 P3 状态与 P5 组合阶梯，不新增 P7 后台。
 任务书与启动提示词见 [`docs/ROADMAP.md`](docs/ROADMAP.md) 与 [`AGENTS.md`](AGENTS.md)。
