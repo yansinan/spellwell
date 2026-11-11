@@ -16,7 +16,7 @@ test('常见组合库：单字母 + digraph/vowel-team/r-controlled/suffix 已�
   for (const text of ['a', 'z', 'th', 'sh', 'ch', 'ea', 'ee', 'igh', 'er', 'ar', 'tion', 'ough', 'ing']) {
     assertEqual(typeof byText[text], 'string', `missing grapheme ${text}`);
   }
-  assertEqual(graphemes.items.length >= 90, true);
+  assertEqual(graphemes.items.length >= 150, true);
 });
 
 test('自动切分：weather → w/ea/th/er，常见词可复现', () => {
@@ -49,7 +49,7 @@ test('切分应用：未知/非法 unit 明确报错', () => {
   const word = { text: 'weather', units: [] };
   applySegments(word, ['w', 'ea', 'th', 'er'], byText);
   assertEqual(word.units.length, 4);
-  assertThrows(() => applySegments(word, ['w', 'zz'], byText), 'CONTENT_EDIT_INVALID');
+  assertThrows(() => applySegments(word, ['w', 'qq'], byText), 'CONTENT_EDIT_INVALID');
 });
 
 test('单元标题行：切换后续单词所属单元', () => {

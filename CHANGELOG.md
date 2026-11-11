@@ -17,7 +17,8 @@
 - 用真实 attempts 校准权重：按词/题型错误率、小样本平滑、约束优先。
 - 修复旧 DB 无 unitId 时 Start practice 空队列的问题；内容版本升到 3。
 - v2→v3 迁移保留后台已编辑词，补齐 grade/term/unit。
-- 内容版本升到 5，导入两套教材词库；新增外研词库报告。
+- 内容版本升到 6，导入两套教材词库；新增外研词库报告。
+- 组合库 96 → 152；切分审计：全字母保底 433 → 316。
 - `contentRevision`：后台保存递增；下一轮重新读内容。
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
 - 计划项带 `params.plan.reason/mode/policyVersion`。
@@ -38,7 +39,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 202 passed · 0 failed · 43 files
+# PASS  p9 gate · 204 passed · 0 failed · 44 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。
@@ -88,10 +89,10 @@ node tests/runTests.js --phase=p9
 
 ```bash
 node tests/runTests.js --phase=p7
-# PASS  p7 gate · 183 passed · 0 failed · 33 files
+# PASS  p7 gate · 185 passed · 0 failed · 34 files
 
 node tests/runTests.js --phase=p8
-# PASS  p8 gate · 186 passed · 0 failed · 34 files
+# PASS  p8 gate · 188 passed · 0 failed · 35 files
 ```
 
 - Stats：4 answers / 50%，按日正确率、词状态、最近 4 条答案均显示。

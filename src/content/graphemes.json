@@ -672,6 +672,398 @@
       "tier": "T4",
       "kind": "suffix",
       "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.bl",
+      "text": "bl",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.br",
+      "text": "br",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.cl",
+      "text": "cl",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.cr",
+      "text": "cr",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.dr",
+      "text": "dr",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.fl",
+      "text": "fl",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.fr",
+      "text": "fr",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.gl",
+      "text": "gl",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.gr",
+      "text": "gr",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.pl",
+      "text": "pl",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.pr",
+      "text": "pr",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.sc",
+      "text": "sc",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.sk",
+      "text": "sk",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.sl",
+      "text": "sl",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.sm",
+      "text": "sm",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.sn",
+      "text": "sn",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.sp",
+      "text": "sp",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.st",
+      "text": "st",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.sw",
+      "text": "sw",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.tr",
+      "text": "tr",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.tw",
+      "text": "tw",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.bb",
+      "text": "bb",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.dd",
+      "text": "dd",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ff",
+      "text": "ff",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.gg",
+      "text": "gg",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ll",
+      "text": "ll",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.mm",
+      "text": "mm",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.nn",
+      "text": "nn",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.pp",
+      "text": "pp",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.rr",
+      "text": "rr",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ss",
+      "text": "ss",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.tt",
+      "text": "tt",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.zz",
+      "text": "zz",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.scr",
+      "text": "scr",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.spr",
+      "text": "spr",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.str",
+      "text": "str",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.shr",
+      "text": "shr",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.thr",
+      "text": "thr",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.squ",
+      "text": "squ",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.sch",
+      "text": "sch",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.able",
+      "text": "able",
+      "tier": "T4",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ible",
+      "text": "ible",
+      "tier": "T4",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ance",
+      "text": "ance",
+      "tier": "T4",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ence",
+      "text": "ence",
+      "tier": "T4",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ous",
+      "text": "ous",
+      "tier": "T4",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ious",
+      "text": "ious",
+      "tier": "T4",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.all",
+      "text": "all",
+      "tier": "T4",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ble",
+      "text": "ble",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.cle",
+      "text": "cle",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.dle",
+      "text": "dle",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.fle",
+      "text": "fle",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.gle",
+      "text": "gle",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.kle",
+      "text": "kle",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ple",
+      "text": "ple",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.tle",
+      "text": "tle",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.zle",
+      "text": "zle",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
     }
   ]
 }

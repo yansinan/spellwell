@@ -9,6 +9,53 @@
 
 import { ContractError } from '../core/errors.js';
 
+const END_SUFFIXES = new Set([
+  'ing', 'ed', 'es', 'ly', 'est', 'tion', 'sion', 'ment', 'ness', 'ful', 'less',
+  'ture', 'sure', 'able', 'ible', 'ance', 'ence', 'ous', 'ious',
+  'ble', 'cle', 'dle', 'fle', 'gle', 'kle', 'ple', 'tle', 'zle', 'all',
+]);
+const SUFFIX_MIN_LENGTH = Object.freeze({ ed: 5, es: 5, ly: 4, est: 6, all: 4 });
+
+/** 人工确认过的异常切分；按 token 写入，最后仍校验 join === text。 */
+export const SEGMENTATION_OVERRIDES = Object.freeze({
+  different: ['d', 'i', 'ff', 'er', 'e', 'n', 't'],
+  interesting: ['i', 'n', 't', 'er', 'e', 'st', 'ing'],
+  favourite: ['f', 'a', 'v', 'ou', 'r', 'i', 't', 'e'],
+  classroom: ['cl', 'a', 'ss', 'r', 'oo', 'm'],
+  blackboard: ['bl', 'a', 'ck', 'b', 'oar', 'd'],
+  basketball: ['b', 'a', 's', 'k', 'e', 't', 'b', 'all'],
+  grandpa: ['gr', 'a', 'n', 'd', 'p', 'a'],
+  grandma: ['gr', 'a', 'n', 'd', 'm', 'a'],
+  thing: ['th', 'i', 'ng'],
+  sing: ['s', 'i', 'ng'],
+  king: ['k', 'i', 'ng'],
+  ring: ['r', 'i', 'ng'],
+  bring: ['br', 'i', 'ng'],
+  spring: ['spr', 'i', 'ng'],
+  string: ['str', 'i', 'ng'],
+  swing: ['sw', 'i', 'ng'],
+  wing: ['w', 'i', 'ng'],
+  yes: ['y', 'e', 's'],
+  bed: ['b', 'e', 'd'],
+  red: ['r', 'e', 'd'],
+  rest: ['r', 'e', 'st'],
+  best: ['b', 'e', 'st'],
+  test: ['t', 'e', 'st'],
+  forest: ['f', 'or', 'e', 'st'],
+  table: ['t', 'a', 'ble'],
+  timetable: ['t', 'i', 'm', 'e', 't', 'a', 'ble'],
+  transportation: ['tr', 'a', 'n', 's', 'p', 'or', 't', 'a', 'tion'],
+});
+
+function isEndSuffixAllowed(candidate, index, text) {
+  if (!END_SUFFIXES.has(candidate)) return true;
+  if (index + candidate.length !== text.length) return false;
+  const min = SUFFIX_MIN_LENGTH[candidate] ?? 1;
+  return text.length >= min;
+}
+
+
+
 /**
  * 最长匹配优先的自动切分。graphemeByText 由内容库构建。
  * @param {string} word
@@ -20,6 +67,14 @@ export function autoSegment(word, graphemeByText) {
   if (!/^[a-z]+$/.test(text)) {
     throw new ContractError('WORD_IMPORT_INVALID', `word must be lowercase ASCII: ${text}`);
   }
+  const override = SEGMENTATION_OVERRIDES[text];
+  if (override) {
+    const tokens = override.map((token) => ({ text: token, graphemeId: graphemeByText[token] }));
+    if (tokens.every((token) => token.graphemeId) && tokens.map((token) => token.text).join('') === text) {
+      return tokens;
+    }
+  }
+
   const units = [];
   let index = 0;
   while (index < text.length) {
@@ -27,10 +82,9 @@ export function autoSegment(word, graphemeByText) {
     for (let length = Math.min(6, text.length - index); length >= 1; length -= 1) {
       const candidate = text.slice(index, index + length);
       const id = graphemeByText[candidate];
-      if (id) {
-        matched = { text: candidate, graphemeId: id };
-        break;
-      }
+      if (!id || !isEndSuffixAllowed(candidate, index, text)) continue;
+      matched = { text: candidate, graphemeId: id };
+      break;
     }
     if (!matched) {
       throw new ContractError('WORD_IMPORT_INVALID', `no grapheme for "${text[index]}"`);

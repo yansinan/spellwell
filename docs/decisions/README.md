@@ -28,6 +28,7 @@
 | [0022](0022-textbook-switch.md) | 多教材版本与后台切换 | Accepted | textbook 字段；meta.activeTextbook；两套词库共存 |
 | [0023](0023-sequential-unit-unlock.md) | 单元顺序解锁与练习设计页 | Accepted | 完成单元 + 下一个；完成=全部词练过；不足20不跨单元 |
 | [0024](0024-retry-and-session-summary.md) | 答错重试到正确与结束页 | Accepted | 首次作答记录；答错显示答案；结束时正确率+错词 |
+| [0025](0025-segmentation-audit.md) | 基础词库切分审计与组合库扩充 | Accepted | 96→152；后缀词尾约束；例外表；静态自带 |
 
 新增 ADR 的模板：
 

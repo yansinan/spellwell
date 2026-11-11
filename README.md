@@ -176,7 +176,7 @@ tools/serve.mjs   零依赖静态服务器
 - `ContentValidator`：V1—V9 内容结构校验；V10 只导出 reviewed。
 - 内容后台 `/src/admin/index.html`：搜索/列表/编辑器、单词/unit 维护、保存到共享 IndexedDB；学习端刷新可见。
 - 批量录入：逗号显式切分，无逗号自动建议；支持中文翻译/音标。
-- 组合库扩充到 96 项，覆盖常见单字母/组合/后缀。
+- 组合库扩充到 152 项，覆盖单字母/辅音簇/双写/后缀；基础词库已审计切分。
 - 本机数据迁移独立：`/migration/index.html`，仅用于换主机时全量导出/导入 8 个 store。
 - 后台不再要求内容 JSON 导出/导入；reviewed-only 校验保留，内容导出入口移除。
 - 当前种子全部 `unreviewed`；V10 仍识别 112 条阻断，内容导出入口已移除。
@@ -204,7 +204,7 @@ tools/serve.mjs   零依赖静态服务器
 ## P9 已实现
 
 - 两套教材词库：人教版新起点 583 词、外研版新交际（北京专版）891 词；后台可切换当前教材。
-- 词库来源/质量/优化报告：[`docs/PEP_VOCAB_BASE.md`](docs/PEP_VOCAB_BASE.md)、[`docs/FLTRP_VOCAB_BASE.md`](docs/FLTRP_VOCAB_BASE.md)。
+- 词库来源/质量/优化报告：[`docs/PEP_VOCAB_BASE.md`](docs/PEP_VOCAB_BASE.md)、[`docs/FLTRP_VOCAB_BASE.md`](docs/FLTRP_VOCAB_BASE.md)、[`docs/SEGMENTATION_AUDIT.md`](docs/SEGMENTATION_AUDIT.md)。
 - 练习设计页：只显示已完成单元 + 下一个新单元；按学期/单元顺序解锁；完成单元可复选复习；Review/Effort；不选题量。
 - 答错显示正确答案并可重试，答对才进入下一题；结束页先展示正确率，再列错词。
 - 后台题量默认 20，设置页 `/src/admin/settings.html`，面包屑返回内容库。

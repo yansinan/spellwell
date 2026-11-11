@@ -142,12 +142,8 @@
       "text": "play",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "ay",
@@ -542,16 +538,12 @@
       "text": "please",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
-          "text": "le",
-          "graphemeId": "g.le"
-        },
-        {
-          "text": "a",
-          "graphemeId": "g.a"
+          "text": "ea",
+          "graphemeId": "g.ea"
         },
         {
           "text": "s",
@@ -653,12 +645,8 @@
       "text": "two",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "tw",
+          "graphemeId": "g.tw"
         },
         {
           "text": "o",
@@ -686,12 +674,8 @@
       "text": "three",
       "units": [
         {
-          "text": "th",
-          "graphemeId": "g.th"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "thr",
+          "graphemeId": "g.thr"
         },
         {
           "text": "ee",
@@ -855,12 +839,8 @@
       "text": "grandpa",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "a",
@@ -904,12 +884,8 @@
       "text": "grandma",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "a",
@@ -961,12 +937,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "er",
@@ -1027,12 +999,8 @@
       "text": "brother",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "o",
@@ -1299,24 +1267,16 @@
       "text": "classroom",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "a",
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "r",
@@ -1352,12 +1312,8 @@
       "text": "blackboard",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "bl",
+          "graphemeId": "g.bl"
         },
         {
           "text": "a",
@@ -1446,12 +1402,12 @@
           "graphemeId": "g.d"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "k",
-          "graphemeId": "g.k"
+          "text": "sk",
+          "graphemeId": "g.sk"
         }
       ],
       "grade": 1,
@@ -1702,12 +1658,8 @@
       "text": "school",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "ch",
-          "graphemeId": "g.ch"
+          "text": "sch",
+          "graphemeId": "g.sch"
         },
         {
           "text": "oo",
@@ -1772,12 +1724,8 @@
       "text": "schoolbag",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "ch",
-          "graphemeId": "g.ch"
+          "text": "sch",
+          "graphemeId": "g.sch"
         },
         {
           "text": "oo",
@@ -1977,8 +1925,12 @@
           "graphemeId": "g.r"
         },
         {
-          "text": "ed",
-          "graphemeId": "g.ed"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "d",
+          "graphemeId": "g.d"
         }
       ],
       "grade": 1,
@@ -2002,12 +1954,8 @@
       "text": "green",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "ee",
@@ -2039,12 +1987,8 @@
       "text": "blue",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "bl",
+          "graphemeId": "g.bl"
         },
         {
           "text": "ue",
@@ -2072,12 +2016,8 @@
       "text": "black",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "bl",
+          "graphemeId": "g.bl"
         },
         {
           "text": "a",
@@ -2294,12 +2234,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pp",
+          "graphemeId": "g.pp"
         },
         {
           "text": "y",
@@ -2327,12 +2263,8 @@
       "text": "stop",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "o",
@@ -2393,12 +2325,8 @@
       "text": "slow",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "sl",
+          "graphemeId": "g.sl"
         },
         {
           "text": "ow",
@@ -2599,12 +2527,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "b",
-          "graphemeId": "g.b"
+          "text": "bb",
+          "graphemeId": "g.bb"
         },
         {
           "text": "i",
@@ -2636,12 +2560,8 @@
       "text": "friend",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "ie",
@@ -3303,12 +3223,8 @@
       "text": "twin",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "tw",
+          "graphemeId": "g.tw"
         },
         {
           "text": "i",
@@ -3377,20 +3293,12 @@
       "text": "small",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "sm",
+          "graphemeId": "g.sm"
         },
         {
-          "text": "m",
-          "graphemeId": "g.m"
-        },
-        {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 1,
@@ -3612,16 +3520,16 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "f",
-          "graphemeId": "g.f"
+          "text": "ff",
+          "graphemeId": "g.ff"
         },
         {
-          "text": "f",
-          "graphemeId": "g.f"
+          "text": "er",
+          "graphemeId": "g.er"
         },
         {
-          "text": "ere",
-          "graphemeId": "g.ere"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
           "text": "n",
@@ -4131,12 +4039,8 @@
           "graphemeId": "g.n"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "er",
@@ -4387,12 +4291,8 @@
       "text": "swim",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "sw",
+          "graphemeId": "g.sw"
         },
         {
           "text": "i",
@@ -4432,12 +4332,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 1,
@@ -4523,16 +4419,8 @@
       "text": "strong",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "str",
+          "graphemeId": "g.str"
         },
         {
           "text": "o",
@@ -4592,12 +4480,8 @@
           "graphemeId": "g.b"
         },
         {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 1,
@@ -4695,8 +4579,12 @@
           "graphemeId": "g.b"
         },
         {
-          "text": "ed",
-          "graphemeId": "g.ed"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "d",
+          "graphemeId": "g.d"
         }
       ],
       "grade": 1,
@@ -4728,12 +4616,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "ble",
+          "graphemeId": "g.ble"
         }
       ],
       "grade": 1,
@@ -4893,16 +4777,12 @@
       "text": "clean",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
-          "text": "le",
-          "graphemeId": "g.le"
-        },
-        {
-          "text": "a",
-          "graphemeId": "g.a"
+          "text": "ea",
+          "graphemeId": "g.ea"
         },
         {
           "text": "n",
@@ -5037,12 +4917,8 @@
       "text": "snow",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "sn",
+          "graphemeId": "g.sn"
         },
         {
           "text": "ow",
@@ -5111,12 +4987,8 @@
           "graphemeId": "g.t"
         },
         {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 1,
@@ -5453,12 +5325,8 @@
       "text": "twelve",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "tw",
+          "graphemeId": "g.tw"
         },
         {
           "text": "el",
@@ -5675,12 +5543,8 @@
       "text": "clock",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "o",
@@ -5955,12 +5819,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pp",
+          "graphemeId": "g.pp"
         },
         {
           "text": "le",
@@ -6062,12 +5922,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "n",
-          "graphemeId": "g.n"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "nn",
+          "graphemeId": "g.nn"
         },
         {
           "text": "er",
@@ -6177,12 +6033,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "m",
-          "graphemeId": "g.m"
-        },
-        {
-          "text": "m",
-          "graphemeId": "g.m"
+          "text": "mm",
+          "graphemeId": "g.mm"
         },
         {
           "text": "y",
@@ -6255,12 +6107,8 @@
           "graphemeId": "g.oo"
         },
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "dle",
+          "graphemeId": "g.dle"
         }
       ],
       "grade": 2,
@@ -6321,12 +6169,8 @@
       "text": "bread",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "ea",
@@ -6527,12 +6371,8 @@
       "text": "sweet",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "sw",
+          "graphemeId": "g.sw"
         },
         {
           "text": "ee",
@@ -6642,12 +6482,8 @@
       "text": "snowy",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "sn",
+          "graphemeId": "g.sn"
         },
         {
           "text": "ow",
@@ -6724,12 +6560,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "n",
-          "graphemeId": "g.n"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "nn",
+          "graphemeId": "g.nn"
         },
         {
           "text": "y",
@@ -6868,12 +6700,8 @@
           "graphemeId": "g.e"
         },
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "g",
-          "graphemeId": "g.g"
+          "text": "gg",
+          "graphemeId": "g.gg"
         }
       ],
       "grade": 2,
@@ -6959,20 +6787,16 @@
       "text": "spring",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "spr",
+          "graphemeId": "g.spr"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "i",
+          "graphemeId": "g.i"
         },
         {
-          "text": "r",
-          "graphemeId": "g.r"
-        },
-        {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "ng",
+          "graphemeId": "g.ng"
         }
       ],
       "grade": 2,
@@ -7004,12 +6828,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "m",
-          "graphemeId": "g.m"
-        },
-        {
-          "text": "m",
-          "graphemeId": "g.m"
+          "text": "mm",
+          "graphemeId": "g.mm"
         },
         {
           "text": "er",
@@ -7362,12 +7182,8 @@
       "text": "skirt",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "k",
-          "graphemeId": "g.k"
+          "text": "sk",
+          "graphemeId": "g.sk"
         },
         {
           "text": "ir",
@@ -7824,12 +7640,8 @@
       "text": "train",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "ai",
@@ -7861,12 +7673,8 @@
       "text": "plane",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "a",
@@ -7947,8 +7755,12 @@
           "graphemeId": "g.n"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "s",
+          "graphemeId": "g.s"
         },
         {
           "text": "e",
@@ -8067,12 +7879,8 @@
       "text": "driver",
       "units": [
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "i",
@@ -8454,12 +8262,8 @@
       "text": "flower",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "fl",
+          "graphemeId": "g.fl"
         },
         {
           "text": "ow",
@@ -8491,24 +8295,16 @@
       "text": "grass",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "a",
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         }
       ],
       "grade": 2,
@@ -8680,8 +8476,12 @@
           "graphemeId": "g.y"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "s",
+          "graphemeId": "g.s"
         }
       ],
       "grade": 2,
@@ -8705,24 +8505,16 @@
       "text": "class",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "a",
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         }
       ],
       "grade": 2,
@@ -8952,12 +8744,8 @@
       "text": "great",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "ea",
@@ -9100,12 +8888,8 @@
       "text": "student",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "u",
@@ -9223,8 +9007,12 @@
           "graphemeId": "g.s"
         },
         {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "ng",
+          "graphemeId": "g.ng"
         }
       ],
       "grade": 2,
@@ -9252,20 +9040,8 @@
           "graphemeId": "g.d"
         },
         {
-          "text": "a",
-          "graphemeId": "g.a"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
-        },
-        {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "e",
-          "graphemeId": "g.e"
+          "text": "ance",
+          "graphemeId": "g.ance"
         }
       ],
       "grade": 2,
@@ -9289,12 +9065,8 @@
       "text": "draw",
       "units": [
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "aw",
@@ -9338,12 +9110,8 @@
           "graphemeId": "g.b"
         },
         {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 2,
@@ -9519,16 +9287,24 @@
           "graphemeId": "g.w"
         },
         {
-          "text": "ed",
-          "graphemeId": "g.ed"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "d",
+          "graphemeId": "g.d"
         },
         {
           "text": "n",
           "graphemeId": "g.n"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "s",
+          "graphemeId": "g.s"
         },
         {
           "text": "d",
@@ -9601,12 +9377,8 @@
       "text": "friday",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "i",
@@ -9922,12 +9694,8 @@
       "text": "from",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "o",
@@ -10214,12 +9982,8 @@
       "text": "tree",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "ee",
@@ -10259,12 +10023,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "f",
-          "graphemeId": "g.f"
+          "text": "ff",
+          "graphemeId": "g.ff"
         },
         {
           "text": "e",
@@ -10543,12 +10303,8 @@
           "graphemeId": "g.ue"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         }
       ],
       "grade": 3,
@@ -10580,12 +10336,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "ar",
@@ -10658,24 +10410,16 @@
       "text": "playground",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "ay",
           "graphemeId": "g.ay"
         },
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "ou",
@@ -10879,16 +10623,16 @@
           "graphemeId": "g.f"
         },
         {
-          "text": "ore",
-          "graphemeId": "g.ore"
+          "text": "or",
+          "graphemeId": "g.or"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 3,
@@ -10912,24 +10656,16 @@
       "text": "classmate",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "a",
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "m",
@@ -11039,8 +10775,12 @@
           "graphemeId": "g.th"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "s",
+          "graphemeId": "g.s"
         },
         {
           "text": "e",
@@ -11303,12 +11043,8 @@
       "text": "place",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "a",
@@ -11377,12 +11113,8 @@
       "text": "story",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "or",
@@ -11579,12 +11311,8 @@
           "graphemeId": "g.n"
         },
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "cle",
+          "graphemeId": "g.cle"
         }
       ],
       "grade": 3,
@@ -11748,12 +11476,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "ple",
+          "graphemeId": "g.ple"
         }
       ],
       "grade": 3,
@@ -11818,12 +11542,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "tt",
+          "graphemeId": "g.tt"
         },
         {
           "text": "le",
@@ -11958,8 +11678,12 @@
           "graphemeId": "g.b"
         },
         {
-          "text": "est",
-          "graphemeId": "g.est"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 3,
@@ -11987,12 +11711,12 @@
           "graphemeId": "g.b"
         },
         {
-          "text": "ed",
-          "graphemeId": "g.ed"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "oo",
@@ -12238,12 +11962,8 @@
       "text": "blanket",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "bl",
+          "graphemeId": "g.bl"
         },
         {
           "text": "a",
@@ -12295,12 +12015,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "th",
-          "graphemeId": "g.th"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "thr",
+          "graphemeId": "g.thr"
         },
         {
           "text": "oo",
@@ -12418,12 +12134,8 @@
           "graphemeId": "g.n"
         },
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "dle",
+          "graphemeId": "g.dle"
         }
       ],
       "grade": 3,
@@ -12455,12 +12167,8 @@
           "graphemeId": "g.ur"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "pr",
+          "graphemeId": "g.pr"
         },
         {
           "text": "i",
@@ -12570,12 +12278,8 @@
           "graphemeId": "g.w"
         },
         {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 3,
@@ -12599,24 +12303,20 @@
       "text": "problem",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "pr",
+          "graphemeId": "g.pr"
         },
         {
           "text": "o",
           "graphemeId": "g.o"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
+          "text": "bl",
+          "graphemeId": "g.bl"
         },
         {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
           "text": "m",
@@ -12652,12 +12352,8 @@
           "graphemeId": "g.e"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "tw",
+          "graphemeId": "g.tw"
         },
         {
           "text": "ee",
@@ -12738,12 +12434,12 @@
           "graphemeId": "g.m"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "y",
@@ -12771,12 +12467,8 @@
       "text": "floor",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "fl",
+          "graphemeId": "g.fl"
         },
         {
           "text": "oo",
@@ -12973,24 +12665,16 @@
       "text": "grassland",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "a",
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "l",
@@ -13038,12 +12722,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         }
       ],
       "grade": 3,
@@ -13631,8 +13311,12 @@
           "graphemeId": "g.th"
         },
         {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "ng",
+          "graphemeId": "g.ng"
         }
       ],
       "grade": 3,
@@ -13656,12 +13340,12 @@
       "text": "fly",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
+          "text": "fl",
+          "graphemeId": "g.fl"
         },
         {
-          "text": "ly",
-          "graphemeId": "g.ly"
+          "text": "y",
+          "graphemeId": "g.y"
         }
       ],
       "grade": 3,
@@ -13693,12 +13377,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "d",
-          "graphemeId": "g.d"
+          "text": "dd",
+          "graphemeId": "g.dd"
         },
         {
           "text": "le",
@@ -13726,12 +13406,8 @@
       "text": "grey",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "ey",
@@ -13833,12 +13509,8 @@
       "text": "climb",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "i",
@@ -14121,16 +13793,12 @@
       "text": "sleep",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "sl",
+          "graphemeId": "g.sl"
         },
         {
-          "text": "le",
-          "graphemeId": "g.le"
-        },
-        {
-          "text": "e",
-          "graphemeId": "g.e"
+          "text": "ee",
+          "graphemeId": "g.ee"
         },
         {
           "text": "p",
@@ -14158,12 +13826,8 @@
       "text": "stomach",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "o",
@@ -14244,12 +13908,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         }
       ],
       "grade": 3,
@@ -14339,12 +13999,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "d",
-          "graphemeId": "g.d"
+          "text": "dd",
+          "graphemeId": "g.dd"
         }
       ],
       "grade": 3,
@@ -14516,12 +14172,8 @@
       "text": "grape",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "a",
@@ -14557,12 +14209,8 @@
       "text": "breakfast",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "ea",
@@ -14581,12 +14229,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 3,
@@ -14790,8 +14434,12 @@
           "graphemeId": "g.v"
         },
         {
-          "text": "our",
-          "graphemeId": "g.our"
+          "text": "ou",
+          "graphemeId": "g.ou"
+        },
+        {
+          "text": "r",
+          "graphemeId": "g.r"
         },
         {
           "text": "i",
@@ -14827,12 +14475,8 @@
       "text": "drink",
       "units": [
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "i",
@@ -15040,12 +14684,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "e",
@@ -15345,12 +14985,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "n",
-          "graphemeId": "g.n"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "nn",
+          "graphemeId": "g.nn"
         },
         {
           "text": "y",
@@ -15854,12 +15490,8 @@
           "graphemeId": "g.b"
         },
         {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 3,
@@ -16039,12 +15671,8 @@
       "text": "sport",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "or",
@@ -16257,12 +15885,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "er",
@@ -16359,12 +15983,8 @@
           "graphemeId": "g.er"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "ch",
-          "graphemeId": "g.ch"
+          "text": "sch",
+          "graphemeId": "g.sch"
         },
         {
           "text": "oo",
@@ -16454,12 +16074,8 @@
       "text": "clothes",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "o",
@@ -16573,20 +16189,16 @@
       "text": "dress",
       "units": [
         {
-          "text": "d",
-          "graphemeId": "g.d"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         }
       ],
       "grade": 3,
@@ -16758,12 +16370,8 @@
       "text": "try",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "y",
@@ -16791,12 +16399,8 @@
       "text": "smart",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "m",
-          "graphemeId": "g.m"
+          "text": "sm",
+          "graphemeId": "g.sm"
         },
         {
           "text": "ar",
@@ -16939,12 +16543,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 3,
@@ -17148,24 +16748,16 @@
       "text": "plastic",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "a",
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "i",
@@ -17197,12 +16789,8 @@
       "text": "special",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "e",
@@ -17242,12 +16830,12 @@
       "text": "clever",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
           "text": "v",
@@ -17361,12 +16949,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 3,
@@ -17686,12 +17270,8 @@
       "text": "trousers",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "ou",
@@ -17776,12 +17356,8 @@
       "text": "sweater",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "sw",
+          "graphemeId": "g.sw"
         },
         {
           "text": "ea",
@@ -17973,12 +17549,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         }
       ],
       "grade": 3,
@@ -18010,12 +17582,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pp",
+          "graphemeId": "g.pp"
         },
         {
           "text": "e",
@@ -18063,12 +17631,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "n",
-          "graphemeId": "g.n"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "nn",
+          "graphemeId": "g.nn"
         },
         {
           "text": "ing",
@@ -18174,12 +17738,8 @@
       "text": "space",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "a",
@@ -18285,12 +17845,8 @@
       "text": "science",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "c",
-          "graphemeId": "g.c"
+          "text": "sc",
+          "graphemeId": "g.sc"
         },
         {
           "text": "ie",
@@ -18453,8 +18009,12 @@
       "text": "lesson",
       "units": [
         {
-          "text": "less",
-          "graphemeId": "g.less"
+          "text": "le",
+          "graphemeId": "g.le"
+        },
+        {
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "o",
@@ -18527,12 +18087,8 @@
       "text": "scientist",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "c",
-          "graphemeId": "g.c"
+          "text": "sc",
+          "graphemeId": "g.sc"
         },
         {
           "text": "ie",
@@ -18551,12 +18107,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 3,
@@ -18584,12 +18136,8 @@
           "graphemeId": "g.c"
         },
         {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 3,
@@ -18654,8 +18202,12 @@
           "graphemeId": "g.p"
         },
         {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "ng",
+          "graphemeId": "g.ng"
         },
         {
           "text": "p",
@@ -18732,12 +18284,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "b",
-          "graphemeId": "g.b"
+          "text": "bb",
+          "graphemeId": "g.bb"
         },
         {
           "text": "y",
@@ -18777,16 +18325,16 @@
           "graphemeId": "g.t"
         },
         {
-          "text": "ere",
-          "graphemeId": "g.ere"
+          "text": "er",
+          "graphemeId": "g.er"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "ing",
@@ -18822,24 +18370,20 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "tt",
+          "graphemeId": "g.tt"
         },
         {
           "text": "er",
           "graphemeId": "g.er"
         },
         {
-          "text": "f",
-          "graphemeId": "g.f"
+          "text": "fl",
+          "graphemeId": "g.fl"
         },
         {
-          "text": "ly",
-          "graphemeId": "g.ly"
+          "text": "y",
+          "graphemeId": "g.y"
         }
       ],
       "grade": 3,
@@ -18863,12 +18407,8 @@
       "text": "group",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "ou",
@@ -18900,12 +18440,8 @@
       "text": "speak",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "ea",
@@ -18978,12 +18514,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "tt",
+          "graphemeId": "g.tt"
         },
         {
           "text": "y",
@@ -19019,12 +18551,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "n",
-          "graphemeId": "g.n"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "nn",
+          "graphemeId": "g.nn"
         },
         {
           "text": "y",
@@ -19097,12 +18625,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "g",
-          "graphemeId": "g.g"
+          "text": "gg",
+          "graphemeId": "g.gg"
         },
         {
           "text": "ie",
@@ -19130,16 +18654,16 @@
       "text": "bring",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "i",
+          "graphemeId": "g.i"
         },
         {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "ng",
+          "graphemeId": "g.ng"
         }
       ],
       "grade": 4,
@@ -19204,8 +18728,12 @@
           "graphemeId": "g.k"
         },
         {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "ng",
+          "graphemeId": "g.ng"
         }
       ],
       "grade": 4,
@@ -19274,12 +18802,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pp",
+          "graphemeId": "g.pp"
         },
         {
           "text": "o",
@@ -19521,12 +19045,8 @@
           "graphemeId": "g.er"
         },
         {
-          "text": "ou",
-          "graphemeId": "g.ou"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ous",
+          "graphemeId": "g.ous"
         }
       ],
       "grade": 4,
@@ -19595,12 +19115,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "m",
@@ -19743,24 +19259,16 @@
       "text": "still",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "i",
           "graphemeId": "g.i"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         }
       ],
       "grade": 4,
@@ -19784,12 +19292,8 @@
       "text": "swap",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "sw",
+          "graphemeId": "g.sw"
         },
         {
           "text": "a",
@@ -19956,16 +19460,8 @@
           "graphemeId": "g.t"
         },
         {
-          "text": "a",
-          "graphemeId": "g.a"
-        },
-        {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "able",
+          "graphemeId": "g.able"
         }
       ],
       "grade": 4,
@@ -20194,12 +19690,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pp",
+          "graphemeId": "g.pp"
         },
         {
           "text": "er",
@@ -20268,12 +19760,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "y",
@@ -20379,12 +19867,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "k",
-          "graphemeId": "g.k"
+          "text": "sk",
+          "graphemeId": "g.sk"
         }
       ],
       "grade": 4,
@@ -20441,12 +19925,8 @@
       "text": "smell",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "m",
-          "graphemeId": "g.m"
+          "text": "sm",
+          "graphemeId": "g.sm"
         },
         {
           "text": "el",
@@ -20478,12 +19958,8 @@
       "text": "spoon",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "oo",
@@ -20527,12 +20003,8 @@
           "graphemeId": "g.p"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "i",
@@ -20584,16 +20056,8 @@
           "graphemeId": "g.c"
         },
         {
-          "text": "i",
-          "graphemeId": "g.i"
-        },
-        {
-          "text": "ou",
-          "graphemeId": "g.ou"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ious",
+          "graphemeId": "g.ious"
         }
       ],
       "grade": 4,
@@ -20625,12 +20089,8 @@
           "graphemeId": "g.ir"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 4,
@@ -20732,12 +20192,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "k",
-          "graphemeId": "g.k"
+          "text": "sk",
+          "graphemeId": "g.sk"
         },
         {
           "text": "e",
@@ -21229,12 +20685,8 @@
           "graphemeId": "g.sh"
         },
         {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 4,
@@ -21270,12 +20722,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 4,
@@ -21418,12 +20866,8 @@
           "graphemeId": "g.n"
         },
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "ed",
@@ -21451,12 +20895,8 @@
       "text": "bright",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "igh",
@@ -21496,12 +20936,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         }
       ],
       "grade": 4,
@@ -21599,12 +21035,8 @@
       "text": "plant",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "a",
@@ -21833,24 +21265,16 @@
       "text": "glasses",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "gl",
+          "graphemeId": "g.gl"
         },
         {
           "text": "a",
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "es",
@@ -22034,12 +21458,8 @@
       "text": "trip",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "i",
@@ -22202,12 +21622,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "sn",
+          "graphemeId": "g.sn"
         },
         {
           "text": "ey",
@@ -22296,12 +21712,8 @@
           "graphemeId": "g.n"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "sw",
+          "graphemeId": "g.sw"
         },
         {
           "text": "er",
@@ -22333,12 +21745,12 @@
           "graphemeId": "g.m"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "a",
@@ -22386,12 +21798,8 @@
           "graphemeId": "g.er"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "a",
@@ -22636,16 +22044,16 @@
       "text": "present",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pr",
+          "graphemeId": "g.pr"
         },
         {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "s",
+          "graphemeId": "g.s"
         },
         {
           "text": "e",
@@ -22689,12 +22097,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 4,
@@ -22751,12 +22155,8 @@
       "text": "blow",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "bl",
+          "graphemeId": "g.bl"
         },
         {
           "text": "ow",
@@ -22969,12 +22369,8 @@
       "text": "study",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "u",
@@ -23145,12 +22541,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "f",
-          "graphemeId": "g.f"
+          "text": "ff",
+          "graphemeId": "g.ff"
         },
         {
           "text": "i",
@@ -23251,12 +22643,8 @@
           "graphemeId": "g.ere"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 5,
@@ -23288,12 +22676,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "f",
-          "graphemeId": "g.f"
+          "text": "ff",
+          "graphemeId": "g.ff"
         },
         {
           "text": "i",
@@ -23407,12 +22791,8 @@
       "text": "french",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "e",
@@ -23485,12 +22865,8 @@
       "text": "storybook",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "or",
@@ -23620,12 +22996,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "ar",
@@ -23731,12 +23103,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 5,
@@ -23871,12 +23239,8 @@
       "text": "smoking",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "m",
-          "graphemeId": "g.m"
+          "text": "sm",
+          "graphemeId": "g.sm"
         },
         {
           "text": "o",
@@ -23920,12 +23284,8 @@
           "graphemeId": "g.ew"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "a",
@@ -24076,12 +23436,8 @@
       "text": "break",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "ea",
@@ -24277,12 +23633,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pp",
+          "graphemeId": "g.pp"
         },
         {
           "text": "ing",
@@ -24404,12 +23756,8 @@
       "text": "spend",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "e",
@@ -24564,8 +23912,12 @@
           "graphemeId": "g.r"
         },
         {
-          "text": "est",
-          "graphemeId": "g.est"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 5,
@@ -24589,12 +23941,8 @@
       "text": "travel",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "a",
@@ -24762,12 +24110,8 @@
           "graphemeId": "g.p"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "air",
@@ -24934,12 +24278,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 5,
@@ -24992,16 +24332,12 @@
       "text": "sleepy",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "sl",
+          "graphemeId": "g.sl"
         },
         {
-          "text": "le",
-          "graphemeId": "g.le"
-        },
-        {
-          "text": "e",
-          "graphemeId": "g.e"
+          "text": "ee",
+          "graphemeId": "g.ee"
         },
         {
           "text": "p",
@@ -25078,16 +24414,12 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "sl",
+          "graphemeId": "g.sl"
         },
         {
-          "text": "le",
-          "graphemeId": "g.le"
-        },
-        {
-          "text": "e",
-          "graphemeId": "g.e"
+          "text": "ee",
+          "graphemeId": "g.ee"
         },
         {
           "text": "p",
@@ -25300,12 +24632,8 @@
           "graphemeId": "g.ar"
         },
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "o",
@@ -25427,8 +24755,12 @@
           "graphemeId": "g.b"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "s",
+          "graphemeId": "g.s"
         },
         {
           "text": "i",
@@ -25464,12 +24796,8 @@
       "text": "staircase",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "air",
@@ -25558,12 +24886,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "tt",
+          "graphemeId": "g.tt"
         },
         {
           "text": "a",
@@ -25603,12 +24927,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         },
         {
           "text": "a",
@@ -25743,8 +25063,12 @@
       "text": "lychee",
       "units": [
         {
-          "text": "ly",
-          "graphemeId": "g.ly"
+          "text": "l",
+          "graphemeId": "g.l"
+        },
+        {
+          "text": "y",
+          "graphemeId": "g.y"
         },
         {
           "text": "ch",
@@ -26059,12 +25383,8 @@
           "graphemeId": "g.n"
         },
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "o",
@@ -26104,12 +25424,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "b",
-          "graphemeId": "g.b"
+          "text": "bb",
+          "graphemeId": "g.bb"
         },
         {
           "text": "i",
@@ -26182,12 +25498,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         },
         {
           "text": "ar",
@@ -26437,8 +25749,12 @@
           "graphemeId": "g.m"
         },
         {
-          "text": "ed",
-          "graphemeId": "g.ed"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "d",
+          "graphemeId": "g.d"
         },
         {
           "text": "i",
@@ -26515,24 +25831,16 @@
       "text": "glass",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "gl",
+          "graphemeId": "g.gl"
         },
         {
           "text": "a",
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         }
       ],
       "grade": 5,
@@ -26626,12 +25934,8 @@
       "text": "plate",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "a",
@@ -26679,12 +25983,8 @@
           "graphemeId": "g.p"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "i",
@@ -26798,12 +26098,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         }
       ],
       "grade": 5,
@@ -27171,12 +26467,8 @@
           "graphemeId": "g.e"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "u",
@@ -27249,12 +26541,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "pr",
+          "graphemeId": "g.pr"
         },
         {
           "text": "i",
@@ -27397,12 +26685,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 6,
@@ -27651,8 +26935,12 @@
           "graphemeId": "g.f"
         },
         {
-          "text": "est",
-          "graphemeId": "g.est"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "i",
@@ -27696,12 +26984,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "k",
-          "graphemeId": "g.k"
+          "text": "sk",
+          "graphemeId": "g.sk"
         }
       ],
       "grade": 6,
@@ -27733,12 +27017,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 6,
@@ -27807,12 +27087,8 @@
       "text": "fruit",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "ui",
@@ -27979,8 +27255,20 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "tion",
-          "graphemeId": "g.tion"
+          "text": "t",
+          "graphemeId": "g.t"
+        },
+        {
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "o",
+          "graphemeId": "g.o"
+        },
+        {
+          "text": "n",
+          "graphemeId": "g.n"
         },
         {
           "text": "sh",
@@ -28077,12 +27365,8 @@
           "graphemeId": "g.m"
         },
         {
-          "text": "ou",
-          "graphemeId": "g.ou"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ous",
+          "graphemeId": "g.ous"
         }
       ],
       "grade": 6,
@@ -28430,12 +27714,8 @@
       "text": "snowman",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "sn",
+          "graphemeId": "g.sn"
         },
         {
           "text": "ow",
@@ -28475,12 +27755,8 @@
       "text": "ski",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "k",
-          "graphemeId": "g.k"
+          "text": "sk",
+          "graphemeId": "g.sk"
         },
         {
           "text": "i",
@@ -28545,12 +27821,8 @@
       "text": "dry",
       "units": [
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "y",
@@ -28652,12 +27924,8 @@
       "text": "cloudy",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "ou",
@@ -28701,12 +27969,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "g",
-          "graphemeId": "g.g"
+          "text": "gg",
+          "graphemeId": "g.gg"
         },
         {
           "text": "y",
@@ -28922,12 +28186,8 @@
       "text": "cloud",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "ou",
@@ -29041,12 +28301,8 @@
       "text": "crop",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "cr",
+          "graphemeId": "g.cr"
         },
         {
           "text": "o",
@@ -29078,12 +28334,8 @@
       "text": "flood",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "fl",
+          "graphemeId": "g.fl"
         },
         {
           "text": "oo",
@@ -29115,12 +28367,8 @@
       "text": "drought",
       "units": [
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "ough",
@@ -29152,12 +28400,8 @@
       "text": "freezing",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "ee",
@@ -29230,12 +28474,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "gl",
+          "graphemeId": "g.gl"
         },
         {
           "text": "oo",
@@ -29263,12 +28503,8 @@
       "text": "climate",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "i",
@@ -29615,12 +28851,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "c",
-          "graphemeId": "g.c"
+          "text": "sc",
+          "graphemeId": "g.sc"
         },
         {
           "text": "ow",
@@ -29652,8 +28884,12 @@
           "graphemeId": "g.s"
         },
         {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "ng",
+          "graphemeId": "g.ng"
         },
         {
           "text": "a",
@@ -29783,12 +29019,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "el",
@@ -29849,24 +29081,16 @@
       "text": "crossing",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "cr",
+          "graphemeId": "g.cr"
         },
         {
           "text": "o",
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "ing",
@@ -29939,12 +29163,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "i",
@@ -30074,12 +29294,8 @@
           "graphemeId": "g.er"
         },
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "ou",
@@ -30123,12 +29339,8 @@
           "graphemeId": "g.e"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "o",
@@ -30250,12 +29462,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         }
       ],
       "grade": 6,
@@ -30303,12 +29511,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         }
       ],
       "grade": 6,
@@ -30344,12 +29548,8 @@
           "graphemeId": "g.t"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "i",
@@ -30545,12 +29745,20 @@
           "graphemeId": "g.are"
         },
         {
-          "text": "ful",
-          "graphemeId": "g.ful"
+          "text": "f",
+          "graphemeId": "g.f"
         },
         {
-          "text": "ly",
-          "graphemeId": "g.ly"
+          "text": "u",
+          "graphemeId": "g.u"
+        },
+        {
+          "text": "ll",
+          "graphemeId": "g.ll"
+        },
+        {
+          "text": "y",
+          "graphemeId": "g.y"
         }
       ],
       "grade": 6,
@@ -30574,12 +29782,8 @@
       "text": "slowly",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "sl",
+          "graphemeId": "g.sl"
         },
         {
           "text": "ow",
@@ -30611,12 +29815,8 @@
       "text": "stocking",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "o",
@@ -30758,12 +29958,8 @@
           "graphemeId": "g.m"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "ing",
@@ -30824,12 +30020,8 @@
           "graphemeId": "g.ea"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "er",
@@ -31046,12 +30238,8 @@
           "graphemeId": "g.y"
         },
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "ing",
@@ -31120,12 +30308,8 @@
       "text": "slim",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "sl",
+          "graphemeId": "g.sl"
         },
         {
           "text": "i",
@@ -31255,12 +30439,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "ble",
+          "graphemeId": "g.ble"
         }
       ],
       "grade": 6,
@@ -31465,12 +30645,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "c",
@@ -31613,12 +30789,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "oa",
@@ -31658,12 +30830,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         }
       ],
       "grade": 6,
@@ -31695,12 +30863,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "tt",
+          "graphemeId": "g.tt"
         },
         {
           "text": "o",
@@ -31736,12 +30900,8 @@
           "graphemeId": "g.le"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "tt",
+          "graphemeId": "g.tt"
         },
         {
           "text": "er",
@@ -31777,12 +30937,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 6,
@@ -31814,12 +30970,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pp",
+          "graphemeId": "g.pp"
         },
         {
           "text": "or",
@@ -32015,8 +31167,12 @@
           "graphemeId": "g.f"
         },
         {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "ng",
+          "graphemeId": "g.ng"
         },
         {
           "text": "er",
@@ -32048,8 +31204,12 @@
           "graphemeId": "g.m"
         },
         {
-          "text": "ed",
-          "graphemeId": "g.ed"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "d",
+          "graphemeId": "g.d"
         },
         {
           "text": "i",
@@ -32109,20 +31269,8 @@
           "graphemeId": "g.l"
         },
         {
-          "text": "a",
-          "graphemeId": "g.a"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
-        },
-        {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "e",
-          "graphemeId": "g.e"
+          "text": "ance",
+          "graphemeId": "g.ance"
         }
       ],
       "grade": 6,
@@ -32302,12 +31450,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "z",
-          "graphemeId": "g.z"
-        },
-        {
-          "text": "z",
-          "graphemeId": "g.z"
+          "text": "zz",
+          "graphemeId": "g.zz"
         },
         {
           "text": "le",
@@ -32335,16 +31479,8 @@
       "text": "strange",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "str",
+          "graphemeId": "g.str"
         },
         {
           "text": "a",
@@ -32404,12 +31540,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         },
         {
           "text": "i",
@@ -32449,12 +31581,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         },
         {
           "text": "a",
@@ -32486,12 +31614,8 @@
       "text": "bridge",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "i",
@@ -32564,16 +31688,8 @@
       "text": "stream",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "str",
+          "graphemeId": "g.str"
         },
         {
           "text": "ea",
@@ -32662,8 +31778,16 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "ness",
-          "graphemeId": "g.ness"
+          "text": "n",
+          "graphemeId": "g.n"
+        },
+        {
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "m",
@@ -32699,12 +31823,8 @@
       "text": "protect",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "pr",
+          "graphemeId": "g.pr"
         },
         {
           "text": "o",
@@ -32752,8 +31872,12 @@
           "graphemeId": "g.d"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "s",
+          "graphemeId": "g.s"
         },
         {
           "text": "er",
@@ -32871,8 +31995,12 @@
           "graphemeId": "g.w"
         },
         {
-          "text": "est",
-          "graphemeId": "g.est"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 6,
@@ -32900,16 +32028,8 @@
           "graphemeId": "g.au"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "str",
+          "graphemeId": "g.str"
         },
         {
           "text": "al",
@@ -33035,12 +32155,8 @@
       "text": "playwright",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "ay",
@@ -33080,16 +32196,8 @@
       "text": "stratforduponavon",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "str",
+          "graphemeId": "g.str"
         },
         {
           "text": "a",
@@ -33489,12 +32597,12 @@
           "graphemeId": "g.al"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "er",
@@ -33599,16 +32707,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "str",
+          "graphemeId": "g.str"
         },
         {
           "text": "o",
@@ -33742,12 +32842,8 @@
       "text": "dream",
       "units": [
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "ea",
@@ -33812,12 +32908,8 @@
       "text": "planet",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "a",
@@ -33972,12 +33064,8 @@
       "text": "schoolbag",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "ch",
-          "graphemeId": "g.ch"
+          "text": "sch",
+          "graphemeId": "g.sch"
         },
         {
           "text": "oo",
@@ -34867,12 +33955,8 @@
       "text": "two",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "tw",
+          "graphemeId": "g.tw"
         },
         {
           "text": "o",
@@ -34900,12 +33984,8 @@
       "text": "three",
       "units": [
         {
-          "text": "th",
-          "graphemeId": "g.th"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "thr",
+          "graphemeId": "g.thr"
         },
         {
           "text": "ee",
@@ -35032,12 +34112,8 @@
       "text": "black",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "bl",
+          "graphemeId": "g.bl"
         },
         {
           "text": "a",
@@ -35106,12 +34182,8 @@
       "text": "blue",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "bl",
+          "graphemeId": "g.bl"
         },
         {
           "text": "ue",
@@ -35143,8 +34215,12 @@
           "graphemeId": "g.r"
         },
         {
-          "text": "ed",
-          "graphemeId": "g.ed"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "d",
+          "graphemeId": "g.d"
         }
       ],
       "grade": 1,
@@ -35168,12 +34244,8 @@
       "text": "green",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "ee",
@@ -35246,12 +34318,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pp",
+          "graphemeId": "g.pp"
         },
         {
           "text": "le",
@@ -35489,8 +34557,12 @@
           "graphemeId": "g.y"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "s",
+          "graphemeId": "g.s"
         }
       ],
       "grade": 1,
@@ -35576,12 +34648,12 @@
           "graphemeId": "g.d"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "k",
-          "graphemeId": "g.k"
+          "text": "sk",
+          "graphemeId": "g.sk"
         }
       ],
       "grade": 1,
@@ -35605,12 +34677,8 @@
       "text": "blackboard",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "bl",
+          "graphemeId": "g.bl"
         },
         {
           "text": "a",
@@ -35844,8 +34912,12 @@
           "graphemeId": "g.b"
         },
         {
-          "text": "ed",
-          "graphemeId": "g.ed"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "d",
+          "graphemeId": "g.d"
         }
       ],
       "grade": 1,
@@ -36009,12 +35081,8 @@
       "text": "plane",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "a",
@@ -36054,12 +35122,8 @@
           "graphemeId": "g.b"
         },
         {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 1,
@@ -36091,12 +35155,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         }
       ],
       "grade": 1,
@@ -36120,12 +35180,8 @@
       "text": "train",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "ai",
@@ -36404,16 +35460,8 @@
           "graphemeId": "g.t"
         },
         {
-          "text": "a",
-          "graphemeId": "g.a"
-        },
-        {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "able",
+          "graphemeId": "g.able"
         }
       ],
       "grade": 1,
@@ -36517,12 +35565,8 @@
           "graphemeId": "g.e"
         },
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "g",
-          "graphemeId": "g.g"
+          "text": "gg",
+          "graphemeId": "g.gg"
         }
       ],
       "grade": 1,
@@ -36805,12 +35849,8 @@
           "graphemeId": "g.ir"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "y",
@@ -36912,12 +35952,8 @@
       "text": "skirt",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "k",
-          "graphemeId": "g.k"
+          "text": "sk",
+          "graphemeId": "g.sk"
         },
         {
           "text": "ir",
@@ -36949,20 +35985,16 @@
       "text": "dress",
       "units": [
         {
-          "text": "d",
-          "graphemeId": "g.d"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         }
       ],
       "grade": 1,
@@ -37163,12 +36195,8 @@
       "text": "brother",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "o",
@@ -37212,12 +36240,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "er",
@@ -37245,12 +36269,8 @@
       "text": "grandmother",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "a",
@@ -37302,12 +36322,8 @@
       "text": "grandfather",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "a",
@@ -37446,24 +36462,16 @@
       "text": "classmate",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "a",
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "m",
@@ -37503,12 +36511,8 @@
       "text": "friend",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "ie",
@@ -37874,12 +36878,8 @@
           "graphemeId": "g.t"
         },
         {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 2,
@@ -37903,24 +36903,16 @@
       "text": "pretty",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "pr",
+          "graphemeId": "g.pr"
         },
         {
           "text": "e",
           "graphemeId": "g.e"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "tt",
+          "graphemeId": "g.tt"
         },
         {
           "text": "y",
@@ -38203,12 +37195,8 @@
       "text": "school",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "ch",
-          "graphemeId": "g.ch"
+          "text": "sch",
+          "graphemeId": "g.sch"
         },
         {
           "text": "oo",
@@ -38338,12 +37326,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "i",
@@ -38437,24 +37421,16 @@
       "text": "grass",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "a",
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         }
       ],
       "grade": 2,
@@ -38478,12 +37454,8 @@
       "text": "tree",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "ee",
@@ -38511,12 +37483,8 @@
       "text": "flower",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "fl",
+          "graphemeId": "g.fl"
         },
         {
           "text": "ow",
@@ -38626,12 +37594,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         }
       ],
       "grade": 2,
@@ -38667,12 +37631,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "m",
@@ -38741,16 +37701,16 @@
       "text": "present",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pr",
+          "graphemeId": "g.pr"
         },
         {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "s",
+          "graphemeId": "g.s"
         },
         {
           "text": "e",
@@ -38955,12 +37915,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pp",
+          "graphemeId": "g.pp"
         },
         {
           "text": "y",
@@ -38988,12 +37944,8 @@
       "text": "swim",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "sw",
+          "graphemeId": "g.sw"
         },
         {
           "text": "i",
@@ -39062,12 +38014,8 @@
       "text": "cloudy",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "ou",
@@ -39103,12 +38051,8 @@
       "text": "snowy",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "sn",
+          "graphemeId": "g.sn"
         },
         {
           "text": "ow",
@@ -39189,12 +38133,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "n",
-          "graphemeId": "g.n"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "nn",
+          "graphemeId": "g.nn"
         },
         {
           "text": "y",
@@ -39333,20 +38273,16 @@
       "text": "spring",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "spr",
+          "graphemeId": "g.spr"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "i",
+          "graphemeId": "g.i"
         },
         {
-          "text": "r",
-          "graphemeId": "g.r"
-        },
-        {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "ng",
+          "graphemeId": "g.ng"
         }
       ],
       "grade": 2,
@@ -39378,12 +38314,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "m",
-          "graphemeId": "g.m"
-        },
-        {
-          "text": "m",
-          "graphemeId": "g.m"
+          "text": "mm",
+          "graphemeId": "g.mm"
         },
         {
           "text": "er",
@@ -39641,8 +38573,12 @@
           "graphemeId": "g.v"
         },
         {
-          "text": "our",
-          "graphemeId": "g.our"
+          "text": "ou",
+          "graphemeId": "g.ou"
+        },
+        {
+          "text": "r",
+          "graphemeId": "g.r"
         },
         {
           "text": "i",
@@ -39760,12 +38696,8 @@
       "text": "twelve",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "tw",
+          "graphemeId": "g.tw"
         },
         {
           "text": "el",
@@ -39801,12 +38733,8 @@
       "text": "twenty",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "tw",
+          "graphemeId": "g.tw"
         },
         {
           "text": "e",
@@ -40125,12 +39053,8 @@
       "text": "playtime",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "ay",
@@ -40363,16 +39287,24 @@
           "graphemeId": "g.w"
         },
         {
-          "text": "ed",
-          "graphemeId": "g.ed"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "d",
+          "graphemeId": "g.d"
         },
         {
           "text": "n",
           "graphemeId": "g.n"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "s",
+          "graphemeId": "g.s"
         },
         {
           "text": "d",
@@ -40445,12 +39377,8 @@
       "text": "friday",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "i",
@@ -40630,24 +39558,16 @@
       "text": "class",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "a",
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         }
       ],
       "grade": 3,
@@ -40671,12 +39591,8 @@
       "text": "grade",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "a",
@@ -41297,12 +40213,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "m",
-          "graphemeId": "g.m"
-        },
-        {
-          "text": "m",
-          "graphemeId": "g.m"
+          "text": "mm",
+          "graphemeId": "g.mm"
         },
         {
           "text": "ar",
@@ -41334,12 +40246,8 @@
       "text": "bread",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "ea",
@@ -41408,12 +40316,8 @@
       "text": "fruit",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "ui",
@@ -41658,16 +40562,12 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
+          "text": "bl",
+          "graphemeId": "g.bl"
         },
         {
-          "text": "le",
-          "graphemeId": "g.le"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "es",
+          "graphemeId": "g.es"
         }
       ],
       "grade": 3,
@@ -41732,12 +40632,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "b",
-          "graphemeId": "g.b"
+          "text": "bb",
+          "graphemeId": "g.bb"
         },
         {
           "text": "i",
@@ -41802,12 +40698,8 @@
       "text": "snake",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "sn",
+          "graphemeId": "g.sn"
         },
         {
           "text": "a",
@@ -41851,12 +40743,8 @@
           "graphemeId": "g.ur"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "tle",
+          "graphemeId": "g.tle"
         }
       ],
       "grade": 3,
@@ -41880,20 +40768,12 @@
       "text": "small",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "sm",
+          "graphemeId": "g.sm"
         },
         {
-          "text": "m",
-          "graphemeId": "g.m"
-        },
-        {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 3,
@@ -41987,20 +40867,8 @@
           "graphemeId": "g.d"
         },
         {
-          "text": "a",
-          "graphemeId": "g.a"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
-        },
-        {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "e",
-          "graphemeId": "g.e"
+          "text": "ance",
+          "graphemeId": "g.ance"
         }
       ],
       "grade": 3,
@@ -42123,12 +40991,8 @@
       "text": "sweater",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "sw",
+          "graphemeId": "g.sw"
         },
         {
           "text": "ea",
@@ -42205,12 +41069,8 @@
       "text": "gloves",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "gl",
+          "graphemeId": "g.gl"
         },
         {
           "text": "o",
@@ -42246,12 +41106,8 @@
       "text": "trousers",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "ou",
@@ -42476,12 +41332,8 @@
           "graphemeId": "g.e"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "u",
@@ -42554,12 +41406,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "pr",
+          "graphemeId": "g.pr"
         },
         {
           "text": "i",
@@ -42702,12 +41550,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 3,
@@ -42964,12 +41808,8 @@
           "graphemeId": "g.ir"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 3,
@@ -43046,16 +41886,8 @@
           "graphemeId": "g.c"
         },
         {
-          "text": "i",
-          "graphemeId": "g.i"
-        },
-        {
-          "text": "ou",
-          "graphemeId": "g.ou"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ious",
+          "graphemeId": "g.ious"
         }
       ],
       "grade": 3,
@@ -43091,8 +41923,12 @@
           "graphemeId": "g.n"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "s",
+          "graphemeId": "g.s"
         },
         {
           "text": "e",
@@ -43161,12 +41997,8 @@
       "text": "science",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "c",
-          "graphemeId": "g.c"
+          "text": "sc",
+          "graphemeId": "g.sc"
         },
         {
           "text": "ie",
@@ -43404,24 +42236,16 @@
       "text": "classroom",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "a",
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "r",
@@ -43465,12 +42289,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "ar",
@@ -43539,24 +42359,16 @@
       "text": "playground",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "ay",
           "graphemeId": "g.ay"
         },
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "ou",
@@ -43670,12 +42482,8 @@
       "text": "floor",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "fl",
+          "graphemeId": "g.fl"
         },
         {
           "text": "oo",
@@ -43802,12 +42610,12 @@
           "graphemeId": "g.ea"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         },
         {
-          "text": "ly",
-          "graphemeId": "g.ly"
+          "text": "y",
+          "graphemeId": "g.y"
         }
       ],
       "grade": 3,
@@ -43925,12 +42733,8 @@
           "graphemeId": "g.n"
         },
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "cle",
+          "graphemeId": "g.cle"
         }
       ],
       "grade": 3,
@@ -44081,12 +42885,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 3,
@@ -44307,12 +43107,8 @@
           "graphemeId": "g.l"
         },
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "e",
@@ -44418,12 +43214,12 @@
           "graphemeId": "g.b"
         },
         {
-          "text": "ed",
-          "graphemeId": "g.ed"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "oo",
@@ -44463,12 +43259,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "th",
-          "graphemeId": "g.th"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "thr",
+          "graphemeId": "g.thr"
         },
         {
           "text": "oo",
@@ -44500,12 +43292,8 @@
       "text": "study",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "u",
@@ -44627,12 +43415,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "n",
-          "graphemeId": "g.n"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "nn",
+          "graphemeId": "g.nn"
         },
         {
           "text": "ing",
@@ -44688,12 +43472,8 @@
           "graphemeId": "g.b"
         },
         {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 4,
@@ -44729,16 +43509,16 @@
           "graphemeId": "g.t"
         },
         {
-          "text": "ere",
-          "graphemeId": "g.ere"
+          "text": "er",
+          "graphemeId": "g.er"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "ing",
@@ -44914,12 +43694,8 @@
       "text": "step",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "e",
@@ -45383,12 +44159,8 @@
       "text": "transportation",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "a",
@@ -45510,12 +44282,8 @@
       "text": "snow",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "sn",
+          "graphemeId": "g.sn"
         },
         {
           "text": "ow",
@@ -45551,12 +44319,8 @@
           "graphemeId": "g.ea"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "e",
@@ -45765,12 +44529,8 @@
       "text": "crayon",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "cr",
+          "graphemeId": "g.cr"
         },
         {
           "text": "ay",
@@ -45806,24 +44566,16 @@
       "text": "scissors",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "c",
-          "graphemeId": "g.c"
+          "text": "sc",
+          "graphemeId": "g.sc"
         },
         {
           "text": "i",
           "graphemeId": "g.i"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "or",
@@ -45925,16 +44677,12 @@
       "text": "please",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
-          "text": "le",
-          "graphemeId": "g.le"
-        },
-        {
-          "text": "a",
-          "graphemeId": "g.a"
+          "text": "ea",
+          "graphemeId": "g.ea"
         },
         {
           "text": "s",
@@ -46167,12 +44915,8 @@
           "graphemeId": "g.er"
         },
         {
-          "text": "ou",
-          "graphemeId": "g.ou"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ous",
+          "graphemeId": "g.ous"
         }
       ],
       "grade": 4,
@@ -46278,12 +45022,8 @@
       "text": "stop",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "o",
@@ -46315,16 +45055,8 @@
       "text": "street",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "str",
+          "graphemeId": "g.str"
         },
         {
           "text": "ee",
@@ -46541,12 +45273,8 @@
       "text": "great",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "ea",
@@ -46656,12 +45384,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "ple",
+          "graphemeId": "g.ple"
         }
       ],
       "grade": 4,
@@ -46726,12 +45450,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 4,
@@ -46878,12 +45598,8 @@
           "graphemeId": "g.e"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "tw",
+          "graphemeId": "g.tw"
         },
         {
           "text": "ee",
@@ -46919,8 +45635,12 @@
           "graphemeId": "g.r"
         },
         {
-          "text": "est",
-          "graphemeId": "g.est"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "au",
@@ -47001,12 +45721,8 @@
       "text": "grocery",
       "units": [
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "gr",
+          "graphemeId": "g.gr"
         },
         {
           "text": "o",
@@ -47046,24 +45762,16 @@
       "text": "crossroads",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "cr",
+          "graphemeId": "g.cr"
         },
         {
           "text": "o",
           "graphemeId": "g.o"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         },
         {
           "text": "r",
@@ -47432,12 +46140,8 @@
       "text": "square",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "qu",
-          "graphemeId": "g.qu"
+          "text": "squ",
+          "graphemeId": "g.squ"
         },
         {
           "text": "are",
@@ -47502,12 +46206,8 @@
       "text": "station",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "a",
@@ -47539,12 +46239,8 @@
       "text": "place",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "a",
@@ -47584,8 +46280,12 @@
           "graphemeId": "g.th"
         },
         {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "ng",
+          "graphemeId": "g.ng"
         }
       ],
       "grade": 4,
@@ -47609,12 +46309,8 @@
       "text": "stay",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "ay",
@@ -47642,12 +46338,8 @@
       "text": "star",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "ar",
@@ -47679,8 +46371,12 @@
           "graphemeId": "g.k"
         },
         {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "ng",
+          "graphemeId": "g.ng"
         }
       ],
       "grade": 4,
@@ -47716,12 +46412,8 @@
           "graphemeId": "g.n"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "al",
@@ -47790,12 +46482,8 @@
       "text": "dream",
       "units": [
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "ea",
@@ -47856,12 +46544,8 @@
       "text": "ski",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "k",
-          "graphemeId": "g.k"
+          "text": "sk",
+          "graphemeId": "g.sk"
         },
         {
           "text": "i",
@@ -47889,12 +46573,8 @@
       "text": "travel",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "a",
@@ -47967,12 +46647,8 @@
       "text": "skateboarding",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "k",
-          "graphemeId": "g.k"
+          "text": "sk",
+          "graphemeId": "g.sk"
         },
         {
           "text": "a",
@@ -48028,8 +46704,12 @@
           "graphemeId": "g.s"
         },
         {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "ng",
+          "graphemeId": "g.ng"
         },
         {
           "text": "ing",
@@ -48106,16 +46786,16 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "f",
-          "graphemeId": "g.f"
+          "text": "ff",
+          "graphemeId": "g.ff"
         },
         {
-          "text": "f",
-          "graphemeId": "g.f"
+          "text": "er",
+          "graphemeId": "g.er"
         },
         {
-          "text": "ere",
-          "graphemeId": "g.ere"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
           "text": "n",
@@ -48155,12 +46835,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "b",
-          "graphemeId": "g.b"
+          "text": "bb",
+          "graphemeId": "g.bb"
         },
         {
           "text": "y",
@@ -48188,12 +46864,8 @@
       "text": "stamp",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "a",
@@ -48262,12 +46934,8 @@
       "text": "free",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "ee",
@@ -48381,16 +47049,8 @@
           "graphemeId": "g.au"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "str",
+          "graphemeId": "g.str"
         },
         {
           "text": "al",
@@ -48508,12 +47168,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "n",
-          "graphemeId": "g.n"
+          "text": "sn",
+          "graphemeId": "g.sn"
         },
         {
           "text": "ey",
@@ -48651,12 +47307,8 @@
           "graphemeId": "g.n"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "y",
@@ -48684,12 +47336,12 @@
       "text": "clever",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
           "text": "v",
@@ -48832,12 +47484,8 @@
       "text": "friendly",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "ie",
@@ -49255,12 +47903,8 @@
       "text": "slim",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "sl",
+          "graphemeId": "g.sl"
         },
         {
           "text": "i",
@@ -49325,16 +47969,8 @@
       "text": "straight",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "str",
+          "graphemeId": "g.str"
         },
         {
           "text": "ai",
@@ -49448,12 +48084,8 @@
           "graphemeId": "g.ue"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ss",
+          "graphemeId": "g.ss"
         }
       ],
       "grade": 5,
@@ -49839,12 +48471,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 5,
@@ -49946,24 +48574,20 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "tt",
+          "graphemeId": "g.tt"
         },
         {
           "text": "er",
           "graphemeId": "g.er"
         },
         {
-          "text": "f",
-          "graphemeId": "g.f"
+          "text": "fl",
+          "graphemeId": "g.fl"
         },
         {
-          "text": "ly",
-          "graphemeId": "g.ly"
+          "text": "y",
+          "graphemeId": "g.y"
         }
       ],
       "grade": 5,
@@ -50061,12 +48685,12 @@
           "graphemeId": "g.al"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "sw",
+          "graphemeId": "g.sw"
         },
         {
           "text": "o",
@@ -50208,12 +48832,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "i",
@@ -50323,12 +48943,8 @@
           "graphemeId": "g.c"
         },
         {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 5,
@@ -50504,12 +49120,8 @@
       "text": "drink",
       "units": [
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "i",
@@ -50545,12 +49157,8 @@
       "text": "stomachache",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "o",
@@ -50692,16 +49300,12 @@
       "text": "sleepy",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "sl",
+          "graphemeId": "g.sl"
         },
         {
-          "text": "le",
-          "graphemeId": "g.le"
-        },
-        {
-          "text": "e",
-          "graphemeId": "g.e"
+          "text": "ee",
+          "graphemeId": "g.ee"
         },
         {
           "text": "p",
@@ -50889,12 +49493,8 @@
       "text": "plant",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "a",
@@ -50942,12 +49542,8 @@
           "graphemeId": "g.e"
         },
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "a",
@@ -50987,12 +49583,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "f",
-          "graphemeId": "g.f"
+          "text": "ff",
+          "graphemeId": "g.ff"
         },
         {
           "text": "i",
@@ -51069,12 +49661,8 @@
       "text": "special",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "e",
@@ -51352,12 +49940,8 @@
       "text": "swam",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "sw",
+          "graphemeId": "g.sw"
         },
         {
           "text": "a",
@@ -51389,12 +49973,12 @@
       "text": "slept",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "sl",
+          "graphemeId": "g.sl"
         },
         {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
           "text": "p",
@@ -51570,12 +50154,8 @@
           "graphemeId": "g.p"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "i",
@@ -51726,12 +50306,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "e",
@@ -51862,12 +50438,8 @@
           "graphemeId": "g.ea"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 6,
@@ -51895,8 +50467,12 @@
           "graphemeId": "g.w"
         },
         {
-          "text": "est",
-          "graphemeId": "g.est"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 6,
@@ -51932,12 +50508,8 @@
           "graphemeId": "g.m"
         },
         {
-          "text": "ou",
-          "graphemeId": "g.ou"
-        },
-        {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "ous",
+          "graphemeId": "g.ous"
         }
       ],
       "grade": 6,
@@ -51973,12 +50545,8 @@
           "graphemeId": "g.m"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "le",
-          "graphemeId": "g.le"
+          "text": "ple",
+          "graphemeId": "g.ple"
         }
       ],
       "grade": 6,
@@ -52047,12 +50615,8 @@
           "graphemeId": "g.o"
         },
         {
-          "text": "g",
-          "graphemeId": "g.g"
-        },
-        {
-          "text": "g",
-          "graphemeId": "g.g"
+          "text": "gg",
+          "graphemeId": "g.gg"
         },
         {
           "text": "y",
@@ -52080,12 +50644,8 @@
       "text": "spicy",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "i",
@@ -52162,16 +50722,16 @@
           "graphemeId": "g.f"
         },
         {
-          "text": "ore",
-          "graphemeId": "g.ore"
+          "text": "or",
+          "graphemeId": "g.or"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 6,
@@ -52195,12 +50755,8 @@
       "text": "stone",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "o",
@@ -52379,8 +50935,12 @@
           "graphemeId": "g.sh"
         },
         {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "i",
+          "graphemeId": "g.i"
+        },
+        {
+          "text": "ng",
+          "graphemeId": "g.ng"
         },
         {
           "text": "t",
@@ -52457,12 +51017,8 @@
       "text": "clock",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "o",
@@ -52494,12 +51050,8 @@
       "text": "speak",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "ea",
@@ -52531,12 +51083,8 @@
       "text": "french",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "e",
@@ -52658,16 +51206,16 @@
       "text": "president",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "pr",
+          "graphemeId": "g.pr"
         },
         {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "e",
+          "graphemeId": "g.e"
         },
         {
-          "text": "es",
-          "graphemeId": "g.es"
+          "text": "s",
+          "graphemeId": "g.s"
         },
         {
           "text": "i",
@@ -52764,12 +51312,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "m",
-          "graphemeId": "g.m"
-        },
-        {
-          "text": "m",
-          "graphemeId": "g.m"
+          "text": "mm",
+          "graphemeId": "g.mm"
         },
         {
           "text": "al",
@@ -52994,12 +51538,8 @@
           "graphemeId": "g.e"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "e",
@@ -53027,12 +51567,8 @@
       "text": "spend",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "p",
-          "graphemeId": "g.p"
+          "text": "sp",
+          "graphemeId": "g.sp"
         },
         {
           "text": "e",
@@ -53068,12 +51604,8 @@
       "text": "trunk",
       "units": [
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "u",
@@ -53191,12 +51723,8 @@
           "graphemeId": "g.u"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "k",
-          "graphemeId": "g.k"
+          "text": "sk",
+          "graphemeId": "g.sk"
         }
       ],
       "grade": 6,
@@ -53224,12 +51752,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "i",
@@ -53302,12 +51826,8 @@
       "text": "smart",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "m",
-          "graphemeId": "g.m"
+          "text": "sm",
+          "graphemeId": "g.sm"
         },
         {
           "text": "ar",
@@ -53339,12 +51859,8 @@
       "text": "scared",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "c",
-          "graphemeId": "g.c"
+          "text": "sc",
+          "graphemeId": "g.sc"
         },
         {
           "text": "are",
@@ -53454,12 +51970,8 @@
       "text": "proud",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "pr",
+          "graphemeId": "g.pr"
         },
         {
           "text": "ou",
@@ -53540,12 +52052,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "l",
-          "graphemeId": "g.l"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "ll",
+          "graphemeId": "g.ll"
         }
       ],
       "grade": 6,
@@ -53639,12 +52147,8 @@
       "text": "cry",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "cr",
+          "graphemeId": "g.cr"
         },
         {
           "text": "y",
@@ -53721,8 +52225,12 @@
           "graphemeId": "g.t"
         },
         {
-          "text": "est",
-          "graphemeId": "g.est"
+          "text": "e",
+          "graphemeId": "g.e"
+        },
+        {
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 6,
@@ -53803,16 +52311,8 @@
           "graphemeId": "g.a"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "str",
+          "graphemeId": "g.str"
         },
         {
           "text": "o",
@@ -53864,12 +52364,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 6,
@@ -53893,12 +52389,8 @@
       "text": "scientist",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "c",
-          "graphemeId": "g.c"
+          "text": "sc",
+          "graphemeId": "g.sc"
         },
         {
           "text": "ie",
@@ -53917,12 +52409,8 @@
           "graphemeId": "g.i"
         },
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         }
       ],
       "grade": 6,
@@ -54270,12 +52758,8 @@
       "text": "story",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "or",
@@ -54397,12 +52881,8 @@
       "text": "blind",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "bl",
+          "graphemeId": "g.bl"
         },
         {
           "text": "i",
@@ -54442,12 +52922,8 @@
           "graphemeId": "g.f"
         },
         {
-          "text": "al",
-          "graphemeId": "g.al"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "all",
+          "graphemeId": "g.all"
         }
       ],
       "grade": 6,
@@ -54483,12 +52959,8 @@
           "graphemeId": "g.m"
         },
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "pl",
+          "graphemeId": "g.pl"
         },
         {
           "text": "ing",
@@ -54516,16 +52988,16 @@
       "text": "bring",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "i",
+          "graphemeId": "g.i"
         },
         {
-          "text": "ing",
-          "graphemeId": "g.ing"
+          "text": "ng",
+          "graphemeId": "g.ng"
         }
       ],
       "grade": 6,
@@ -54578,12 +53050,8 @@
       "text": "broken",
       "units": [
         {
-          "text": "b",
-          "graphemeId": "g.b"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "br",
+          "graphemeId": "g.br"
         },
         {
           "text": "o",
@@ -54660,12 +53128,8 @@
       "text": "prize",
       "units": [
         {
-          "text": "p",
-          "graphemeId": "g.p"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "pr",
+          "graphemeId": "g.pr"
         },
         {
           "text": "i",
@@ -54775,12 +53239,8 @@
       "text": "scarf",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "c",
-          "graphemeId": "g.c"
+          "text": "sc",
+          "graphemeId": "g.sc"
         },
         {
           "text": "ar",
@@ -54972,12 +53432,8 @@
           "graphemeId": "g.ar"
         },
         {
-          "text": "d",
-          "graphemeId": "g.d"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "dr",
+          "graphemeId": "g.dr"
         },
         {
           "text": "o",
@@ -55058,12 +53514,8 @@
       "text": "stadium",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "t",
-          "graphemeId": "g.t"
+          "text": "st",
+          "graphemeId": "g.st"
         },
         {
           "text": "a",
@@ -55505,12 +53957,8 @@
           "graphemeId": "g.n"
         },
         {
-          "text": "t",
-          "graphemeId": "g.t"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "tr",
+          "graphemeId": "g.tr"
         },
         {
           "text": "y",
@@ -55611,12 +54059,8 @@
       "text": "squirrel",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "qu",
-          "graphemeId": "g.qu"
+          "text": "squ",
+          "graphemeId": "g.squ"
         },
         {
           "text": "ir",
@@ -55652,12 +54096,8 @@
       "text": "swan",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "sw",
+          "graphemeId": "g.sw"
         },
         {
           "text": "a",
@@ -55689,12 +54129,8 @@
       "text": "frog",
       "units": [
         {
-          "text": "f",
-          "graphemeId": "g.f"
-        },
-        {
-          "text": "r",
-          "graphemeId": "g.r"
+          "text": "fr",
+          "graphemeId": "g.fr"
         },
         {
           "text": "o",
@@ -55928,12 +54364,8 @@
       "text": "cloud",
       "units": [
         {
-          "text": "c",
-          "graphemeId": "g.c"
-        },
-        {
-          "text": "l",
-          "graphemeId": "g.l"
+          "text": "cl",
+          "graphemeId": "g.cl"
         },
         {
           "text": "ou",
@@ -55964,12 +54396,8 @@
       "text": "sweet",
       "units": [
         {
-          "text": "s",
-          "graphemeId": "g.s"
-        },
-        {
-          "text": "w",
-          "graphemeId": "g.w"
+          "text": "sw",
+          "graphemeId": "g.sw"
         },
         {
           "text": "ee",

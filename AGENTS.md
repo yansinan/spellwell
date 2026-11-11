@@ -168,7 +168,7 @@ node tools/serve.mjs
 - P6 T-JUDGE-FIX 判断+改错、T-CLOZE 句子填空；probe 60 天，答错退回、答对 mastered：见 ADR-0012。
 - P7 ContentValidator V1—V10；单词/unit 编辑器；导出只放行 reviewed，未审核阻断：见 ADR-0013。
 - P8 前台 Stats：本次/历史/按日/状态报告；纯统计只读，不参与调度：见 ADR-0014。
-- 后台自动切分只生成草稿建议；组合库 96 项；批量格式 `w,ea,th,er | 中文 | 音标`；见 ADR-0016。
+- 后台自动切分只生成草稿建议；组合库 152 项；批量格式 `w,ea,th,er | 中文 | 音标`；见 ADR-0016、ADR-0025。
 - 后台列表按 unit 折叠，展示错/对次数；只读 attempts，不写学习状态。
 - P9 练习设计：年级学期折叠 + unit 多选 + Review/Effort；题量后台设置（默认20，5—30）；计划项带 reason；`revise()` 预留但不实时改题。
 - P9 权重：按真实 attempts 的词/题型错误率 + 小样本平滑；同层排序，约束优先；见 ADR-0019。
@@ -177,3 +177,4 @@ node tools/serve.mjs
 - 两套教材词库：`pep-2026` 583 词、`fltrp-2026` 891 词；后台 `meta.activeTextbook` 切换；全部 unreviewed；见 ADR-0022。
 - 练习单元顺序解锁：完成=全部词练过；只显示已完成+下一个；不足20不跨单元凑数；见 ADR-0023。
 - 答错显示正确答案并重试到正确；session 只记录第一次；结束页正确率+错词；见 ADR-0024。
+- 基础词库切分：组合库 152；后缀仅词尾；人工例外表；静态词库随工程发布；见 ADR-0025。
