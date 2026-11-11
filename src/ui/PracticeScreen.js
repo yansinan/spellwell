@@ -10,12 +10,13 @@
  */
 
 import { findNearestSlot } from './dragGeometry.js';
+import { insertUnit, insertionIndexForPoint, previewInsertUnit } from './sequenceOrder.js';
 import { createSoundPlayer } from './sound.js';
 
 const TYPE_COPY = Object.freeze({
   'T-SEQUENCE': {
     title: 'Build the word',
-    hint: 'Tap or drag the sounds in order. Tap again to change.',
+    hint: 'Tap to choose. Drag to reorder. Tap a placed sound to change.',
   },
   'T-FILL': { title: 'Fill the gap', hint: 'Tap the missing sound.' },
   'T-TYPE': { title: 'Type the word', hint: 'Type all the letters.' },
@@ -44,6 +45,8 @@ export class PracticeScreen {
   #timers = new Set();
   #drag = null;
   #suppressClick = false;
+  #previewGap = null;
+  #previewKey = null;
   #sound = createSoundPlayer();
 
   /**
@@ -115,14 +118,6 @@ export class PracticeScreen {
 
   #eventForSlot(slotIndex) {
     return this.#events.find((event) => event.slotIndex === slotIndex);
-  }
-
-  #firstEmptySlot() {
-    const count = this.#current?.renderModel.slots.length ?? 0;
-    for (let index = 0; index < count; index += 1) {
-      if (!this.#eventForSlot(index)) return index;
-    }
-    return null;
   }
 
   #allSlotsFilled() {
@@ -235,7 +230,7 @@ export class PracticeScreen {
       <div class="sw-tiles" data-role="tiles">
         ${this.#current.renderModel.units.map((unit) => {
           const isUsed = used.has(unit.unitId);
-          return `<button type="button" class="sw-tile ${isUsed ? 'is-used' : ''}" data-unit-id="${escapeHtml(unit.unitId)}" data-text="${escapeHtml(unit.text)}" aria-pressed="${isUsed}">${escapeHtml(unit.text)}</button>`;
+          return `<button type="button" class="sw-tile ${isUsed ? 'is-used' : ''}" data-unit-id="${escapeHtml(unit.unitId)}" data-text="${escapeHtml(unit.text)}" aria-pressed="${isUsed}" ${isUsed ? 'disabled aria-disabled="true"' : ''}>${escapeHtml(unit.text)}</button>`;
         }).join('')}
       </div>
     `;
@@ -262,6 +257,7 @@ export class PracticeScreen {
   #bindQuestion() {
     const spec = this.#current.spec;
     for (const button of this.#root.querySelectorAll('[data-unit-id]')) {
+      if (/** @type {HTMLButtonElement} */ (button).disabled) continue;
       const unitId = /** @type {HTMLElement} */ (button).dataset.unitId ?? '';
       button.addEventListener('click', (event) => {
         // 鼠标/触摸由 pointerup 处理；detail=0 是键盘触发的 click。
@@ -271,17 +267,24 @@ export class PracticeScreen {
         }
         this.#activateTile(unitId);
       });
-      if (spec.typeId === 'T-SEQUENCE') this.#bindDrag(/** @type {HTMLElement} */ (button), unitId);
+      if (spec.typeId === 'T-SEQUENCE') this.#bindDrag(/** @type {HTMLElement} */ (button), unitId, { sourceKind: 'tile' });
     }
 
     if (spec.typeId === 'T-SEQUENCE') {
       for (const slot of this.#root.querySelectorAll('[data-slot-index]')) {
+        const index = Number(/** @type {HTMLElement} */ (slot).dataset.slotIndex);
+        const slotEvent = this.#eventForSlot(index);
         slot.addEventListener('click', () => {
-          if (this.#locked) return;
-          const index = Number(/** @type {HTMLElement} */ (slot).dataset.slotIndex);
+          if (this.#locked || this.#suppressClick) return;
           if (!this.#eventForSlot(index)) return;
           this.#clearSlot(index);
         });
+        if (slotEvent) {
+          this.#bindDrag(/** @type {HTMLElement} */ (slot), slotEvent.unitId, {
+            sourceKind: 'slot',
+            sourceSlotIndex: index,
+          });
+        }
       }
     }
 
@@ -328,8 +331,9 @@ export class PracticeScreen {
   /**
    * @param {HTMLElement} button
    * @param {string} unitId
+   * @param {{sourceKind?: 'tile'|'slot', sourceSlotIndex?: number}} [options]
    */
-  #bindDrag(button, unitId) {
+  #bindDrag(button, unitId, options = {}) {
     button.addEventListener('pointerdown', (event) => {
       if (this.#locked || this.#drag) return;
       if (event.pointerType === 'mouse' && event.button !== 0) return;
@@ -338,11 +342,14 @@ export class PracticeScreen {
         pointerId: event.pointerId,
         unitId,
         button,
+        sourceKind: options.sourceKind ?? 'tile',
+        sourceSlotIndex: options.sourceSlotIndex ?? null,
         startX: event.clientX,
         startY: event.clientY,
         active: false,
         ghost: null,
-        targetSlot: null,
+        insertIndex: null,
+        targetSide: null,
         targetEl: null,
         move: (moveEvent) => this.#onDragMove(moveEvent),
         up: (upEvent) => this.#onDragEnd(upEvent),
@@ -386,7 +393,7 @@ export class PracticeScreen {
     if (!drag || drag.pointerId !== event.pointerId) return;
     const wasActive = drag.active;
     const draggedUnitId = drag.unitId;
-    const nearest = wasActive ? this.#nearestSlotAt(event.clientX, event.clientY) : null;
+    const drop = wasActive ? this.#dropAt(event.clientX, event.clientY) : null;
     this.#removeDragListeners(drag);
     this.#suppressClick = true;
     setTimeout(() => {
@@ -395,12 +402,22 @@ export class PracticeScreen {
 
     if (wasActive) {
       event.preventDefault();
-      if (nearest) {
-        this.#clearDrag();
-        this.#placeUnit(draggedUnitId, nearest.index, 'drag-unit');
-      } else {
+      if (!drop) {
         this.#bounceBack(drag);
+        return;
       }
+      const inserted = this.#insertUnit(draggedUnitId, drop.insertIndex);
+      if (!inserted) {
+        this.#bounceBack(drag);
+        return;
+      }
+      this.#clearDrag();
+      return;
+    }
+
+    if (drag.sourceKind === 'slot' && drag.sourceSlotIndex !== null) {
+      this.#clearDrag();
+      this.#clearSlot(drag.sourceSlotIndex);
       return;
     }
 
@@ -453,17 +470,106 @@ export class PracticeScreen {
     return findNearestSlot(slots, { x, y }, 64);
   }
 
+  #dropAt(x, y) {
+    const nearest = this.#nearestSlotAt(x, y);
+    if (!nearest) return null;
+    const rect = nearest.element.getBoundingClientRect();
+    const insertIndex = insertionIndexForPoint(nearest.index, rect, x);
+    const side = x >= rect.left + rect.width / 2 ? 'after' : 'before';
+    return { element: nearest.element, slotIndex: nearest.index, insertIndex, side };
+  }
+
   #highlightDropTarget(x, y) {
     const drag = this.#drag;
     if (!drag) return;
-    const nearest = this.#nearestSlotAt(x, y);
-    const target = nearest?.element ?? null;
-    const targetSlot = nearest?.index ?? null;
-    if (drag.targetEl === target && drag.targetSlot === targetSlot) return;
-    drag.targetEl?.classList.remove('is-drop-target');
+    const drop = this.#dropAt(x, y);
+    const target = drop?.element ?? null;
+    if (drag.targetEl === target && drag.insertIndex === (drop?.insertIndex ?? null)) return;
+    drag.targetEl?.classList.remove('is-drop-target', 'is-drop-before', 'is-drop-after');
     drag.targetEl = target;
-    drag.targetSlot = targetSlot;
-    target?.classList.add('is-drop-target');
+    drag.insertIndex = drop?.insertIndex ?? null;
+    drag.targetSide = drop?.side ?? null;
+    if (target && drop) target.classList.add('is-drop-target', `is-drop-${drop.side}`);
+    if (drop) this.#applyPreview(drag, drop);
+    else this.#clearPreview();
+  }
+
+  /**
+   * 实时预览：把当前槽位内容按预览映射平移，在插入点显示缺口。
+   * 只改 transform/opacity，不改 #events，释放后由 #insertUnit 提交。
+   * @param {NonNullable<typeof this.#drag>} drag
+   * @param {{insertIndex: number}} drop
+   */
+  #applyPreview(drag, drop) {
+    const current = [...this.#events]
+      .sort((a, b) => a.slotIndex - b.slotIndex)
+      .map((event) => event.unitId);
+    const preview = previewInsertUnit(
+      current,
+      drag.unitId,
+      drop.insertIndex,
+      this.#current.renderModel.slots.length,
+    );
+    if (!preview) {
+      this.#clearPreview();
+      return;
+    }
+
+    const key = `${preview.insertAt}|${preview.sourceIndex}|${current.join('|')}`;
+    if (this.#previewKey === key) return;
+
+    const container = this.#root.querySelector('.sw-slots');
+    if (!container) return;
+    container.classList.add('is-previewing');
+    const slotEls = [...container.querySelectorAll('[data-slot-index]')];
+
+    for (const element of slotEls) {
+      const index = Number(/** @type {HTMLElement} */ (element).dataset.slotIndex);
+      const event = this.#eventForSlot(index);
+      if (!event || index === preview.sourceIndex) {
+        element.style.opacity = '0';
+        element.style.transform = '';
+        continue;
+      }
+      const move = preview.moves.find((candidate) => candidate.from === index);
+      const target = move?.to ?? index;
+      const targetEl = slotEls.find(
+        (candidate) => Number(/** @type {HTMLElement} */ (candidate).dataset.slotIndex) === target,
+      );
+      const dx = targetEl ? targetEl.offsetLeft - element.offsetLeft : 0;
+      element.style.opacity = '1';
+      element.style.transform = dx === 0 ? '' : `translateX(${dx}px)`;
+    }
+
+    const gapTarget = slotEls.find(
+      (candidate) => Number(/** @type {HTMLElement} */ (candidate).dataset.slotIndex) === preview.insertAt,
+    );
+    if (!gapTarget) return;
+    let gap = this.#previewGap;
+    if (!gap) {
+      gap = document.createElement('div');
+      gap.className = 'sw-preview-gap';
+      gap.setAttribute('aria-hidden', 'true');
+      container.appendChild(gap);
+      this.#previewGap = gap;
+    }
+    gap.style.left = `${gapTarget.offsetLeft}px`;
+    gap.style.top = `${gapTarget.offsetTop}px`;
+    gap.style.width = `${gapTarget.offsetWidth}px`;
+    gap.style.height = `${gapTarget.offsetHeight}px`;
+    this.#previewKey = key;
+  }
+
+  #clearPreview() {
+    const container = this.#root.querySelector('.sw-slots');
+    container?.classList.remove('is-previewing');
+    for (const element of container?.querySelectorAll('[data-slot-index]') ?? []) {
+      element.style.transform = '';
+      element.style.opacity = '';
+    }
+    this.#previewGap?.remove();
+    this.#previewGap = null;
+    this.#previewKey = null;
   }
 
   /**
@@ -472,9 +578,10 @@ export class PracticeScreen {
    */
   #bounceBack(drag) {
     if (!drag) return;
+    this.#clearPreview();
     this.#removeDragListeners(drag);
     const { ghost, button } = drag;
-    drag.targetEl?.classList.remove('is-drop-target');
+    drag.targetEl?.classList.remove('is-drop-target', 'is-drop-before', 'is-drop-after');
     button.classList.remove('is-dragging');
     this.#drag = null;
     this.#sound.bounce();
@@ -514,46 +621,47 @@ export class PracticeScreen {
 
   #clearDrag() {
     if (!this.#drag) return;
+    this.#clearPreview();
     this.#removeDragListeners(this.#drag);
     this.#drag.ghost?.remove();
     this.#drag.button.classList.remove('is-dragging');
-    this.#drag.targetEl?.classList.remove('is-drop-target');
+    this.#drag.targetEl?.classList.remove('is-drop-target', 'is-drop-before', 'is-drop-after');
     this.#drag = null;
   }
 
-  /**
-   * @param {string} unitId
-   * @param {number} slotIndex
-   * @param {'tap-unit'|'drag-unit'} kind
-   */
-  #placeUnit(unitId, slotIndex, kind) {
-    if (this.#locked) return;
+  #insertUnit(unitId, boundary) {
+    if (this.#locked) return false;
     const { spec, renderModel } = this.#current;
-    if (spec.typeId !== 'T-SEQUENCE') return;
-    if (!Number.isInteger(slotIndex) || slotIndex < 0 || slotIndex >= renderModel.slots.length) return;
-
-    this.#events = this.#events.filter(
-      (event) => event.slotIndex !== slotIndex && event.unitId !== unitId,
-    );
-    this.#events.push({ kind, unitId, slotIndex });
-    if (kind === 'drag-unit') this.#sound.drop();
+    if (spec.typeId !== 'T-SEQUENCE') return false;
+    const ordered = [...this.#events]
+      .sort((a, b) => a.slotIndex - b.slotIndex)
+      .map((event) => event.unitId);
+    const next = insertUnit(ordered, unitId, boundary, renderModel.slots.length);
+    if (!next) return false;
+    this.#events = next.map((id, index) => ({
+      kind: 'drag-unit',
+      unitId: id,
+      slotIndex: index,
+    }));
+    this.#sound.drop();
     this.#afterSelectionChange();
+    return true;
   }
 
   #activateTile(unitId) {
     if (this.#locked || !unitId) return;
+    if (this.#events.some((event) => event.unitId === unitId)) return;
     const { spec } = this.#current;
 
     if (spec.typeId === 'T-SEQUENCE') {
-      const existing = this.#events.find((event) => event.unitId === unitId);
-      if (existing) {
-        this.#clearSlot(existing.slotIndex);
-        return;
-      }
-      const slotIndex = this.#firstEmptySlot();
-      if (slotIndex === null) return;
+      if (this.#events.length >= this.#current.renderModel.slots.length) return;
       this.#sound.tap();
-      this.#placeUnit(unitId, slotIndex, 'tap-unit');
+      this.#events.push({
+        kind: 'tap-unit',
+        unitId,
+        slotIndex: this.#events.length,
+      });
+      this.#afterSelectionChange();
       return;
     }
 
@@ -570,7 +678,15 @@ export class PracticeScreen {
     if (this.#locked) return;
     this.#sound.cancel();
     this.#clearTimers();
-    this.#events = this.#events.filter((event) => event.slotIndex !== slotIndex);
+    const ordered = this.#events
+      .filter((event) => event.slotIndex !== slotIndex)
+      .sort((a, b) => a.slotIndex - b.slotIndex)
+      .map((event) => event.unitId);
+    this.#events = ordered.map((id, index) => ({
+      kind: 'tap-unit',
+      unitId: id,
+      slotIndex: index,
+    }));
     this.#afterSelectionChange();
   }
 

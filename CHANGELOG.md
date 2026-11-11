@@ -13,15 +13,20 @@
 - `src/ui/bootstrap.js`：同源 JSON → MemoryAdapter → repositories → ResourceBundle。
 - `src/ui/PracticeScreen.js`：纯英文学习端，点选/拖拽/键盘输入、显式 Check、温和反馈、`Done.` 结束页。
 - `src/ui/dragGeometry.js`：64px 吸附半径与最近槽位计算。
+- `src/ui/sequenceOrder.js`：已到位块重排，左右半边决定插前/插后，移源后修正边界。
 - `src/ui/sound.js`：Web Audio 合成轻音效，Sound/Muted 开关，无外部音频资源。
 - 拖拽未命中槽位时，浮层 240ms 缓动弹回来源块；原块保留，不产生错误画像。
+- 已到位块可拖拽重排；满槽时新候选块弹回，不覆盖原顺序。
+- 拖拽中实时侧滑：源块隐藏、其他块平移让位、插入点显示缺口；释放才提交，离开则还原。
+- 已使用的灰色待选块设为 disabled，不再响应点击/拖拽；取消/修改只通过已填槽位。
 - `styles/practice.css`：学习端样式，颜色/圆角/动效全部来自 token。
 - `?dev=1` 保留 P0 状态页；`?debug=1` 显示 AttemptResult 调试面板；`/` 默认进入学习端。
-- `tests/p1/`：T-SEQUENCE/T-FILL/T-TYPE、PracticeSession、UI 边界、拖拽几何、音效静音、难度梯度文档、学习端英文检查。
+- `tests/p1/`：T-SEQUENCE/T-FILL/T-TYPE、PracticeSession、UI 边界、拖拽几何、有序重排、音效静音、难度梯度文档、学习端英文检查。
 - ADR-0003：P1 运行边界与 judge 上下文。
 - ADR-0004：选择粒度（grapheme/letter/mixed）的后续方案。
 - ADR-0005：拖拽吸附/弹回与互动音效。
 - ADR-0006：grapheme < mixed < letter 的难度梯度与 P3 难度向量。
+- ADR-0007：已到位块的插入式重排、左右半边判定与满槽拒绝。
 
 ### Changed
 
@@ -34,12 +39,12 @@
 
 ```bash
 node tests/runTests.js --phase=p1
-# PASS  p1 gate · 127 passed · 0 failed · 18 files
+# PASS  p1 gate · 135 passed · 0 failed · 19 files
 ```
 
 浏览器验收：3 词 × 3 题型完整 9/9；T-SEQUENCE 鼠标拖拽三块入槽、触摸拖拽 `f → slot 0`、
-点击已选块取消后不误提交；拖到槽位附近可吸附、拖到远处弹回；
-Sound/Muted 可切换；错误路径 `fish → f i oo` 的 debug 面板显示
+点击已填槽位取消后不误提交；灰色待选块禁用；拖到槽位附近可吸附、拖到远处弹回；
+Sound/Muted 可切换；拖拽悬停时其他块实时侧滑、缺口随左右半边移动；错误路径 `fish → f i oo` 的 debug 面板显示
 `SUBSTITUTION`、位置 2、expected `sh`、actual `oo`；390px 移动端无横向滚动。
 
 ### Known limitations

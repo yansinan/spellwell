@@ -104,6 +104,7 @@
 }
 
 .sw-slots {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,6 +114,8 @@
 }
 
 .sw-slot {
+  position: relative;
+  z-index: 1;
   appearance: none;
   padding: 0;
   display: grid;
@@ -136,6 +139,18 @@
   border-color: var(--sw-mint-deep);
   background: var(--sw-mint);
   cursor: pointer;
+}
+
+.sw-slot.is-drop-before {
+  box-shadow: inset 4px 0 0 var(--sw-mint-deep);
+}
+
+.sw-slot.is-drop-after {
+  box-shadow: inset -4px 0 0 var(--sw-mint-deep);
+}
+
+.sw-slot.is-dragging {
+  opacity: 0.3;
 }
 
 .sw-slot.is-drop-target {
@@ -199,7 +214,7 @@
 }
 
 .sw-tile.is-used {
-  cursor: pointer;
+  cursor: default;
 }
 
 .sw-tile.is-used:hover:not(:disabled) {
@@ -419,4 +434,20 @@
     height: 58px;
     font-size: 25px;
   }
+}
+
+/* 拖拽实时预览：其他块侧滑让位，插入点显示虚线缺口。 */
+.sw-slots.is-previewing .sw-slot {
+  transition: transform 140ms var(--sw-ease-out), opacity 140ms var(--sw-ease-out);
+}
+
+.sw-preview-gap {
+  position: absolute;
+  z-index: 0;
+  border: 2px dashed var(--sw-sky-deep);
+  border-radius: var(--sw-radius-sm);
+  background: var(--sw-surface);
+  pointer-events: none;
+  transition: left 140ms var(--sw-ease-out), top 140ms var(--sw-ease-out),
+    width 140ms var(--sw-ease-out), height 140ms var(--sw-ease-out);
 }

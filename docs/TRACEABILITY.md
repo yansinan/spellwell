@@ -104,9 +104,10 @@
 | R-P1-08 | P1 不持久化、不写调度状态 | `PracticeSession` 内存 results | `tests/p1/architecture.test.js` | P1 | ✅ |
 | R-P1-09 | 同 spec.seed 渲染稳定 | `createRng` + 各 build | `tests/p1/tsequence.test.js` 等 | P1 | ✅ |
 | R-P1-10 | 3 词 × 3 题型端到端 | 浏览器 `/` | 无头 Edge 3×3 + `?debug=1` | P1 | ✅ |
-| R-P1-11 | T-SEQUENCE 点选 + 拖拽 + 再次点击取消/修改 | `src/ui/PracticeScreen.js` | 鼠标/触摸拖拽 + 点击取消的浏览器验收 | P1 | ✅ |
+| R-P1-11 | T-SEQUENCE 点选 + 拖拽 + 点击已填槽取消/修改；灰色待选块禁用 | `src/ui/PracticeScreen.js` | 鼠标/触摸拖拽 + 槽位取消 + disabled 待选块的浏览器验收 | P1 | ✅ |
 | R-P1-12 | 拖拽靠近槽位吸附，未命中弹回待选区 | `src/ui/dragGeometry.js` + PracticeScreen | `tests/p1/dragGeometry.test.js` + 浏览器远/近放置 | P1 | ✅ |
 | R-P1-13 | 轻量互动音效 + 静音开关 | `src/ui/sound.js` | `tests/p1/sound.test.js` + 浏览器 Sound/Muted | P1 | ✅ |
+| R-P1-14 | 已到位块可重排，按左右半边插入并顺移；拖拽中实时侧滑 | `src/ui/sequenceOrder.js` + PracticeScreen | `tests/p1/sequenceOrder.test.js` + 浏览器悬停/释放 | P1 | ✅ |
 | R-UNIT-01 | 组合可拆成字母、支持混合粒度 | `spec.params.unitGranularity`（P3/P4） | ADR-0004；P3/P4 测试待建 | P3/P4 | ⏳ |
 | R-DIFF-01 | §3.5 同词同脚手架：grapheme < mixed < letter | `DifficultyPolicy`（P3） | `tests/p1/difficultyDesign.test.js` + ADR-0006 | P3/P4 | 🧪 |
 | R-DIFF-02 | §3.5 难度是向量，不用题型 ID 代替 | `QuestionSpec.params.difficulty`（P3） | P3 `DifficultyPolicy` 测试待建 | P3 | ⏳ |
@@ -151,6 +152,7 @@
 | A-06 | P1 的内容装配、迷你队列、judge 上下文未定义 | 同源 fetch → MemoryAdapter；PracticeSession 生成 9 条 spec；judge 接收只读 bundle 与注入 now | ADR-0003 |
 | A-07 | 是否只能按 grapheme 整块选择 | 内容仍人工标注 grapheme；P3/P4 用 spec 粒度参数支持字母/混合，不由题型猜 | ADR-0004 |
 | A-08 | 拖拽未命中如何处理、音效尺度 | 64px 吸附 + 240ms 弹回；Web Audio 低音量合成音 + Sound/Muted | ADR-0005 |
+| A-09 | 已到位块如何重排/插入 | 左右半边决定插前/插后；移源后修正边界；满槽拒绝新候选 | ADR-0007 |
 
 ---
 

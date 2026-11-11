@@ -67,6 +67,7 @@
 │   │   ├── bootstrap.js         # P1 内容装配（P2 切 adapter）
 │   │   ├── PracticeScreen.js    # P1 学习端（点选/拖拽/显式 Check）
 │   │   ├── dragGeometry.js      # 64px 吸附半径与最近槽位
+│   │   ├── sequenceOrder.js     # 已到位块插入式重排
 │   │   ├── sound.js             # Web Audio 轻音效 + 静音开关
 │   │   ├── ParentScreen.js
 │   │   └── skins/              # P8；皮肤只换 token，不换行为

@@ -96,9 +96,11 @@ P0 **不包含**：任何题型的真实出题/判定、IndexedDB 写入、调�
 - [x] `ResourceBundle`：`{ word, graphemes }`；`src/ui/bootstrap.js` 从同源 JSON 装配，题型层只消费。
 - [x] `PracticeSession`：3 词 × 3 题型共 9 条 spec，同 seed 可复现；结果只存内存。
 - [x] `PracticeScreen`：渲染 RenderModel、接收 InputEvent、温和反馈；学习端全英文。
-- [x] T-SEQUENCE 同时支持按序点选与指针拖拽（鼠标/触摸），已选单位再次点击可取消并修改槽位。
+- [x] T-SEQUENCE 同时支持按序点选与指针拖拽（鼠标/触摸），点击已填槽位可取消并修改；已使用待选块置灰禁用。
 - [x] T-SEQUENCE judge 按 `slotIndex` 重建答案，允许取消中间选择、拖拽放置与点选混用。
 - [x] 拖拽距离槽位 64px 内吸附；未命中时浮层 240ms 缓动弹回待选区，原块不丢。
+- [x] 已到位块可拖拽重排：拖到目标块左/右半边决定插前/插后，其余块顺移；满槽时新候选弹回。
+- [x] 拖拽中实时侧滑：源块隐藏、其他块平移让位，插入点显示虚线缺口；释放才提交，离开/弹回则还原。
 - [x] Web Audio 合成轻音效（选中/拾取/吸附/取消/返回/对/错/完成），Header 提供 Sound/Muted 开关。
 - [x] `?debug=1`：开发模式显示 AttemptResult，孩子端不显示。
 - [x] `tests/p1/`：题型 build/judge、session、seed 复现、UI 边界、拖拽几何、音效静音、学习端英文检查。
@@ -108,13 +110,15 @@ P0 **不包含**：任何题型的真实出题/判定、IndexedDB 写入、调�
 
 ```bash
 node tests/runTests.js --phase=p1
-# PASS  p1 gate · 127 passed · 0 failed · 18 files
+# PASS  p1 gate · 135 passed · 0 failed · 19 files
 ```
 
 - 累计运行 P0 + P1，低阶段无回退。
 - 无头浏览器完成 9/9：`T-SEQUENCE → T-FILL → T-TYPE` 三词轮转，结束页 `Done.`。
-- T-SEQUENCE 鼠标拖拽三块入槽、触摸拖拽 `f → slot 0`、点击已选块取消后不误提交，均通过。
+- T-SEQUENCE 鼠标拖拽三块入槽、触摸拖拽 `f → slot 0`、点击已填槽位取消后不误提交；灰色待选块禁用，均通过。
 - 拖拽到槽位附近 40px 可吸附；拖到舞台远处会弹回且槽位保持空，浮层最终移除。
+- `[f,i,sh]` 拖 f 到 sh 右侧变 `[i,sh,f]`；sh 拖到 f 左侧变 `[sh,f,i]`；候选插入与满槽拒绝均通过。
+- 拖拽悬停时其他块实时侧滑、缺口位置随左右半边变化，未释放前不修改状态。
 - Sound/Muted 可切换，全流程无控制台报错。
 - 390px 移动端：`clientWidth = scrollWidth = 390`，无横向滚动。
 - 不写 `wordStates` / `graphemeStates` / `attempts`；刷新即重置。

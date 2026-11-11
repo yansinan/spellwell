@@ -84,6 +84,7 @@ test('ADR：偏离设计的裁决已入库，并被追溯矩阵引用', async ()
   assert(decisionFiles.includes('0004-unit-granularity.md'));
   assert(decisionFiles.includes('0005-interaction-feedback.md'));
   assert(decisionFiles.includes('0006-difficulty-gradient.md'));
+  assert(decisionFiles.includes('0007-ordered-reorder.md'));
   const adr1 = await read('docs/decisions/0001-storage-contract.md');
   const adr2 = await read('docs/decisions/0002-docs-as-code.md');
   assertMatch(adr1, /状态\*\*：Accepted/);

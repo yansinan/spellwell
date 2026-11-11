@@ -153,3 +153,4 @@ node tools/serve.mjs
 - 组合拆分粒度用 spec 参数，不由题型层猜；当前只 grapheme，P3/P4 支持 letter/mixed：见 ADR-0004。
 - 拖拽 64px 吸附、未命中 240ms 弹回；音效是低音量 Web Audio 合成音，不引入音频资源：见 ADR-0005。
 - 同词同脚手架：grapheme 块选 < mixed < letter；难度是多维向量，P3 才校准权重：见 DESIGN §3.5 与 ADR-0006。
+- 已到位块可重排；目标槽位左半边插前、右半边插后；拖拽中其他块实时侧滑、显示插入缺口；满槽候选弹回；已使用待选块置灰禁用：见 ADR-0007。

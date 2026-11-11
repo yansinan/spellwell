@@ -35,6 +35,9 @@ npm start
 
 ![P1 学习端](docs/p1-preview.png)
 
+> T-SEQUENCE 拖拽重排时，其他块实时侧滑让位，缺口随左右半边移动：
+> ![实时重排预览](docs/p1-reorder-preview.png)
+
 > P0 骨架自检页保留在 `?dev=1`：![P0 开发状态页](docs/p0-preview.png)
 
 ---
@@ -97,7 +100,7 @@ tools/serve.mjs   零依赖静态服务器
 
 ## P1 已实现
 
-- `T-SEQUENCE`：按序点选单位，支持鼠标/触摸拖拽；靠近槽位 64px 吸附，未命中 240ms 弹回待选区；已选单位再次点击可取消并修改槽位；错误定位到 `OMISSION` / `SUBSTITUTION` / `EXTRA` / `TRANSPOSITION`。
+- `T-SEQUENCE`：按序点选单位，支持鼠标/触摸拖拽；靠近槽位 64px 吸附，未命中 240ms 弹回待选区；已到位块可拖拽重排，按目标块左右半边插前/插后并顺移；拖拽中其他块实时侧滑让位并显示缺口；点击已填槽位可取消；已使用的灰色待选项禁用；错误定位到 `OMISSION` / `SUBSTITUTION` / `EXTRA` / `TRANSPOSITION`。
 - `T-FILL`：骨架已给、只填空位，候选池含干扰组合。
 - `T-TYPE`：整词输入，按 grapheme unit 定位错误。
 - `PracticeScreen`：纯英文学习端，点选/拖拽/键盘输入、显式 Check、温和反馈、`?debug=1` 调试面板。
