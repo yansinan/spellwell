@@ -155,8 +155,22 @@ export function importWord(content, entry, mode = 'merge') {
     existing.units = entry.units;
     existing.translation = entry.translation ?? '';
     existing.phonetic = entry.phonetic ?? '';
+    if (entry.unitId) {
+      existing.grade = entry.grade ?? existing.grade;
+      existing.term = entry.term ?? existing.term;
+      existing.unit = entry.unit ?? existing.unit;
+      existing.unitId = entry.unitId;
+      existing.unitLabel = entry.unitLabel ?? existing.unitLabel;
+    }
     existing.reviewStatus = 'unreviewed';
     return 'replaced';
+  }
+  if (entry.unitId) {
+    existing.grade = entry.grade ?? existing.grade;
+    existing.term = entry.term ?? existing.term;
+    existing.unit = entry.unit ?? existing.unit;
+    existing.unitId = entry.unitId;
+    existing.unitLabel = entry.unitLabel ?? existing.unitLabel;
   }
   if (!Array.isArray(existing.units) || existing.units.length === 0) {
     existing.units = entry.units;

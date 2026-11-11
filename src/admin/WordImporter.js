@@ -41,6 +41,35 @@ export function autoSegment(word, graphemeByText) {
   return units;
 }
 
+
+/**
+ * 单元标题行：
+ *   一年级上unit2
+ *   二年级下 unit 5
+ *   一年级下第2单元
+ * @param {string} line
+ * @returns {{grade: number, term: '上'|'下', unit: number, unitId: string, unitLabel: string}|null}
+ */
+export function parseUnitHeader(line) {
+  const raw = String(line ?? '').trim();
+  if (!raw) return null;
+  const match = raw.match(/^([一二1-2])年级\s*([上下])\s*(?:unit|单元|第)?\s*(\d+)\s*(?:单元)?$/i);
+  if (!match) return null;
+  const grade = match[1] === '二' || match[1] === '2' ? 2 : 1;
+  const term = match[2];
+  const unit = Number(match[3]);
+  if (!Number.isInteger(unit) || unit < 1 || unit > 20) {
+    throw new ContractError('WORD_IMPORT_INVALID', `invalid unit number: ${match[3]}`);
+  }
+  return {
+    grade,
+    term,
+    unit,
+    unitId: `g${grade}-s${term === '下' ? '2' : '1'}-u${unit}`,
+    unitLabel: `${grade === 1 ? '一' : '二'}年级${term} · 第${unit}单元`,
+  };
+}
+
 /**
  * 解析一行：
  *   w,ea,th,er | 天气 | /ˈweðər/
@@ -95,10 +124,16 @@ export function parseWordLine(line, graphemeByText) {
 export function parseBatch(input, graphemeByText) {
   const entries = [];
   const errors = [];
+  let currentUnit = null;
   for (const [index, line] of String(input ?? '').split(/\r?\n/).entries()) {
     try {
+      const unit = parseUnitHeader(line);
+      if (unit) {
+        currentUnit = unit;
+        continue;
+      }
       const entry = parseWordLine(line, graphemeByText);
-      if (entry) entries.push(entry);
+      if (entry) entries.push(currentUnit ? { ...entry, ...currentUnit } : entry);
     } catch (error) {
       errors.push({ line: index + 1, message: error.message });
     }

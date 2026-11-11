@@ -209,6 +209,7 @@ tools/serve.mjs   零依赖静态服务器
 - 题量、单元、模式进入 Scheduler；真实 attempts 校准选词权重；当前会话不因内容更新中断。
 - 每个计划项带 `reason/mode/policyVersion/score/calibration`；`revise()` 接口预留。
 - 提示词优先级：句子 → 音标 → 中文翻译 → 单词保底。
+- 批量新增支持单元标题行，如 `一年级上unit2`；后续词继承该单元直到下一个标题。
 
 ![P9 练习设计](docs/p9-preview.png)
 

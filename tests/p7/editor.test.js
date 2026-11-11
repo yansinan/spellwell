@@ -54,3 +54,22 @@ test('重复词合并/替换/跳过：保留稳定 ID，merge 不覆盖人工切
   assertEqual(original.reviewStatus, 'unreviewed');
   assertEqual(importWord(content, entry, 'skip'), 'skipped');
 });
+
+test('批量单元标题：合并时也更新词所属单元', () => {
+  const content = base();
+  const original = content.words.items[0];
+  const entry = {
+    text: 'fish',
+    units: original.units,
+    translation: '鱼',
+    phonetic: '',
+    grade: 2,
+    term: '上',
+    unit: 5,
+    unitId: 'g2-s1-u5',
+    unitLabel: '二年级上 · 第5单元',
+  };
+  assertEqual(importWord(content, entry, 'merge'), 'merged');
+  assertEqual(original.unitId, 'g2-s1-u5');
+  assertEqual(original.unitLabel, '二年级上 · 第5单元');
+});

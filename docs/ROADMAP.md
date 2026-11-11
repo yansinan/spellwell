@@ -336,7 +336,7 @@ node tests/runTests.js --phase=p6
 
 ```bash
 node tests/runTests.js --phase=p7
-# PASS  p7 gate · 177 passed · 0 failed · 32 files
+# PASS  p7 gate · 179 passed · 0 failed · 32 files
 ```
 
 - 当前种子：V1—V9 通过；V10 仍识别 112 条 unreviewed。
@@ -372,7 +372,7 @@ node tests/runTests.js --phase=p7
 
 ```bash
 node tests/runTests.js --phase=p8
-# PASS  p8 gate · 180 passed · 0 failed · 33 files
+# PASS  p8 gate · 182 passed · 0 failed · 33 files
 ```
 
 - 浏览器 Stats：4 answers / 50%，最近 4 天按日正确率，learning/reviewing 分布，最近 4 条答案。
@@ -406,13 +406,14 @@ node tests/runTests.js --phase=p8
 - [x] 当前会话保持；内容更新只提示 `New practice`，不中途换题。
 - [x] `PlanPolicy.revise()` 兼容接口；P9 不实时改当前计划。
 - [x] 提示词按句子 → 音标 → 中文 → 单词保底；CLOZE 句子即题面。
-- [x] `tests/p9/`：默认题量、单元过滤、retired、Review/Effort、plan hook、权重校准、提示词。
+- [x] 批量单元标题：`一年级上unit2` 后续词继承，直到下一个标题。
+- [x] `tests/p9/`：默认题量、单元过滤、retired、Review/Effort、plan hook、权重校准、提示词、批量单元标题。
 
 ### 验收结果
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 191 passed · 0 failed · 39 files
+# PASS  p9 gate · 193 passed · 0 failed · 39 files
 ```
 
 - 练习设计页：3 个单元全选、Review 默认、`20 questions`。

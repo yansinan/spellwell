@@ -6,7 +6,7 @@
 
 import { readFile } from 'node:fs/promises';
 import { applySegments } from '../../src/admin/ContentEditor.js';
-import { autoSegment, parseBatch, parseWordLine } from '../../src/admin/WordImporter.js';
+import { autoSegment, parseBatch, parseUnitHeader, parseWordLine } from '../../src/admin/WordImporter.js';
 import { assertDeepEqual, assertEqual, assertThrows, test } from '../harness.js';
 
 const graphemes = JSON.parse(await readFile(new URL('../../src/content/graphemes.json', import.meta.url), 'utf8'));
@@ -50,4 +50,21 @@ test('切分应用：未知/非法 unit 明确报错', () => {
   applySegments(word, ['w', 'ea', 'th', 'er'], byText);
   assertEqual(word.units.length, 4);
   assertThrows(() => applySegments(word, ['w', 'zz'], byText), 'CONTENT_EDIT_INVALID');
+});
+
+test('单元标题行：切换后续单词所属单元', () => {
+  assertDeepEqual(parseUnitHeader('一年级上unit2'), {
+    grade: 1, term: '上', unit: 2, unitId: 'g1-s1-u2', unitLabel: '一年级上 · 第2单元',
+  });
+  assertDeepEqual(parseUnitHeader('二年级下 unit 5'), {
+    grade: 2, term: '下', unit: 5, unitId: 'g2-s2-u5', unitLabel: '二年级下 · 第5单元',
+  });
+  assertEqual(parseUnitHeader('weather'), null);
+
+  const result = parseBatch('一年级上unit2\ncat\nfish\n二年级下unit5\ndog', byText);
+  assertEqual(result.entries.length, 3);
+  assertEqual(result.entries[0].unitId, 'g1-s1-u2');
+  assertEqual(result.entries[1].unitId, 'g1-s1-u2');
+  assertEqual(result.entries[2].unitId, 'g2-s2-u5');
+  assertEqual(result.errors.length, 0);
 });

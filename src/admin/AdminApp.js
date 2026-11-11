@@ -214,6 +214,7 @@ export async function mountAdmin(root) {
       const rows = batchActions.map(({ entry, action }) => `
         <tr class="${action === 'skip' ? 'is-muted' : ''}">
           <td><strong>${escape(entry.text)}</strong></td>
+          <td>${escape(entry.unitLabel || '默认单元')}</td>
           <td>${entry.units.map((unit) => escape(unit.text)).join(' · ')}</td>
           <td>${escape(entry.translation || '—')}</td>
           <td>${escape(entry.phonetic || '—')}</td>
@@ -231,7 +232,7 @@ export async function mountAdmin(root) {
               <option value="skip" ${duplicateMode === 'skip' ? 'selected' : ''}>跳过</option>
             </select>
           </label>
-          ${rows ? `<table class="sw-admin__units"><thead><tr><th>词</th><th>切分</th><th>中文</th><th>音标</th><th>处理</th></tr></thead><tbody>${rows}</tbody></table>` : ''}
+          ${rows ? `<table class="sw-admin__units"><thead><tr><th>词</th><th>单元</th><th>切分</th><th>中文</th><th>音标</th><th>处理</th></tr></thead><tbody>${rows}</tbody></table>` : ''}
           ${errors ? `<ul class="sw-admin__errors">${errors}</ul>` : ''}
           <button type="button" class="sw-check" data-batch-commit ${created + merged + replaced === 0 ? 'disabled' : ''}>加入并保存</button>
         </div>
@@ -255,15 +256,15 @@ export async function mountAdmin(root) {
         <div class="sw-admin__batch-head">
           <div>
             <h2>批量新增</h2>
-            <p class="sw-admin__muted">每行一个词；逗号显式切分，无逗号自动切分；可追加中文/音标。</p>
+            <p class="sw-admin__muted">先写单元标题行（如 <code>一年级上unit2</code>），后续单词归入该单元，直到下一个标题；每行一个词，逗号显式切分，无逗号自动切分；可追加中文/音标。</p>
           </div>
           <button type="button" class="sw-text-button" data-toggle-batch>${batchOpen ? '收起' : '展开'}</button>
         </div>
         ${batchOpen ? `
-          <textarea data-batch-input rows="6" spellcheck="false" placeholder="w,ea,th,er | 天气 | /ˈweðər/\nweather | 天气 | /ˈweðər/\nfish">${escape(batchText)}</textarea>
+          <textarea data-batch-input rows="6" spellcheck="false" placeholder="一年级上unit2\nw,ea,th,er | 天气 | /ˈweðər/\nfish\n二年级下unit5\nboat">${escape(batchText)}</textarea>
           <div class="sw-admin__toolbar">
             <button type="button" class="sw-text-button" data-batch-preview>解析预览</button>
-            <span class="sw-admin__muted">中文/音标可留空；“|”分隔词、中文、音标。</span>
+            <span class="sw-admin__muted">单元标题行切换后续词所属单元；中文/音标可留空；“|”分隔词、中文、音标。</span>
           </div>
           ${batchPreviewHtml}
         ` : ''}
@@ -391,11 +392,11 @@ export async function mountAdmin(root) {
         const baseUnit = currentWord();
         const result = importWord(content, {
           ...entry,
-          grade: baseUnit?.grade ?? 1,
-          term: baseUnit?.term ?? '下',
-          unit: baseUnit?.unit ?? 1,
-          unitId: baseUnit?.unitId ?? 'g1-s2-u1',
-          unitLabel: baseUnit?.unitLabel ?? '一年级下 · 第1单元',
+          grade: entry.grade ?? baseUnit?.grade ?? 1,
+          term: entry.term ?? baseUnit?.term ?? '下',
+          unit: entry.unit ?? baseUnit?.unit ?? 1,
+          unitId: entry.unitId ?? baseUnit?.unitId ?? 'g1-s2-u1',
+          unitLabel: entry.unitLabel ?? baseUnit?.unitLabel ?? '一年级下 · 第1单元',
         }, duplicateMode);
         counts[result === 'created' ? 'created' : result === 'merged' ? 'merged' : result === 'replaced' ? 'replaced' : 'skipped'] += 1;
       }
