@@ -1,5 +1,51 @@
 # CHANGELOG
 
+## [0.5.0] — 2026-11-11 · P4 顺序/边界错闭环
+
+### Added
+
+- `T-REORDER`：单位初始打乱，点两块交换；`reorder(fromIndex,toIndex)` 事件重建顺序，定位 TRANSPOSITION。
+- `T-EDIT`：预填错误词，输入修错；按 OMISSION/EXTRA/TRANSPOSITION/SUBSTITUTION 生成初始文本。
+- `T-SEGMENT`：逐字母 + 间隙按钮；区分 BOUNDARY_OVER/UNDER/MISPLACED。
+- `PracticeScreen` P4 交互：
+  - T-REORDER 点击选中/交换、Clear；
+  - T-EDIT 预填输入框、Check；
+  - T-SEGMENT 间隙点选/取消、Check。
+- Scheduler 错误映射：TRANSPOSITION→T-REORDER、SUBSTITUTION→T-EDIT、BOUNDARY_*→T-SEGMENT；OMISSION 仍优先 T-FILL。
+- `QuestionSpecBuilder` 支持 P4 题型与 T-EDIT `initialText`。
+- `tests/p4/types.test.js`、`tests/p4/schedulerTypes.test.js`。
+- ADR-0010：P4 题型交互与映射。
+
+### Changed
+
+- `package.json` 版本 `0.4.0` → `0.5.0`；新增 `test:p4`。
+- `TypeSelector.SUBSTITUTION` 首选从 T-SEQUENCE 改为 T-EDIT，T-REORDER/T-SEGMENT 进入 P4 候选。
+- P0 注册表守卫只要求 P5/P6 题型继续抛未实现。
+- `README` / `ROADMAP` / `TRACEABILITY` / `AGENTS` / `FILE_SPEC` 状态推进到 P5。
+
+### Verification
+
+```bash
+node tests/runTests.js --phase=p4
+# PASS  p4 gate · 153 passed · 0 failed · 24 files
+```
+
+浏览器实测：
+
+- TRANSPOSITION 错 → `T-REORDER`，fish 初始 `i / sh / f`，交换后 correct。
+- SUBSTITUTION 错 → `T-EDIT`，预填 `fia`，改为 `fish` 后 correct。
+- BOUNDARY_OVER_SEGMENT 错 → `T-SEGMENT`，字母 `f i s h`，点 2 个正确间隙后 correct。
+- 三次正确均写 wordStates、清空错误画像、attempts 增加；无控制台异常。
+- 390px 移动端无横向滚动。
+
+### Known limitations
+
+- T-REORDER 目前是点击交换；拖拽版留 P8。
+- T-EDIT 的错词由错误类型生成，不直接回放真实输入文本。
+- T-MATCH/T-CLOZE 仍为 P5/P6 骨架。
+
+---
+
 ## [0.4.0] — 2026-11-11 · P3 记忆曲线与错词调度
 
 ### Added

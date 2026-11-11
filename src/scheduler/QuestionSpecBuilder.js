@@ -11,6 +11,7 @@ import { validateQuestionSpec } from '../core/contracts.js';
 import { createRng, hashSeed } from '../core/seedRandom.js';
 
 export const P1_AVAILABLE_TYPES = Object.freeze(['T-SEQUENCE', 'T-FILL', 'T-TYPE']);
+export const P4_AVAILABLE_TYPES = Object.freeze([...P1_AVAILABLE_TYPES, 'T-REORDER', 'T-EDIT', 'T-SEGMENT']);
 
 /**
  * @param {{units: {text: string, graphemeId: string}[]}} word
@@ -46,8 +47,8 @@ function chooseDistractorIds(word, pool, seed) {
  * @returns {'fill'|'sequence'|'type'}
  */
 function scaffoldOf(typeId) {
-  if (typeId === 'T-FILL') return 'fill';
-  if (typeId === 'T-SEQUENCE') return 'sequence';
+  if (typeId === 'T-FILL' || typeId === 'T-SEGMENT') return 'fill';
+  if (typeId === 'T-SEQUENCE' || typeId === 'T-REORDER') return 'sequence';
   return 'type';
 }
 
@@ -61,12 +62,55 @@ function tierNumber(tier) {
 }
 
 /**
+ * 构造 T-EDIT 的错词文本。只使用 spec 提供的错误类型与候选池，不自动推断切分。
+ * @param {{
+ *   word: {text: string, units: {text: string, graphemeId: string}[]},
+ *   focusIndex: number,
+ *   errorType?: string,
+ *   distractorPool?: {id: string, text: string}[]
+ * }} input
+ * @returns {string}
+ */
+function initialEditText({ word, focusIndex, errorType, distractorPool = [] }) {
+  const texts = word.units.map((unit) => unit.text);
+  const focus = texts[focusIndex] ?? texts[0];
+  const replacement = distractorPool.find((item) => item.text !== focus && item.text.length > 0)?.text
+    ?? (focus.length > 1 ? focus[0] : `${focus}x`);
+  let edited = [...texts];
+  switch (errorType) {
+    case 'OMISSION':
+      edited.splice(focusIndex, 1);
+      break;
+    case 'EXTRA':
+      edited.splice(focusIndex, 0, replacement);
+      break;
+    case 'TRANSPOSITION':
+      if (edited.length > 1) {
+        const next = focusIndex + 1 < edited.length ? focusIndex + 1 : focusIndex - 1;
+        [edited[focusIndex], edited[next]] = [edited[next], edited[focusIndex]];
+      }
+      break;
+    case 'SUBSTITUTION':
+    case 'SUFFIX_RULE':
+    case 'UNKNOWN':
+    default:
+      edited[focusIndex] = replacement;
+      break;
+  }
+  const text = edited.join('');
+  if (text !== word.text) return text;
+  if (word.text.length > 1) return `${word.text.slice(1)}${word.text[0]}`;
+  return `${word.text}${word.text}`;
+}
+
+/**
  * @param {{
  *   word: {id: string, text: string, units: {text: string, graphemeId: string}[]},
  *   typeId: string,
  *   graphemeMap?: Record<string, {tier?: string}>,
  *   distractorPool?: {id: string, text: string}[],
  *   seed?: number|string,
+ *   errorType?: string,
  *   specId: string
  * }} input
  * @returns {import('../core/contracts.js').QuestionSpec}
@@ -77,13 +121,14 @@ export function buildWordSpec({
   graphemeMap = {},
   distractorPool = [],
   seed = 20261111,
+  errorType,
   specId,
 }) {
   if (!word || typeof word.id !== 'string' || !Array.isArray(word.units) || word.units.length === 0) {
     throw new ContractError('SPEC_BUILD_INVALID', 'word with at least one unit is required');
   }
-  if (!P1_AVAILABLE_TYPES.includes(typeId)) {
-    throw new ContractError('SPEC_BUILD_INVALID', `P3 cannot build type ${typeId}`);
+  if (!P4_AVAILABLE_TYPES.includes(typeId)) {
+    throw new ContractError('SPEC_BUILD_INVALID', `P4 cannot build type ${typeId}`);
   }
 
   const focusIndex = chooseFocusIndex(word);
@@ -93,7 +138,17 @@ export function buildWordSpec({
     ? { distractorGraphemeIds: distractors }
     : typeId === 'T-FILL'
       ? { blankUnitIndex: focusIndex, distractorGraphemeIds: distractors }
-      : {};
+      : typeId === 'T-EDIT'
+        ? {
+          initialText: initialEditText({
+            word,
+            focusIndex,
+            errorType,
+            distractorPool,
+          }),
+          operation: errorType ?? 'replace',
+        }
+        : {};
 
   params.difficulty = {
     scaffold: scaffoldOf(typeId),
@@ -104,9 +159,9 @@ export function buildWordSpec({
       1,
       ...word.units.map((unit) => tierNumber(graphemeMap[unit.graphemeId]?.tier)),
     ),
-    distractorCount: typeId === 'T-TYPE' ? 0 : distractors.length,
+    distractorCount: ['T-SEQUENCE', 'T-FILL'].includes(typeId) ? distractors.length : 0,
     confusableCount: 0,
-    inputMode: typeId === 'T-TYPE' ? 'keyboard' : 'tap',
+    inputMode: typeId === 'T-TYPE' || typeId === 'T-EDIT' ? 'keyboard' : 'tap',
   };
 
   const spec = {

@@ -20,7 +20,9 @@ import {
   test,
 } from '../harness.js';
 
-const IMPLEMENTED_IN_P1 = new Set(['T-SEQUENCE', 'T-FILL', 'T-TYPE']);
+const IMPLEMENTED_THROUGH_P4 = new Set([
+  'T-SEQUENCE', 'T-FILL', 'T-TYPE', 'T-REORDER', 'T-EDIT', 'T-SEGMENT',
+]);
 
 const EXPECTED_PHASES = {
   'T-SEQUENCE': 'P1',
@@ -65,7 +67,7 @@ test('注册表：未知题型明确报错', () => {
 
 test('未实现题型：build/judge 在对应阶段前必须抛 PHASE_NOT_IMPLEMENTED', () => {
   for (const meta of listQuestionTypes()) {
-    if (IMPLEMENTED_IN_P1.has(meta.id)) continue;
+    if (IMPLEMENTED_THROUGH_P4.has(meta.id)) continue;
     const { build, judge } = getQuestionType(meta.id);
     const buildError = assertThrows(() => build({}, {}), 'PHASE_NOT_IMPLEMENTED');
     assertEqual(buildError.phase, meta.phase);

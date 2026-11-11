@@ -72,17 +72,21 @@
 | R-TYPE-02 | §3.4 每个题型只做 build/judge | `defineQuestionType` 契约 | `tests/p0/registry.test.js` + `architecture.test.js` | P0 | ✅ |
 | R-TYPE-03 | §3.4 题型 ID 与修复信号对应 | `REPAIR_PREFERENCE` / 各 meta | `tests/p0/scheduler.test.js` | P0 | ✅ |
 | R-TYPE-04 | P1 三题型可出题判定 | `TSequence/TFill/TType` | `tests/p1/*.test.js` + 浏览器 3×3 | P1 | ✅ |
-| R-TYPE-05 | `ai→ia` 顺序修复 | `TReorder` | `tests/p4/*` 待建 | P4 | ⏳ |
-| R-TYPE-06 | `sh→ch`、`ck/k` 边界修复 | `TSegment/TEdit/TMatch` | `tests/p5/*` 待建 | P4/P5 | ⏳ |
+| R-TYPE-05 | `ai→ia` 顺序修复 | `TReorder` | `tests/p4/types.test.js` + 浏览器 | P4 | ✅ |
+| R-TYPE-06 | `sh→ch`、`ck/k` 边界修复 | `TSegment/TEdit/TMatch` | `tests/p4/types.test.js` + 浏览器；T-MATCH 待 P5 | P4/P5 | 🧪 |
 | R-SCHED-01 | §2.1 每日 5—8 词队列 | `Scheduler.buildDailyQueue` | `tests/p3/scheduler.test.js` | P3 | ✅ |
 | R-SCHED-02 | 错词次日强制再现 | `Scheduler.recordAttempt` | `tests/p3/scheduler.test.js` 固定时钟 | P3 | ✅ |
-| R-SCHED-03 | 按错误类型选修复题型 | `TypeSelector.selectType` + Scheduler | `tests/p3/scheduler.test.js` OMISSION→T-FILL | P0/P3 | ✅ |
+| R-SCHED-03 | 按错误类型选修复题型 | `TypeSelector` + Scheduler | `tests/p3/scheduler.test.js` + `tests/p4/schedulerTypes.test.js` | P0/P4 | ✅ |
 | R-SCHED-04 | 组合独立阶梯、跨 2 词 | `GraphemeRepository` / `Scheduler` | P5 测试 | P5 | ⏳ |
 | R-SCHED-05 | 假掌握抽查 60 天 | `IntervalPolicy` 常量 | P6 测试 | P6 | ⏳ |
 | R-P3-01 | 尝试落库、wordState 升降档与错误画像 | `Scheduler.recordAttempt` | `tests/p3/scheduler.test.js` | P3 | ✅ |
 | R-P3-02 | 每日队列优先错词/到期/新词 | `Scheduler.buildDailyQueue` | `tests/p3/scheduler.test.js` | P3 | ✅ |
 | R-P3-03 | 每个 spec 记录 P3 难度向量 | `QuestionSpecBuilder` | `tests/p3/scheduler.test.js` | P3 | ✅ |
 | R-P3-04 | 刷新后学习状态仍在 | P2 IndexedDB + StateRepository | 浏览器刷新：wordStates/attempts 保留 | P3 | ✅ |
+| R-P4-01 | T-REORDER 打乱单位、交换重排、TRANSPOSITION | `TReorder` + PracticeScreen | `tests/p4/types.test.js` + 浏览器 | P4 | ✅ |
+| R-P4-02 | T-EDIT 预填错词、编辑修错、错误定位 | `TEdit` + PracticeScreen | `tests/p4/types.test.js` + 浏览器 | P4 | ✅ |
+| R-P4-03 | T-SEGMENT 字母间隙、过度/不足/错位 | `TSegment` + PracticeScreen | `tests/p4/types.test.js` + 浏览器 | P4 | ✅ |
+| R-P4-04 | P4 错误类型映射到 P4 题型 | `Scheduler` + `TypeSelector` | `tests/p4/schedulerTypes.test.js` | P4 | ✅ |
 
 ### 5.1 九题型覆盖（与 `QUESTION_TYPE_IDS` 一一对应）
 
@@ -90,13 +94,13 @@
 |---|---|---|---|
 | `T-SEQUENCE` | P1 | 已实现 | `tests/p1/tsequence.test.js` |
 | `T-FILL` | P1 | 已实现 | `tests/p1/tfill.test.js` |
-| `T-REORDER` | P4 | 骨架 | `tests/p0/registry.test.js` 抛错断言 |
+| `T-REORDER` | P4 | 已实现 | `tests/p4/types.test.js` |
 | `T-TYPE` | P1 | 已实现 | `tests/p1/ttype.test.js` |
 | `T-JUDGE-FIX` | P6 | 骨架 | `tests/p0/registry.test.js` 抛错断言 |
-| `T-EDIT` | P4 | 骨架 | 同上 |
+| `T-EDIT` | P4 | 已实现 | `tests/p4/types.test.js` |
 | `T-MATCH` | P5 | 骨架 | 同上 |
 | `T-CLOZE` | P6 | 骨架 | 同上 |
-| `T-SEGMENT` | P4 | 骨架 | 同上 |
+| `T-SEGMENT` | P4 | 已实现 | `tests/p4/types.test.js` |
 
 ### 5.2 P1 最小闭环
 
@@ -163,6 +167,7 @@
 | A-09 | 已到位块如何重排/插入 | 左右半边决定插前/插后；移源后修正边界；满槽拒绝新候选 | ADR-0007 |
 | A-10 | 内容如何进入 IndexedDB、失败如何降级 | meta.contentVersion 幂等；IndexedDB 优先、Memory 回退；导出导入覆盖 8 库 | ADR-0008 |
 | A-11 | 每日队列排序、错词优先级与状态迁移 | 5—8 队列；错词→到期→新词→填充；答错次日；答对清错；P3 难度向量 | ADR-0009 |
+| A-12 | P4 三种修复题型如何交互与定位 | 点击交换、预填修错、字母间隙；P4 错误映射 | ADR-0010 |
 
 ---
 

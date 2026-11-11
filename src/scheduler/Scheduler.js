@@ -12,12 +12,11 @@
 
 import { validateAttemptResult } from '../core/contracts.js';
 import { ContractError } from '../core/errors.js';
-import { hashSeed } from '../core/seedRandom.js';
 import { isDayKey, toDayKey } from '../core/time.js';
 import { applyWordReview } from './IntervalPolicy.js';
 import { appendErrorProfile } from './ErrorProfile.js';
-import { P1_AVAILABLE_TYPES, buildWordSpec } from './QuestionSpecBuilder.js';
-import { NEW_WORD_ROTATION, selectType } from './TypeSelector.js';
+import { P4_AVAILABLE_TYPES, buildWordSpec } from './QuestionSpecBuilder.js';
+import { NEW_WORD_ROTATION, candidatesForError } from './TypeSelector.js';
 
 export const MIN_QUEUE_SIZE = 5;
 export const MAX_QUEUE_SIZE = 8;
@@ -145,15 +144,10 @@ export class Scheduler {
     return selected.map((word, index) => {
       const state = stateByWord.get(String(word.id));
       const latestError = state?.errorProfile?.at(-1);
-      const typeSeed = hashSeed(`${seed}|${word.id}|${today}|type`);
       let typeId = latestError
-        ? selectType({
-          errorType: latestError.type,
-          seed: typeSeed,
-          available: [...P1_AVAILABLE_TYPES],
-        })
+        ? candidatesForError(latestError.type).find((candidate) => P4_AVAILABLE_TYPES.includes(candidate))
         : NEW_WORD_ROTATION[index % NEW_WORD_ROTATION.length];
-      if (!typeId || !P1_AVAILABLE_TYPES.includes(typeId)) {
+      if (!typeId || !P4_AVAILABLE_TYPES.includes(typeId)) {
         typeId = NEW_WORD_ROTATION[index % NEW_WORD_ROTATION.length];
       }
 
@@ -163,6 +157,7 @@ export class Scheduler {
         graphemeMap: this.graphemeMap,
         distractorPool: this.distractorPool,
         seed,
+        errorType: latestError?.type,
         specId: `spec.daily.${String(word.id)}.${typeId}.${index}`,
       });
     });

@@ -15,7 +15,7 @@ export const NEW_WORD_ROTATION = Object.freeze(['T-SEQUENCE', 'T-FILL', 'T-TYPE'
 /** @type {Readonly<Record<string, readonly string[]>>} */
 export const REPAIR_PREFERENCE = Object.freeze({
   OMISSION: Object.freeze(['T-FILL', 'T-EDIT', 'T-SEGMENT']),
-  SUBSTITUTION: Object.freeze(['T-SEQUENCE', 'T-FILL', 'T-EDIT']),
+  SUBSTITUTION: Object.freeze(['T-EDIT', 'T-SEQUENCE', 'T-FILL']),
   TRANSPOSITION: Object.freeze(['T-REORDER', 'T-EDIT']),
   EXTRA: Object.freeze(['T-EDIT', 'T-FILL']),
   BOUNDARY_OVER_SEGMENT: Object.freeze(['T-SEGMENT', 'T-FILL', 'T-MATCH']),

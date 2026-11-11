@@ -1,19 +1,19 @@
 # 开发路线图 · ROADMAP
 
-**当前阶段**：P3 ✅（2026-11-11）
-**下一阶段**：P4（顺序/边界错闭环）
-**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P3 不通过不进入 P4。
+**当前阶段**：P4 ✅（2026-11-11）
+**下一阶段**：P5（组合强化与配对）
+**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P4 不通过不进入 P5。
 
 ---
 
 ## 1. 门禁命令
 
 ```bash
-# 当前阶段（P3，累计 p0..p3）
-node tests/runTests.js --phase=p3
+# 当前阶段（P4，累计 p0..p4）
+node tests/runTests.js --phase=p4
 
 # 后续阶段（累计运行 p0..pN）
-node tests/runTests.js --phase=p4
+node tests/runTests.js --phase=p5
 
 # 默认：自动跑到仓库中已存在的最高阶段
 node tests/runTests.js
@@ -36,8 +36,8 @@ node tools/serve.mjs
 | **P1** | 最小拼写闭环（T-SEQUENCE/T-FILL/T-TYPE） | `--phase=p1` PASS + 3 词 3 题型人工验收 | ✅ 完成 |
 | **P2** | IndexedDB 持久化与内容导入 | `--phase=p2` PASS + 刷新不丢、导出导入一致 | ✅ 完成 |
 | **P3** | 记忆曲线与错词调度 | `--phase=p3` PASS + 次日必现 | ✅ 完成 |
-| **P4** | 顺序/边界错闭环（T-REORDER/T-EDIT/T-SEGMENT） | `--phase=p4` PASS + 三类错误触发对应修复 | ⏳ 下一步 |
-| **P5** | 组合强化与配对（T-MATCH） | `--phase=p5` PASS + 跨 2 词连续正确 | ⏳ |
+| **P4** | 顺序/边界错闭环（T-REORDER/T-EDIT/T-SEGMENT） | `--phase=p4` PASS + 三类错误触发对应修复 | ✅ 完成 |
+| **P5** | 组合强化与配对（T-MATCH） | `--phase=p5` PASS + 跨 2 词连续正确 | ⏳ 下一步 |
 | **P6** | 判断纠错与语境抽查（T-JUDGE-FIX/T-CLOZE） | `--phase=p6` PASS + 假掌握被拦下 | ⏳ |
 | **P7** | 人工标注后台系统 | `--phase=p7` PASS + 错误切分阻断导出 | ⏳ |
 | **P8** | 输入适配与体验（PC/移动） | `--phase=p8` PASS + 同 spec+seed 双端一致 | ⏳ |
@@ -205,35 +205,73 @@ node tests/runTests.js --phase=p3
 
 ---
 
-## 7. P4 任务书（下一阶段）
+## 7. P4 任务书（已完成）
 
 **目标**：实现顺序/边界错闭环：T-REORDER、T-EDIT、T-SEGMENT，并把错误类型映射到对应修复题型。
 
-### 范围
+### 交付物
 
-1. `T-REORDER`：打乱单位排序；judge 定位 TRANSPOSITION。
-2. `T-EDIT`：插入/删除/替换/移动修错词；覆盖 SUBSTITUTION/EXTRA/OMISSION。
-3. `T-SEGMENT`：字母间隙点切分点；区分 OVER/UNDER/MISPLACED。
-4. `TypeSelector` 的 P4 题型不再被 `available` 过滤；Scheduler 可在错误修复时选用。
-5. 三个题型的 build/judge 测试；错误画像 unitKind/position；保持输入等价（点选可替代拖拽）。
-6. 不实现 T-MATCH/T-CLOZE；不做 P5 组合阶梯。
+- [x] `T-REORDER`：单位打乱，点两块交换；judge 从初始顺序应用 `reorder` 事件，首个不匹配报 `TRANSPOSITION`。
+- [x] `T-EDIT`：Scheduler 按错误类型生成预填错词；输入框修错，judge 复用整词分析定位 OMISSION/SUBSTITUTION/EXTRA。
+- [x] `T-SEGMENT`：逐字母 + 间隙按钮；区分 OVER/UNDER/MISPLACED 边界错。
+- [x] `TypeSelector`：TRANSPOSITION→T-REORDER、SUBSTITUTION→T-EDIT、BOUNDARY_*→T-SEGMENT；P3 仍可降级到 P1。
+- [x] `PracticeScreen`：三种 P4 交互、Check、清空、状态落库。
+- [x] `QuestionSpecBuilder`：P4 题型、T-EDIT 预填文本、难度向量。
+- [x] `tests/p4/types.test.js`、`tests/p4/schedulerTypes.test.js`。
+- [x] ADR-0010：P4 题型交互与映射。
 
-### 验收
+### 验收结果
 
-- `node tests/runTests.js --phase=p4` PASS。
-- `sh → hs` 触发 T-REORDER；`sh → ch` 触发 T-EDIT；`ck/k` 边界错触发 T-SEGMENT。
-- 次日错词队列能选中对应 P4 题型。
-- 不引入选择题、听力、图片配对；不做后台。
+```bash
+node tests/runTests.js --phase=p4
+# PASS  p4 gate · 153 passed · 0 failed · 24 files
+```
 
-### 启动提示词（可直接交给 agent）
+浏览器实测：
 
-> 只做 P4，不提前做 P5。先读 `AGENTS.md`、`docs/DESIGN.md §3.4/§3.5`、`docs/TRACEABILITY.md` 的 R-TYPE-04/05/09。
-> 实现 T-REORDER/T-EDIT/T-SEGMENT 的 build/judge，更新 TypeSelector 与 Scheduler 的可用题型。
-> 保持点选/拖拽等价、错误画像可定位；每步运行 `node tests/runTests.js --phase=p4`。
+- TRANSPOSITION 错 → 队列首题 `T-REORDER`，fish 初始 `i / sh / f`；点选交换后 correct，`2 / 6`。
+- SUBSTITUTION 错 → `T-EDIT`，预填 `fia`；改为 `fish` 后 correct。
+- BOUNDARY_OVER_SEGMENT 错 → `T-SEGMENT`，字母 `f i s h` + 3 个间隙；点 2 个正确边界后 correct。
+- 三次正确均写 `wordStates`、清空错误画像、`attempts` 增加；无控制台异常。
+- 390px 无横向滚动。
+
+### P4 明确不做
+
+- 不做 T-MATCH / T-CLOZE（P5/P6）。
+- 不做 P5 组合强化、家长端完整报表。
+- 不做拖拽版 T-REORDER（点选已等价；P8 再扩 PointerAdapter）。
 
 ---
 
-## 8. 后续阶段要点（防止提前实现）
+## 8. P5 任务书（下一阶段）
+
+**目标**：补组合强化包与 T-MATCH，让易混组合（sh/ch、ck/k、ai/ee 等）独立复习，并用配对/分类建立组合家族。
+
+### 范围
+
+1. `T-MATCH` build/judge：组合与词例配对/分类；不引入纯四选一。
+2. 组合独立阶梯：`graphemeStates` 的 interval、wordsPassed、dueDate；每天最多 1 个强化组合，2—3 个词。
+3. 跨 2 个不同词连续正确才进入 `probe` 候选；组合块选 → 键盘整词的过渡。
+4. Scheduler 每日队列包含组合强化包；难度向量标记 grapheme 层级。
+5. `tests/p5/`：T-MATCH、组合状态、跨词条件、每日 1 组、P4 不回归。
+6. 不实现 P6 的 T-JUDGE-FIX/T-CLOZE；不做后台。
+
+### 验收
+
+- `node tests/runTests.js --phase=p5` PASS。
+- sh/ch 配对正确；同一组合跨 2 词连续正确后进入 probe 候选。
+- 每天组合强化不超过 1 组；刷新后组合状态仍在。
+- 不引入选择题、听力、图片配对。
+
+### 启动提示词（可直接交给 agent）
+
+> 只做 P5，不提前做 P6。先读 `AGENTS.md`、`docs/DESIGN.md §2.1/§3.3/§3.4`、`docs/TRACEABILITY.md` 的 R-SCHED-04/R-TYPE-06。
+> 实现 T-MATCH 与组合独立阶梯，复用 P3 队列/P4 错误画像；不新增 P6 题型。
+> 每步运行 `node tests/runTests.js --phase=p5`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+
+---
+
+## 9. 后续阶段要点（防止提前实现）
 
 | 阶段 | 关键新增 | 不得提前做的事 |
 |---|---|---|
@@ -260,7 +298,7 @@ P1 不实现字母级/混合粒度。
 
 ---
 
-## 9. 阶段完成检查
+## 10. 阶段完成检查
 
 - [ ] 本阶段门禁 PASS，且低阶段测试未回退。
 - [ ] `TRACEABILITY.md` 中本阶段条目从 ⏳/🧪 改为 ✅。

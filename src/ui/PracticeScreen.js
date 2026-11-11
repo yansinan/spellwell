@@ -1,6 +1,6 @@
 /**
  * @layer ui
- * @phase P1
+ * @phase P4
  * @doc §2.1 孩子端（学习模块）
  *
  * P1 学习端：只渲染 RenderModel、收集语义 InputEvent、调用 PracticeSession。
@@ -20,6 +20,9 @@ const TYPE_COPY = Object.freeze({
   },
   'T-FILL': { title: 'Fill the gap', hint: 'Tap the missing sound.' },
   'T-TYPE': { title: 'Type the word', hint: 'Type all the letters.' },
+  'T-REORDER': { title: 'Put the sounds in order', hint: 'Tap two sounds to swap them.' },
+  'T-EDIT': { title: 'Fix the word', hint: 'Edit the letters, then check.' },
+  'T-SEGMENT': { title: 'Mark the sounds', hint: 'Tap the gaps between sounds.' },
 });
 
 /**
@@ -48,6 +51,9 @@ export class PracticeScreen {
   #previewGap = null;
   #previewKey = null;
   #onResult;
+  #reorderOrder = [];
+  #reorderInitial = [];
+  #reorderSelected = null;
   #sound = createSoundPlayer();
 
   /**
@@ -104,6 +110,9 @@ export class PracticeScreen {
     this.#current = this.#session.buildCurrent();
     this.#events = [];
     this.#locked = false;
+    this.#reorderSelected = null;
+    this.#reorderOrder = this.#current.renderModel.slots.map((slot) => slot.unitId ?? '');
+    this.#reorderInitial = [...this.#reorderOrder];
     this.#root.innerHTML = this.#questionTemplate();
     this.#bindQuestion();
     this.#bindSoundToggle();
@@ -163,13 +172,25 @@ export class PracticeScreen {
     const copy = this.#typeCopy();
     const progress = `${this.#session.currentIndex + 1} / ${this.#session.size}`;
     const word = escapeHtml(bundle.word.text);
-    const slots = spec.typeId === 'T-TYPE' ? this.#typeInputTemplate() : this.#slotsTemplate();
-    const tiles = spec.typeId === 'T-TYPE' ? '' : this.#tilesTemplate();
-    const clear = spec.typeId === 'T-TYPE'
+    const isType = spec.typeId === 'T-TYPE';
+    const isEdit = spec.typeId === 'T-EDIT';
+    const isSegment = spec.typeId === 'T-SEGMENT';
+    const slots = isType
+      ? this.#typeInputTemplate()
+      : isEdit
+        ? this.#editInputTemplate()
+        : isSegment
+          ? this.#segmentTemplate()
+          : this.#slotsTemplate();
+    const tiles = spec.typeId === 'T-SEQUENCE' || spec.typeId === 'T-FILL'
+      ? this.#tilesTemplate()
+      : '';
+    const clear = isType || isEdit
       ? ''
       : `<button type="button" class="sw-text-button" data-action="clear" ${this.#events.length === 0 ? 'disabled' : ''}>Clear</button>`;
-    const showCheck = spec.typeId === 'T-TYPE' || spec.typeId === 'T-SEQUENCE';
-    const checkDisabled = spec.typeId === 'T-TYPE' || !this.#allSlotsFilled();
+    const showCheck = ['T-TYPE', 'T-EDIT', 'T-SEQUENCE', 'T-REORDER', 'T-SEGMENT'].includes(spec.typeId);
+    const checkDisabled = spec.typeId === 'T-TYPE'
+      || (spec.typeId === 'T-SEQUENCE' && !this.#allSlotsFilled());
     const check = showCheck
       ? `<button type="button" class="sw-check" data-action="check" ${checkDisabled ? 'disabled' : ''}>Check</button>`
       : '';
@@ -201,6 +222,17 @@ export class PracticeScreen {
 
   #slotsTemplate() {
     const { spec, bundle } = this.#current;
+    if (spec.typeId === 'T-REORDER') {
+      return `
+        <div class="sw-slots sw-slots--reorder" data-role="reorder">
+          ${this.#reorderOrder.map((unitId, index) => {
+            const text = this.#unitText(unitId);
+            const selected = this.#reorderSelected === index;
+            return `<button type="button" class="sw-slot is-filled ${selected ? 'is-selected' : ''}" data-reorder-index="${index}" aria-pressed="${selected}" aria-label="Swap ${escapeHtml(text)}">${escapeHtml(text)}</button>`;
+          }).join('')}
+        </div>
+      `;
+    }
     if (spec.typeId === 'T-FILL') {
       const blankIndex = Number(spec.params.blankUnitIndex);
       const selected = this.#eventForSlot(blankIndex) ? this.#unitText(this.#eventForSlot(blankIndex).unitId) : '';
@@ -258,6 +290,42 @@ export class PracticeScreen {
     `;
   }
 
+  #editInputTemplate() {
+    const value = escapeHtml(this.#current.renderModel.fixedText ?? '');
+    return `
+      <div class="sw-type-row">
+        <input
+          class="sw-type-input"
+          data-role="edit-input"
+          type="text"
+          inputmode="text"
+          autocomplete="off"
+          autocapitalize="none"
+          spellcheck="false"
+          aria-label="Edit the word"
+          value="${value}"
+        />
+      </div>
+    `;
+  }
+
+  #segmentTemplate() {
+    const text = String(this.#current.renderModel.fixedText ?? '');
+    const selected = new Set(
+      this.#events.filter((event) => event.kind === 'tap-gap').map((event) => event.gapIndex),
+    );
+    const parts = [];
+    for (let index = 0; index < text.length; index += 1) {
+      parts.push(`<span class="sw-segment__letter">${escapeHtml(text[index])}</span>`);
+      if (index < text.length - 1) {
+        const gapIndex = index + 1;
+        const on = selected.has(gapIndex);
+        parts.push(`<button type="button" class="sw-gap ${on ? 'is-on' : ''}" data-gap-index="${gapIndex}" aria-pressed="${on}" aria-label="Gap ${gapIndex}"></button>`);
+      }
+    }
+    return `<div class="sw-segments" data-role="segments">${parts.join('')}</div>`;
+  }
+
   #bindQuestion() {
     const spec = this.#current.spec;
     for (const button of this.#root.querySelectorAll('[data-unit-id]')) {
@@ -290,6 +358,38 @@ export class PracticeScreen {
           });
         }
       }
+    }
+
+    if (spec.typeId === 'T-REORDER') {
+      for (const button of this.#root.querySelectorAll('[data-reorder-index]')) {
+        button.addEventListener('click', () => {
+          this.#onReorderTap(Number(/** @type {HTMLElement} */ (button).dataset.reorderIndex));
+        });
+      }
+    }
+
+    if (spec.typeId === 'T-SEGMENT') {
+      for (const gap of this.#root.querySelectorAll('[data-gap-index]')) {
+        gap.addEventListener('click', () => {
+          this.#toggleGap(Number(/** @type {HTMLElement} */ (gap).dataset.gapIndex));
+        });
+      }
+    }
+
+    const editInput = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="edit-input"]'));
+    if (editInput) {
+      const button = /** @type {HTMLButtonElement|null} */ (this.#root.querySelector('[data-action="check"]'));
+      const sync = () => {
+        if (button) button.disabled = editInput.value.trim().length === 0;
+      };
+      editInput.addEventListener('input', sync);
+      editInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          this.#submit();
+        }
+      });
+      sync();
     }
 
     const clear = this.#root.querySelector('[data-action="clear"]');
@@ -652,6 +752,40 @@ export class PracticeScreen {
     return true;
   }
 
+  #onReorderTap(index) {
+    if (this.#locked) return;
+    if (this.#reorderSelected === null) {
+      this.#reorderSelected = index;
+      this.#sound.tap();
+      this.#afterSelectionChange();
+      return;
+    }
+    if (this.#reorderSelected === index) {
+      this.#reorderSelected = null;
+      this.#sound.cancel();
+      this.#afterSelectionChange();
+      return;
+    }
+    const from = this.#reorderSelected;
+    const to = index;
+    [this.#reorderOrder[from], this.#reorderOrder[to]] = [this.#reorderOrder[to], this.#reorderOrder[from]];
+    this.#events.push({ kind: 'reorder', fromIndex: from, toIndex: to });
+    this.#reorderSelected = null;
+    this.#sound.tap();
+    this.#afterSelectionChange();
+  }
+
+  #toggleGap(gapIndex) {
+    if (this.#locked) return;
+    const at = this.#events.findIndex(
+      (event) => event.kind === 'tap-gap' && event.gapIndex === gapIndex,
+    );
+    if (at >= 0) this.#events.splice(at, 1);
+    else this.#events.push({ kind: 'tap-gap', gapIndex });
+    this.#sound.tap();
+    this.#afterSelectionChange();
+  }
+
   #activateTile(unitId) {
     if (this.#locked || !unitId) return;
     if (this.#events.some((event) => event.unitId === unitId)) return;
@@ -711,6 +845,11 @@ export class PracticeScreen {
       const text = input?.value ?? '';
       if (text.trim().length === 0) return;
       events = [{ kind: 'key-text', text }];
+    } else if (spec.typeId === 'T-EDIT') {
+      const input = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="edit-input"]'));
+      const text = input?.value ?? '';
+      if (text.trim().length === 0) return;
+      events = [{ kind: 'edit', text }];
     } else if (spec.typeId === 'T-FILL' && events.length === 0) {
       return;
     } else if (spec.typeId === 'T-SEQUENCE' && !this.#allSlotsFilled()) {
