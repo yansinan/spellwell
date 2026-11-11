@@ -35,10 +35,10 @@
 
 ```bash
 node tests/runTests.js --phase=p7
-# PASS  p7 gate · 175 passed · 0 failed · 31 files
+# PASS  p7 gate · 176 passed · 0 failed · 31 files
 
 node tests/runTests.js --phase=p8
-# PASS  p8 gate · 178 passed · 0 failed · 32 files
+# PASS  p8 gate · 179 passed · 0 failed · 32 files
 ```
 
 - Stats：4 answers / 50%，按日正确率、词状态、最近 4 条答案均显示。

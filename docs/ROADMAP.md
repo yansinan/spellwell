@@ -335,7 +335,7 @@ node tests/runTests.js --phase=p6
 
 ```bash
 node tests/runTests.js --phase=p7
-# PASS  p7 gate · 175 passed · 0 failed · 31 files
+# PASS  p7 gate · 176 passed · 0 failed · 31 files
 ```
 
 - 当前种子：V1—V9 通过；V10 仍识别 112 条 unreviewed。
@@ -371,7 +371,7 @@ node tests/runTests.js --phase=p7
 
 ```bash
 node tests/runTests.js --phase=p8
-# PASS  p8 gate · 178 passed · 0 failed · 32 files
+# PASS  p8 gate · 179 passed · 0 failed · 32 files
 ```
 
 - 浏览器 Stats：4 answers / 50%，最近 4 天按日正确率，learning/reviewing 分布，最近 4 条答案。

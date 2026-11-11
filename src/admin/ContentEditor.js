@@ -121,3 +121,43 @@ export function deleteWord(content, wordId) {
   const [removed] = content.words.items.splice(index, 1);
   return removed;
 }
+
+/**
+ * 批量导入时处理同文本词：
+ * - merge：保留已有 ID/units/reviewStatus，只补空的中文/音标；无 units 时补切分；
+ * - replace：保留 ID，覆盖 units/中文/音标，并将 reviewStatus 标记为 unreviewed；
+ * - skip：不修改。
+ * @param {{words: {items: any[]}}} content
+ * @param {{text: string, units: any[], translation?: string, phonetic?: string}} entry
+ * @param {'merge'|'replace'|'skip'} mode
+ * @returns {'created'|'merged'|'replaced'|'skipped'}
+ */
+export function importWord(content, entry, mode = 'merge') {
+  const existing = content.words.items.find((item) => item.text === entry.text);
+  if (!existing) {
+    addWord(content, {
+      id: nextWordId(content, entry.text),
+      text: entry.text,
+      units: entry.units,
+      translation: entry.translation ?? '',
+      phonetic: entry.phonetic ?? '',
+      level: 1,
+      reviewStatus: 'unreviewed',
+    });
+    return 'created';
+  }
+  if (mode === 'skip') return 'skipped';
+  if (mode === 'replace') {
+    existing.units = entry.units;
+    existing.translation = entry.translation ?? '';
+    existing.phonetic = entry.phonetic ?? '';
+    existing.reviewStatus = 'unreviewed';
+    return 'replaced';
+  }
+  if (!Array.isArray(existing.units) || existing.units.length === 0) {
+    existing.units = entry.units;
+  }
+  if (!existing.translation && entry.translation) existing.translation = entry.translation;
+  if (!existing.phonetic && entry.phonetic) existing.phonetic = entry.phonetic;
+  return 'merged';
+}

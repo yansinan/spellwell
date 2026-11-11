@@ -4,7 +4,7 @@
  * @doc §2.3 内容后台
  */
 
-import { addUnit, addWord, cloneContent, deleteWord, nextWordId, removeUnit, updateUnit, updateWord } from '../../src/admin/ContentEditor.js';
+import { addUnit, addWord, cloneContent, deleteWord, importWord, nextWordId, removeUnit, updateUnit, updateWord } from '../../src/admin/ContentEditor.js';
 import { assertDeepEqual, assertEqual, assertThrows, test } from '../harness.js';
 
 function base() {
@@ -37,4 +37,20 @@ test('后台编辑：增删改 unit 并保留人工切分', () => {
   assertEqual(cloneContent(content) === content, false);
   deleteWord(content, 'w.fish');
   assertEqual(content.words.items.length, 0);
+});
+
+test('重复词合并/替换/跳过：保留稳定 ID，merge 不覆盖人工切分', () => {
+  const content = base();
+  const original = content.words.items[0];
+  const entry = { text: 'fish', units: [{ text: 'f', graphemeId: 'g.f' }, { text: 'i', graphemeId: 'g.f' }, { text: 'sh', graphemeId: 'g.sh' }], translation: '鱼', phonetic: '/fɪʃ/' };
+  assertEqual(importWord(content, entry, 'merge'), 'merged');
+  assertEqual(content.words.items.length, 1);
+  assertDeepEqual(original.units, [{ text: 'f', graphemeId: 'g.f' }]);
+  assertEqual(original.translation, '鱼');
+  assertEqual(original.phonetic, '/fɪʃ/');
+
+  assertEqual(importWord(content, entry, 'replace'), 'replaced');
+  assertEqual(original.units.length, 3);
+  assertEqual(original.reviewStatus, 'unreviewed');
+  assertEqual(importWord(content, entry, 'skip'), 'skipped');
 });

@@ -14,6 +14,7 @@ import {
   applySegments,
   cloneContent,
   deleteWord,
+  importWord,
   nextWordId,
   updateWord,
 } from './ContentEditor.js';
@@ -81,7 +82,10 @@ export async function mountAdmin(root) {
     content = opened.content;
     adapter = opened.adapter;
   } catch (error) {
-    root.innerHTML = `<section class="sw-panel"><h2>加载失败</h2><pre>${escape(error)}</pre></section>`;
+    const hint = window.location.protocol === 'file:'
+      ? '当前是 file://；请先运行 node tools/serve.mjs，再打开 http://127.0.0.1:4173/src/admin/index.html'
+      : '请确认静态服务器与同源 IndexedDB 可用。';
+    root.innerHTML = `<section class="sw-panel"><h2>加载失败</h2><p>${escape(hint)}</p><pre>${escape(error)}</pre></section>`;
     return;
   }
 
@@ -91,6 +95,7 @@ export async function mountAdmin(root) {
   let batchOpen = false;
   let batchText = '';
   let batchPreview = null;
+  let duplicateMode = 'merge';
   let notice = '';
 
   const graphemeByText = () => Object.fromEntries(content.graphemes.items.map((item) => [item.text, item.id]));
@@ -151,35 +156,43 @@ export async function mountAdmin(root) {
     }).join('');
 
     let batchPreviewHtml = '';
-    let batchNewEntries = [];
+    let batchActions = [];
     if (batchPreview) {
       const existingTexts = new Set(content.words.items.map((item) => item.text));
       const seen = new Set();
-      batchNewEntries = batchPreview.entries.filter((entry) => {
-        if (existingTexts.has(entry.text) || seen.has(entry.text)) return false;
+      batchActions = batchPreview.entries.map((entry) => {
+        const duplicate = existingTexts.has(entry.text) || seen.has(entry.text);
         seen.add(entry.text);
-        return true;
+        return { entry, action: duplicate ? duplicateMode : 'created' };
       });
-      const existingCount = batchPreview.entries.length - batchNewEntries.length;
-      const rows = batchPreview.entries.map((entry) => {
-        const duplicate = existingTexts.has(entry.text) || !batchNewEntries.includes(entry);
-        return `
-          <tr class="${duplicate ? 'is-muted' : ''}">
-            <td><strong>${escape(entry.text)}</strong></td>
-            <td>${entry.units.map((unit) => escape(unit.text)).join(' · ')}</td>
-            <td>${escape(entry.translation || '—')}</td>
-            <td>${escape(entry.phonetic || '—')}</td>
-            <td>${duplicate ? '已存在/重复，跳过' : '将新增'}</td>
-          </tr>
-        `;
-      }).join('');
+      const created = batchActions.filter((item) => item.action === 'created').length;
+      const merged = batchActions.filter((item) => item.action === 'merge').length;
+      const replaced = batchActions.filter((item) => item.action === 'replace').length;
+      const skipped = batchActions.filter((item) => item.action === 'skip').length;
+      const label = { created: '新增', merge: '合并', replace: '替换', skip: '跳过' };
+      const rows = batchActions.map(({ entry, action }) => `
+        <tr class="${action === 'skip' ? 'is-muted' : ''}">
+          <td><strong>${escape(entry.text)}</strong></td>
+          <td>${entry.units.map((unit) => escape(unit.text)).join(' · ')}</td>
+          <td>${escape(entry.translation || '—')}</td>
+          <td>${escape(entry.phonetic || '—')}</td>
+          <td>${label[action]}</td>
+        </tr>
+      `).join('');
       const errors = batchPreview.errors.map((error) => `<li>第 ${error.line} 行：${escape(error.message)}</li>`).join('');
       batchPreviewHtml = `
         <div class="sw-admin__batch-preview">
-          <p>可新增 <strong>${batchNewEntries.length}</strong> 个；跳过 ${existingCount} 个；错误 ${batchPreview.errors.length} 个。</p>
-          ${rows ? `<table class="sw-admin__units"><thead><tr><th>词</th><th>切分</th><th>中文</th><th>音标</th><th>状态</th></tr></thead><tbody>${rows}</tbody></table>` : ''}
+          <p>新增 ${created} · 合并 ${merged} · 替换 ${replaced} · 跳过 ${skipped} · 错误 ${batchPreview.errors.length}</p>
+          <label class="sw-admin__inline-field">重复词
+            <select data-duplicate-mode>
+              <option value="merge" ${duplicateMode === 'merge' ? 'selected' : ''}>合并（保留人工切分，只补空字段）</option>
+              <option value="replace" ${duplicateMode === 'replace' ? 'selected' : ''}>替换（覆盖切分/中文/音标）</option>
+              <option value="skip" ${duplicateMode === 'skip' ? 'selected' : ''}>跳过</option>
+            </select>
+          </label>
+          ${rows ? `<table class="sw-admin__units"><thead><tr><th>词</th><th>切分</th><th>中文</th><th>音标</th><th>处理</th></tr></thead><tbody>${rows}</tbody></table>` : ''}
           ${errors ? `<ul class="sw-admin__errors">${errors}</ul>` : ''}
-          <button type="button" class="sw-check" data-batch-commit ${batchNewEntries.length === 0 ? 'disabled' : ''}>加入并保存</button>
+          <button type="button" class="sw-check" data-batch-commit ${created + merged + replaced === 0 ? 'disabled' : ''}>加入并保存</button>
         </div>
       `;
     }
@@ -304,26 +317,27 @@ export async function mountAdmin(root) {
       batchPreview = parseBatch(batchText, graphemeByText());
       render();
     });
+    root.querySelector('[data-duplicate-mode]')?.addEventListener('change', (event) => {
+      duplicateMode = event.target.value;
+      render();
+    });
     root.querySelector('[data-batch-commit]')?.addEventListener('click', async () => {
-      if (!batchPreview || batchNewEntries.length === 0) return;
-      for (const entry of batchNewEntries) {
-        addWord(content, {
-          id: nextWordId(content, entry.text),
-          text: entry.text,
-          translation: entry.translation,
-          phonetic: entry.phonetic,
-          level: 1,
-          units: entry.units,
-          reviewStatus: 'unreviewed',
-        });
+      if (!batchPreview || batchActions.length === 0) return;
+      const counts = { created: 0, merged: 0, replaced: 0, skipped: 0 };
+      for (const { entry } of batchActions) {
+        const result = importWord(content, entry, duplicateMode);
+        counts[result === 'created' ? 'created' : result === 'merged' ? 'merged' : result === 'replaced' ? 'replaced' : 'skipped'] += 1;
       }
-      const addedCount = batchNewEntries.length;
-      selectedWordId = content.words.items[content.words.items.length - 1]?.id ?? selectedWordId;
+      const changed = counts.created + counts.merged + counts.replaced;
+      const lastText = [...batchActions].reverse().find((item) => item.action !== 'skip')?.entry.text;
+      if (lastText) selectedWordId = content.words.items.find((item) => item.text === lastText)?.id ?? selectedWordId;
       batchOpen = false;
       batchPreview = null;
       batchText = '';
       const ok = await persistContent();
-      notice = ok ? `已批量加入并保存 ${addedCount} 个单词。` : '已加入草稿，但校验未通过，尚未写入本机数据库。';
+      notice = ok
+        ? `已保存：新增 ${counts.created} · 合并 ${counts.merged} · 替换 ${counts.replaced} · 跳过 ${counts.skipped}。`
+        : '已修改草稿，但校验未通过，尚未写入本机数据库。';
       render();
     });
 
