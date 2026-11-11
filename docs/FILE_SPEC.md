@@ -27,6 +27,8 @@
 │   ├── tokens.css              # DESIGN §6.2 的唯一色彩/圆角/动效来源
 │   ├── app.css                 # 开发壳/P0 状态页样式
 │   └── practice.css            # P1 学习端样式
+├── migration/
+│   └── index.html              # P8 本机数据迁移页
 ├── src/
 │   ├── core/                   # 契约、错误、随机、时间、事件总线；零业务
 │   │   ├── contracts.js        # QuestionSpec / RenderModel / InputEvent / AttemptResult / 状态
@@ -67,13 +69,14 @@
 │   │   ├── App.js               # P0 状态页（?dev=1）
 │   │   ├── PracticeSession.js   # P1 9 题 / P3 注入每日 specs
 │   │   ├── bootstrap.js         # P3：每日队列；IndexedDB 优先，失败回退 Memory
-│   │   ├── PracticeScreen.js    # P1—P4 学习端（点选/拖拽/交换/编辑/间隙）
+│   │   ├── PracticeScreen.js    # P1—P6/P8 学习端 + Stats
+│   │   ├── MigrationApp.js      # P8 本机全量数据迁移（非内容发布）
 │   │   ├── dragGeometry.js      # 64px 吸附半径与最近槽位
 │   │   ├── sequenceOrder.js     # 已到位块插入式重排
 │   │   ├── analytics.js        # P8 纯统计：session/历史/按日/状态
 │   │   ├── sound.js             # Web Audio 轻音效 + 静音开关
 │   │   ├── ParentScreen.js
-│   │   └── skins/              # P8；皮肤只换 token，不换行为
+│   │   └── skins/              # 皮肤只换 token，不换行为
 │   ├── content/                # 人工标注内容，只读；格式见 CONTENT_SPEC
 │   │   ├── words.json
 │   │   ├── graphemes.json
@@ -242,7 +245,7 @@ questionTypes  ←  scheduler
 ## 8. 样式规范
 
 - 颜色、圆角、字号、动效时长只能来自 `styles/tokens.css`；组件 CSS 里出现 `#RRGGBB` 视为违规（`tokens.css` 除外）。
-- 学习端（`PracticeScreen` 及其子视图）**不得出现中文字符串**；家长端可以中文。P8 加静态扫描。
+- 学习端（`PracticeScreen` 及其子视图）**不得出现中文字符串**；家长端可以中文。P9 加静态扫描。
 - 不使用尖锐边框、强投影、红色报错；错误态用暖橘 `--sw-peach`。
 - 点选与拖拽必须等价：任何拖拽交互都必须有 tap 路径（P8 验收）。
 - 动画必须尊重 `prefers-reduced-motion`。

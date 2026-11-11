@@ -18,6 +18,7 @@
 | [0012](0012-probe-judge-cloze.md) | 判断纠错、语境抽查与 probe 迁移 | Accepted | claim 判断+改错、句子挖空、60 天 probe、答错退回 |
 | [0013](0013-content-admin-export.md) | ContentValidator、后台与生产导出阻断 | Accepted | V1—V10、只读后台、reviewed-only 导出 |
 | [0014](0014-learning-analytics.md) | 前台学习分析与历史答题统计 | Accepted | 本次/历史/按日/状态报告；无积分排名；P8 新增 |
+| [0015](0015-shared-content-migration.md) | 后台与前台共享 IndexedDB；迁移独立 | Accepted | 内容直写共享库；BroadcastChannel 提示；迁移全量快照 |
 
 新增 ADR 的模板：
 

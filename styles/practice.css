@@ -648,3 +648,30 @@
 .sw-report__list small {
   color: var(--sw-ink-soft);
 }
+
+/* 后台保存内容后，学习端提示刷新。 */
+.sw-content-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--sw-radius-pill);
+  background: var(--sw-ink);
+  color: var(--sw-white);
+  box-shadow: var(--sw-shadow-card);
+  transform: translateX(-50%);
+}
+
+.sw-content-banner button {
+  border: 0;
+  border-radius: var(--sw-radius-pill);
+  padding: 6px 12px;
+  background: var(--sw-mint);
+  color: var(--sw-ink);
+  font: inherit;
+  cursor: pointer;
+}

@@ -43,6 +43,23 @@ async function boot() {
   }).mount();
 }
 
+function showContentBanner() {
+  if (document.getElementById('content-update-banner')) return;
+  const banner = document.createElement('div');
+  banner.id = 'content-update-banner';
+  banner.className = 'sw-content-banner';
+  banner.innerHTML = '<span>Content updated.</span><button type="button">Reload</button>';
+  banner.querySelector('button').addEventListener('click', () => window.location.reload());
+  document.body.append(banner);
+}
+
+if (typeof BroadcastChannel === 'function') {
+  const channel = new BroadcastChannel('spellwell-content');
+  channel.addEventListener('message', (event) => {
+    if (event.data?.type === 'content-updated') showContentBanner();
+  });
+}
+
 boot().catch((error) => {
   console.error('[SpellWell] boot failed', error);
   root.innerHTML = `

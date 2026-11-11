@@ -1105,8 +1105,9 @@ export class PracticeScreen {
           <h1 class="sw-done__title">Practice report</h1>
           <section class="sw-report__block">
             <h2>This session</h2>
-            <p><strong>${session.correct} / ${session.total}</strong> correct · ${session.accuracy}%</p>
-            <p>${session.topError ? `Most frequent: ${escapeHtml(session.topError)}` : 'No errors in this session.'}</p>
+            ${session.total === 0
+              ? '<p>No answers in this session yet.</p>'
+              : `<p><strong>${session.correct} / ${session.total}</strong> correct · ${session.accuracy}%</p><p>${session.topError ? `Most frequent: ${escapeHtml(session.topError)}` : 'No errors in this session.'}</p>`}
           </section>
           <section class="sw-report__block">
             <h2>All attempts</h2>

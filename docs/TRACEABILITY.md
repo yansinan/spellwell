@@ -100,6 +100,8 @@
 | R-P7-03 | 后台不写学习状态 | `src/admin/**` | `tests/p7/adminArchitecture.test.js` | P7 | ✅ |
 | R-P7-04 | 后台可访问并显示校验/阻断 | `/src/admin/index.html` | 浏览器 admin 验收 | P7 | ✅ |
 | R-P7-05 | 后台维护单词与 unit 切分 | `ContentEditor` + AdminApp | `tests/p7/editor.test.js` + 浏览器 | P7 | ✅ |
+| R-P7-06 | 后台保存到共享 IndexedDB，学习端可见 | `AdminApp` + BroadcastChannel | 浏览器双页验收 | P7/P8 | ✅ |
+| R-P8-05 | 本机数据全量迁移独立于内容编辑 | `MigrationApp` | 浏览器迁移页 | P8 | ✅ |
 | R-P8-01 | 本次练习效果统计 | `summarizeSession` + Done 页 | `tests/p8/analytics.test.js` + 浏览器 | P8 | ✅ |
 | R-P8-02 | 历史答题汇总/按日/按词 | `summarizeAttempts` / `groupAttemptsByDay` | `tests/p8/analytics.test.js` + Stats 页 | P8 | ✅ |
 | R-P8-03 | 词状态与 probe 分布 | `summarizeWordStates` | `tests/p8/analytics.test.js` | P8 | ✅ |
@@ -189,6 +191,7 @@
 | A-14 | 判断纠错、语境抽查与 probe 迁移 | claim 判断+改错、句子挖空、60 天 probe、答错退回 | ADR-0012 |
 | A-15 | 后台校验与生产导出如何阻断 | V1—V10、只读后台、只导出 reviewed、后台不碰状态 | ADR-0013 |
 | A-16 | 前台学习分析包含什么、如何避免游戏化 | 本次/历史/按日/状态；无积分排名；只读报告 | ADR-0014 |
+| A-17 | 后台编辑如何进入学习端、迁移是否内容发布 | 共享 IndexedDB + BroadcastChannel；全量迁移独立 | ADR-0015 |
 
 ---
 

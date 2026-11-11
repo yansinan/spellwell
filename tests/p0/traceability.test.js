@@ -92,6 +92,7 @@ test('ADR：偏离设计的裁决已入库，并被追溯矩阵引用', async ()
   assert(decisionFiles.includes('0012-probe-judge-cloze.md'));
   assert(decisionFiles.includes('0013-content-admin-export.md'));
   assert(decisionFiles.includes('0014-learning-analytics.md'));
+  assert(decisionFiles.includes('0015-shared-content-migration.md'));
   const adr1 = await read('docs/decisions/0001-storage-contract.md');
   const adr2 = await read('docs/decisions/0002-docs-as-code.md');
   assertMatch(adr1, /状态\*\*：Accepted/);

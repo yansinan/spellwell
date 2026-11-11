@@ -33,6 +33,7 @@ npm start
 打开预览页会进入学习端：每日 5—8 个词，默认 6 个。
 `?dev=1` 仍可查看 P0 开发状态页；`?debug=1` 会在学习端显示 AttemptResult 调试面板并暴露 `__SPELLWELL_DEBUG__`（含 scheduler）。
 内容后台：`/src/admin/index.html`。
+本机数据迁移：`/migration/index.html`。
 
 ![P1 学习端](docs/p1-preview.png)
 
@@ -172,8 +173,10 @@ tools/serve.mjs   零依赖静态服务器
 ## P7 已实现
 
 - `ContentValidator`：V1—V9 内容结构校验；V10 只导出 reviewed。
-- 内容后台 `/src/admin/index.html`：单词库/unit 编辑器、4 库计数、校验错误、IndexedDB 保存、导出阻断。
-- 当前种子全部 `unreviewed` → 导出按钮禁用，38 条内容阻断。
+- 内容后台 `/src/admin/index.html`：搜索/列表/编辑器、单词/unit 维护、保存到共享 IndexedDB；学习端刷新可见。
+- 本机数据迁移独立：`/migration/index.html`，仅用于换主机时全量导出/导入 8 个 store。
+- 后台不再要求内容 JSON 导出/导入；reviewed-only 校验保留，内容导出入口移除。
+- 当前种子全部 `unreviewed`；V10 仍识别 38 条阻断，内容导出入口已移除。
 - 后台不 import 状态仓库，不触碰 wordStates/graphemeStates/attempts。
 
 ![P7 内容后台](docs/p7-preview.png)

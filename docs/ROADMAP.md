@@ -81,7 +81,7 @@ P0 **不包含**：任何题型的真实出题/判定、IndexedDB 写入、调�
 - 不实现 T-SEQUENCE/T-FILL/T-TYPE 的 build/judge（P1）。
 - 不接 IndexedDB（P2）。
 - 不做每日队列/次日错词（P3）。
-- 不做家长端/后台/挑战模式（P3/P7/P9）。
+- 不做家长端/后台/挑战模式（P3/P7/P10）。
 - 不引入任何 npm 依赖、构建工具、框架。
 
 ---
@@ -324,8 +324,9 @@ node tests/runTests.js --phase=p6
 
 - [x] `ContentValidator`：V1—V9 结构校验 + V10 reviewed-only。
 - [x] `buildExport`：无效/未审核内容阻断，返回可定位 `unreviewed[]`。
-- [x] `AdminApp`：同源加载 4 库、显示计数/错误、导出按钮；后台不 import 状态仓库。
-- [x] 单词库/unit 编辑器：新增单词、编辑 text/unit、选择 grapheme、保存到本机 IndexedDB、下载草稿。
+- [x] `AdminApp`：同源加载 4 库、双栏单词列表/编辑器、保存到共享 IndexedDB；后台不 import 状态仓库。
+- [x] 单词库/unit 编辑器：搜索/列表/内联新增、编辑 text/unit、选择 grapheme、未保存状态、撤销、共享 IndexedDB 保存。
+- [x] 内容导出入口移除；本机迁移独立 `/migration/index.html`。
 - [x] `/src/admin/index.html` 可访问；学习端不暴露入口。
 - [x] `tests/p7/content.test.js`、`tests/p7/adminArchitecture.test.js`。
 - [x] ADR-0013：ContentValidator、后台与导出阻断。
@@ -337,12 +338,12 @@ node tests/runTests.js --phase=p7
 # PASS  p7 gate · 170 passed · 0 failed · 30 files
 ```
 
-- 当前种子：V1—V9 通过；V10 阻断 38 条 unreviewed，导出按钮 disabled。
-- 全部 reviewed 的测试副本：导出 10/22/4/2，只含 reviewed。
+- 当前种子：V1—V9 通过；V10 仍识别 38 条 unreviewed。
+- `buildExport` 测试副本：全部 reviewed 时导出 10/22/4/2，只含 reviewed。
 - 切分不闭合、缺组合、重复 ID、句子答案错、混淆项重复均能定位。
-- 后台浏览器：words 10 / graphemes 22 / sentences 4 / confusables 2；显示 `CONTENT_EXPORT_UNREVIEWED`。
+- 后台浏览器：双栏编辑器、单词/unit 保存到共享 IndexedDB；学习端刷新可见。
 - 后台模块不触碰 wordStates/graphemeStates/attempts。
-- 后台新增单词/unit 编辑、IndexedDB 保存与草稿下载；当前种子 unreviewed 仍阻断 reviewed-only 导出。
+- 后台不再有内容导出/导入；全量数据迁移独立。
 
 ### P7 明确不做
 

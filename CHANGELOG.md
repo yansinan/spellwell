@@ -9,19 +9,22 @@
   - Header `Stats` 报告页：本次练习、历史总览、最近 5 天、Word states、最近 10 次答案；
   - Done 页显示本次 `correct / total` 与正确率；
   - 只读报告，无积分/排行榜，不参与调度。
-- 后台单词库/unit 编辑器：
-  - 新增单词、编辑 text/level/reviewStatus；
-  - 增删改 unit，人工选择 grapheme；
-  - 保存到本机 IndexedDB，学习端刷新可见；
-  - 下载当前草稿 JSON；reviewed-only 导出仍阻断未审核内容。
+- 后台单词库/unit 编辑器（交互重做）：
+  - 左侧搜索/单词列表，右侧编辑器；内联新增，不再 prompt；
+  - 增删改 unit、人工选择 grapheme、拼接一致性提示；
+  - 保存到与学习端共享的 IndexedDB，BroadcastChannel 提示学习端刷新；
+  - 未保存/已同步状态、撤销、全局校验；
+  - 移除内容“下载/导入”假流程，避免与迁移混淆。
+- 本机数据迁移独立页面 `/migration/index.html`：全量 8 store 导出/导入，仅用于换主机；不在 AdminApp 中导出内容。
 - `tests/p7/editor.test.js`、`tests/p8/analytics.test.js`。
 - ADR-0014：前台学习分析与历史统计。
+- ADR-0015：后台/前台共享 IndexedDB；本机迁移独立。
 
 ### Changed
 
 - `package.json` 版本 `0.8.0` → `0.9.0`；新增 `test:p8`。
 - 阶段重排：P8 学习分析、P9 输入适配、P10 挑战、P11 平移。
-- 后台从只读统计升级为单词/unit 编辑 + 导出控制台。
+- 后台从只读统计升级为单词/unit 编辑 + 共享 IndexedDB；内容导出入口移除。
 - `README` / `ROADMAP` / `TRACEABILITY` / `AGENTS` / `FILE_SPEC` 状态推进到 P9。
 
 ### Verification

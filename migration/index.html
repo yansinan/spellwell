@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SpellWell · 本机数据迁移</title>
+    <link rel="stylesheet" href="../styles/tokens.css" />
+    <link rel="stylesheet" href="../styles/app.css" />
+  </head>
+  <body class="sw-app">
+    <main class="sw-shell">
+      <header class="sw-hero">
+        <p class="sw-eyebrow">DATA MIGRATION</p>
+        <h1 class="sw-title">本机数据迁移</h1>
+        <p class="sw-lede">只用于换主机：完整导出/导入内容、学习状态与 attempts。</p>
+      </header>
+      <div id="migration-root"><p class="sw-lede">加载中…</p></div>
+    </main>
+    <script type="module">
+      import { mountMigration } from '../src/ui/MigrationApp.js';
+      mountMigration(document.getElementById('migration-root')).catch((error) => {
+        document.getElementById('migration-root').textContent = String(error);
+      });
+    </script>
+  </body>
+</html>

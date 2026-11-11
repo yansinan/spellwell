@@ -21,6 +21,7 @@
   --sw-ink-soft: #6b6b76;
   --sw-ink-faint: #8a8a93;
   --sw-line: rgba(68, 68, 68, 0.08);
+  --sw-line-strong: rgba(68, 68, 68, 0.18);
   --sw-white: #ffffff;
 
   /* 形状 */
