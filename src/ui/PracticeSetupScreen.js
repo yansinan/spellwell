@@ -28,6 +28,8 @@ export class PracticeSetupScreen {
     this.selectedUnits = new Set(workspace.units.map((unit) => unit.id));
     this.mode = workspace.settings.defaultMode;
     this.loading = false;
+    const firstUnitTerm = workspace.terms.find((term) => term.units.length > 0);
+    this.expandedTerms = new Set(firstUnitTerm ? [firstUnitTerm.id] : []);
   }
 
   mount() {
@@ -60,7 +62,7 @@ export class PracticeSetupScreen {
                 const selectedCount = term.units.filter((unit) => this.selectedUnits.has(unit.id)).length;
                 const allSelected = term.units.length > 0 && selectedCount === term.units.length;
                 return `
-                  <details class="sw-setup__term" ${term.units.length > 0 ? 'open' : ''}>
+                  <details class="sw-setup__term" ${this.expandedTerms.has(term.id) ? 'open' : ''}>
                     <summary>
                       <label class="sw-setup__term-check" data-term-label>
                         <input type="checkbox" data-setup-term="${escape(term.id)}" ${allSelected ? 'checked' : ''} ${term.units.length === 0 ? 'disabled' : ''} />
@@ -103,6 +105,14 @@ export class PracticeSetupScreen {
       </div>
     `;
 
+    for (const details of this.root.querySelectorAll('.sw-setup__term')) {
+      const term = this.workspace.terms.find((item) => item.units.some((unit) => details.querySelector(`[data-setup-unit="${unit.id}"]`)));
+      details.addEventListener('toggle', () => {
+        if (!term) return;
+        if (details.open) this.expandedTerms.add(term.id);
+        else this.expandedTerms.delete(term.id);
+      });
+    }
     for (const input of this.root.querySelectorAll('[data-setup-term]')) {
       const term = this.workspace.terms.find((item) => item.id === input.dataset.setupTerm);
       if (term) {

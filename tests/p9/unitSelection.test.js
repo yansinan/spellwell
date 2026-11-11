@@ -33,7 +33,7 @@ async function setup() {
 test('单元选择：只生成所选 unit 的题，队列可到 20', async () => {
   const { scheduler, adapter } = await setup();
   const specs = await scheduler.buildDailyQueue({ size: 20, units: ['g1-s2-u1'], mode: 'review' });
-  assertEqual(specs.length, 8);
+  assertEqual(specs.length, 11);
   for (const spec of specs) {
     const word = await adapter.get('words', spec.target.id);
     assertEqual(word.unitId, 'g1-s2-u1');

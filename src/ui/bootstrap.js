@@ -21,12 +21,10 @@ import { PracticeSession } from './PracticeSession.js';
 
 export const P1_WORD_IDS = Object.freeze(['w.fish', 'w.ship', 'w.night']);
 
-const TERM_DEFINITIONS = Object.freeze([
-  { id: 'g1-s1', grade: 1, term: '上', label: '一年级上' },
-  { id: 'g1-s2', grade: 1, term: '下', label: '一年级下' },
-  { id: 'g2-s1', grade: 2, term: '上', label: '二年级上' },
-  { id: 'g2-s2', grade: 2, term: '下', label: '二年级下' },
-]);
+const TERM_DEFINITIONS = Object.freeze([1, 2, 3, 4, 5, 6].flatMap((grade) => ([
+  { id: `g${grade}-s1`, grade, term: '上', label: `${['一', '二', '三', '四', '五', '六'][grade - 1]}年级上` },
+  { id: `g${grade}-s2`, grade, term: '下', label: `${['一', '二', '三', '四', '五', '六'][grade - 1]}年级下` },
+])));
 
 async function fetchJson(relativePath) {
   const response = await fetch(new URL(relativePath, import.meta.url));

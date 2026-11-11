@@ -4,15 +4,16 @@
 
 ### Added
 
-- 单元模型 `grade/term/unit` + `unitId/unitLabel`：3 个单元、20 个词。
+- 单元模型 `grade/term/unit` + `unitId/unitLabel`；接入 2026 人教新起点基础词库：583 个词、72 个单元、12 个学期。
 - 练习设计按“一年级上/下、二年级上/下”折叠，学期下多选 unit。
-- 练习设计页：一年级上/下、二年级上/下折叠；学期下多选 unit；Review/Effort；前台不选题量。
+- 练习设计页：一至六年级上/下折叠；学期下多选 unit；Review/Effort；前台不选题量。
 - 题量设置 `meta.practiceSettings`，默认 20，范围 5—30。
 - 后台练习设置页 `/src/admin/settings.html`，面包屑“内容库 / 练习设置”。
 - Scheduler 支持 unit 过滤、retired 过滤、Review/Effort 侧重。
 - 用真实 attempts 校准权重：按词/题型错误率、小样本平滑、约束优先。
 - 修复旧 DB 无 unitId 时 Start practice 空队列的问题；内容版本升到 3。
 - v2→v3 迁移保留后台已编辑词，补齐 grade/term/unit。
+- 内容版本升到 4，导入 583 词基础词库；新增基础词库报告。
 - `contentRevision`：后台保存递增；下一轮重新读内容。
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
 - 计划项带 `params.plan.reason/mode/policyVersion`。

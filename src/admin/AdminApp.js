@@ -102,7 +102,9 @@ export async function mountAdmin(root) {
   } catch {
     attemptStats = {};
   }
-  const collapsedLevels = new Set();
+  const selectedUnit = content.words.items.find((item) => item.id === selectedWordId)?.unitId;
+  const collapsedLevels = new Set(content.words.items.map((item) => String(item.unitId ?? `level-${item.level ?? 1}`)));
+  if (selectedUnit) collapsedLevels.delete(String(selectedUnit));
   let adding = false;
   let batchOpen = false;
   let batchText = '';
@@ -331,8 +333,7 @@ export async function mountAdmin(root) {
               <label>单词 <input data-word-text value="${escape(word.text)}" /></label>
               <label>年级
                 <select data-word-grade>
-                  <option value="1" ${word.grade === 1 ? 'selected' : ''}>一年级</option>
-                  <option value="2" ${word.grade === 2 ? 'selected' : ''}>二年级</option>
+                  ${[1, 2, 3, 4, 5, 6].map((grade) => `<option value="${grade}" ${word.grade === grade ? 'selected' : ''}>${['一', '二', '三', '四', '五', '六'][grade - 1]}年级</option>`).join('')}
                 </select>
               </label>
               <label>学期
@@ -574,7 +575,7 @@ export async function mountAdmin(root) {
         const term = root.querySelector('[data-word-term]').value;
         const unit = Number(root.querySelector('[data-word-unit]').value);
         const unitId = `g${grade}-s${term === '下' ? '2' : '1'}-u${unit}`;
-        const unitLabel = `${grade === 1 ? '一' : '二'}年级${term} · 第${unit}单元`;
+        const unitLabel = `${['一', '二', '三', '四', '五', '六'][grade - 1]}年级${term} · 第${unit}单元`;
         updateWord(content, word.id, {
           text,
           grade,

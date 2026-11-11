@@ -110,6 +110,7 @@
 | R-P9-05 | 真实 attempts 校准选词权重 | `SelectionWeights` + Scheduler | `tests/p9/selectionWeights.test.js` + `unitSelection.test.js` | P9 | ✅ |
 | R-P9-06 | 年级/学期/单元多选与出题范围 | `bootstrap` + PracticeSetupScreen + Scheduler | `tests/p9/unitSelection.test.js` + 浏览器 | P9 | ✅ |
 | R-P9-07 | 提示词句子/音标/中文/单词优先级 | `promptSelector` + PracticeScreen | `tests/p9/promptSelector.test.js` | P9 | ✅ |
+| R-P9-08 | 2026 人教新起点 1—6 年级基础词库 | `src/content/words.json` + report | content tests + data audit | P9 | ✅ |
 | R-P7-09 | 批量单元标题行切换后续词单元 | `WordImporter.parseBatch` + AdminApp | `tests/p7/import.test.js` + `tests/p7/editor.test.js` | P7 | ✅ |
 | R-P7-10 | 词库单独导入/导出与重复词合并/替换/不动 | `WordLibrary` + AdminApp | `tests/p7/wordLibrary.test.js` + 浏览器 | P7 | ✅ |
 | R-P8-05 | 本机数据全量迁移独立于内容编辑 | `MigrationApp` | 浏览器迁移页 | P8 | ✅ |

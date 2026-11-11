@@ -394,7 +394,8 @@ node tests/runTests.js --phase=p8
 
 ### 交付物
 
-- [x] 内容单元模型：`grade/term/unit` + `unitId/unitLabel`；3 个单元、20 个词。
+- [x] 内容单元模型：`grade/term/unit` + `unitId/unitLabel`；2026 人教新起点 583 词、72 单元、12 学期。
+- [x] 基础词库来源、数据质量与优化报告：`docs/PEP_VOCAB_BASE.md`。
 - [x] 练习设计按年级学期折叠；学期下多选 unit。
 - [x] 真实 attempts 权重校准（按词/题型错误率、平滑、约束优先）。
 - [x] 修复旧 DB 无 unitId 时 Start practice 空队列。
@@ -417,7 +418,7 @@ node tests/runTests.js --phase=p9
 # PASS  p9 gate · 196 passed · 0 failed · 40 files
 ```
 
-- 练习设计页：3 个单元全选、Review 默认、`20 questions`。
+- 练习设计页：12 个学期折叠、unit 多选、Review 默认、`20 questions`。
 - 开始后 `1 / 20`；只生成所选 unit 的题目。
 - 后台设置 20 题；重新设置后下一轮生效。
 - 学期折叠为“一年级上/一年级下/二年级上/二年级下”；单元标签为“一年级下 · 第1单元”等。

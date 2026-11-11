@@ -174,3 +174,4 @@ node tools/serve.mjs
 - P9 权重：按真实 attempts 的词/题型错误率 + 小样本平滑；同层排序，约束优先；见 ADR-0019。
 - P9 提示词：句子 → 音标 → 中文 → 单词；CLOZE 句子即题面；见 ADR-0020。
 - 词库可单独导入/导出（只含 words）；重复词合并/替换/不动；全量迁移仍走 migration；见 ADR-0021。
+- 2026 人教新起点基础词库：583 词、72 单元、12 学期；全部 unreviewed；来源与优化见 `docs/PEP_VOCAB_BASE.md`。
