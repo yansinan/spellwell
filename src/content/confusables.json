@@ -7,7 +7,10 @@
       "b": "g.sh",
       "kind": "digraph",
       "note": "chip / ship 的词首对比",
-      "wordPairIds": ["w.chip", "w.ship"],
+      "wordPairIds": [
+        "w.chip",
+        "w.ship"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -16,7 +19,70 @@
       "b": "g.k",
       "kind": "ending",
       "note": "duck / book 的结尾组合对比；非最小对立，仅作定位",
-      "wordPairIds": ["w.duck", "w.book"],
+      "wordPairIds": [
+        "w.duck",
+        "w.book"
+      ],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "c.ai-ay",
+      "a": "g.ai",
+      "b": "g.ay",
+      "kind": "vowel-team",
+      "note": "rain / play 的元音组合对比",
+      "wordPairIds": [
+        "w.rain",
+        "w.fltrp-play"
+      ],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "c.ea-ee",
+      "a": "g.ea",
+      "b": "g.ee",
+      "kind": "vowel-team",
+      "note": "weather / green 的元音组合对比",
+      "wordPairIds": [
+        "w.weather",
+        "w.green"
+      ],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "c.oa-ow",
+      "a": "g.oa",
+      "b": "g.ow",
+      "kind": "vowel-team",
+      "note": "boat / snow 的元音组合对比",
+      "wordPairIds": [
+        "w.boat",
+        "w.snow"
+      ],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "c.ir-ur",
+      "a": "g.ir",
+      "b": "g.ur",
+      "kind": "r-controlled",
+      "note": "bird / turn 的 r 控制组合对比",
+      "wordPairIds": [
+        "w.bird",
+        "w.fltrp-turn"
+      ],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "c.s-th",
+      "a": "g.s",
+      "b": "g.th",
+      "kind": "digraph",
+      "note": "sun / three 的词首辅音对比",
+      "wordPairIds": [
+        "w.sun",
+        "w.the"
+      ],
       "reviewStatus": "unreviewed"
     }
   ]

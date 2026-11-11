@@ -19,6 +19,8 @@
 - v2→v3 迁移保留后台已编辑词，补齐 grade/term/unit。
 - 内容版本升到 6，导入两套教材词库；新增外研词库报告。
 - 组合库 96 → 152；切分审计：全字母保底 433 → 316。
+- 魔法 e 标注 108 个 CVCe 词；新增 162 条例句、7 组混淆项。
+- 练习阶段改为 Warm-up → Review → New → Practice；新词先搭、复习再默写。
 - `contentRevision`：后台保存递增；下一轮重新读内容。
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
 - 计划项带 `params.plan.reason/mode/policyVersion`。
@@ -39,7 +41,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 204 passed · 0 failed · 44 files
+# PASS  p9 gate · 205 passed · 0 failed · 44 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。
@@ -89,10 +91,10 @@ node tests/runTests.js --phase=p9
 
 ```bash
 node tests/runTests.js --phase=p7
-# PASS  p7 gate · 185 passed · 0 failed · 34 files
+# PASS  p7 gate · 186 passed · 0 failed · 34 files
 
 node tests/runTests.js --phase=p8
-# PASS  p8 gate · 188 passed · 0 failed · 35 files
+# PASS  p8 gate · 189 passed · 0 failed · 35 files
 ```
 
 - Stats：4 answers / 50%，按日正确率、词状态、最近 4 条答案均显示。

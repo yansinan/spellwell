@@ -188,6 +188,12 @@ export class PracticeScreen {
   #questionTemplate() {
     const { spec, bundle } = this.#current;
     const copy = this.#typeCopy();
+    const phaseLabel = {
+      repair: 'Warm-up',
+      review: 'Review',
+      new: 'New word',
+      practice: 'Practice',
+    }[spec.params?.plan?.phase] ?? '';
     const progress = `${this.#session.currentIndex + 1} / ${this.#session.size}`;
     const isType = spec.typeId === 'T-TYPE';
     const isEdit = spec.typeId === 'T-EDIT';
@@ -232,6 +238,7 @@ export class PracticeScreen {
         ${this.#headerTemplate(progress)}
 
         <main class="sw-practice__stage">
+          ${phaseLabel ? `<p class="sw-practice__phase">${phaseLabel}</p>` : ''}
           <p class="sw-practice__kind">${copy.title}</p>
           ${promptHtml}
           <p class="sw-practice__hint">${copy.hint}</p>

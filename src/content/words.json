@@ -48,7 +48,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "c",
@@ -56,7 +57,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -73,7 +75,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-meet",
@@ -163,7 +167,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpplay.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -354,7 +360,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "v",
@@ -362,7 +369,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -379,7 +387,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-six",
@@ -765,7 +775,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpfamily.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -958,7 +970,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpsister.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1028,7 +1042,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbrother.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1127,7 +1143,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrplove.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1259,7 +1277,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpdoor.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1390,7 +1410,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpwindow.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1423,7 +1445,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpdesk.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1452,7 +1476,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpchair.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1514,7 +1540,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbig.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1584,7 +1612,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpteacher.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1683,7 +1713,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpschool.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1806,7 +1838,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrppencil.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1839,7 +1873,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbook.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1872,7 +1908,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpread.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1946,7 +1984,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpred.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1979,7 +2019,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpgreen.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2008,7 +2050,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpblue.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2041,7 +2085,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpblack.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2054,7 +2100,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "t",
@@ -2062,7 +2109,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -2078,8 +2126,12 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "sentenceIds": [
+        "s.fltrpwhite.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-yellow",
@@ -2115,7 +2167,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpyellow.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2255,7 +2309,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrphappy.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2317,7 +2373,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpgo.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2445,7 +2503,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpdog.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2478,7 +2538,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpcat.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2589,7 +2651,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpfriend.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2733,7 +2797,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpzoo.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2931,7 +2997,8 @@
         },
         {
           "text": "u",
-          "graphemeId": "g.u"
+          "graphemeId": "g.u",
+          "magicE": true
         },
         {
           "text": "t",
@@ -2939,7 +3006,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -2956,7 +3024,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "u_e"
     },
     {
       "id": "w.fltrp-picture",
@@ -3038,7 +3108,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "c",
@@ -3046,7 +3117,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -3063,7 +3135,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-eye",
@@ -3129,7 +3203,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "s",
@@ -3137,7 +3212,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -3154,7 +3230,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.fltrp-mouth",
@@ -3285,7 +3363,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrphave.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -3314,7 +3394,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpsmall.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -3327,7 +3409,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "m",
@@ -3335,7 +3418,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -3352,7 +3436,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-know",
@@ -4184,7 +4270,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrptoy.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -4230,7 +4318,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "m",
@@ -4238,7 +4327,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -4255,7 +4345,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-he",
@@ -4316,7 +4408,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpswim.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -4411,7 +4505,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrprun.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -4543,7 +4639,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "m",
@@ -4551,7 +4648,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -4567,8 +4665,12 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "sentenceIds": [
+        "s.fltrphome.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.fltrp-bed",
@@ -4703,7 +4805,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrproom.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -4769,7 +4873,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpday.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -4938,7 +5044,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpsnow.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -5054,7 +5162,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "m",
@@ -5062,7 +5171,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -5079,7 +5189,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-tell",
@@ -5219,7 +5331,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "n",
@@ -5227,7 +5340,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -5244,7 +5358,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-ten",
@@ -5395,7 +5511,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbirthday.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -5601,7 +5719,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpsad.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -5840,7 +5960,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpapple.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -5972,7 +6094,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpeat.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -6017,7 +6141,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbanana.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -6067,7 +6193,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "c",
@@ -6075,7 +6202,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -6091,8 +6219,12 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "sentenceIds": [
+        "s.fltrprice.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-noodle",
@@ -6161,7 +6293,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpmilk.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -6194,7 +6328,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbread.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -6207,7 +6343,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "k",
@@ -6215,7 +6352,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -6231,8 +6369,12 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "sentenceIds": [
+        "s.fltrplike.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-but",
@@ -6339,7 +6481,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "k",
@@ -6347,7 +6490,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -6363,8 +6507,12 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "sentenceIds": [
+        "s.fltrpcake.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-sweet",
@@ -6433,7 +6581,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpweather.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -6717,7 +6867,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpegg.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -6812,7 +6964,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpspring.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -6849,7 +7003,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpsummer.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -6890,7 +7046,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpautumn.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -6931,7 +7089,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpwinter.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -7001,7 +7161,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpyear.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -7047,7 +7209,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "k",
@@ -7055,7 +7218,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -7072,7 +7236,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-some",
@@ -7368,7 +7534,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpsun.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -7405,7 +7573,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpjump.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -7484,7 +7654,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "t",
@@ -7492,7 +7663,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -7508,8 +7680,12 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "sentenceIds": [
+        "s.fltrpkite.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-card",
@@ -7603,7 +7779,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbus.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -7632,7 +7810,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpcar.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -7665,7 +7845,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrptrain.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -7678,7 +7860,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "n",
@@ -7686,7 +7869,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -7702,8 +7886,12 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "sentenceIds": [
+        "s.fltrpplane.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-farm",
@@ -7838,7 +8026,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpsee.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -8678,7 +8868,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpmusic.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -9028,7 +9220,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpsing.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -9057,7 +9251,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpdance.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -9193,7 +9389,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpweek.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -9876,7 +10074,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "s",
@@ -9884,7 +10083,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -9901,7 +10101,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-ruler",
@@ -9937,7 +10139,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpruler.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -10003,7 +10207,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrptree.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -10566,7 +10772,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpboat.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -10673,7 +10881,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "t",
@@ -10681,7 +10890,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -10698,7 +10908,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-world",
@@ -10776,7 +10988,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "magicE": true
         },
         {
           "text": "s",
@@ -10784,7 +10997,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -10801,7 +11015,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "e_e"
     },
     {
       "id": "w.fltrp-those",
@@ -10813,7 +11029,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "s",
@@ -10821,7 +11038,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -10838,7 +11056,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.fltrp-age",
@@ -10945,7 +11165,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "m",
@@ -10953,7 +11174,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -10969,8 +11191,12 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "sentenceIds": [
+        "s.fltrpgame.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-about",
@@ -11048,7 +11274,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "c",
@@ -11056,7 +11283,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -11073,7 +11301,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-right",
@@ -11266,7 +11496,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpgood.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -11909,7 +12141,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbag.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -12053,7 +12287,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "n",
@@ -12061,7 +12296,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -12078,7 +12314,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-gift",
@@ -12172,7 +12410,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "s",
@@ -12180,7 +12419,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -12197,7 +12437,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-party",
@@ -12633,7 +12875,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "v",
@@ -12641,7 +12884,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -12658,7 +12902,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-grassland",
@@ -12785,7 +13031,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "k",
@@ -12793,7 +13040,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -12810,7 +13058,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-dear",
@@ -12900,7 +13150,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbad.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -13024,7 +13276,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "t",
@@ -13032,7 +13285,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -13048,8 +13302,12 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "sentenceIds": [
+        "s.fltrpwrite.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-piano",
@@ -13464,7 +13722,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpwater.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -13547,7 +13807,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "d",
@@ -13555,7 +13816,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -13572,7 +13834,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-bike",
@@ -13584,7 +13848,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "k",
@@ -13592,7 +13857,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -13608,8 +13874,12 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "sentenceIds": [
+        "s.fltrpbike.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-wow",
@@ -13699,7 +13969,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "t",
@@ -13707,7 +13978,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -13724,7 +13996,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-why",
@@ -14177,7 +14451,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "p",
@@ -14185,7 +14460,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -14202,7 +14478,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-breakfast",
@@ -14443,7 +14721,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "t",
@@ -14451,7 +14730,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -14468,7 +14748,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-drink",
@@ -14504,7 +14786,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpdrink.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -15236,7 +15520,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpmorning.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -15285,7 +15571,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpafternoon.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -15326,7 +15614,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpevening.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -15507,7 +15797,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpball.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -15565,7 +15857,8 @@
         },
         {
           "text": "u",
-          "graphemeId": "g.u"
+          "graphemeId": "g.u",
+          "magicE": true
         },
         {
           "text": "t",
@@ -15573,7 +15866,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -15590,7 +15884,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "u_e"
     },
     {
       "id": "w.fltrp-way",
@@ -16437,7 +16733,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "n",
@@ -16445,7 +16742,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -16462,7 +16760,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-wrong",
@@ -17077,7 +17377,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrphot.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -17114,7 +17416,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpcold.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -17151,7 +17455,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpwind.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -17743,7 +18049,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "c",
@@ -17751,7 +18058,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -17768,7 +18076,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-museum",
@@ -17977,7 +18287,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "n",
@@ -17985,7 +18296,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -18002,7 +18314,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-lesson",
@@ -18692,7 +19006,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "k",
@@ -18700,7 +19015,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -18717,7 +19033,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-king",
@@ -18762,7 +19080,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "f",
@@ -18770,7 +19089,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -18787,7 +19107,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-hippo",
@@ -19609,7 +19931,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "k",
@@ -19617,7 +19940,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -19634,7 +19958,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.fltrp-healthy",
@@ -20242,7 +20568,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "s",
@@ -20250,7 +20577,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -20267,7 +20595,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-goal",
@@ -20357,7 +20687,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "m",
@@ -20365,7 +20696,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -20382,7 +20714,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.fltrp-painter",
@@ -20620,7 +20954,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "k",
@@ -20628,7 +20963,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -20645,7 +20981,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-far",
@@ -21200,7 +21538,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "v",
@@ -21208,7 +21547,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -21225,7 +21565,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-thin",
@@ -21426,7 +21768,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "n",
@@ -21434,7 +21777,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -21451,7 +21795,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-trip",
@@ -21873,7 +22219,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "v",
@@ -21881,7 +22228,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -21898,7 +22246,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-someone",
@@ -22337,7 +22687,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "t",
@@ -22345,7 +22696,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -22362,7 +22714,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-study",
@@ -22546,7 +22900,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "c",
@@ -22554,7 +22909,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -22571,7 +22927,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-subject",
@@ -22759,7 +23117,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "t",
@@ -22767,7 +23126,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -22784,7 +23144,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-french",
@@ -23342,7 +23704,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "n",
@@ -23350,7 +23713,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -23367,7 +23731,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-sh",
@@ -24637,7 +25003,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "b",
@@ -24645,7 +25012,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -24662,7 +25030,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.fltrp-bookshelf",
@@ -24764,7 +25134,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "d",
@@ -24772,7 +25143,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -24789,7 +25161,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-staircase",
@@ -24809,7 +25183,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "s",
@@ -24817,7 +25192,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -24834,7 +25210,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-lift",
@@ -24961,7 +25339,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "s",
@@ -24969,7 +25348,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -24986,7 +25366,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.fltrp-weed",
@@ -25055,7 +25437,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrporange.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -25195,7 +25579,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "p",
@@ -25203,7 +25588,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -25220,7 +25606,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-young",
@@ -25902,7 +26290,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "f",
@@ -25910,7 +26299,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -25927,7 +26317,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-plate",
@@ -25939,7 +26331,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "t",
@@ -25947,7 +26340,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -25964,7 +26358,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-chopstick",
@@ -26608,7 +27004,8 @@
         },
         {
           "text": "u",
-          "graphemeId": "g.u"
+          "graphemeId": "g.u",
+          "magicE": true
         },
         {
           "text": "n",
@@ -26616,7 +27013,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -26633,7 +27031,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "u_e"
     },
     {
       "id": "w.fltrp-july",
@@ -26899,7 +27299,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "t",
@@ -26907,7 +27308,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -26924,7 +27326,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-festival",
@@ -27649,7 +28053,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "k",
@@ -27657,7 +28062,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -27674,7 +28080,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-outing",
@@ -28211,7 +28619,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpcloud.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -28516,7 +28926,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "t",
@@ -28524,7 +28935,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -28541,7 +28953,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-jiuzhaigou",
@@ -29627,7 +30041,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "f",
@@ -29635,7 +30050,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -29652,7 +30068,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-safety",
@@ -29869,7 +30287,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "t",
@@ -29877,7 +30296,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -29894,7 +30314,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fltrp-fireworks",
@@ -31221,7 +31643,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "n",
@@ -31229,7 +31652,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -31246,7 +31670,9 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.fltrp-ambulance",
@@ -32972,7 +33398,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.book.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -33009,7 +33437,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.ruler.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -33054,7 +33484,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.pencil.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -33161,7 +33593,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.have.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -33176,7 +33610,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "c",
@@ -33184,7 +33619,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -33201,7 +33637,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.ear",
@@ -33267,7 +33705,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "s",
@@ -33275,7 +33714,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -33292,7 +33732,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.mouth",
@@ -33446,7 +33888,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.dog.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -33590,7 +34034,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.cat.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -33770,7 +34216,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "n",
@@ -33778,7 +34225,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -33795,7 +34243,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.ten",
@@ -34047,7 +34497,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "v",
@@ -34055,7 +34506,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -34072,7 +34524,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.one",
@@ -34135,7 +34589,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.black.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -34172,7 +34628,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.yellow.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -34201,7 +34659,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.blue.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -34234,7 +34694,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.red.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -34267,7 +34729,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.green.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -34337,7 +34801,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.apple.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -34411,7 +34877,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.banana.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -34448,7 +34916,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.orange.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -34521,7 +34991,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "k",
@@ -34529,7 +35000,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -34543,10 +35015,14 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.like.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.yes",
@@ -34634,7 +35110,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.chair.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -34667,7 +35145,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.desk.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -34964,7 +35444,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.door.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -35086,7 +35568,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "n",
@@ -35094,7 +35577,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -35108,10 +35592,14 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.plane.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.ball",
@@ -35137,7 +35625,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.ball.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -35203,7 +35693,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.train.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -35232,7 +35724,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.car.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -35371,7 +35865,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "c",
@@ -35379,7 +35874,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 1,
@@ -35393,10 +35889,14 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.rice.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.noodles",
@@ -35580,7 +36080,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.egg.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -35794,7 +36296,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.milk.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -35831,7 +36335,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.water.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -36148,7 +36654,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.father.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -36185,7 +36693,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.mother.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -36222,7 +36732,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.brother.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -36259,7 +36771,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.sister.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -36479,7 +36993,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "t",
@@ -36487,7 +37002,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -36504,7 +37020,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.friend",
@@ -36538,7 +37056,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.friend.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -36755,7 +37275,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "m",
@@ -36763,7 +37284,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -36780,7 +37302,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.her",
@@ -36864,7 +37388,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.big.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -37027,7 +37553,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "m",
@@ -37035,7 +37562,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -37052,7 +37580,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.new",
@@ -37185,7 +37715,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.zoo.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -37218,7 +37750,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.school.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -37308,7 +37842,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.park.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -37382,7 +37918,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.go.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -37473,7 +38011,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.tree.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -37539,7 +38079,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.boat.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -37554,7 +38096,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "k",
@@ -37562,7 +38105,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -37579,7 +38123,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.hill",
@@ -37934,7 +38480,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.happy.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -37967,7 +38515,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.swim.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -38234,7 +38784,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.weather.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -38296,7 +38848,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.spring.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -38333,7 +38887,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.summer.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -38374,7 +38930,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.autumn.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -38415,7 +38973,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.winter.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -38448,7 +39008,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.hot.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -38551,7 +39113,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.cold.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -38582,7 +39146,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "t",
@@ -38590,7 +39155,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -38607,7 +39173,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.season",
@@ -39021,7 +39589,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "m",
@@ -39029,7 +39598,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -39046,7 +39616,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.playtime",
@@ -39066,7 +39638,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "m",
@@ -39074,7 +39647,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 2,
@@ -39091,7 +39665,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.when",
@@ -39515,7 +40091,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.year.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -39596,7 +40174,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "d",
@@ -39604,7 +40183,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -39621,7 +40201,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.age",
@@ -40002,7 +40584,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.bad.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -40017,7 +40601,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "t",
@@ -40025,7 +40610,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -40042,7 +40628,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.tongue",
@@ -40146,7 +40734,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.morning.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -40195,7 +40785,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.afternoon.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -40269,7 +40861,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.bread.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -40284,7 +40878,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "k",
@@ -40292,7 +40887,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -40306,10 +40902,14 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.cake.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fruit",
@@ -40703,7 +41303,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "k",
@@ -40711,7 +41312,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -40728,7 +41330,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.turtle",
@@ -40787,7 +41391,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.small.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -40882,7 +41488,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.dance.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -41236,7 +41844,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.week.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -41473,7 +42083,8 @@
         },
         {
           "text": "u",
-          "graphemeId": "g.u"
+          "graphemeId": "g.u",
+          "magicE": true
         },
         {
           "text": "n",
@@ -41481,7 +42092,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -41498,7 +42110,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "u_e"
     },
     {
       "id": "w.july",
@@ -41790,7 +42404,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.birthday.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -42098,7 +42714,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.music.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -42538,7 +43156,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.room.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -42715,7 +43335,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.family.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -43163,7 +43785,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.run.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -43178,7 +43802,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "m",
@@ -43186,7 +43811,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 3,
@@ -43200,10 +43826,14 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.home.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.bedroom",
@@ -43592,7 +44222,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "t",
@@ -43600,7 +44231,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -43617,7 +44249,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.fun",
@@ -43795,7 +44429,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.evening.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -43950,7 +44586,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "p",
@@ -43958,7 +44595,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -43975,7 +44613,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.so",
@@ -44030,7 +44670,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.day.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -44127,7 +44769,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "t",
@@ -44135,7 +44778,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -44152,7 +44796,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.transportation",
@@ -44301,7 +44947,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.snow.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -44460,7 +45108,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "f",
@@ -44468,7 +45117,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -44485,7 +45135,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.eraser",
@@ -44756,7 +45408,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "n",
@@ -44764,7 +45417,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -44778,10 +45432,14 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.phone.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.dad",
@@ -44990,7 +45648,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "f",
@@ -44998,7 +45657,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -45015,7 +45675,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.stop",
@@ -45580,7 +46242,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.teacher.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -46005,7 +46669,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "v",
@@ -46013,7 +46678,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -46030,7 +46696,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.toy",
@@ -46056,7 +46724,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.toy.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -46244,7 +46914,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "c",
@@ -46252,7 +46923,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -46269,7 +46941,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.thing",
@@ -47263,7 +47937,8 @@
         },
         {
           "text": "u",
-          "graphemeId": "g.u"
+          "graphemeId": "g.u",
+          "magicE": true
         },
         {
           "text": "t",
@@ -47271,7 +47946,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 4,
@@ -47288,7 +47964,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "u_e"
     },
     {
       "id": "w.country",
@@ -47419,7 +48097,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "t",
@@ -47427,7 +48106,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -47444,7 +48124,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.quiet",
@@ -47575,7 +48257,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "v",
@@ -47583,7 +48266,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -47600,7 +48284,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.popular",
@@ -48011,7 +48697,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "c",
@@ -48019,7 +48706,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -48036,7 +48724,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.young",
@@ -48757,7 +49447,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.love.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -49055,7 +49747,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "s",
@@ -49063,7 +49756,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -49080,7 +49774,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.tired",
@@ -49147,7 +49843,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.drink.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -49432,7 +50130,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "c",
@@ -49440,7 +50139,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -49457,7 +50157,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.more",
@@ -49547,7 +50249,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "t",
@@ -49555,7 +50258,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -49572,7 +50276,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.office",
@@ -49588,7 +50294,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "c",
@@ -49596,7 +50303,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 5,
@@ -49613,7 +50321,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.together",
@@ -50033,7 +50743,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.sad.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -50760,7 +51472,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "n",
@@ -50768,7 +51481,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -50785,7 +51499,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.london",
@@ -51174,7 +51890,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "s",
@@ -51182,7 +51899,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -51199,7 +51917,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.president",
@@ -52115,7 +52835,8 @@
         },
         {
           "text": "a",
-          "graphemeId": "g.a"
+          "graphemeId": "g.a",
+          "magicE": true
         },
         {
           "text": "c",
@@ -52123,7 +52844,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -52140,7 +52862,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "a_e"
     },
     {
       "id": "w.cry",
@@ -53133,7 +53857,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "z",
@@ -53141,7 +53866,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -53158,7 +53884,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.live",
@@ -53207,7 +53935,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "t",
@@ -53215,7 +53944,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -53232,7 +53962,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.scarf",
@@ -53359,7 +54091,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "v",
@@ -53367,7 +54100,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -53384,7 +54118,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.meet",
@@ -53437,7 +54173,8 @@
         },
         {
           "text": "o",
-          "graphemeId": "g.o"
+          "graphemeId": "g.o",
+          "magicE": true
         },
         {
           "text": "b",
@@ -53445,7 +54182,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -53462,7 +54200,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "o_e"
     },
     {
       "id": "w.downtown",
@@ -53970,7 +54710,8 @@
         },
         {
           "text": "i",
-          "graphemeId": "g.i"
+          "graphemeId": "g.i",
+          "magicE": true
         },
         {
           "text": "d",
@@ -53978,7 +54719,8 @@
         },
         {
           "text": "e",
-          "graphemeId": "g.e"
+          "graphemeId": "g.e",
+          "silent": true
         }
       ],
       "grade": 6,
@@ -53995,7 +54737,9 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "magicE": true,
+      "magicEPattern": "i_e"
     },
     {
       "id": "w.thanksgiving",
@@ -54348,7 +55092,9 @@
       "tags": [
         "nature"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.sun.01"
+      ],
       "reviewStatus": "unreviewed",
       "unitId": "g1-s2-u1",
       "unitLabel": "一年级下 · 第1单元",
@@ -54383,7 +55129,9 @@
       "tags": [
         "seed"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.cloud.01"
+      ],
       "reviewStatus": "unreviewed",
       "grade": 1,
       "term": "下",

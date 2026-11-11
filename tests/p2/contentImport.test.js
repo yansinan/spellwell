@@ -37,8 +37,8 @@ test('内容导入：首次写入 4 个内容库并记录 contentVersion', async
   assertEqual(result.version, CONTENT_VERSION);
   assertEqual(result.counts.words, 1474);
   assertEqual(result.counts.graphemes, 152);
-  assertEqual(result.counts.sentences, 4);
-  assertEqual(result.counts.confusables, 2);
+  assertEqual(result.counts.sentences, 162);
+  assertEqual(result.counts.confusables, 7);
   assertEqual(await readContentVersion(adapter), CONTENT_VERSION);
   assertEqual((await adapter.get('words', 'w.fish')).text, 'fish');
   assertEqual((await adapter.get('meta', 'contentVersion')).value, CONTENT_VERSION);

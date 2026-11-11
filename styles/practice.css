@@ -970,3 +970,12 @@
   font-weight: 700;
   color: var(--sw-mint-deep);
 }
+
+.sw-practice__phase {
+  margin: 0 0 2px;
+  color: var(--sw-ink-soft);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}

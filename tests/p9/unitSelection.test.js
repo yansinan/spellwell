@@ -45,8 +45,10 @@ test('复习/努力：新词题型轮转有不同侧重', async () => {
   const { scheduler } = await setup();
   const review = await scheduler.buildDailyQueue({ size: 20, units: ['g2-s1-u1'], mode: 'review' });
   const effort = await scheduler.buildDailyQueue({ size: 20, units: ['g2-s1-u1'], mode: 'effort' });
-  assertEqual(review[0].typeId, 'T-FILL');
-  assertEqual(effort[0].typeId, 'T-TYPE');
+  assertEqual(review[0].typeId, 'T-SEQUENCE');
+  assertEqual(effort[0].typeId, 'T-FILL');
+  assertEqual(review[0].params.plan.phase, 'new');
+  assertEqual(review[0].params.plan.typeReason, 'new:build');
   assertEqual(review[0].params.plan.mode, 'review');
   assertEqual(effort[0].params.plan.mode, 'effort');
   assertEqual(effort[0].params.plan.reason, 'new-word');

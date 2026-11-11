@@ -190,7 +190,20 @@ export class Scheduler {
       const diff = scoreFor(b) - scoreFor(a);
       return diff !== 0 ? diff : compareStrings(String(a.id), String(b.id));
     };
-    const newWords = words.filter((word) => !stateByWord.has(String(word.id))).sort(byScore);
+    const byUnit = (a, b) => {
+      const grade = Number(a.grade ?? 0) - Number(b.grade ?? 0);
+      if (grade !== 0) return grade;
+      const term = String(a.term ?? '上') === String(b.term ?? '上') ? 0 : String(a.term) === '上' ? -1 : 1;
+      if (term !== 0) return term;
+      const unit = Number(a.unit ?? 0) - Number(b.unit ?? 0);
+      return unit !== 0 ? unit : compareStrings(String(a.id), String(b.id));
+    };
+    const newWords = words
+      .filter((word) => !stateByWord.has(String(word.id)))
+      .sort((a, b) => {
+        const score = scoreFor(b) - scoreFor(a);
+        return score !== 0 ? score : byUnit(a, b);
+      });
     const fillers = words
       .filter((word) => {
         const state = stateByWord.get(String(word.id));
@@ -201,28 +214,26 @@ export class Scheduler {
     /** @type {Record<string, unknown>[]} */
     const selected = [];
     const seen = new Set();
-    const push = (word) => {
+    const phaseByWord = new Map();
+    const push = (word, phase) => {
       if (!word || selected.length >= target) return;
       const id = String(word.id);
       if (seen.has(id)) return;
       seen.add(id);
       selected.push(word);
+      phaseByWord.set(id, phase);
     };
 
+    // 稳定教学顺序：修复 → 复习 → 新词 → 巩固。
     for (const state of dueErrors) {
-      push(words.find((word) => String(word.id) === state.wordId));
+      push(words.find((word) => String(word.id) === state.wordId), 'repair');
     }
     for (const state of dueReviews) {
-      push(words.find((word) => String(word.id) === state.wordId));
+      push(words.find((word) => String(word.id) === state.wordId), 'review');
     }
-    if (mode === 'effort') {
-      for (const word of newWords) push(word);
-      for (const word of fillers) push(word);
-    } else {
-      for (const word of fillers) push(word);
-      for (const word of newWords) push(word);
-    }
-    for (const word of words) push(word);
+    for (const word of newWords) push(word, 'new');
+    for (const word of fillers) push(word, 'practice');
+    for (const word of words) push(word, 'practice');
 
     if (selected.length === 0) {
       throw new ContractError('SCHEDULER_QUEUE_EMPTY', 'daily queue has no words');
@@ -232,19 +243,28 @@ export class Scheduler {
       const state = stateByWord.get(String(word.id));
       const latestError = state?.errorProfile?.at(-1);
       const sentence = this.sentences[String(word.id)] ?? null;
+      const phase = phaseByWord.get(String(word.id)) ?? 'practice';
       let typeId;
+      let typeReason;
       if (state?.status === 'probe') {
         typeId = sentence ? 'T-CLOZE' : 'T-JUDGE-FIX';
+        typeReason = 'probe';
       } else if (latestError) {
         typeId = candidatesForError(latestError.type).find((candidate) => P4_AVAILABLE_TYPES.includes(candidate));
+        typeReason = 'repair';
+      } else if (phase === 'new') {
+        typeId = mode === 'effort' ? 'T-FILL' : 'T-SEQUENCE';
+        typeReason = 'new:build';
+      } else if (phase === 'review') {
+        typeId = Number(state?.intervalIndex ?? 0) >= 2 ? 'T-TYPE' : 'T-FILL';
+        typeReason = 'review:recall';
       } else {
-        const rotation = mode === 'effort'
-          ? ['T-TYPE', 'T-SEQUENCE', 'T-FILL']
-          : ['T-FILL', 'T-SEQUENCE', 'T-TYPE'];
-        typeId = rotation[index % rotation.length];
+        typeId = mode === 'effort' ? 'T-TYPE' : 'T-FILL';
+        typeReason = 'practice:apply';
       }
       if (!typeId || !P6_AVAILABLE_TYPES.includes(typeId)) {
         typeId = NEW_WORD_ROTATION[index % NEW_WORD_ROTATION.length];
+        typeReason = 'fallback';
       }
 
       const spec = buildWordSpec({
@@ -267,6 +287,8 @@ export class Scheduler {
             : 'new-word';
       spec.params.plan = {
         reason,
+        phase,
+        typeReason,
         mode,
         policyVersion: 1,
         score: scoreFor(word),

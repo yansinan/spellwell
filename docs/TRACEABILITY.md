@@ -116,6 +116,8 @@
 | R-P9-11 | 单元顺序解锁：已完成 + 下一个 | `unitProgress` + PracticeSetupScreen | `tests/p9/unitProgress.test.js` + 浏览器 | P9 | ✅ |
 | R-P9-12 | 答错显示答案、重试到正确、结束页正确率+错词 | `PracticeSession` + `PracticeScreen` + `completionSummary` | P1/P9 retry tests + 浏览器 | P9 | ✅ |
 | R-P7-11 | 基础词库切分审计与组合库扩充 | `WordImporter` + graphemes/words | `tests/p7/segmentation.test.js` | P7 | ✅ |
+| R-P9-13 | 练习阶段顺序与题型策略 | `Scheduler` phase/typeReason + UI | `tests/p9/unitSelection.test.js` | P9 | ✅ |
+| R-P7-12 | 例句库与混淆项预制 | `sentences.json` + `confusables.json` | content tests | P7 | ✅ |
 | R-P7-09 | 批量单元标题行切换后续词单元 | `WordImporter.parseBatch` + AdminApp | `tests/p7/import.test.js` + `tests/p7/editor.test.js` | P7 | ✅ |
 | R-P7-10 | 词库单独导入/导出与重复词合并/替换/不动 | `WordLibrary` + AdminApp | `tests/p7/wordLibrary.test.js` + 浏览器 | P7 | ✅ |
 | R-P8-05 | 本机数据全量迁移独立于内容编辑 | `MigrationApp` | 浏览器迁移页 | P8 | ✅ |
@@ -219,6 +221,7 @@
 | A-25 | 练习单元如何解锁 | 完成=全部词练过；显示已完成+下一个；不足20不跨单元 | ADR-0023 |
 | A-26 | 答错后如何反馈/记录/结束 | 显示答案并重试；只记录第一次；结束先正确率再错词 | ADR-0024 |
 | A-27 | 词库切分如何修正与发布 | 152 组合；后缀词尾；例外表；静态词库随包 | ADR-0025 |
+| A-28 | 练习顺序/题型为何这样排 | 修复→复习→新词→巩固；阶段决定题型；phase 可解释 | ADR-0026 |
 
 ---
 

@@ -35,6 +35,21 @@
 1474 词、152 graphemes、contentVersion 6；
 上线包自带，运行时只从同源静态文件导入 IndexedDB。
 
+## 魔法 e
+
+CVCe 词增加词级标注：
+
+```json
+{ "magicE": true, "magicEPattern": "a_e" }
+```
+
+并给最终 e 标 `silent:true`，给前面的元音 unit 标 `magicE:true`。
+当前 units 仍保持连续字母（`n/a/m/e`），因为 schema 要求 `units.join === text`；
+魔法 e 作为难度/审核/教学标注，不改变题型判定。
+
+排除了 `have/love/live/move/come/some/one/everyone/welcome/chinese` 等非魔法 e 词。
+共标注 108 词。
+
 ## 结果
 
 - 全字母保底 433 → 316；
