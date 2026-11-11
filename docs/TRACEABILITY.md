@@ -1,0 +1,162 @@
+# 需求追溯矩阵 · TRACEABILITY
+
+**用途**：把 `docs/DESIGN.md` 的条款、仓库代码、验证方式、阶段绑在一起。任何新增规则都必须在此登记；任何删除测试都必须先改这里并说明原因。
+
+**状态图例**：`✅ 已落实` / `🧪 已冻结（测试存在，功能未实现）` / `⏳ 计划中` / `👁 人工评审`
+
+**门禁**：`node tests/runTests.js --phase=p0`（P0 回归）；`node tests/runTests.js --phase=p1`（当前 P1，累计运行）。
+
+---
+
+## 1. 产品哲学与边界
+
+| ID | 设计条款 | 实现位置 | 验证方式 | 阶段 | 状态 |
+|---|---|---|---|---|---|
+| R-PHIL-01 | §1.1 只保留看词→拼写→判定→调度闭环 | `src/questionTypes/registry.js` 仅 9 个拼写题型；无听力/选择/图片题型 | `tests/p0/registry.test.js` 断言题型集合精确等于 9 个；👁 评审 UI | P0 | ✅ |
+| R-PHIL-02 | §1.1 / §6.2 不做积分、排行榜、连胜、生命值 | 无相关模块；`ROADMAP` 明确排除 | 👁 评审 + 代码搜索 | P0 | ✅ |
+| R-PHIL-03 | §1.1 题型轮转制造新鲜感，不靠外部奖励 | `TypeSelector.js` 按错误类型给候选池；`QuestionSpec.seed` 决定选择 | `tests/p0/scheduler.test.js` | P0/P3 | 🧪 |
+| R-PHIL-04 | §1.2 错误结构化，不向孩子展示“错题本” | `ErrorProfile.js`；UI 只做温和反馈 | `tests/p0/scheduler.test.js`；P1 UI 测试 | P0/P3 | 🧪 |
+| R-PHIL-05 | §1.3 间隔阶梯 1/3/7/14/30 | `src/scheduler/IntervalPolicy.js` | `tests/p0/scheduler.test.js` | P0 | ✅ |
+| R-PHIL-06 | §1.3 答错降 2 档、连续再错归零 | `IntervalPolicy.nextReview()` | `tests/p0/scheduler.test.js` | P0 | ✅ |
+| R-PHIL-07 | §1.3 连续 3 次 + 跨 2 词进抽查，60 天验证 | 常量已定义；逻辑在 P5 | `tests/p5/*` 待建 | P5 | ⏳ |
+| R-PHIL-08 | §1.4 切分禁止自动推断 | 内容 JSON 显式 `units[]`；运行时无切分函数 | `tests/p0/content.test.js` + 👁 标注评审 | P0 | ✅ |
+
+## 2. 架构铁律
+
+| ID | 设计条款 | 实现位置 | 验证方式 | 阶段 | 状态 |
+|---|---|---|---|---|---|
+| R-ARCH-01 | §3.2 题型层不查库、不碰 DOM、不写状态、不造干扰项 | `src/questionTypes/*` 只依赖 `core` | `tests/p0/architecture.test.js` | P0 | ✅ |
+| R-ARCH-02 | §3.2 调度层不渲染、不判定、不依赖 DOM | `src/scheduler/*` 只依赖 `core`/`repositories`/registry | `tests/p0/architecture.test.js` | P0 | ✅ |
+| R-ARCH-03 | §3.2 仓库层只调用 StorageAdapter 的 7 个方法 | `src/repositories/BaseRepository.js` + 各仓库 | `tests/p0/architecture.test.js`（方法白名单扫描） | P0 | ✅ |
+| R-ARCH-04 | §3.2 所有随机使用 `spec.seed` | `src/core/seedRandom.js`；全仓库无 `Math.random` | `tests/p0/architecture.test.js` + `seed.test.js` | P0 | ✅ |
+| R-ARCH-05 | §3.2 UI 层只渲染/编排，不实现判定 | `src/ui/PracticeScreen.js` | `tests/p1/architecture.test.js`：屏幕不 import 题型、不调用 judge | P0/P1 | ✅ |
+| R-ARCH-06 | §3.2 层间依赖单向，无循环 | 见 `FILE_SPEC §3` | `tests/p0/architecture.test.js` 循环检测 | P0 | ✅ |
+| R-ARCH-07 | §5.3 换 adapter 仓库零改动 | `StorageAdapter` 抽象 + 仓库仅用接口 | `tests/p0/storage.test.js` 适配器契约套件；P10 换 Node adapter | P0/P10 | 🧪 |
+| R-ARCH-08 | §3.2 组合根唯一 | `main.js` | 👁 评审 | P0 | ✅ |
+
+## 3. 核心契约
+
+| ID | 设计条款 | 实现位置 | 验证方式 | 阶段 | 状态 |
+|---|---|---|---|---|---|
+| R-CONTRACT-01 | §5.2 `QuestionSpec` 字段与类型 | `src/core/contracts.js` `validateQuestionSpec` | `tests/p0/contracts.test.js` | P0 | ✅ |
+| R-CONTRACT-02 | §5.2 `RenderModel` 与设备无关 | `validateRenderModel` | `tests/p0/contracts.test.js` | P0 | ✅ |
+| R-CONTRACT-03 | §5.2 `InputEvent` 六种语义事件 | `validateInputEvent` | `tests/p0/contracts.test.js` | P0 | ✅ |
+| R-CONTRACT-04 | §5.2 `AttemptResult` 判定结果 | `validateAttemptResult` | `tests/p0/contracts.test.js` | P0 | ✅ |
+| R-CONTRACT-05 | §3.3 `wordState` / `graphemeState` 字段 | `validateWordState` / `validateGraphemeState` | `tests/p0/contracts.test.js` | P0 | ✅ |
+| R-CONTRACT-06 | §3.3 九种错误类型完整 | `ERROR_TYPES` | `tests/p0/contracts.test.js` 精确断言 | P0 | ✅ |
+| R-CONTRACT-07 | 跨层契约版本化 | `CONTRACT_VERSION = 1` | `tests/p0/traceability.test.js` | P0 | ✅ |
+
+## 4. 存储与仓库
+
+| ID | 设计条款 | 实现位置 | 验证方式 | 阶段 | 状态 |
+|---|---|---|---|---|---|
+| R-STORE-01 | §3.2 适配器 7 方法：`init/get/put/query/transaction/exportAll/importAll` | `src/storage/StorageAdapter.js` | `tests/p0/storage.test.js` 精确断言 | P0 | ✅ |
+| R-STORE-02 | §5.1 8 个 store：words/graphemes/sentences/confusables/wordStates/graphemeStates/attempts/meta | `src/storage/schema.js` | `tests/p0/storage.test.js` | P0 | ✅ |
+| R-STORE-03 | §3.2 查询不暴露底层细节 | `query(store,{where,limit,offset})` | `tests/p0/storage.test.js` | P0 | ✅ |
+| R-STORE-04 | 事务失败回滚 | `MemoryAdapter.transaction` | `tests/p0/storage.test.js` | P0 | ✅ |
+| R-STORE-05 | 导出/导入一致 | `exportAll/importAll` | `tests/p0/storage.test.js` 往返断言 | P0 | ✅ |
+| R-STORE-06 | IndexedDB 持久化 | `src/storage/IndexedDBAdapter.js` | P2 浏览器测试 | P2 | ⏳ |
+| R-STORE-07 | 内容仓库查询 | `WordRepository` 等 | `tests/p0/repositories.test.js` | P0 | ✅ |
+| R-STORE-08 | 状态默认值与到期查询 | `StateRepository` | `tests/p0/repositories.test.js` | P0 | ✅ |
+| R-STORE-09 | 尝试记录只追加 | `AttemptRepository` | `tests/p0/repositories.test.js` | P0 | ✅ |
+
+## 5. 调度与题型
+
+| ID | 设计条款 | 实现位置 | 验证方式 | 阶段 | 状态 |
+|---|---|---|---|---|---|
+| R-TYPE-01 | §3.4 9 个题型精确注册 | `src/questionTypes/registry.js` | `tests/p0/registry.test.js` | P0 | ✅ |
+| R-TYPE-02 | §3.4 每个题型只做 build/judge | `defineQuestionType` 契约 | `tests/p0/registry.test.js` + `architecture.test.js` | P0 | ✅ |
+| R-TYPE-03 | §3.4 题型 ID 与修复信号对应 | `REPAIR_PREFERENCE` / 各 meta | `tests/p0/scheduler.test.js` | P0 | ✅ |
+| R-TYPE-04 | P1 三题型可出题判定 | `TSequence/TFill/TType` | `tests/p1/*.test.js` + 浏览器 3×3 | P1 | ✅ |
+| R-TYPE-05 | `ai→ia` 顺序修复 | `TReorder` | `tests/p4/*` 待建 | P4 | ⏳ |
+| R-TYPE-06 | `sh→ch`、`ck/k` 边界修复 | `TSegment/TEdit/TMatch` | `tests/p5/*` 待建 | P4/P5 | ⏳ |
+| R-SCHED-01 | §2.1 每日 5—8 词队列 | `Scheduler.buildDailyQueue` | `tests/p3/*` 待建 | P3 | ⏳ |
+| R-SCHED-02 | 错词次日强制再现 | `Scheduler` | `tests/p3/*` 待建 | P3 | ⏳ |
+| R-SCHED-03 | 按错误类型选修复题型 | `TypeSelector.selectType` | `tests/p0/scheduler.test.js` 覆盖全部错误枚举 | P0/P3 | 🧪 |
+| R-SCHED-04 | 组合独立阶梯、跨 2 词 | `GraphemeRepository` / `Scheduler` | P5 测试 | P5 | ⏳ |
+| R-SCHED-05 | 假掌握抽查 60 天 | `IntervalPolicy` 常量 | P6 测试 | P6 | ⏳ |
+
+### 5.1 九题型覆盖（与 `QUESTION_TYPE_IDS` 一一对应）
+
+| 题型 | 阶段 | 当前状态 | 验证 |
+|---|---|---|---|
+| `T-SEQUENCE` | P1 | 已实现 | `tests/p1/tsequence.test.js` |
+| `T-FILL` | P1 | 已实现 | `tests/p1/tfill.test.js` |
+| `T-REORDER` | P4 | 骨架 | `tests/p0/registry.test.js` 抛错断言 |
+| `T-TYPE` | P1 | 已实现 | `tests/p1/ttype.test.js` |
+| `T-JUDGE-FIX` | P6 | 骨架 | `tests/p0/registry.test.js` 抛错断言 |
+| `T-EDIT` | P4 | 骨架 | 同上 |
+| `T-MATCH` | P5 | 骨架 | 同上 |
+| `T-CLOZE` | P6 | 骨架 | 同上 |
+| `T-SEGMENT` | P4 | 骨架 | 同上 |
+
+### 5.2 P1 最小闭环
+
+| ID | 设计条款 | 实现位置 | 验证方式 | 阶段 | 状态 |
+|---|---|---|---|---|---|
+| R-P1-01 | §2.1 3 词 × 3 题型最小队列 | `src/ui/PracticeSession.js` | `tests/p1/session.test.js` | P1 | ✅ |
+| R-P1-02 | §5.2 资源装配不查库 | `src/ui/bootstrap.js` | `tests/p1/architecture.test.js` + 浏览器 | P1 | ✅ |
+| R-P1-03 | §3.4 T-SEQUENCE 出题与判定 | `src/questionTypes/TSequence.js` | `tests/p1/tsequence.test.js` | P1 | ✅ |
+| R-P1-04 | §3.4 T-FILL 出题与判定 | `src/questionTypes/TFill.js` | `tests/p1/tfill.test.js` | P1 | ✅ |
+| R-P1-05 | §3.4 T-TYPE 出题与判定 | `src/questionTypes/TType.js` | `tests/p1/ttype.test.js` | P1 | ✅ |
+| R-P1-06 | §1.2 错误定位到 unit/position/type | `src/questionTypes/shared.js` | 三题型错误用例测试 | P1 | ✅ |
+| R-P1-07 | §6.2 学习端纯英文、不显示“错误” | `src/ui/PracticeScreen.js` | `tests/p1/architecture.test.js` + 👁 | P1 | ✅ |
+| R-P1-08 | P1 不持久化、不写调度状态 | `PracticeSession` 内存 results | `tests/p1/architecture.test.js` | P1 | ✅ |
+| R-P1-09 | 同 spec.seed 渲染稳定 | `createRng` + 各 build | `tests/p1/tsequence.test.js` 等 | P1 | ✅ |
+| R-P1-10 | 3 词 × 3 题型端到端 | 浏览器 `/` | 无头 Edge 3×3 + `?debug=1` | P1 | ✅ |
+| R-P1-11 | T-SEQUENCE 点选 + 拖拽 + 再次点击取消/修改 | `src/ui/PracticeScreen.js` | 鼠标/触摸拖拽 + 点击取消的浏览器验收 | P1 | ✅ |
+| R-P1-12 | 拖拽靠近槽位吸附，未命中弹回待选区 | `src/ui/dragGeometry.js` + PracticeScreen | `tests/p1/dragGeometry.test.js` + 浏览器远/近放置 | P1 | ✅ |
+| R-P1-13 | 轻量互动音效 + 静音开关 | `src/ui/sound.js` | `tests/p1/sound.test.js` + 浏览器 Sound/Muted | P1 | ✅ |
+| R-UNIT-01 | 组合可拆成字母、支持混合粒度 | `spec.params.unitGranularity`（P3/P4） | ADR-0004；P3/P4 测试待建 | P3/P4 | ⏳ |
+| R-DIFF-01 | §3.5 同词同脚手架：grapheme < mixed < letter | `DifficultyPolicy`（P3） | `tests/p1/difficultyDesign.test.js` + ADR-0006 | P3/P4 | 🧪 |
+| R-DIFF-02 | §3.5 难度是向量，不用题型 ID 代替 | `QuestionSpec.params.difficulty`（P3） | P3 `DifficultyPolicy` 测试待建 | P3 | ⏳ |
+
+## 6. 内容与后台
+
+| ID | 设计条款 | 实现位置 | 验证方式 | 阶段 | 状态 |
+|---|---|---|---|---|---|
+| R-CONTENT-01 | §1.4 / §2.3 人工切分 | `src/content/words.json` 的 `units[]` | `tests/p0/content.test.js`（join + grapheme 引用 + 禁止自动切分） | P0 | ✅ |
+| R-CONTENT-02 | §2.3 混淆项成对，禁止单边 | `src/content/confusables.json` | `tests/p0/content.test.js` 对称/重复检查 | P0 | ✅ |
+| R-CONTENT-03 | §2.3 句子语义唯一 | `src/content/sentences.json` | `tests/p0/content.test.js` 挖空恰好一次；语义唯一 👁 | P0 | 🧪 |
+| R-CONTENT-04 | §2.3 T1—T4 分层 | `graphemes.json` 的 `tier` | `tests/p0/content.test.js` | P0 | ✅ |
+| R-CONTENT-05 | 未审核内容不得生产导出 | `reviewStatus` 字段 | P0 断言字段存在；P7 导出阻断 | P0/P7 | 🧪 |
+| R-ADMIN-01 | §2.3 后台只产内容、只校验 | `src/admin/*`（P7） | P7 测试：不写学习状态 | P7 | ⏳ |
+| R-ADMIN-02 | §2.3 切分校验阻断错误导出 | `ContentValidator`（P7） | P7 测试 | P7 | ⏳ |
+
+## 7. 体验与阶段纪律
+
+| ID | 设计条款 | 实现位置 | 验证方式 | 阶段 | 状态 |
+|---|---|---|---|---|---|
+| R-UI-01 | §6.2 色彩/圆角/动效 token | `styles/tokens.css` | `tests/p0/traceability.test.js` 检查 token 存在 | P0 | ✅ |
+| R-UI-02 | §6.2 学习端不出现中文 | `PracticeScreen` | P1 静态扫描；P8 再扩到全部学习视图 | P1/P8 | ✅ |
+| R-UI-03 | §6.2 点选与拖拽等价（全部题型/适配器） | PointerAdapter / 其余题型；T-SEQUENCE 已由 R-P1-11 覆盖 | P8 双端测试 | P8 | ⏳ |
+| R-UI-04 | §6.2 答错温和反馈，无红色/弹窗 | `styles/practice.css` + PracticeScreen | 👁 评审 + 浏览器 | P1 | 👁 |
+| R-CHALLENGE-01 | §2.1 挑战模式不写主状态 | `RapidTapChallenge` | P9 测试 | P9 | ⏳ |
+| R-DOC-01 | §四 阶段门禁累计运行 | `tests/runTests.js` | `--phase=p0` 自身即验证 | P0 | ✅ |
+| R-DOC-02 | 文档条款 → 代码 → 测试可追溯 | `docs/TRACEABILITY.md` + 文件头 `@doc` | `tests/p0/traceability.test.js` | P0 | ✅ |
+| R-DOC-03 | 偏离设计必须 ADR | `docs/decisions/` | `tests/p0/traceability.test.js` 检查目录与索引 | P0 | ✅ |
+| R-DOC-04 | 未到阶段的题型明确抛 NotImplementedError | 未实现题型 build/judge | `tests/p0/registry.test.js` | P0 | ✅ |
+
+---
+
+## 8. 文档歧义裁决记录
+
+| 编号 | 歧义 | 裁决 | 位置 |
+|---|---|---|---|
+| A-01 | §3.2 称“6 个存储方法”，实际列出 7 个 | 以 7 个为准；`STORAGE_METHODS` 精确冻结 | ADR-0001 |
+| A-02 | §3.3 `errorProfile` 单对象 vs. 一次多错 | 落库为有界数组（最多 8 条）；`AttemptResult.firstError` 为主错误 | ADR-0001 |
+| A-03 | `wordState.status` / `graphemeState.status` 未给枚举 | 词：`learning/reviewing/probe/mastered`；组合：`learning/reviewing/probe/steady` | ADR-0001 |
+| A-04 | `query` 语义未定义 | P0 仅等值过滤 + limit/offset；P2 再基于索引优化 | ADR-0001 |
+| A-05 | 内容 `reviewStatus` 未定义 | `unreviewed/reviewed/retired`；生产导出只放行 reviewed | CONTENT_SPEC |
+| A-06 | P1 的内容装配、迷你队列、judge 上下文未定义 | 同源 fetch → MemoryAdapter；PracticeSession 生成 9 条 spec；judge 接收只读 bundle 与注入 now | ADR-0003 |
+| A-07 | 是否只能按 grapheme 整块选择 | 内容仍人工标注 grapheme；P3/P4 用 spec 粒度参数支持字母/混合，不由题型猜 | ADR-0004 |
+| A-08 | 拖拽未命中如何处理、音效尺度 | 64px 吸附 + 240ms 弹回；Web Audio 低音量合成音 + Sound/Muted | ADR-0005 |
+
+---
+
+## 9. 维护规则
+
+1. 新增代码文件若对应新规则，先在本表加一行，再写代码。
+2. 删除/重命名测试，必须同步改本表“验证方式”列，并在 CHANGELOG 说明。
+3. 每个阶段门禁前，逐行检查本阶段状态；`⏳` 不得出现在已完成阶段。
+4. `👁 人工评审` 的条款在阶段验收时由人确认，确认后在 CHANGELOG 记录。

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "c.ch-sh",
+      "a": "g.ch",
+      "b": "g.sh",
+      "kind": "digraph",
+      "note": "chip / ship 的词首对比",
+      "wordPairIds": ["w.chip", "w.ship"],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "c.ck-k",
+      "a": "g.ck",
+      "b": "g.k",
+      "kind": "ending",
+      "note": "duck / book 的结尾组合对比；非最小对立，仅作定位",
+      "wordPairIds": ["w.duck", "w.book"],
+      "reviewStatus": "unreviewed"
+    }
+  ]
+}

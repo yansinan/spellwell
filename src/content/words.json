@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "w.cat",
+      "text": "cat",
+      "level": 1,
+      "units": [
+        { "text": "c", "graphemeId": "g.c" },
+        { "text": "a", "graphemeId": "g.a" },
+        { "text": "t", "graphemeId": "g.t" }
+      ],
+      "tags": ["animal"],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.fish",
+      "text": "fish",
+      "level": 1,
+      "units": [
+        { "text": "f", "graphemeId": "g.f" },
+        { "text": "i", "graphemeId": "g.i" },
+        { "text": "sh", "graphemeId": "g.sh" }
+      ],
+      "tags": ["animal", "water"],
+      "sentenceIds": ["s.fish.01"],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.ship",
+      "text": "ship",
+      "level": 1,
+      "units": [
+        { "text": "sh", "graphemeId": "g.sh" },
+        { "text": "i", "graphemeId": "g.i" },
+        { "text": "p", "graphemeId": "g.p" }
+      ],
+      "tags": ["transport"],
+      "sentenceIds": ["s.ship.01"],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.chip",
+      "text": "chip",
+      "level": 1,
+      "units": [
+        { "text": "ch", "graphemeId": "g.ch" },
+        { "text": "i", "graphemeId": "g.i" },
+        { "text": "p", "graphemeId": "g.p" }
+      ],
+      "tags": ["food"],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.duck",
+      "text": "duck",
+      "level": 1,
+      "units": [
+        { "text": "d", "graphemeId": "g.d" },
+        { "text": "u", "graphemeId": "g.u" },
+        { "text": "ck", "graphemeId": "g.ck" }
+      ],
+      "tags": ["animal"],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.rain",
+      "text": "rain",
+      "level": 1,
+      "units": [
+        { "text": "r", "graphemeId": "g.r" },
+        { "text": "ai", "graphemeId": "g.ai" },
+        { "text": "n", "graphemeId": "g.n" }
+      ],
+      "tags": ["weather"],
+      "sentenceIds": ["s.rain.01"],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.night",
+      "text": "night",
+      "level": 2,
+      "units": [
+        { "text": "n", "graphemeId": "g.n" },
+        { "text": "igh", "graphemeId": "g.igh" },
+        { "text": "t", "graphemeId": "g.t" }
+      ],
+      "tags": ["time"],
+      "sentenceIds": ["s.night.01"],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.tree",
+      "text": "tree",
+      "level": 1,
+      "units": [
+        { "text": "t", "graphemeId": "g.t" },
+        { "text": "r", "graphemeId": "g.r" },
+        { "text": "ee", "graphemeId": "g.ee" }
+      ],
+      "tags": ["nature"],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.book",
+      "text": "book",
+      "level": 1,
+      "units": [
+        { "text": "b", "graphemeId": "g.b" },
+        { "text": "oo", "graphemeId": "g.oo" },
+        { "text": "k", "graphemeId": "g.k" }
+      ],
+      "tags": ["object"],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "w.sun",
+      "text": "sun",
+      "level": 1,
+      "units": [
+        { "text": "s", "graphemeId": "g.s" },
+        { "text": "u", "graphemeId": "g.u" },
+        { "text": "n", "graphemeId": "g.n" }
+      ],
+      "tags": ["nature"],
+      "sentenceIds": [],
+      "reviewStatus": "unreviewed"
+    }
+  ]
+}

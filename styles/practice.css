@@ -1,0 +1,422 @@
+/* P1 学习端。颜色/圆角/动效只来自 tokens.css。 */
+
+.sw-practice {
+  width: min(760px, 100%);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: sw-rise var(--sw-motion-soft) var(--sw-ease-out) both;
+}
+
+.sw-practice__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sw-brand {
+  font-family: var(--sw-font-en);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.sw-practice__tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sw-sound {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--sw-radius-pill);
+  border: 1px solid var(--sw-line);
+  background: var(--sw-surface);
+  color: var(--sw-ink-soft);
+  font-family: var(--sw-font-en);
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.sw-sound[aria-pressed="true"] {
+  opacity: 0.6;
+}
+
+.sw-progress {
+  padding: 6px 14px;
+  border-radius: var(--sw-radius-pill);
+  background: var(--sw-surface);
+  border: 1px solid var(--sw-line);
+  font-family: var(--sw-font-en);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--sw-ink-soft);
+}
+
+.sw-practice__stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 20px 8px 28px;
+  border-radius: var(--sw-radius-card);
+  background:
+    radial-gradient(circle at 12% 8%, var(--sw-sky-soft), transparent 42%),
+    radial-gradient(circle at 88% 92%, var(--sw-mint-soft), transparent 42%),
+    var(--sw-surface);
+  border: 1px solid var(--sw-line);
+  box-shadow: var(--sw-shadow-card);
+}
+
+.sw-practice__kind {
+  margin: 0;
+  font-family: var(--sw-font-en);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sw-ink-faint);
+}
+
+.sw-practice__word {
+  margin: 0;
+  font-family: var(--sw-font-en);
+  font-size: clamp(44px, 10vw, 68px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+}
+
+.sw-practice__hint {
+  margin: 0 0 4px;
+  font-family: var(--sw-font-en);
+  font-size: 14px;
+  color: var(--sw-ink-soft);
+  text-align: center;
+}
+
+.sw-slots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 68px;
+}
+
+.sw-slot {
+  appearance: none;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: var(--sw-radius-sm);
+  border: 2px dashed var(--sw-sky-deep);
+  background: var(--sw-surface-strong);
+  box-shadow: var(--sw-shadow-slot);
+  font-family: var(--sw-font-en);
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--sw-ink);
+  transition: background var(--sw-motion-tap) var(--sw-ease-bounce),
+    transform var(--sw-motion-tap) var(--sw-ease-bounce);
+}
+
+.sw-slot.is-filled {
+  border-style: solid;
+  border-color: var(--sw-mint-deep);
+  background: var(--sw-mint);
+  cursor: pointer;
+}
+
+.sw-slot.is-drop-target {
+  border-color: var(--sw-mint-deep);
+  border-style: solid;
+  background: var(--sw-sky-soft);
+  transform: scale(1.04);
+}
+
+.sw-slot--fixed {
+  border-style: solid;
+  border-color: var(--sw-line);
+  background: var(--sw-surface);
+  box-shadow: none;
+}
+
+.sw-slot--blank {
+  cursor: pointer;
+}
+
+.sw-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 560px;
+}
+
+.sw-tile {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  min-width: 62px;
+  height: 58px;
+  padding: 0 18px;
+  border-radius: var(--sw-radius-sm);
+  border: 1px solid var(--sw-line);
+  background: var(--sw-surface-strong);
+  box-shadow: var(--sw-shadow-card);
+  color: var(--sw-ink);
+  font-family: var(--sw-font-en);
+  font-size: 24px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform var(--sw-motion-tap) var(--sw-ease-bounce),
+    opacity var(--sw-motion-tap) var(--sw-ease-out),
+    background var(--sw-motion-tap) var(--sw-ease-out);
+}
+
+.sw-tile:hover:not(:disabled),
+.sw-tile:focus-visible:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--sw-sky-soft);
+}
+
+.sw-tile.is-used,
+.sw-tile:disabled {
+  opacity: 0.35;
+  transform: none;
+}
+
+.sw-tile.is-used {
+  cursor: pointer;
+}
+
+.sw-tile.is-used:hover:not(:disabled) {
+  background: var(--sw-surface-strong);
+}
+
+.sw-tile.is-dragging {
+  opacity: 0.25;
+}
+
+.sw-drag-ghost {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  min-width: 62px;
+  height: 58px;
+  padding: 0 18px;
+  border-radius: var(--sw-radius-sm);
+  border: 2px solid var(--sw-mint-deep);
+  background: var(--sw-mint);
+  color: var(--sw-ink);
+  font-family: var(--sw-font-en);
+  font-size: 24px;
+  font-weight: 800;
+  transform: translate(-50%, -50%) rotate(-2deg);
+  box-shadow: var(--sw-shadow-card);
+  opacity: 0.95;
+  will-change: left, top, opacity, transform;
+}
+
+.sw-tile:focus-visible,
+.sw-slot:focus-visible,
+.sw-sound:focus-visible,
+.sw-text-button:focus-visible,
+.sw-check:focus-visible,
+.sw-type-input:focus-visible {
+  outline: none;
+  box-shadow: var(--sw-focus-ring);
+}
+
+.sw-type-row {
+  width: min(420px, 100%);
+  padding: 0 8px;
+}
+
+.sw-type-input {
+  width: 100%;
+  height: 66px;
+  padding: 0 20px;
+  border-radius: var(--sw-radius-sm);
+  border: 2px solid var(--sw-sky);
+  background: var(--sw-surface-strong);
+  color: var(--sw-ink);
+  font-family: var(--sw-font-en);
+  font-size: 30px;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0.06em;
+}
+
+.sw-type-input::placeholder {
+  color: var(--sw-ink-faint);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.sw-feedback {
+  min-height: 26px;
+  margin: 2px 0 0;
+  font-family: var(--sw-font-en);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--sw-ink-soft);
+}
+
+.sw-practice__stage.is-correct .sw-feedback {
+  color: var(--sw-mint-deep);
+}
+
+.sw-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 48px;
+}
+
+.sw-text-button {
+  border: 0;
+  background: transparent;
+  color: var(--sw-ink-soft);
+  font-family: var(--sw-font-cn);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: var(--sw-radius-pill);
+}
+
+.sw-text-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.sw-check {
+  min-width: 130px;
+  height: 52px;
+  padding: 0 26px;
+  border: 0;
+  border-radius: var(--sw-radius-pill);
+  background: var(--sw-mint);
+  color: var(--sw-ink);
+  font-family: var(--sw-font-en);
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform var(--sw-motion-tap) var(--sw-ease-bounce),
+    background var(--sw-motion-tap) var(--sw-ease-out);
+}
+
+.sw-check:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: var(--sw-mint-deep);
+}
+
+.sw-check:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+
+.sw-practice__stage.is-correct .sw-slot.is-filled {
+  animation: sw-correct-pulse 420ms var(--sw-ease-out);
+}
+
+.sw-practice__stage.is-wrong {
+  animation: sw-gentle-shake 320ms var(--sw-ease-out);
+}
+
+.sw-practice__stage.is-wrong .sw-slot.is-filled {
+  border-color: var(--sw-peach);
+  background: var(--sw-peach);
+}
+
+.sw-practice--done .sw-practice__stage {
+  min-height: 420px;
+}
+
+.sw-done {
+  gap: 8px;
+}
+
+.sw-done__title {
+  margin: 0;
+  font-family: var(--sw-font-en);
+  font-size: clamp(48px, 12vw, 76px);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.sw-debug {
+  width: min(560px, 100%);
+  max-height: 180px;
+  overflow: auto;
+  margin: 8px 0 0;
+  padding: 12px 14px;
+  border-radius: var(--sw-radius-sm);
+  background: var(--sw-surface-strong);
+  border: 1px dashed var(--sw-sky-deep);
+  color: var(--sw-ink-soft);
+  font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+  font-size: 11px;
+  line-height: 1.45;
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+@keyframes sw-correct-pulse {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.06); background: var(--sw-mint-deep); }
+  100% { transform: scale(1); }
+}
+
+@keyframes sw-gentle-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+}
+
+@media (max-width: 560px) {
+  .sw-practice {
+    padding: 16px 14px 28px;
+  }
+
+  .sw-practice__stage {
+    padding: 16px 4px 22px;
+    border-radius: var(--sw-radius-sm);
+  }
+
+  .sw-slot {
+    width: 52px;
+    height: 52px;
+    font-size: 22px;
+  }
+
+  .sw-tile {
+    min-width: 54px;
+    height: 52px;
+    font-size: 21px;
+    padding: 0 14px;
+  }
+
+  .sw-type-input {
+    height: 58px;
+    font-size: 25px;
+  }
+}

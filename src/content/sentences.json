@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "s.fish.01",
+      "wordId": "w.fish",
+      "text": "A fish can swim.",
+      "blank": "fish",
+      "answer": "fish",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.ship.01",
+      "wordId": "w.ship",
+      "text": "The ship is big.",
+      "blank": "ship",
+      "answer": "ship",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.rain.01",
+      "wordId": "w.rain",
+      "text": "I like the rain.",
+      "blank": "rain",
+      "answer": "rain",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.night.01",
+      "wordId": "w.night",
+      "text": "The moon shines at night.",
+      "blank": "night",
+      "answer": "night",
+      "reviewStatus": "unreviewed"
+    }
+  ]
+}

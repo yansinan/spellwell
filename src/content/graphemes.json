@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "items": [
+    { "id": "g.a", "text": "a", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.b", "text": "b", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.c", "text": "c", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.d", "text": "d", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.e", "text": "e", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.f", "text": "f", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.i", "text": "i", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.k", "text": "k", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.n", "text": "n", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.o", "text": "o", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.p", "text": "p", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.r", "text": "r", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.s", "text": "s", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.t", "text": "t", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.u", "text": "u", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
+    { "id": "g.sh", "text": "sh", "tier": "T1", "kind": "digraph", "reviewStatus": "unreviewed" },
+    { "id": "g.ch", "text": "ch", "tier": "T1", "kind": "digraph", "reviewStatus": "unreviewed" },
+    { "id": "g.ck", "text": "ck", "tier": "T1", "kind": "digraph", "reviewStatus": "unreviewed" },
+    { "id": "g.ai", "text": "ai", "tier": "T2", "kind": "vowel-team", "reviewStatus": "unreviewed" },
+    { "id": "g.ee", "text": "ee", "tier": "T2", "kind": "vowel-team", "reviewStatus": "unreviewed" },
+    { "id": "g.oo", "text": "oo", "tier": "T2", "kind": "vowel-team", "reviewStatus": "unreviewed" },
+    { "id": "g.igh", "text": "igh", "tier": "T3", "kind": "trigraph", "reviewStatus": "unreviewed" }
+  ]
+}

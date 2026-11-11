@@ -1,0 +1,13 @@
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# 测试运行产物
+tests/.last-run.json
+
+# Node（本项目无依赖，仅防御）
+node_modules/
+
+# 本地
+*.log
