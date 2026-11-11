@@ -8,7 +8,7 @@
  */
 
 import { IndexedDBAdapter } from '../storage/IndexedDBAdapter.js';
-import { CONTENT_VERSION, importContent, readContentVersion } from '../storage/contentImport.js';
+import { CONTENT_VERSION, importContent, migrateContentV2ToV3, readContentVersion } from '../storage/contentImport.js';
 import {
   addWord,
   applySegments,
@@ -43,7 +43,10 @@ async function openContent() {
     return { adapter: null, content: await loadStatic(), error };
   }
   let version = await readContentVersion(adapter);
-  if (version !== CONTENT_VERSION) {
+  if (version === 2) {
+    await migrateContentV2ToV3(adapter);
+    version = CONTENT_VERSION;
+  } else if (version !== CONTENT_VERSION) {
     const staticContent = await loadStatic();
     await importContent(adapter, { ...staticContent, version: CONTENT_VERSION });
     version = CONTENT_VERSION;
@@ -299,16 +302,21 @@ export async function mountAdmin(root) {
 
             <div class="sw-admin__field-row">
               <label>单词 <input data-word-text value="${escape(word.text)}" /></label>
-              <label>Unit ID <input data-word-unit-id value="${escape(word.unitId ?? '')}" placeholder="u1-1" /></label>
-              <label>Unit 标签 <input data-word-unit-label value="${escape(word.unitLabel ?? '')}" placeholder="一年级下学期 · 第1单元" /></label>
-              <label>中文 <input data-word-translation value="${escape(word.translation ?? '')}" placeholder="可选" /></label>
-              <label>音标 <input data-word-phonetic value="${escape(word.phonetic ?? '')}" placeholder="可选，如 /ˈweðər/" /></label>
-              <label>Level
-                <select data-word-level>
-                  <option value="1" ${word.level === 1 ? 'selected' : ''}>1</option>
-                  <option value="2" ${word.level === 2 ? 'selected' : ''}>2</option>
+              <label>年级
+                <select data-word-grade>
+                  <option value="1" ${word.grade === 1 ? 'selected' : ''}>一年级</option>
+                  <option value="2" ${word.grade === 2 ? 'selected' : ''}>二年级</option>
                 </select>
               </label>
+              <label>学期
+                <select data-word-term>
+                  <option value="上" ${word.term === '上' ? 'selected' : ''}>上</option>
+                  <option value="下" ${word.term === '下' ? 'selected' : ''}>下</option>
+                </select>
+              </label>
+              <label>单元 <input type="number" min="1" max="20" data-word-unit value="${word.unit ?? 1}" /></label>
+              <label>中文 <input data-word-translation value="${escape(word.translation ?? '')}" placeholder="可选" /></label>
+              <label>音标 <input data-word-phonetic value="${escape(word.phonetic ?? '')}" placeholder="可选，如 /ˈweðər/" /></label>
               <label>Review
                 <select data-word-review>
                   ${['unreviewed', 'reviewed', 'retired'].map((status) => `<option value="${status}" ${word.reviewStatus === status ? 'selected' : ''}>${status}</option>`).join('')}
@@ -383,9 +391,11 @@ export async function mountAdmin(root) {
         const baseUnit = currentWord();
         const result = importWord(content, {
           ...entry,
-          level: baseUnit?.level ?? 1,
-          unitId: baseUnit?.unitId ?? 'u1-1',
-          unitLabel: baseUnit?.unitLabel ?? '一年级下学期 · 第1单元',
+          grade: baseUnit?.grade ?? 1,
+          term: baseUnit?.term ?? '下',
+          unit: baseUnit?.unit ?? 1,
+          unitId: baseUnit?.unitId ?? 'g1-s2-u1',
+          unitLabel: baseUnit?.unitLabel ?? '一年级下 · 第1单元',
         }, duplicateMode);
         counts[result === 'created' ? 'created' : result === 'merged' ? 'merged' : result === 'replaced' ? 'replaced' : 'skipped'] += 1;
       }
@@ -414,9 +424,11 @@ export async function mountAdmin(root) {
         text,
         translation: '',
         phonetic: '',
-        level: baseUnit?.level ?? 1,
-        unitId: baseUnit?.unitId ?? 'u1-1',
-        unitLabel: baseUnit?.unitLabel ?? '一年级下学期 · 第1单元',
+        grade: baseUnit?.grade ?? 1,
+        term: baseUnit?.term ?? '下',
+        unit: baseUnit?.unit ?? 1,
+        unitId: baseUnit?.unitId ?? 'g1-s2-u1',
+        unitLabel: baseUnit?.unitLabel ?? '一年级下 · 第1单元',
         units: [],
         reviewStatus: 'unreviewed',
       });
@@ -483,13 +495,20 @@ export async function mountAdmin(root) {
           render();
           return;
         }
+        const grade = Number(root.querySelector('[data-word-grade]').value);
+        const term = root.querySelector('[data-word-term]').value;
+        const unit = Number(root.querySelector('[data-word-unit]').value);
+        const unitId = `g${grade}-s${term === '下' ? '2' : '1'}-u${unit}`;
+        const unitLabel = `${grade === 1 ? '一' : '二'}年级${term} · 第${unit}单元`;
         updateWord(content, word.id, {
           text,
-          unitId: root.querySelector('[data-word-unit-id]').value.trim(),
-          unitLabel: root.querySelector('[data-word-unit-label]').value.trim(),
+          grade,
+          term,
+          unit,
+          unitId,
+          unitLabel,
           translation,
           phonetic,
-          level: Number(root.querySelector('[data-word-level]').value),
           reviewStatus: root.querySelector('[data-word-review]').value,
         });
         const ok = await persistContent();

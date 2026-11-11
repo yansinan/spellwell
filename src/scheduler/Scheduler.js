@@ -25,6 +25,7 @@ import {
 import { appendErrorProfile } from './ErrorProfile.js';
 import { P4_AVAILABLE_TYPES, P6_AVAILABLE_TYPES, buildWordSpec } from './QuestionSpecBuilder.js';
 import { NEW_WORD_ROTATION, candidatesForError } from './TypeSelector.js';
+import { calibrateWeights, scoreWord } from './SelectionWeights.js';
 
 export const MIN_QUEUE_SIZE = 5;
 export const MAX_QUEUE_SIZE = 30;
@@ -155,7 +156,7 @@ export class Scheduler {
     const allWords = await this.wordRepository.all();
     const words = allWords.filter((word) => {
       if (word.reviewStatus === 'retired') return false;
-      if (unitFilter && !unitFilter.has(String(word.unitId))) return false;
+      if (unitFilter && !unitFilter.has(String(word.unitId ?? `level-${word.level ?? 1}`))) return false;
       return true;
     });
     if (words.length === 0) {
@@ -163,6 +164,15 @@ export class Scheduler {
     }
     const states = await this.stateRepository.listWordStates();
     const stateByWord = new Map(states.map((state) => [state.wordId, state]));
+    const attempts = this.attemptRepository?.recent ? await this.attemptRepository.recent(1000) : [];
+    const weights = calibrateWeights(attempts);
+    const scoreFor = (word) => scoreWord({
+      word,
+      state: stateByWord.get(String(word.id)),
+      weights,
+      today,
+      mode,
+    });
 
     const due = states
       .filter((state) => isDue(state, today))
@@ -176,15 +186,17 @@ export class Scheduler {
     const dueReviews = due.filter(
       (state) => state.lastResult !== 'wrong' && state.errorProfile.length === 0,
     );
-    const newWords = words.filter((word) => !stateByWord.has(String(word.id)));
+    const byScore = (a, b) => {
+      const diff = scoreFor(b) - scoreFor(a);
+      return diff !== 0 ? diff : compareStrings(String(a.id), String(b.id));
+    };
+    const newWords = words.filter((word) => !stateByWord.has(String(word.id))).sort(byScore);
     const fillers = words
-      .filter((word) => stateByWord.get(String(word.id))?.status !== 'mastered')
-      .sort((a, b) => {
-        const left = stateByWord.get(String(a.id));
-        const right = stateByWord.get(String(b.id));
-        const dateCompare = compareStrings(String(left?.dueDate ?? ''), String(right?.dueDate ?? ''));
-        return dateCompare !== 0 ? dateCompare : compareStrings(String(a.id), String(b.id));
-      });
+      .filter((word) => {
+        const state = stateByWord.get(String(word.id));
+        return state && state.status !== 'mastered';
+      })
+      .sort(byScore);
 
     /** @type {Record<string, unknown>[]} */
     const selected = [];
@@ -257,6 +269,12 @@ export class Scheduler {
         reason,
         mode,
         policyVersion: 1,
+        score: scoreFor(word),
+        calibration: {
+          sampleSize: weights.sampleSize,
+          globalErrorRate: Number(weights.globalErrorRate.toFixed(4)),
+          wordErrorRate: Number((weights.byWord[String(word.id)]?.errorRate ?? weights.priorErrorRate).toFixed(4)),
+        },
       };
       return spec;
     });

@@ -27,7 +27,11 @@
 {
   "id": "w.fish",
   "text": "fish",
-  "level": 1,
+  "grade": 1,
+  "term": "下",
+  "unit": 1,
+  "unitId": "g1-s2-u1",
+  "unitLabel": "一年级下 · 第1单元",
   "units": [
     { "text": "f", "graphemeId": "g.f" },
     { "text": "i", "graphemeId": "g.i" },
@@ -45,7 +49,11 @@
 |---|---|
 | `id` | `w.<slug>`，永久稳定；同形异义词用 `w.bow.1` / `w.bow.2` |
 | `text` | 小写 ASCII 字母，无空格、连字符；长度 1—12 |
-| `level` | 1 或 2（一年级/二年级） |
+| `grade` | 1 或 2（一年级/二年级） |
+| `term` | `上` 或 `下` |
+| `unit` | 单元序号，正整数；同一 grade+term 下可多个 |
+| `unitId` | `g<grade>-s<1|2>-u<unit>`，由 grade/term/unit 派生，稳定 |
+| `unitLabel` | 展示标签，如“一年级下 · 第1单元” |
 | `units` | 非空、有序；`units.map(u => u.text).join('') === text` |
 | `units[].text` | 连续字母子串，不得为空 |
 | `units[].graphemeId` | 必须存在于 `graphemes.json`，且组合文本等于 `unit.text` |

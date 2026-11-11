@@ -9,7 +9,7 @@
 
 import { MemoryAdapter } from '../storage/MemoryAdapter.js';
 import { IndexedDBAdapter } from '../storage/IndexedDBAdapter.js';
-import { CONTENT_VERSION, importContent, readContentVersion } from '../storage/contentImport.js';
+import { CONTENT_VERSION, importContent, migrateContentV2ToV3, readContentVersion } from '../storage/contentImport.js';
 import { readPracticeSettings } from '../storage/practiceSettings.js';
 import { GraphemeRepository } from '../repositories/GraphemeRepository.js';
 import { WordRepository } from '../repositories/WordRepository.js';
@@ -20,6 +20,13 @@ import { Scheduler } from '../scheduler/Scheduler.js';
 import { PracticeSession } from './PracticeSession.js';
 
 export const P1_WORD_IDS = Object.freeze(['w.fish', 'w.ship', 'w.night']);
+
+const TERM_DEFINITIONS = Object.freeze([
+  { id: 'g1-s1', grade: 1, term: '上', label: '一年级上' },
+  { id: 'g1-s2', grade: 1, term: '下', label: '一年级下' },
+  { id: 'g2-s1', grade: 2, term: '上', label: '二年级上' },
+  { id: 'g2-s2', grade: 2, term: '下', label: '二年级下' },
+]);
 
 async function fetchJson(relativePath) {
   const response = await fetch(new URL(relativePath, import.meta.url));
@@ -43,6 +50,7 @@ async function createAdapter() {
 async function ensureContent(adapter) {
   const current = await readContentVersion(adapter);
   if (current === CONTENT_VERSION) return { seeded: false, version: CONTENT_VERSION };
+  if (current === 2) return migrateContentV2ToV3(adapter);
   const [words, graphemes, sentences, confusables] = await Promise.all([
     fetchJson('../content/words.json'),
     fetchJson('../content/graphemes.json'),
@@ -67,9 +75,23 @@ async function readContent(adapter) {
   for (const word of activeWords) {
     const id = String(word.unitId ?? `level-${word.level ?? 1}`);
     const label = String(word.unitLabel ?? `Level ${word.level ?? 1}`);
-    if (!unitMap.has(id)) unitMap.set(id, { id, label, count: 0 });
+    if (!unitMap.has(id)) {
+      unitMap.set(id, {
+        id,
+        label,
+        grade: Number(word.grade ?? word.level ?? 1),
+        term: String(word.term ?? '下'),
+        unit: Number(word.unit ?? 1),
+        count: 0,
+      });
+    }
     unitMap.get(id).count += 1;
   }
+  const units = [...unitMap.values()].sort((a, b) => a.id.localeCompare(b.id));
+  const terms = TERM_DEFINITIONS.map((definition) => ({
+    ...definition,
+    units: units.filter((unit) => unit.grade === definition.grade && unit.term === definition.term),
+  }));
   return {
     words,
     activeWords,
@@ -79,7 +101,8 @@ async function readContent(adapter) {
     sentenceByWord,
     settings,
     revision: Number(revisionRecord?.value ?? 0),
-    units: [...unitMap.values()].sort((a, b) => a.id.localeCompare(b.id)),
+    units,
+    terms,
   };
 }
 
@@ -126,7 +149,7 @@ export async function createPracticeWorkspace() {
     snapshot = await readContent(adapter);
     const selectedUnits = Array.isArray(units) && units.length > 0 ? new Set(units.map(String)) : null;
     const words = snapshot.activeWords.filter(
-      (word) => !selectedUnits || selectedUnits.has(String(word.unitId)),
+      (word) => !selectedUnits || selectedUnits.has(String(word.unitId ?? `level-${word.level ?? 1}`)),
     );
     if (words.length === 0) throw new Error('no words in selected units');
     const selectedMode = mode ?? snapshot.settings.defaultMode;
@@ -172,6 +195,7 @@ export async function createPracticeWorkspace() {
     contentSeeded: content.seeded,
     get revision() { return snapshot.revision; },
     get units() { return snapshot.units; },
+    get terms() { return snapshot.terms; },
     get settings() { return snapshot.settings; },
     refresh,
     startPractice,

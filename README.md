@@ -203,11 +203,11 @@ tools/serve.mjs   零依赖静态服务器
 
 ## P9 已实现
 
-- 20 个词、3 个单元（一年级下学期 2 单元、二年级上学期 1 单元）。
-- 练习设计页：单元多选、Review/Effort；不选题量。
+- 20 个词、3 个单元；`grade/term/unit` 模型，一年级下 2 单元、二年级上 1 单元。
+- 练习设计页：一年级上/下、二年级上/下折叠；每个学期下多选 unit；Review/Effort；不选题量。
 - 后台题量默认 20，设置页 `/src/admin/settings.html`，面包屑返回内容库。
-- 题量、单元、模式进入 Scheduler；当前会话不因内容更新中断。
-- 每个计划项带 `reason/mode/policyVersion`；`revise()` 接口预留。
+- 题量、单元、模式进入 Scheduler；真实 attempts 校准选词权重；当前会话不因内容更新中断。
+- 每个计划项带 `reason/mode/policyVersion/score/calibration`；`revise()` 接口预留。
 
 ![P9 练习设计](docs/p9-preview.png)
 

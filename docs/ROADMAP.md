@@ -394,27 +394,30 @@ node tests/runTests.js --phase=p8
 
 ### 交付物
 
-- [x] 内容单元模型：`unitId` / `unitLabel`；3 个单元、20 个词。
-- [x] 前台练习设计页：单元多选、Review/Effort、后台题量；不显示题量选择。
+- [x] 内容单元模型：`grade/term/unit` + `unitId/unitLabel`；3 个单元、20 个词。
+- [x] 练习设计按年级学期折叠；学期下多选 unit。
+- [x] 真实 attempts 权重校准（按词/题型错误率、平滑、约束优先）。
+- [x] 修复旧 DB 无 unitId 时 Start practice 空队列。
+- [x] 前台练习设计页：年级学期折叠 + unit 多选、Review/Effort、后台题量；不显示题量选择。
 - [x] 默认 20 题；后台设置 `/src/admin/settings.html`，面包屑返回内容库。
 - [x] Scheduler 按 unit 过滤、retired 过滤、Review/Effort 侧重点不同。
 - [x] 题目带 `params.plan.reason/mode/policyVersion`，可解释。
 - [x] `contentRevision`：后台保存递增；下一轮重新读内容。
 - [x] 当前会话保持；内容更新只提示 `New practice`，不中途换题。
 - [x] `PlanPolicy.revise()` 兼容接口；P9 不实时改当前计划。
-- [x] `tests/p9/`：默认题量、单元过滤、retired、Review/Effort、plan hook。
+- [x] `tests/p9/`：默认题量、单元过滤、retired、Review/Effort、plan hook、权重校准。
 
 ### 验收结果
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 186 passed · 0 failed · 36 files
+# PASS  p9 gate · 190 passed · 0 failed · 38 files
 ```
 
 - 练习设计页：3 个单元全选、Review 默认、`20 questions`。
 - 开始后 `1 / 20`；只生成所选 unit 的题目。
 - 后台设置 20 题；重新设置后下一轮生效。
-- 单元分组标签为“一年级下学期 · 第1单元”等。
+- 学期折叠为“一年级上/一年级下/二年级上/二年级下”；单元标签为“一年级下 · 第1单元”等。
 - 当前会话不被后台保存打断。
 
 ### P9 明确不做

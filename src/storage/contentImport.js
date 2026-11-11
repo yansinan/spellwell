@@ -4,12 +4,12 @@
  * @doc §5.3 存储层平移策略
  *
  * 内容导入：只写内容库 + meta，不碰学习状态。
- * 同一 contentVersion 幂等跳过；版本变化时覆盖写入（P2 暂不删除旧内容）。
+ * 同一 contentVersion 幂等跳过；P9 的 v2→v3 走迁移保留后台编辑，其他版本覆盖写入。
  */
 
 import { ContractError } from '../core/errors.js';
 
-export const CONTENT_VERSION = 2;
+export const CONTENT_VERSION = 3;
 
 const CONTENT_STORES = Object.freeze(['words', 'graphemes', 'sentences', 'confusables']);
 
@@ -90,4 +90,31 @@ export async function importContent(adapter, content) {
   });
 
   return { seeded: true, version, counts };
+}
+
+/**
+ * P9：contentVersion 2 → 3，补齐 grade/term/unit，不覆盖后台已编辑的词。
+ * @param {import('./StorageAdapter.js').StorageAdapter} adapter
+ */
+export async function migrateContentV2ToV3(adapter) {
+  const current = await readContentVersion(adapter);
+  if (current !== 2) return { migrated: false, version: current };
+  const words = await adapter.query('words', {});
+  const legacy = {
+    'u1-1': { grade: 1, term: '下', unit: 1 },
+    'u1-2': { grade: 1, term: '下', unit: 2 },
+    'u2-1': { grade: 2, term: '上', unit: 1 },
+  };
+  await adapter.transaction(['words', 'meta'], async (tx) => {
+    for (const word of words) {
+      const scope = legacy[word.unitId] ?? (Number(word.level) === 2
+        ? { grade: 2, term: '上', unit: 1 }
+        : { grade: 1, term: '下', unit: 1 });
+      const unitId = `g${scope.grade}-s${scope.term === '下' ? '2' : '1'}-u${scope.unit}`;
+      const unitLabel = `${scope.grade === 1 ? '一' : '二'}年级${scope.term} · 第${scope.unit}单元`;
+      await tx.put('words', { ...word, ...scope, unitId, unitLabel });
+    }
+    await tx.put('meta', { key: 'contentVersion', value: 3 });
+  });
+  return { migrated: true, version: 3 };
 }

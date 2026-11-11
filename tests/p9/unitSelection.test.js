@@ -10,7 +10,7 @@ import { WordRepository } from '../../src/repositories/WordRepository.js';
 import { StateRepository } from '../../src/repositories/StateRepository.js';
 import { AttemptRepository } from '../../src/repositories/AttemptRepository.js';
 import { Scheduler } from '../../src/scheduler/Scheduler.js';
-import { assertEqual, test } from '../harness.js';
+import { assert, assertEqual, test } from '../harness.js';
 
 const words = JSON.parse(await readFile(new URL('../../src/content/words.json', import.meta.url), 'utf8'));
 const graphemes = JSON.parse(await readFile(new URL('../../src/content/graphemes.json', import.meta.url), 'utf8'));
@@ -32,18 +32,18 @@ async function setup() {
 
 test('单元选择：只生成所选 unit 的题，队列可到 20', async () => {
   const { scheduler, adapter } = await setup();
-  const specs = await scheduler.buildDailyQueue({ size: 20, units: ['u1-1'], mode: 'review' });
+  const specs = await scheduler.buildDailyQueue({ size: 20, units: ['g1-s2-u1'], mode: 'review' });
   assertEqual(specs.length, 8);
   for (const spec of specs) {
     const word = await adapter.get('words', spec.target.id);
-    assertEqual(word.unitId, 'u1-1');
+    assertEqual(word.unitId, 'g1-s2-u1');
   }
 });
 
 test('复习/努力：新词题型轮转有不同侧重', async () => {
   const { scheduler } = await setup();
-  const review = await scheduler.buildDailyQueue({ size: 20, units: ['u2-1'], mode: 'review' });
-  const effort = await scheduler.buildDailyQueue({ size: 20, units: ['u2-1'], mode: 'effort' });
+  const review = await scheduler.buildDailyQueue({ size: 20, units: ['g2-s1-u1'], mode: 'review' });
+  const effort = await scheduler.buildDailyQueue({ size: 20, units: ['g2-s1-u1'], mode: 'effort' });
   assertEqual(review[0].typeId, 'T-FILL');
   assertEqual(effort[0].typeId, 'T-TYPE');
   assertEqual(review[0].params.plan.mode, 'review');
@@ -55,6 +55,26 @@ test('retired 内容不进入队列', async () => {
   const { scheduler, adapter } = await setup();
   const word = await adapter.get('words', 'w.book');
   await adapter.put('words', { ...word, reviewStatus: 'retired' });
-  const specs = await scheduler.buildDailyQueue({ size: 20, units: ['u1-1'], mode: 'review' });
+  const specs = await scheduler.buildDailyQueue({ size: 20, units: ['g1-s2-u1'], mode: 'review' });
   assertEqual(specs.some((spec) => spec.target.id === 'w.book'), false);
+});
+
+test('真实权重：有错误历史的词在同层排序更靠前', async () => {
+  const { scheduler, adapter } = await setup();
+  const now = Date.now();
+  for (let index = 0; index < 2; index += 1) {
+    await adapter.put('attempts', {
+      id: `a.weight.${index}`,
+      specId: `spec.weight.${index}`,
+      wordId: 'w.ship',
+      wordCorrect: false,
+      firstError: null,
+      timestamp: now + index,
+    });
+  }
+  const specs = await scheduler.buildDailyQueue({ size: 20, units: ['g1-s2-u1'], mode: 'review' });
+  assertEqual(specs[0].target.id, 'w.ship');
+  assertEqual(specs[1].target.id !== 'w.ship', true);
+  assertEqual(specs[0].params.plan.calibration.sampleSize, 2);
+  assert(specs[0].params.plan.calibration.wordErrorRate > 0.5);
 });

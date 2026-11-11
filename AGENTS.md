@@ -75,7 +75,7 @@ node tools/serve.mjs
 4. **仓库层只调用 StorageAdapter 的 7 个方法**：`init/get/put/query/transaction/exportAll/importAll`；禁止 `indexedDB`/`fetch`/`localStorage`。
 5. **所有随机只用 `spec.seed` + `mulberry32`。** 全仓库禁止 `Math.random`。
 6. **切分以人工确认为准。** 学习端/题型层禁止自动推断 grapheme；后台可基于组合库生成建议切分，但保存前必须人工确认，`units[]` 仍是唯一真相。
-7. **学习端不出现中文。** 家长端/后台可以中文；按钮用图标+短词。
+7. **学习端题目/操作不出现中文。** 家长端/后台可以中文；练习设计的年级/单元导航可用中文；按钮用图标+短词。
 8. **颜色/圆角/动效只来自 `styles/tokens.css`。** 不使用刺眼红色，不做强阴影。
 9. **不新增依赖、不引入构建工具、不引入框架。** 纯 ESM + Node 脚本。
 10. **偏离 DESIGN 必须先写 ADR。** 先改文档再改代码；禁止“代码即文档”。
@@ -170,4 +170,5 @@ node tools/serve.mjs
 - P8 前台 Stats：本次/历史/按日/状态报告；纯统计只读，不参与调度：见 ADR-0014。
 - 后台自动切分只生成草稿建议；组合库 96 项；批量格式 `w,ea,th,er | 中文 | 音标`；见 ADR-0016。
 - 后台列表按 unit 折叠，展示错/对次数；只读 attempts，不写学习状态。
-- P9 练习设计：单元多选 + Review/Effort；题量由后台设置（默认20）；计划项带 reason；`revise()` 预留但不实时改题。
+- P9 练习设计：年级学期折叠 + unit 多选 + Review/Effort；题量后台设置（默认20，5—30）；计划项带 reason；`revise()` 预留但不实时改题。
+- P9 权重：按真实 attempts 的词/题型错误率 + 小样本平滑；同层排序，约束优先；见 ADR-0019。

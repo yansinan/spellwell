@@ -93,6 +93,9 @@ export function validateContent(content) {
       errors.push(error('WORD_TEXT_INVALID', `${path}.text`, 'word text must be lowercase ASCII'));
       continue;
     }
+    if (![1, 2].includes(word.grade) || !['上', '下'].includes(word.term) || !Number.isInteger(word.unit) || word.unit < 1) {
+      errors.push(error('WORD_SCOPE_INVALID', `${path}.grade/term/unit`, 'word needs grade 1/2, term 上/下, unit >= 1'));
+    }
     if (!Array.isArray(word.units) || word.units.length === 0) {
       errors.push(error('WORD_UNITS_INVALID', `${path}.units`, 'word needs manually annotated units'));
       continue;

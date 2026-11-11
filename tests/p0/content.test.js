@@ -80,7 +80,9 @@ test('words：人工切分拼接必须逐字等于单词文本', () => {
   for (const word of wordsDoc.items) {
     assertEqual(word.text, word.text.toLowerCase(), `${word.id} must be lowercase`);
     assert(/^[a-z]+$/.test(word.text), `${word.id} must be ASCII letters only`);
-    assert([1, 2].includes(word.level), `${word.id} level`);
+    assert([1, 2].includes(word.grade), `${word.id} grade`);
+    assert(['上', '下'].includes(word.term), `${word.id} term`);
+    assert(Number.isInteger(word.unit) && word.unit >= 1, `${word.id} unit`);
     assert(Array.isArray(word.units) && word.units.length > 0, `${word.id} units`);
     assertEqual(word.units.map((unit) => unit.text).join(''), word.text, `${word.id} segmentation join`);
     for (const unit of word.units) {

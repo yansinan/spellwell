@@ -4,16 +4,20 @@
 
 ### Added
 
-- 单元模型 `unitId` / `unitLabel`：3 个单元、20 个词。
-- 练习设计页：单元多选、Review/Effort、后台题量；前台不选题量。
+- 单元模型 `grade/term/unit` + `unitId/unitLabel`：3 个单元、20 个词。
+- 练习设计按“一年级上/下、二年级上/下”折叠，学期下多选 unit。
+- 练习设计页：一年级上/下、二年级上/下折叠；学期下多选 unit；Review/Effort；前台不选题量。
 - 题量设置 `meta.practiceSettings`，默认 20，范围 5—30。
 - 后台练习设置页 `/src/admin/settings.html`，面包屑“内容库 / 练习设置”。
 - Scheduler 支持 unit 过滤、retired 过滤、Review/Effort 侧重。
+- 用真实 attempts 校准权重：按词/题型错误率、小样本平滑、约束优先。
+- 修复旧 DB 无 unitId 时 Start practice 空队列的问题；内容版本升到 3。
+- v2→v3 迁移保留后台已编辑词，补齐 grade/term/unit。
 - `contentRevision`：后台保存递增；下一轮重新读内容。
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
 - 计划项带 `params.plan.reason/mode/policyVersion`。
 - `PlanPolicy.revise()` 兼容接口，P9 不实时改题。
-- `tests/p9/`：题量、单元、mode、retired、plan hook。
+- `tests/p9/`：题量、单元、mode、retired、plan hook、权重校准。
 
 ### Changed
 
@@ -26,7 +30,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 186 passed · 0 failed · 36 files
+# PASS  p9 gate · 190 passed · 0 failed · 38 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。

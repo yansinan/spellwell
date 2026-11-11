@@ -54,15 +54,32 @@ export class PracticeSetupScreen {
           <p class="sw-practice__hint">Choose your units and how hard to work.</p>
 
           <section class="sw-setup__section">
-            <h2>Units</h2>
-            <div class="sw-setup__units">
-              ${units.map((unit) => `
-                <label class="sw-setup__unit ${this.selectedUnits.has(unit.id) ? 'is-selected' : ''}">
-                  <input type="checkbox" data-setup-unit="${escape(unit.id)}" ${this.selectedUnits.has(unit.id) ? 'checked' : ''} />
-                  <span>${escape(unit.label)}</span>
-                  <small>${unit.count} words</small>
-                </label>
-              `).join('')}
+            <h2>年级 / 单元</h2>
+            <div class="sw-setup__terms">
+              ${this.workspace.terms.map((term) => {
+                const selectedCount = term.units.filter((unit) => this.selectedUnits.has(unit.id)).length;
+                const allSelected = term.units.length > 0 && selectedCount === term.units.length;
+                return `
+                  <details class="sw-setup__term" ${term.units.length > 0 ? 'open' : ''}>
+                    <summary>
+                      <label class="sw-setup__term-check" data-term-label>
+                        <input type="checkbox" data-setup-term="${escape(term.id)}" ${allSelected ? 'checked' : ''} ${term.units.length === 0 ? 'disabled' : ''} />
+                      </label>
+                      <span>${escape(term.label)}</span>
+                      <small>${term.units.length === 0 ? '暂无内容' : `${selectedCount}/${term.units.length} 单元`}</small>
+                    </summary>
+                    <div class="sw-setup__units">
+                      ${term.units.map((unit) => `
+                        <label class="sw-setup__unit ${this.selectedUnits.has(unit.id) ? 'is-selected' : ''}">
+                          <input type="checkbox" data-setup-unit="${escape(unit.id)}" ${this.selectedUnits.has(unit.id) ? 'checked' : ''} />
+                          <span>${escape(unit.label)}</span>
+                          <small>${unit.count} words</small>
+                        </label>
+                      `).join('')}
+                    </div>
+                  </details>
+                `;
+              }).join('')}
             </div>
           </section>
 
@@ -86,6 +103,27 @@ export class PracticeSetupScreen {
       </div>
     `;
 
+    for (const input of this.root.querySelectorAll('[data-setup-term]')) {
+      const term = this.workspace.terms.find((item) => item.id === input.dataset.setupTerm);
+      if (term) {
+        const selected = term.units.filter((unit) => this.selectedUnits.has(unit.id)).length;
+        input.indeterminate = selected > 0 && selected < term.units.length;
+      }
+    }
+    for (const label of this.root.querySelectorAll('[data-term-label]')) {
+      label.addEventListener('click', (event) => event.stopPropagation());
+    }
+    for (const input of this.root.querySelectorAll('[data-setup-term]')) {
+      input.addEventListener('change', () => {
+        const term = this.workspace.terms.find((item) => item.id === input.dataset.setupTerm);
+        if (!term) return;
+        for (const unit of term.units) {
+          if (input.checked) this.selectedUnits.add(unit.id);
+          else this.selectedUnits.delete(unit.id);
+        }
+        this.render();
+      });
+    }
     for (const input of this.root.querySelectorAll('[data-setup-unit]')) {
       input.addEventListener('change', () => {
         if (input.checked) this.selectedUnits.add(input.dataset.setupUnit);
