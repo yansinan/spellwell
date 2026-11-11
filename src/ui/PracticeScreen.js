@@ -47,25 +47,29 @@ export class PracticeScreen {
   #suppressClick = false;
   #previewGap = null;
   #previewKey = null;
+  #onResult;
   #sound = createSoundPlayer();
 
   /**
    * @param {{
    *   root: HTMLElement,
    *   session: import('./PracticeSession.js').PracticeSession,
-   *   debug?: boolean
+   *   debug?: boolean,
+   *   onResult?: (result: import('../core/contracts.js').AttemptResult) => Promise<void>|void
    * }} input
    */
-  constructor({ root, session, debug = false }) {
+  constructor({ root, session, debug = false, onResult = null }) {
     if (!root) throw new Error('PracticeScreen needs a root element');
     if (!session) throw new Error('PracticeScreen needs a PracticeSession');
+    if (onResult !== null && typeof onResult !== 'function') throw new Error('onResult must be a function');
     this.#root = root;
     this.#session = session;
     this.#debug = debug;
+    this.#onResult = onResult;
   }
 
   mount() {
-    this.#root.dataset.phase = 'P1';
+    this.#root.dataset.phase = 'P3';
     this.#root.dataset.surface = 'practice';
     this.#root.addEventListener('pointerdown', () => this.#sound.unlock(), { once: true, capture: true });
     this.#root.addEventListener('keydown', () => this.#sound.unlock(), { once: true, capture: true });
@@ -697,7 +701,7 @@ export class PracticeScreen {
     this.#bindSoundToggle();
   }
 
-  #submit() {
+  async #submit() {
     if (this.#locked || this.#session.isComplete) return;
     const { spec } = this.#current;
     let events = this.#events;
@@ -718,6 +722,13 @@ export class PracticeScreen {
     this.#clearDrag();
     const result = this.#session.submit(events);
     this.#updateDebug(result);
+    if (this.#onResult) {
+      try {
+        await this.#onResult(result);
+      } catch (error) {
+        console.error('[SpellWell] failed to record attempt', error);
+      }
+    }
 
     const stage = this.#root.querySelector('.sw-practice__stage');
     const feedback = this.#root.querySelector('[data-role="feedback"]');

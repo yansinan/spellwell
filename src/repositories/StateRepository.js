@@ -88,6 +88,18 @@ export class StateRepository extends BaseRepository {
   }
 
   /**
+   * 全部单词状态（调度器做优先级队列时使用）。
+   * @returns {Promise<import('../core/contracts.js').WordState[]>}
+   */
+  async listWordStates() {
+    const records = await this.adapter.query('wordStates', {});
+    return records.map((state) => {
+      validateWordState(state);
+      return /** @type {import('../core/contracts.js').WordState} */ (state);
+    });
+  }
+
+  /**
    * 到期且未掌握的词；按 dueDate、wordId 排序，保证可复现。
    * @param {string} [today]
    * @returns {Promise<import('../core/contracts.js').WordState[]>}

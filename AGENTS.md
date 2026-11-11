@@ -1,7 +1,7 @@
 # AGENTS.md · 项目执行契约
 
 > 任何 agent、贡献者进入本仓库，先读本文件。它规定“怎么做事”，`docs/DESIGN.md` 规定“做什么”。
-> 当前阶段：**P2 已完成，P3 是下一步**。不要提前实现 P3 及以后的功能。
+> 当前阶段：**P3 已完成，P4 是下一步**。不要提前实现 P4 及以后的功能。
 
 ---
 
@@ -24,17 +24,18 @@
 | P0 | ✅ 完成 | 修 P0 测试、文档错字、架构守卫误报 | 改契约语义、加新题型 |
 | P1 | ✅ 完成 | 修 P1 测试、文档、P1 UI/判定缺陷 | 接 IndexedDB、写调度状态、做 P4 题型 |
 | P2 | ✅ 完成 | 修 P2 测试、IndexedDB 适配器/导入缺陷 | 写学习状态、做调度队列、做 P4 题型 |
-| P3 | ⏳ 下一步 | Scheduler 每日队列、错词次日调度、状态持久化 | 做 P4 题型、后台、家长端完整报表 |
+| P3 | ✅ 完成 | 修 P3 测试、队列/状态/题型映射缺陷 | 做 P4 题型、后台、家长端完整报表 |
+| P4 | ⏳ 下一步 | T-REORDER/T-EDIT/T-SEGMENT、P4 题型映射 | 做 T-MATCH/T-CLOZE、后台、P5 组合阶梯 |
 
-**判断标准**：如果你写的代码在 `docs/ROADMAP.md` 的“P2 明确不做”或“后续阶段要点”里，停手。
+**判断标准**：如果你写的代码在 `docs/ROADMAP.md` 的“P3 明确不做”或“后续阶段要点”里，停手。
 
 ---
 
 ## 2. 命令
 
 ```bash
-# 阶段门禁（唯一验收标准；当前 P2）
-node tests/runTests.js --phase=p2
+# 阶段门禁（唯一验收标准；当前 P3）
+node tests/runTests.js --phase=p3
 
 # 本地预览（必须 HTTP）
 node tools/serve.mjs
@@ -74,7 +75,7 @@ node tools/serve.mjs
 10. **偏离 DESIGN 必须先写 ADR。** 先改文档再改代码；禁止“代码即文档”。
 11. **后台不写学习状态。** `src/admin/**` 不得触碰 `wordStates/graphemeStates/attempts`。
 12. **挑战模式不写主状态。** `RapidTapChallenge` 的结果不得进入调度/错误画像。
-13. **阶段顺序不可跳。** P2 不通过不进入 P3；当前 P2 已完成，只允许修 P2 缺陷，不提前写学习状态或调度队列。
+13. **阶段顺序不可跳。** P3 不通过不进入 P4；当前 P3 已完成，只允许修 P3 缺陷，不提前写 P4 题型。
 
 这些规则中 2/3/4/5/6/10 有自动检查（`architecture.test.js`、`traceability.test.js`、`content.test.js`）；其余靠评审。
 
@@ -133,11 +134,10 @@ node tools/serve.mjs
 
 ## 8. 下一阶段启动提示词（复制给 agent）
 
-> 只做 P3，不提前做 P4。先读 `AGENTS.md`、`docs/DESIGN.md §1.3/§2.1/§3.3`、`docs/TRACEABILITY.md` 的 R-SCHED-01/02/03。
-> 实现 Scheduler 每日队列与 recordAttempt，用固定时钟测试“答错降档、次日必现、按错误类型选题型”；
-> 复用 P1 三题型与 P2 IndexedDB 状态仓库，不新增 P4 题型。
-> 每步运行 `node tests/runTests.js --phase=p3`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
-> 不新增依赖、不做后台、不做家长端完整报表。
+> 只做 P4，不提前做 P5。先读 `AGENTS.md`、`docs/DESIGN.md §3.4/§3.5`、`docs/TRACEABILITY.md` 的 R-TYPE-04/05/09。
+> 实现 T-REORDER/T-EDIT/T-SEGMENT 的 build/judge，更新 TypeSelector 与 Scheduler 可用题型。
+> 保持点选/拖拽等价、错误画像可定位；每步运行 `node tests/runTests.js --phase=p4`。
+> 不新增依赖、不做 T-MATCH/T-CLOZE、不做后台。
 
 ---
 
@@ -156,3 +156,4 @@ node tools/serve.mjs
 - 同词同脚手架：grapheme 块选 < mixed < letter；难度是多维向量，P3 才校准权重：见 DESIGN §3.5 与 ADR-0006。
 - 已到位块可重排；目标槽位左半边插前、右半边插后；拖拽中其他块实时侧滑、显示插入缺口；满槽候选弹回；已使用待选块置灰禁用：见 ADR-0007。
 - P2 内容导入按 meta.contentVersion 幂等；IndexedDB 不可用回退 MemoryAdapter：见 ADR-0008。
+- P3 队列 5—8：错词/错误画像 → 到期 → 新词 → 填充；答错次日、答对清错；P4 题型被 available 过滤：见 ADR-0009。

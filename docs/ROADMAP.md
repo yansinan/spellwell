@@ -1,19 +1,19 @@
 # 开发路线图 · ROADMAP
 
-**当前阶段**：P2 ✅（2026-11-11）
-**下一阶段**：P3（记忆曲线与错词调度）
-**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P2 不通过不进入 P3。
+**当前阶段**：P3 ✅（2026-11-11）
+**下一阶段**：P4（顺序/边界错闭环）
+**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P3 不通过不进入 P4。
 
 ---
 
 ## 1. 门禁命令
 
 ```bash
-# 当前阶段（P2，累计 p0..p2）
-node tests/runTests.js --phase=p2
+# 当前阶段（P3，累计 p0..p3）
+node tests/runTests.js --phase=p3
 
 # 后续阶段（累计运行 p0..pN）
-node tests/runTests.js --phase=p3
+node tests/runTests.js --phase=p4
 
 # 默认：自动跑到仓库中已存在的最高阶段
 node tests/runTests.js
@@ -35,8 +35,8 @@ node tools/serve.mjs
 | **P0** | 契约与骨架 | `--phase=p0` PASS | ✅ 完成 |
 | **P1** | 最小拼写闭环（T-SEQUENCE/T-FILL/T-TYPE） | `--phase=p1` PASS + 3 词 3 题型人工验收 | ✅ 完成 |
 | **P2** | IndexedDB 持久化与内容导入 | `--phase=p2` PASS + 刷新不丢、导出导入一致 | ✅ 完成 |
-| **P3** | 记忆曲线与错词调度 | `--phase=p3` PASS + 次日必现 | ⏳ 下一步 |
-| **P4** | 顺序/边界错闭环（T-REORDER/T-EDIT/T-SEGMENT） | `--phase=p4` PASS + 三类错误触发对应修复 | ⏳ |
+| **P3** | 记忆曲线与错词调度 | `--phase=p3` PASS + 次日必现 | ✅ 完成 |
+| **P4** | 顺序/边界错闭环（T-REORDER/T-EDIT/T-SEGMENT） | `--phase=p4` PASS + 三类错误触发对应修复 | ⏳ 下一步 |
 | **P5** | 组合强化与配对（T-MATCH） | `--phase=p5` PASS + 跨 2 词连续正确 | ⏳ |
 | **P6** | 判断纠错与语境抽查（T-JUDGE-FIX/T-CLOZE） | `--phase=p6` PASS + 假掌握被拦下 | ⏳ |
 | **P7** | 人工标注后台系统 | `--phase=p7` PASS + 错误切分阻断导出 | ⏳ |
@@ -168,36 +168,72 @@ node tests/runTests.js --phase=p2
 
 ---
 
-## 6. P3 任务书（下一阶段）
+## 6. P3 任务书（已完成）
 
 **目标**：把 P2 的内容持久化接到记忆曲线与错词调度，让“答错降档、次日必现、按错误类型选题型”真正跑起来。
 
-### 范围
+### 交付物
 
-1. `Scheduler.buildDailyQueue()`：5—8 个词，包含昨日错词、到期复习、新词；可复现。
-2. `Scheduler.recordAttempt()`：写 `attempts`，按 `IntervalPolicy` 更新 `wordStates`；答错降 2 档、连续错归零。
-3. 次日到期：答错后 `dueDate = 明天`；下次队列强制包含。
-4. `ErrorProfile` 写入状态；`TypeSelector` 按错误类型选择 P1 题型。
-5. 队列/状态全部走 repositories + IndexedDB；刷新不丢。
-6. `tests/p3/`：固定时钟、队列 5—8、次日必现、题型映射、状态持久化、不提前做 P4。
-7. 最小只读家长视图（今日卡点/待抽查计数）可选，若做不得提供修改入口。
+- [x] `Scheduler.buildDailyQueue()`：5—8 个唯一词；错词/错误画像 → 到期复习 → 新词 → 填充。
+- [x] `Scheduler.recordAttempt()`：写 `attempts`，按 `IntervalPolicy` 更新 `wordStates`；答错降 2 档、连续错归零。
+- [x] 答错 `dueDate = 明天`；次日固定时钟队列强制包含。
+- [x] `ErrorProfile` 写入状态；`TypeSelector` 按错误类型选 P1 题型；P4 题型被过滤。
+- [x] 队列/状态走 repositories + IndexedDB；刷新不丢。
+- [x] `QuestionSpecBuilder` 写入 P3 难度向量（grapheme、slot/letter、tier、distractor、inputMode）。
+- [x] `PracticeSession` 支持注入 Scheduler specs；`PracticeScreen` 通过 `onResult` 落库。
+- [x] `tests/p3/scheduler.test.js`：队列 5—8、次日必现、升级、错误画像、T-FILL 修复、难度向量。
+- [x] ADR-0009：每日队列、错词优先级与状态写入。
 
-### 验收
+### 验收结果
 
-- `node tests/runTests.js --phase=p3` PASS。
-- 模拟 3 天：今天答错 → 明天队列包含该词 → 答对升级 → 3 天后再现。
-- 刷新后状态仍在；挑战/调试不写主状态。
-- 不实现 T-REORDER/T-EDIT/T-SEGMENT；不做后台。
+```bash
+node tests/runTests.js --phase=p3
+# PASS  p3 gate · 148 passed · 0 failed · 22 files
+```
 
-### 启动提示词（可直接交给 agent）
+- 浏览器队列 `1 / 6`，首题 T-SEQUENCE `book`；正确后进入 `2 / 6`。
+- IndexedDB：`wordStates=1`、`attempts=1`，book `intervalIndex=1`、`dueDate=2026-11-14`、错误画像空。
+- 刷新后 `contentSeeded=false`、`wordStates=1`、`attempts=1`、content 请求 0；队列仍 6。
+- 固定时钟单测覆盖：OMISSION → T-FILL、答错 dueDate 明天、次日队列首词、答对升级/清错。
 
-> 只做 P3，不提前做 P4。先读 `AGENTS.md`、`docs/DESIGN.md §1.3/§2.1/§3.3`、`docs/TRACEABILITY.md` 的 R-SCHED-01/02/03。
-> 实现 Scheduler 每日队列与 recordAttempt，用固定时钟测试次日必现；复用 P1 三题型，不新增 P4 题型。
-> 每步运行 `node tests/runTests.js --phase=p3`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+### P3 明确不做
+
+- 不做 T-REORDER/T-EDIT/T-SEGMENT（P4）。
+- 不做 `mastered` / 60 天假掌握抽查（P6）。
+- 不做家长端完整报表、后台、挑战模式。
+- 不做 letter/mixed 粒度（P3/P4 预留）。
 
 ---
 
-## 7. 后续阶段要点（防止提前实现）
+## 7. P4 任务书（下一阶段）
+
+**目标**：实现顺序/边界错闭环：T-REORDER、T-EDIT、T-SEGMENT，并把错误类型映射到对应修复题型。
+
+### 范围
+
+1. `T-REORDER`：打乱单位排序；judge 定位 TRANSPOSITION。
+2. `T-EDIT`：插入/删除/替换/移动修错词；覆盖 SUBSTITUTION/EXTRA/OMISSION。
+3. `T-SEGMENT`：字母间隙点切分点；区分 OVER/UNDER/MISPLACED。
+4. `TypeSelector` 的 P4 题型不再被 `available` 过滤；Scheduler 可在错误修复时选用。
+5. 三个题型的 build/judge 测试；错误画像 unitKind/position；保持输入等价（点选可替代拖拽）。
+6. 不实现 T-MATCH/T-CLOZE；不做 P5 组合阶梯。
+
+### 验收
+
+- `node tests/runTests.js --phase=p4` PASS。
+- `sh → hs` 触发 T-REORDER；`sh → ch` 触发 T-EDIT；`ck/k` 边界错触发 T-SEGMENT。
+- 次日错词队列能选中对应 P4 题型。
+- 不引入选择题、听力、图片配对；不做后台。
+
+### 启动提示词（可直接交给 agent）
+
+> 只做 P4，不提前做 P5。先读 `AGENTS.md`、`docs/DESIGN.md §3.4/§3.5`、`docs/TRACEABILITY.md` 的 R-TYPE-04/05/09。
+> 实现 T-REORDER/T-EDIT/T-SEGMENT 的 build/judge，更新 TypeSelector 与 Scheduler 的可用题型。
+> 保持点选/拖拽等价、错误画像可定位；每步运行 `node tests/runTests.js --phase=p4`。
+
+---
+
+## 8. 后续阶段要点（防止提前实现）
 
 | 阶段 | 关键新增 | 不得提前做的事 |
 |---|---|---|
@@ -224,7 +260,7 @@ P1 不实现字母级/混合粒度。
 
 ---
 
-## 8. 阶段完成检查
+## 9. 阶段完成检查
 
 - [ ] 本阶段门禁 PASS，且低阶段测试未回退。
 - [ ] `TRACEABILITY.md` 中本阶段条目从 ⏳/🧪 改为 ✅。

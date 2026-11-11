@@ -30,14 +30,15 @@ async function boot() {
   }
 
   document.documentElement.lang = 'en';
-  const { session, adapter, storage, contentSeeded } = await createP1Session();
+  const { session, adapter, scheduler, storage, contentSeeded } = await createP1Session();
   if (params.get('debug') === '1') {
-    window.__SPELLWELL_DEBUG__ = { session, adapter, storage, contentSeeded };
+    window.__SPELLWELL_DEBUG__ = { session, adapter, scheduler, storage, contentSeeded };
   }
   new PracticeScreen({
     root,
     session,
     debug: params.get('debug') === '1',
+    onResult: (result) => scheduler.recordAttempt(result),
   }).mount();
 }
 

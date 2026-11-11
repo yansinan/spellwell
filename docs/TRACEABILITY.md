@@ -74,11 +74,15 @@
 | R-TYPE-04 | P1 三题型可出题判定 | `TSequence/TFill/TType` | `tests/p1/*.test.js` + 浏览器 3×3 | P1 | ✅ |
 | R-TYPE-05 | `ai→ia` 顺序修复 | `TReorder` | `tests/p4/*` 待建 | P4 | ⏳ |
 | R-TYPE-06 | `sh→ch`、`ck/k` 边界修复 | `TSegment/TEdit/TMatch` | `tests/p5/*` 待建 | P4/P5 | ⏳ |
-| R-SCHED-01 | §2.1 每日 5—8 词队列 | `Scheduler.buildDailyQueue` | `tests/p3/*` 待建 | P3 | ⏳ |
-| R-SCHED-02 | 错词次日强制再现 | `Scheduler` | `tests/p3/*` 待建 | P3 | ⏳ |
-| R-SCHED-03 | 按错误类型选修复题型 | `TypeSelector.selectType` | `tests/p0/scheduler.test.js` 覆盖全部错误枚举 | P0/P3 | 🧪 |
+| R-SCHED-01 | §2.1 每日 5—8 词队列 | `Scheduler.buildDailyQueue` | `tests/p3/scheduler.test.js` | P3 | ✅ |
+| R-SCHED-02 | 错词次日强制再现 | `Scheduler.recordAttempt` | `tests/p3/scheduler.test.js` 固定时钟 | P3 | ✅ |
+| R-SCHED-03 | 按错误类型选修复题型 | `TypeSelector.selectType` + Scheduler | `tests/p3/scheduler.test.js` OMISSION→T-FILL | P0/P3 | ✅ |
 | R-SCHED-04 | 组合独立阶梯、跨 2 词 | `GraphemeRepository` / `Scheduler` | P5 测试 | P5 | ⏳ |
 | R-SCHED-05 | 假掌握抽查 60 天 | `IntervalPolicy` 常量 | P6 测试 | P6 | ⏳ |
+| R-P3-01 | 尝试落库、wordState 升降档与错误画像 | `Scheduler.recordAttempt` | `tests/p3/scheduler.test.js` | P3 | ✅ |
+| R-P3-02 | 每日队列优先错词/到期/新词 | `Scheduler.buildDailyQueue` | `tests/p3/scheduler.test.js` | P3 | ✅ |
+| R-P3-03 | 每个 spec 记录 P3 难度向量 | `QuestionSpecBuilder` | `tests/p3/scheduler.test.js` | P3 | ✅ |
+| R-P3-04 | 刷新后学习状态仍在 | P2 IndexedDB + StateRepository | 浏览器刷新：wordStates/attempts 保留 | P3 | ✅ |
 
 ### 5.1 九题型覆盖（与 `QUESTION_TYPE_IDS` 一一对应）
 
@@ -158,6 +162,7 @@
 | A-08 | 拖拽未命中如何处理、音效尺度 | 64px 吸附 + 240ms 弹回；Web Audio 低音量合成音 + Sound/Muted | ADR-0005 |
 | A-09 | 已到位块如何重排/插入 | 左右半边决定插前/插后；移源后修正边界；满槽拒绝新候选 | ADR-0007 |
 | A-10 | 内容如何进入 IndexedDB、失败如何降级 | meta.contentVersion 幂等；IndexedDB 优先、Memory 回退；导出导入覆盖 8 库 | ADR-0008 |
+| A-11 | 每日队列排序、错词优先级与状态迁移 | 5—8 队列；错词→到期→新词→填充；答错次日；答对清错；P3 难度向量 | ADR-0009 |
 
 ---
 

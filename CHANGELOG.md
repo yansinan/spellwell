@@ -1,5 +1,52 @@
 # CHANGELOG
 
+## [0.4.0] — 2026-11-11 · P3 记忆曲线与错词调度
+
+### Added
+
+- `Scheduler.buildDailyQueue()`：5—8 个唯一词，默认 6；
+  - 优先错词/错误画像，其次到期复习，再补新词与未到期填充；
+  - 队列大小非法值明确报错。
+- `Scheduler.recordAttempt()`：attempts + wordStates 落 IndexedDB；
+  - 答错降 2 档、连续错归零，`dueDate = 明天`；
+  - 答对升档、清空错误画像；状态 `learning/reviewing`。
+- `QuestionSpecBuilder`：单题 spec 装配，写入 P3 难度向量（grapheme、slot/letter、tier、distractor、inputMode）。
+- `TypeSelector` 按错误类型选 P1 可用修复题型；P4 题型通过 `available` 过滤。
+- `PracticeSession` 支持注入 Scheduler specs；`PracticeScreen` `onResult` 回调落库。
+- 学习端每日队列 `1 / 6`；刷新后状态/attempts 仍在。
+- `tests/p3/scheduler.test.js`：队列 5—8、次日必现、答对升级、OMISSION→T-FILL、难度向量。
+- ADR-0009：每日队列、错词优先级与状态写入。
+
+### Changed
+
+- `package.json` 版本 `0.3.0` → `0.4.0`；新增 `test:p3`。
+- `main.js` 向 `PracticeScreen` 注入 `scheduler.recordAttempt`。
+- P0/P1 的历史“Scheduler 必须未实现 / bootstrap 不得碰状态仓库”守卫随阶段推进更新。
+- `README` / `ROADMAP` / `TRACEABILITY` / `AGENTS` / `FILE_SPEC` 状态推进到 P4。
+
+### Verification
+
+```bash
+node tests/runTests.js --phase=p3
+# PASS  p3 gate · 148 passed · 0 failed · 22 files
+```
+
+浏览器验收：
+
+- 队列 `1 / 6`，首题 T-SEQUENCE `book`；正确后进入 `2 / 6`。
+- IndexedDB：`wordStates=1`、`attempts=1`；book `intervalIndex=1`、`dueDate=2026-11-14`、错误画像空。
+- 刷新：`contentSeeded=false`、`wordStates=1`、`attempts=1`、content 请求 0；队列仍 6。
+- 390px 移动端无横向滚动。
+- 固定时钟单测覆盖：答错 dueDate 明天、次日队列首词、OMISSION→T-FILL、答对清错/升级。
+
+### Known limitations
+
+- 同一天再次打开会重新组队，可能和刚完成的队列顺序不同；P3 不缓存“今日队列快照”。
+- `mastered` 与 60 天假掌握抽查仍留 P6；P3 最高状态为 `reviewing`。
+- P3 不实现 P4 题型，顺序/边界错误暂时回退到 P1 题型。
+
+---
+
 ## [0.3.0] — 2026-11-11 · P2 IndexedDB 持久化与内容导入
 
 ### Added

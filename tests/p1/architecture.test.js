@@ -30,8 +30,9 @@ test('P1 UI：PracticeScreen 不直接 import 题型或调用 judge', () => {
   assert(!/\.judge\s*\(/.test(screen), 'screen must not call judge directly');
 });
 
-test('P1 UI：不写学习状态，不触碰持久化', () => {
-  for (const [relative, source] of sources) {
+test('P1 UI：屏幕/会话不写学习状态，不触碰持久化', () => {
+  for (const relative of ['src/ui/PracticeScreen.js', 'src/ui/PracticeSession.js']) {
+    const source = sources.get(relative);
     assert(
       !/from\s+['"][^'"]*(StateRepository|AttemptRepository)\.js/.test(source),
       `${relative} must not import learning-state repositories`,

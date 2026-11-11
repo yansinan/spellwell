@@ -4,7 +4,7 @@
 不做听力、不做选择题（判断+改错除外）、不做图片配对、不做积分/排行榜。
 
 - **定位**：纯前端 ES Modules，无构建、无框架、无运行时依赖；后期可平移 Node 后端。
-- **当前阶段**：**P2 IndexedDB 持久化与内容导入 ✅**；下一步 P3 记忆曲线与错词调度。
+- **当前阶段**：**P3 记忆曲线与错词调度 ✅**；下一步 P4 顺序/边界错闭环。
 - **需求源**：[`docs/DESIGN.md`](docs/DESIGN.md)（定稿 v1.1）。
 
 ---
@@ -14,8 +14,8 @@
 需要 Node 18+（仅用于测试与本地静态服务器，应用本身跑在浏览器）。
 
 ```bash
-# P2 阶段门禁（累计 P0+P1+P2）
-node tests/runTests.js --phase=p2
+# P3 阶段门禁（累计 P0..P3）
+node tests/runTests.js --phase=p3
 
 # 本地预览：ESM 不能走 file://，必须用 HTTP
 node tools/serve.mjs
@@ -30,8 +30,8 @@ npm start
 > `/Users/Dr/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/node/bin/node`
 > 执行上述命令。项目本身不绑定该路径。
 
-打开预览页会进入学习端（内容已持久化）：3 个词 × 3 个题型。
-`?dev=1` 仍可查看 P0 开发状态页；`?debug=1` 会在学习端显示 AttemptResult 调试面板并暴露 `__SPELLWELL_DEBUG__`。
+打开预览页会进入学习端：每日 5—8 个词，默认 6 个。
+`?dev=1` 仍可查看 P0 开发状态页；`?debug=1` 会在学习端显示 AttemptResult 调试面板并暴露 `__SPELLWELL_DEBUG__`（含 scheduler）。
 
 ![P1 学习端](docs/p1-preview.png)
 
@@ -53,8 +53,8 @@ npm start
 | 阶段门禁 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | P0—P10 验收标准；当前阶段只做当前阶段 |
 | 工程规范 | [`docs/FILE_SPEC.md`](docs/FILE_SPEC.md) | 目录、命名、依赖方向、测试与禁止清单 |
 | 内容规范 | [`docs/CONTENT_SPEC.md`](docs/CONTENT_SPEC.md) | 人工切分、ID 稳定性、校验规则 V1—V10 |
-| 执行契约 | [`AGENTS.md`](AGENTS.md) | agent/贡献者必读顺序、铁律、完成定义、P3 启动提示词 |
-| 决策记录 | [`docs/decisions/`](docs/decisions/) | 对文档歧义的裁决；ADR-0001—ADR-0008 |
+| 执行契约 | [`AGENTS.md`](AGENTS.md) | agent/贡献者必读顺序、铁律、完成定义、P4 启动提示词 |
+| 决策记录 | [`docs/decisions/`](docs/decisions/) | 对文档歧义的裁决；ADR-0001—ADR-0009 |
 | 代码头 | 每个 `src/**/*.js` | `@layer` / `@phase` / `@doc §x.y`，由测试校验 |
 | 架构守卫 | `tests/p0/architecture.test.js` | 无 `Math.random`、无越层 import、无 DOM 泄漏、无循环依赖、仓库只用 7 个存储方法 |
 | 文档守卫 | `tests/p0/traceability.test.js` | 枚举/阶段/token/ADR/零依赖与文档一致 |
@@ -70,12 +70,12 @@ npm start
 src/core          契约、seed 随机、时间、事件总线、错误
 src/storage       StorageAdapter / MemoryAdapter / IndexedDBAdapter / contentImport / schema
 src/repositories  词条、组合、句子、混淆项、状态、尝试
-src/scheduler     间隔策略、错误画像、题型选择、Scheduler(骨架)
+src/scheduler     间隔策略、错误画像、题型选择、每日队列/状态写入
 src/questionTypes 9 个题型注册表；P1 三题型已实现
 src/input         指针/键盘/挑战适配器（P8/P9 骨架）
-src/ui            P1 学习端、PracticeSession、P2 bootstrap；P0 状态页
+src/ui            P3 学习端、PracticeSession、bootstrap 每日队列；P0 状态页
 src/content       人工切分种子内容（全部 unreviewed）
-tests/p0,p1,p2    累计门禁：骨架 + P1 三题型/session + P2 内容导入/IndexedDB
+tests/p0..p3      累计门禁：骨架 + P1 题型 + P2 持久化 + P3 队列/状态
 docs              设计、规范、路线图、ADR
 tools/serve.mjs   零依赖静态服务器
 ```
@@ -89,8 +89,8 @@ tools/serve.mjs   零依赖静态服务器
 - 学习状态枚举：词 `learning/reviewing/probe/mastered`，组合 `learning/reviewing/probe/steady`。
 - P0 种子内容全部 `unreviewed`；生产导出只放行 `reviewed`（P7 实现阻断）。
 - P2 的内容装配优先 IndexedDBAdapter；首次导入 content JSON，刷新按 `contentVersion` 跳过网络。
-- P2 已持久化内容与 8 个 store；学习状态仍不写，P3 才接调度。
-- P1 的 9 题是固定演示队列；P3 才把选题/干扰项移到 Scheduler。
+- P2 持久化内容与 8 个 store；P3 已在此基础上写 wordStates/attempts。
+- P1 的 9 题是固定演示；P3 已改为 Scheduler 每日队列。
 - P1 judge 上下文为 `{ spec, renderModel, events, bundle, now }`；不持久化任何学习状态。
 - P1 只按 grapheme 整块选择；字母级/混合粒度是 P3/P4 预留，见 [`ADR-0004`](docs/decisions/0004-unit-granularity.md)。
 - 同词同脚手架：`grapheme < mixed < letter`；难度是多维向量，P3 才校准权重，见 DESIGN §3.5 与 [`ADR-0006`](docs/decisions/0006-difficulty-gradient.md)；IndexedDB 内容导入见 [`ADR-0008`](docs/decisions/0008-indexeddb-content.md)。
@@ -120,8 +120,20 @@ tools/serve.mjs   零依赖静态服务器
 
 ---
 
+## P3 已实现
+
+- `Scheduler.buildDailyQueue()`：5—8 个词，错词/错误画像 → 到期 → 新词 → 填充；默认 6。
+- `Scheduler.recordAttempt()`：attempts + wordStates 落 IndexedDB；答错降 2 档、次日 `dueDate`，答对升档并清空错误画像。
+- `TypeSelector` 按错误类型选 P1 修复题型；P4 题型被 `available` 过滤。
+- `QuestionSpecBuilder` 为每个 spec 写入难度向量；`PracticeSession` 支持注入 Scheduler specs。
+- 学习端队列显示 `1 / 6`；刷新后尝试与状态仍在，内容不再重复请求。
+
+![P3 每日队列](docs/p3-preview.png)
+
+---
+
 ## 下一步
 
-P3：实现 Scheduler 每日队列与 `recordAttempt`，做到“答错降档、次日必现、按错误类型选题型”；
-复用 P2 的 IndexedDB 与 P1 三题型，不新增 P4 题型。
+P4：实现 T-REORDER/T-EDIT/T-SEGMENT，把顺序/边界错误映射到修复题型；
+复用 P3 的每日队列与错误画像，不新增 T-MATCH/T-CLOZE。
 任务书与启动提示词见 [`docs/ROADMAP.md`](docs/ROADMAP.md) 与 [`AGENTS.md`](AGENTS.md)。

@@ -124,11 +124,15 @@ export class PracticeSession {
    *   bundles: import('../questionTypes/QuestionType.js').ResourceBundle[],
    *   distractorPool?: {id: string, text: string}[],
    *   seed?: number|string,
+   *   specs?: import('../core/contracts.js').QuestionSpec[],
    *   now?: () => number
    * }} input
    */
-  constructor({ bundles, distractorPool = [], seed = 20261111, now = () => Date.now() }) {
-    this.#specs = buildPracticeSpecs({ bundles, distractorPool, seed });
+  constructor({ bundles, distractorPool = [], seed = 20261111, specs, now = () => Date.now() }) {
+    if (specs !== undefined && (!Array.isArray(specs) || specs.length === 0)) {
+      throw new ContractError('PRACTICE_CONTENT_INVALID', 'specs must be a non-empty array');
+    }
+    this.#specs = specs ? [...specs] : buildPracticeSpecs({ bundles, distractorPool, seed });
     this.#now = now;
     for (const bundle of bundles) {
       const wordId = bundle.word?.id;

@@ -36,6 +36,7 @@ import {
   assertEqual,
   assertIncludes,
   assertRejects,
+  assertThrows,
   test,
 } from '../harness.js';
 
@@ -173,10 +174,7 @@ test('ErrorProfile：家长端描述具体到位置与目标块', () => {
   assertIncludes(text, '第 3 位');
 });
 
-test('Scheduler：P0 明确未实现，不返回空队列', async () => {
-  const scheduler = new Scheduler({});
-  const error = await assertRejects(() => scheduler.buildDailyQueue(), 'PHASE_NOT_IMPLEMENTED');
-  assertEqual(error.phase, 'P3');
-  const recordError = await assertRejects(() => scheduler.recordAttempt({}), 'PHASE_NOT_IMPLEMENTED');
-  assertEqual(recordError.feature, 'Scheduler.recordAttempt');
+test('Scheduler：P3 需要完整依赖，不静默返回空队列', () => {
+  const error = assertThrows(() => new Scheduler({}), 'SCHEDULER_DEPS_INVALID');
+  assertEqual(error.code, 'SCHEDULER_DEPS_INVALID');
 });

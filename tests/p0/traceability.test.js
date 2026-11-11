@@ -71,10 +71,10 @@ test('AGENTS 是执行入口：必读顺序、门禁命令、完成定义都在'
   assertMatch(agents, /docs\/DESIGN\.md/);
   assertMatch(agents, /docs\/TRACEABILITY\.md/);
   assertMatch(agents, /docs\/ROADMAP\.md/);
-  assertMatch(agents, /node tests\/runTests\.js --phase=p2/);
+  assertMatch(agents, /node tests\/runTests\.js --phase=p3/);
   assertMatch(agents, /完成定义/);
   assertMatch(agents, /不新增依赖/);
-  assertMatch(agents, /P2 不通过不进入 P3/);
+  assertMatch(agents, /P3 不通过不进入 P4/);
 });
 
 test('ADR：偏离设计的裁决已入库，并被追溯矩阵引用', async () => {
@@ -86,6 +86,7 @@ test('ADR：偏离设计的裁决已入库，并被追溯矩阵引用', async ()
   assert(decisionFiles.includes('0006-difficulty-gradient.md'));
   assert(decisionFiles.includes('0007-ordered-reorder.md'));
   assert(decisionFiles.includes('0008-indexeddb-content.md'));
+  assert(decisionFiles.includes('0009-daily-queue-state.md'));
   const adr1 = await read('docs/decisions/0001-storage-contract.md');
   const adr2 = await read('docs/decisions/0002-docs-as-code.md');
   assertMatch(adr1, /状态\*\*：Accepted/);
@@ -126,17 +127,17 @@ test('视觉 token：DESIGN §6.2 的核心颜色/圆角/动效均存在', () =>
   assertMatch(tokens, /#444444/i);
 });
 
-test('零依赖与阶段版本：package.json 无 dependencies，版本 0.3.0', () => {
+test('零依赖与阶段版本：package.json 无 dependencies，版本 0.4.0', () => {
   assertEqual(packageJson.dependencies, undefined);
   assertEqual(packageJson.devDependencies, undefined);
   assertEqual(packageJson.type, 'module');
-  assertEqual(packageJson.version, '0.3.0');
+  assertEqual(packageJson.version, '0.4.0');
   assertEqual(packageJson.scripts['test:p0'], 'node tests/runTests.js --phase=p0');
 });
 
 test('README 与 CHANGELOG 交代当前阶段与运行方式', () => {
   assertMatch(readme, /P0/);
-  assertMatch(readme, /node tests\/runTests\.js --phase=p2/);
+  assertMatch(readme, /node tests\/runTests\.js --phase=p3/);
   assertMatch(readme, /docs\/DESIGN\.md/);
   assertMatch(changelog, /P0/);
   assertMatch(changelog, /2026-11-11/);

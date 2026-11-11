@@ -1,6 +1,6 @@
 # 文件与工程规范 · FILE_SPEC
 
-**适用版本**：DESIGN v1.1 / 仓库 v0.3.0（P2）
+**适用版本**：DESIGN v1.1 / 仓库 v0.4.0（P3）
 **地位**：本文件是 `docs/DESIGN.md` 的工程实施细则。与 DESIGN 冲突时，以 DESIGN 为准；本文件负责把 DESIGN 翻译成可机械检查的规则。
 
 ---
@@ -49,10 +49,11 @@
 │   │   ├── StateRepository.js
 │   │   └── AttemptRepository.js
 │   ├── scheduler/              # 纯逻辑；禁止 DOM / 渲染 / 判定
-│   │   ├── Scheduler.js        # P3 才实现；P0 仅接口 + 明确抛错
+│   │   ├── Scheduler.js        # P3 每日队列、recordAttempt、状态写入
 │   │   ├── IntervalPolicy.js   # 1/3/7/14/30 阶梯与升降档
 │   │   ├── ErrorProfile.js     # 错误画像构造、截断、主错误
-│   │   └── TypeSelector.js     # 错误类型 → 修复题型
+│   │   ├── TypeSelector.js     # 错误类型 → 修复题型
+│   │   └── QuestionSpecBuilder.js # P3 单题 spec + 难度向量
 │   ├── questionTypes/          # 只做 build/judge；禁止查库、DOM、写状态、造干扰项
 │   │   ├── QuestionType.js     # defineQuestionType 契约与元数据校验
 │   │   ├── shared.js           # P1 共享判定：错误定位、整词输入分析
@@ -64,8 +65,8 @@
 │   │   └── RapidTapChallenge.js # P9；不得写主状态
 │   ├── ui/                     # DOM 渲染与流程编排；不得实现判定算法
 │   │   ├── App.js               # P0 状态页（?dev=1）
-│   │   ├── PracticeSession.js   # P1 9 题会话与 spec 生成
-│   │   ├── bootstrap.js         # P2：IndexedDB 优先，失败回退 Memory
+│   │   ├── PracticeSession.js   # P1 9 题 / P3 注入每日 specs
+│   │   ├── bootstrap.js         # P3：每日队列；IndexedDB 优先，失败回退 Memory
 │   │   ├── PracticeScreen.js    # P1 学习端（点选/拖拽/显式 Check）
 │   │   ├── dragGeometry.js      # 64px 吸附半径与最近槽位
 │   │   ├── sequenceOrder.js     # 已到位块插入式重排
@@ -218,7 +219,7 @@ questionTypes  ←  scheduler
 - `core/contracts.js` 导出 `CONTRACT_VERSION`；跨层结构变更必须 +1，并写 ADR。
 - 存储 `schema.js` 导出 `DB_VERSION`；IndexedDB 升级必须写迁移函数与测试（P2 起）。
 - 内容 JSON 顶层带 `"version": 1`；内容格式变更 +1，并更新 `CONTENT_SPEC.md`。
-- `package.json` 版本跟阶段走：P0 `0.1.0`，P1 `0.2.0`，P2 `0.3.0`，以此类推；P10 `1.0.0`。
+- `package.json` 版本跟阶段走：P0 `0.1.0`，P1 `0.2.0`，P2 `0.3.0`，P3 `0.4.0`，以此类推；P10 `1.0.0`。
 
 ---
 
