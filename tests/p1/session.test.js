@@ -138,3 +138,29 @@ test('PracticeSession：错误尝试产生结构化 firstError，仍可继续', 
   session.advance();
   assertEqual(session.currentIndex, 1);
 });
+
+test('PracticeSession：答错后可重试，session 只记录第一次结果', () => {
+  const session = createSession();
+  const { spec, renderModel, bundle } = session.buildCurrent();
+  const wrong = correctEvents({
+    typeId: 'T-SEQUENCE',
+    spec,
+    renderModel,
+    word: /** @type {any} */ (bundle.word),
+  }).slice(0, 2);
+  session.submit(wrong);
+  assertEqual(session.results.length, 1);
+  session.retry();
+  const correct = correctEvents({
+    typeId: 'T-SEQUENCE',
+    spec,
+    renderModel,
+    word: /** @type {any} */ (bundle.word),
+  });
+  const result = session.submit(correct, { record: false });
+  assertEqual(result.wordCorrect, true);
+  assertEqual(session.results.length, 1);
+  assertEqual(session.results[0].wordCorrect, false);
+  session.advance();
+  assertEqual(session.currentIndex, 1);
+});

@@ -879,3 +879,94 @@
 .sw-setup__unit small {
   white-space: nowrap;
 }
+
+/* 答错：明显提示 + 正确答案 + 重试 */
+.sw-feedback.is-wrong-feedback {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  width: min(420px, 100%);
+  padding: 12px 16px;
+  border: 2px solid var(--sw-peach);
+  border-radius: var(--sw-radius-sm);
+  background: var(--sw-peach-soft);
+  color: var(--sw-ink);
+  font-family: var(--sw-font-body);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sw-feedback__title {
+  color: var(--sw-ink-soft);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sw-feedback__answer strong {
+  font-family: var(--sw-font-en);
+  font-size: 1.35em;
+  font-weight: 900;
+}
+
+/* 结束页：先正确率，再错词 */
+.sw-done__accuracy {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  margin: 4px 0 8px;
+}
+
+.sw-done__accuracy strong {
+  font-family: var(--sw-font-en);
+  font-size: clamp(56px, 15vw, 88px);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--sw-mint-deep);
+}
+
+.sw-done__accuracy span {
+  color: var(--sw-ink-soft);
+  font-size: 13px;
+}
+
+.sw-done__wrong {
+  width: min(420px, 100%);
+  padding: 14px 16px;
+  border: 1px solid var(--sw-line);
+  border-radius: var(--sw-radius-sm);
+  background: var(--sw-surface);
+  text-align: left;
+}
+
+.sw-done__wrong h2 {
+  margin: 0 0 8px;
+  font-family: var(--sw-font-body);
+  font-size: 15px;
+  color: var(--sw-ink-soft);
+}
+
+.sw-done__wrong-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sw-done__wrong-list li {
+  padding: 4px 10px;
+  border-radius: var(--sw-radius-pill);
+  background: var(--sw-peach-soft);
+  font-family: var(--sw-font-en);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.sw-done__all-right {
+  margin: 0;
+  font-weight: 700;
+  color: var(--sw-mint-deep);
+}

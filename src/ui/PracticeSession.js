@@ -197,7 +197,7 @@ export class PracticeSession {
    * @param {import('../core/contracts.js').InputEvent[]} events
    * @returns {import('../core/contracts.js').AttemptResult}
    */
-  submit(events) {
+  submit(events, { record = true } = {}) {
     if (this.isComplete) {
       throw new ContractError('PRACTICE_COMPLETE', 'the practice session is complete');
     }
@@ -214,9 +214,23 @@ export class PracticeSession {
       now: this.#now(),
     });
     validateAttemptResult(result);
-    this.#results.push(result);
+    if (record) this.#results.push(result);
     this.#submittedIndex = this.#index;
     return result;
+  }
+
+  /** 允许同一题在答错后重试；不追加 session results。 */
+  retry() {
+    if (this.isComplete) return;
+    this.#submittedIndex = -1;
+  }
+
+  /**
+   * @param {string} wordId
+   * @returns {string}
+   */
+  getWordText(wordId) {
+    return String(this.#bundles.get(String(wordId))?.word?.text ?? String(wordId).replace(/^w\./, ''));
   }
 
   /**

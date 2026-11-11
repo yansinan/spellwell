@@ -13,6 +13,7 @@ import { findNearestSlot } from './dragGeometry.js';
 import { insertUnit, insertionIndexForPoint, previewInsertUnit } from './sequenceOrder.js';
 import { createSoundPlayer } from './sound.js';
 import { buildReport, summarizeSession } from './analytics.js';
+import { buildCompletionSummary } from './completionSummary.js';
 import { selectPrompt } from './promptSelector.js';
 
 const TYPE_COPY = Object.freeze({
@@ -1025,9 +1026,10 @@ export class PracticeScreen {
     this.#locked = true;
     this.#clearTimers();
     this.#clearDrag();
-    const result = this.#session.submit(events);
+    const record = this.#session.results.length === this.#session.currentIndex;
+    const result = this.#session.submit(events, { record });
     this.#updateDebug(result);
-    if (this.#onResult) {
+    if (record && this.#onResult) {
       try {
         await this.#onResult(result);
       } catch (error) {
@@ -1037,19 +1039,38 @@ export class PracticeScreen {
 
     const stage = this.#root.querySelector('.sw-practice__stage');
     const feedback = this.#root.querySelector('[data-role="feedback"]');
-    if (result.wordCorrect) this.#sound.correct();
-    else this.#sound.wrong();
-    stage?.classList.add(result.wordCorrect ? 'is-correct' : 'is-wrong');
-    if (feedback) feedback.textContent = result.wordCorrect ? 'Nice.' : 'Next.';
+    const answer = escapeHtml(this.#current.bundle.word.text);
 
-    for (const button of this.#root.querySelectorAll('button, input')) {
-      /** @type {HTMLButtonElement|HTMLInputElement} */ (button).disabled = true;
+    if (result.wordCorrect) {
+      this.#sound.correct();
+      stage?.classList.add('is-correct');
+      if (feedback) feedback.innerHTML = `<strong>Yes! ${answer}.</strong>`;
+      for (const button of this.#root.querySelectorAll('button, input')) {
+        /** @type {HTMLButtonElement|HTMLInputElement} */ (button).disabled = true;
+      }
+      this.#schedule(() => {
+        this.#session.advance();
+        this.#renderCurrent();
+      }, 900);
+      return;
     }
 
-    this.#schedule(() => {
-      this.#session.advance();
-      this.#renderCurrent();
-    }, 900);
+    // Wrong: do not advance. Show the answer and let the child try again.
+    this.#sound.wrong();
+    stage?.classList.add('is-wrong');
+    if (feedback) {
+      feedback.classList.add('is-wrong-feedback');
+      feedback.innerHTML = `
+        <span class="sw-feedback__title">Not quite.</span>
+        <span class="sw-feedback__answer">The word is <strong>${answer}</strong>.</span>
+        <button type="button" class="sw-text-button" data-action="retry">Try again</button>
+      `;
+      feedback.querySelector('[data-action="retry"]')?.addEventListener('click', () => {
+        this.#renderCurrent();
+      });
+    }
+    this.#session.retry();
+    this.#locked = false;
   }
 
   #updateDebug(result) {
@@ -1146,14 +1167,30 @@ export class PracticeScreen {
 
   #renderDone() {
     this.#clearDrag();
+    const summary = buildCompletionSummary(
+      this.#session.results,
+      (wordId) => this.#session.getWordText(wordId),
+    );
+    const wrongWords = summary.wrongWords;
+    const encouragement = summary.encouragement;
+    const wrongHtml = wrongWords.length > 0
+      ? `<ul class="sw-done__wrong-list">${wrongWords.map((word) => `<li>${escapeHtml(word)}</li>`).join('')}</ul>`
+      : '<p class="sw-done__all-right">No wrong words this time.</p>';
     this.#root.innerHTML = `
       <div class="sw-practice sw-practice--done" data-type="done">
         ${this.#headerTemplate(`${this.#session.size} / ${this.#session.size}`)}
         <main class="sw-practice__stage sw-done">
           <p class="sw-eyebrow">SESSION COMPLETE</p>
-          <h1 class="sw-done__title">Done.</h1>
-          <p class="sw-practice__hint">${this.#session.size} spellings.</p>
-          <p class="sw-practice__hint">${summarizeSession(this.#session.results).correct} / ${this.#session.size} correct · ${summarizeSession(this.#session.results).accuracy}%</p>
+          <h1 class="sw-done__title">${escapeHtml(encouragement)}</h1>
+          <div class="sw-done__accuracy">
+            <strong>${summary.accuracy}%</strong>
+            <span>${summary.firstTryLabel}</span>
+          </div>
+          <section class="sw-done__wrong">
+            <h2>Words to practice</h2>
+            ${wrongHtml}
+            <p class="sw-practice__hint">${wrongWords.length > 0 ? 'These words will come back in your next practice.' : 'You spelled every word correctly.'}</p>
+          </section>
           <div class="sw-done__actions">
             <button type="button" class="sw-check" data-action="again">Again</button>
             ${this.#onNewPractice ? '<button type="button" class="sw-text-button" data-action="new-practice">New practice</button>' : ''}
