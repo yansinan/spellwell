@@ -7,7 +7,8 @@
 - 单元模型 `grade/term/unit` + `unitId/unitLabel`；接入两套教材：人教新起点 583 词、外研版新交际（北京专版）891 词。
 - 后台新增“教材版本”切换；学习端按当前教材取词。
 - 练习设计按“一年级上/下、二年级上/下”折叠，学期下多选 unit。
-- 练习设计页：一至六年级上/下折叠；学期下多选 unit；Review/Effort；前台不选题量。
+- 练习设计页：只显示已完成单元 + 下一个新单元，按学期/单元顺序解锁；Review/Effort；前台不选题量。
+- 单元完成定义：该单元全部词至少练习过一次；完成单元可复选复习。
 - 题量设置 `meta.practiceSettings`，默认 20，范围 5—30。
 - 后台练习设置页 `/src/admin/settings.html`，面包屑“内容库 / 练习设置”。
 - Scheduler 支持 unit 过滤、retired 过滤、Review/Effort 侧重。
@@ -19,7 +20,7 @@
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
 - 计划项带 `params.plan.reason/mode/policyVersion`。
 - `PlanPolicy.revise()` 兼容接口，P9 不实时改题。
-- `tests/p9/`：题量、单元、mode、retired、plan hook、权重校准、提示词优先级、批量单元标题、词库导入导出。
+- `tests/p9/`：题量、单元、mode、retired、plan hook、权重校准、提示词、批量单元、词库、教材切换、顺序解锁。
 - 提示词按句子 → 音标 → 中文 → 单词保底；CLOZE 不重复句子。
 - 批量录入支持单元标题行（如 `一年级上unit2`），后续词继承单元直到下一个标题。
 - 词库支持单独 JSON 导入/导出（按当前教材）；重复词按合并/替换/不动处理。
@@ -35,7 +36,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 198 passed · 0 failed · 41 files
+# PASS  p9 gate · 200 passed · 0 failed · 42 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。

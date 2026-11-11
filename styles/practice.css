@@ -860,3 +860,22 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
+
+/* P9 顺序解锁状态 */
+.sw-setup__unit.is-done {
+  border-color: var(--sw-line);
+  background: var(--sw-surface);
+}
+
+.sw-setup__unit.is-done.is-selected {
+  border-color: var(--sw-mint-deep);
+  background: var(--sw-mint-soft);
+}
+
+.sw-setup__unit.is-current {
+  border-style: solid;
+}
+
+.sw-setup__unit small {
+  white-space: nowrap;
+}

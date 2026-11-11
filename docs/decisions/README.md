@@ -26,6 +26,7 @@
 | [0020](0020-prompt-resource-priority.md) | 提示词资源优先级 | Accepted | 句子→音标→中文→单词；只读；CLOZE 不重复 |
 | [0021](0021-word-library-import-export.md) | 词库单独导入/导出 | Accepted | 只含 words；合并/替换/不动；导入校验后落库 |
 | [0022](0022-textbook-switch.md) | 多教材版本与后台切换 | Accepted | textbook 字段；meta.activeTextbook；两套词库共存 |
+| [0023](0023-sequential-unit-unlock.md) | 单元顺序解锁与练习设计页 | Accepted | 完成单元 + 下一个；完成=全部词练过；不足20不跨单元 |
 
 新增 ADR 的模板：
 

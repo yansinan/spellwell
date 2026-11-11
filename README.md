@@ -205,7 +205,7 @@ tools/serve.mjs   零依赖静态服务器
 
 - 两套教材词库：人教版新起点 583 词、外研版新交际（北京专版）891 词；后台可切换当前教材。
 - 词库来源/质量/优化报告：[`docs/PEP_VOCAB_BASE.md`](docs/PEP_VOCAB_BASE.md)、[`docs/FLTRP_VOCAB_BASE.md`](docs/FLTRP_VOCAB_BASE.md)。
-- 练习设计页：一至六年级上/下折叠；每个学期下多选 unit；Review/Effort；不选题量。
+- 练习设计页：只显示已完成单元 + 下一个新单元；按学期/单元顺序解锁；完成单元可复选复习；Review/Effort；不选题量。
 - 后台题量默认 20，设置页 `/src/admin/settings.html`，面包屑返回内容库。
 - 题量、单元、模式进入 Scheduler；真实 attempts 校准选词权重；当前会话不因内容更新中断。
 - 每个计划项带 `reason/mode/policyVersion/score/calibration`；`revise()` 接口预留。

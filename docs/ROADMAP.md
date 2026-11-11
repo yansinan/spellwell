@@ -396,7 +396,7 @@ node tests/runTests.js --phase=p8
 
 - [x] 内容单元模型：`grade/term/unit` + `unitId/unitLabel`；人教版 583 词 + 外研版 891 词；后台切换教材。
 - [x] 两套词库来源、数据质量与优化报告：`docs/PEP_VOCAB_BASE.md`、`docs/FLTRP_VOCAB_BASE.md`。
-- [x] 练习设计按年级学期折叠；学期下多选 unit。
+- [x] 练习设计按年级学期折叠；只显示已完成单元 + 下一个新单元。
 - [x] 真实 attempts 权重校准（按词/题型错误率、平滑、约束优先）。
 - [x] 修复旧 DB 无 unitId 时 Start practice 空队列。
 - [x] 前台练习设计页：年级学期折叠 + unit 多选、Review/Effort、后台题量；不显示题量选择。
@@ -409,13 +409,13 @@ node tests/runTests.js --phase=p8
 - [x] 提示词按句子 → 音标 → 中文 → 单词保底；CLOZE 句子即题面。
 - [x] 批量单元标题：`一年级上unit2` 后续词继承，直到下一个标题。
 - [x] 词库单独导入/导出：重复词合并/替换/不动。
-- [x] `tests/p9/`：默认题量、单元过滤、retired、Review/Effort、plan hook、权重校准、提示词、批量单元标题。
+- [x] `tests/p9/`：默认题量、单元过滤、retired、Review/Effort、plan hook、权重校准、提示词、批量单元、教材切换、顺序解锁。
 
 ### 验收结果
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 198 passed · 0 failed · 41 files
+# PASS  p9 gate · 200 passed · 0 failed · 42 files
 ```
 
 - 练习设计页：12 个学期折叠、unit 多选、Review 默认、`20 questions`。

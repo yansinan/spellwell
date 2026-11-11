@@ -60,10 +60,11 @@ async function ensureContent(adapter) {
 }
 
 async function readContent(adapter) {
-  const [words, graphemes, sentences] = await Promise.all([
+  const [words, graphemes, sentences, wordStates] = await Promise.all([
     adapter.query('words', {}),
     adapter.query('graphemes', {}),
     adapter.query('sentences', {}),
+    adapter.query('wordStates', {}),
   ]);
   const settings = await readPracticeSettings(adapter);
   const activeTextbook = await readActiveTextbook(adapter);
@@ -73,6 +74,7 @@ async function readContent(adapter) {
   const activeWords = words.filter((word) =>
     (word.textbook ?? DEFAULT_TEXTBOOK) === activeTextbook && word.reviewStatus !== 'retired',
   );
+  const stateByWord = new Map(wordStates.map((state) => [String(state.wordId), state]));
   const unitMap = new Map();
   for (const word of activeWords) {
     const id = String(word.unitId ?? `level-${word.level ?? 1}`);
@@ -85,9 +87,14 @@ async function readContent(adapter) {
         term: String(word.term ?? '下'),
         unit: Number(word.unit ?? 1),
         count: 0,
+        practiced: 0,
+        completed: false,
       });
     }
-    unitMap.get(id).count += 1;
+    const unit = unitMap.get(id);
+    unit.count += 1;
+    if (stateByWord.has(String(word.id))) unit.practiced += 1;
+    unit.completed = unit.practiced === unit.count;
   }
   const units = [...unitMap.values()].sort((a, b) => a.id.localeCompare(b.id));
   const terms = TERM_DEFINITIONS.map((definition) => ({

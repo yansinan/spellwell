@@ -7,6 +7,8 @@
  * 题量由后台设置决定，前台不选。
  */
 
+import { visibleUnitProgress } from './unitProgress.js';
+
 function escape(value) {
   return String(value)
     .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
@@ -25,11 +27,17 @@ export class PracticeSetupScreen {
     this.root = root;
     this.workspace = workspace;
     this.onStart = onStart;
-    this.selectedUnits = new Set(workspace.units.map((unit) => unit.id));
+    const progress = visibleUnitProgress(workspace.units);
+    this.visibleUnits = progress.visible;
+    this.completedUnits = progress.completed;
+    this.currentUnit = progress.current;
+    this.selectedUnits = new Set(
+      progress.current ? [progress.current.id] : progress.completed.map((unit) => unit.id),
+    );
     this.mode = workspace.settings.defaultMode;
     this.loading = false;
-    const firstUnitTerm = workspace.terms.find((term) => term.units.length > 0);
-    this.expandedTerms = new Set(firstUnitTerm ? [firstUnitTerm.id] : []);
+    const currentTerm = workspace.terms.find((term) => term.units.some((unit) => unit.id === progress.current?.id));
+    this.expandedTerms = new Set(currentTerm ? [currentTerm.id] : []);
   }
 
   mount() {
@@ -37,7 +45,11 @@ export class PracticeSetupScreen {
   }
 
   render(message = '') {
-    const units = this.workspace.units;
+    const visibleIds = new Set(this.visibleUnits.map((unit) => unit.id));
+    const terms = this.workspace.terms
+      .map((term) => ({ ...term, units: term.units.filter((unit) => visibleIds.has(unit.id)) }))
+      .filter((term) => term.units.length > 0);
+    const units = this.visibleUnits;
     const available = units
       .filter((unit) => this.selectedUnits.has(unit.id))
       .reduce((sum, unit) => sum + unit.count, 0);
@@ -58,7 +70,7 @@ export class PracticeSetupScreen {
           <section class="sw-setup__section">
             <h2>年级 / 单元</h2>
             <div class="sw-setup__terms">
-              ${this.workspace.terms.map((term) => {
+              ${terms.map((term) => {
                 const selectedCount = term.units.filter((unit) => this.selectedUnits.has(unit.id)).length;
                 const allSelected = term.units.length > 0 && selectedCount === term.units.length;
                 return `
@@ -71,13 +83,17 @@ export class PracticeSetupScreen {
                       <small>${term.units.length === 0 ? '暂无内容' : `${selectedCount}/${term.units.length} 单元`}</small>
                     </summary>
                     <div class="sw-setup__units">
-                      ${term.units.map((unit) => `
-                        <label class="sw-setup__unit ${this.selectedUnits.has(unit.id) ? 'is-selected' : ''}">
+                      ${term.units.map((unit) => {
+                        const done = Boolean(unit.completed);
+                        const status = done ? 'Done' : (unit.practiced ?? 0) > 0 ? 'In progress' : 'Next';
+                        return `
+                        <label class="sw-setup__unit ${this.selectedUnits.has(unit.id) ? 'is-selected' : ''} ${done ? 'is-done' : 'is-current'}">
                           <input type="checkbox" data-setup-unit="${escape(unit.id)}" ${this.selectedUnits.has(unit.id) ? 'checked' : ''} />
                           <span>${escape(unit.label)}</span>
-                          <small>${unit.count} words</small>
+                          <small>${status} · ${unit.practiced ?? 0}/${unit.count}</small>
                         </label>
-                      `).join('')}
+                      `;
+                      }).join('')}
                     </div>
                   </details>
                 `;

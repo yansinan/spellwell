@@ -175,3 +175,4 @@ node tools/serve.mjs
 - P9 提示词：句子 → 音标 → 中文 → 单词；CLOZE 句子即题面；见 ADR-0020。
 - 词库可单独导入/导出（只含 words）；重复词合并/替换/不动；全量迁移仍走 migration；见 ADR-0021。
 - 两套教材词库：`pep-2026` 583 词、`fltrp-2026` 891 词；后台 `meta.activeTextbook` 切换；全部 unreviewed；见 ADR-0022。
+- 练习单元顺序解锁：完成=全部词练过；只显示已完成+下一个；不足20不跨单元凑数；见 ADR-0023。
