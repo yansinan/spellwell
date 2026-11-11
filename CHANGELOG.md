@@ -4,7 +4,8 @@
 
 ### Added
 
-- 单元模型 `grade/term/unit` + `unitId/unitLabel`；接入 2026 人教新起点基础词库：583 个词、72 个单元、12 个学期。
+- 单元模型 `grade/term/unit` + `unitId/unitLabel`；接入两套教材：人教新起点 583 词、外研版新交际（北京专版）891 词。
+- 后台新增“教材版本”切换；学习端按当前教材取词。
 - 练习设计按“一年级上/下、二年级上/下”折叠，学期下多选 unit。
 - 练习设计页：一至六年级上/下折叠；学期下多选 unit；Review/Effort；前台不选题量。
 - 题量设置 `meta.practiceSettings`，默认 20，范围 5—30。
@@ -13,7 +14,7 @@
 - 用真实 attempts 校准权重：按词/题型错误率、小样本平滑、约束优先。
 - 修复旧 DB 无 unitId 时 Start practice 空队列的问题；内容版本升到 3。
 - v2→v3 迁移保留后台已编辑词，补齐 grade/term/unit。
-- 内容版本升到 4，导入 583 词基础词库；新增基础词库报告。
+- 内容版本升到 5，导入两套教材词库；新增外研词库报告。
 - `contentRevision`：后台保存递增；下一轮重新读内容。
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
 - 计划项带 `params.plan.reason/mode/policyVersion`。
@@ -21,7 +22,7 @@
 - `tests/p9/`：题量、单元、mode、retired、plan hook、权重校准、提示词优先级、批量单元标题、词库导入导出。
 - 提示词按句子 → 音标 → 中文 → 单词保底；CLOZE 不重复句子。
 - 批量录入支持单元标题行（如 `一年级上unit2`），后续词继承单元直到下一个标题。
-- 词库支持单独 JSON 导入/导出；重复词按合并/替换/不动处理。
+- 词库支持单独 JSON 导入/导出（按当前教材）；重复词按合并/替换/不动处理。
 
 ### Changed
 
@@ -34,7 +35,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 196 passed · 0 failed · 40 files
+# PASS  p9 gate · 198 passed · 0 failed · 41 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。

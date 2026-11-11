@@ -27,6 +27,8 @@
 {
   "id": "w.fish",
   "text": "fish",
+  "textbook": "pep-2026",
+  "textbookLabel": "人教版新起点（2026）",
   "grade": 1,
   "term": "下",
   "unit": 1,
@@ -49,7 +51,9 @@
 |---|---|
 | `id` | `w.<slug>`，永久稳定；同形异义词用 `w.bow.1` / `w.bow.2` |
 | `text` | 小写 ASCII 字母，无空格、连字符；长度 1—15 |
-| `grade` | 1 或 2（一年级/二年级） |
+| `textbook` | `pep-2026` 或 `fltrp-2026`；后台 activeTextbook 决定学习端教材 |
+| `textbookLabel` | 展示用教材名 |
+| `grade` | 1—6（一年级—六年级） |
 | `term` | `上` 或 `下` |
 | `unit` | 单元序号，正整数；同一 grade+term 下可多个 |
 | `unitId` | `g<grade>-s<1|2>-u<unit>`，由 grade/term/unit 派生，稳定 |
@@ -270,3 +274,10 @@ node tests/runTests.js --phase=p0
 导入后走 V1—V9 校验，通过才写入共享 IndexedDB。学习状态不在词库文件中；
 换机/完整备份仍使用 `/migration/index.html`。
 
+## 教材版本
+
+- `pep-2026`：人教版新起点（2026）；
+- `fltrp-2026`：外研版新交际（北京专版）。
+
+`meta.activeTextbook` 指定当前教材；学习端只读取当前教材的词、单元和学期。
+后台“教材版本”下拉可切换；两套词库共存，互不覆盖。

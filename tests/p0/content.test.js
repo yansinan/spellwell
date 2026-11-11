@@ -22,7 +22,7 @@ const words = new Map(wordsDoc.items.map((item) => [item.id, item]));
 const sentences = new Map(sentencesDoc.items.map((item) => [item.id, item]));
 const REVIEW_STATUSES = new Set(['unreviewed', 'reviewed', 'retired']);
 const TIERS = new Set(['T1', 'T2', 'T3', 'T4']);
-const WORD_ID = /^w\.[a-z]+(?:\.\d+)?$/;
+const WORD_ID = /^w\.(?:fltrp-)?[a-z]+(?:\.\d+)?$/;
 const GRAPHEME_ID = /^g\.[a-z]+$/;
 const SENTENCE_ID = /^s\.[a-z]+\.\d{2}$/;
 const CONFUSABLE_ID = /^c\.[a-z]+-[a-z]+$/;

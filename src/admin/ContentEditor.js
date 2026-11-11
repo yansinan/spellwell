@@ -133,7 +133,10 @@ export function deleteWord(content, wordId) {
  * @returns {'created'|'merged'|'replaced'|'skipped'}
  */
 export function importWord(content, entry, mode = 'merge') {
-  const existing = content.words.items.find((item) => item.text === entry.text);
+  const textbook = entry.textbook ?? 'pep-2026';
+  const existing = content.words.items.find(
+    (item) => item.text === entry.text && (item.textbook ?? 'pep-2026') === textbook,
+  );
   if (!existing) {
     addWord(content, {
       id: typeof entry.id === 'string' && /^w\.[a-z0-9.-]+$/.test(entry.id) && !content.words.items.some((item) => item.id === entry.id)
@@ -148,6 +151,8 @@ export function importWord(content, entry, mode = 'merge') {
       unit: entry.unit ?? 1,
       unitId: entry.unitId ?? 'g1-s2-u1',
       unitLabel: entry.unitLabel ?? '一年级下 · 第1单元',
+      textbook: entry.textbook ?? 'pep-2026',
+      textbookLabel: entry.textbookLabel ?? '人教版新起点（2026）',
       reviewStatus: 'unreviewed',
     });
     return 'created';

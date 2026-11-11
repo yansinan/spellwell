@@ -8,6 +8,7 @@
  */
 
 import { importWord, nextWordId } from './ContentEditor.js';
+import { textbookLabel as labelFor } from '../storage/textbooks.js';
 
 export const WORD_LIBRARY_SCHEMA = 'spellwell.words.v1';
 
@@ -62,12 +63,14 @@ export function parseWordLibrary(input) {
  * @param {'merge'|'replace'|'skip'} mode
  * @returns {{created: number, merged: number, replaced: number, skipped: number, errors: {text: string, message: string}[]}}
  */
-export function applyWordLibrary(content, items, mode = 'merge') {
+export function applyWordLibrary(content, items, mode = 'merge', textbook = 'pep-2026') {
   const counts = { created: 0, merged: 0, replaced: 0, skipped: 0, errors: [] };
   for (const item of Array.isArray(items) ? items : []) {
     try {
       const text = String(item.text ?? '').trim().toLowerCase();
-      const existing = content.words.items.find((word) => word.text === text);
+      const existing = content.words.items.find(
+        (word) => word.text === text && (word.textbook ?? 'pep-2026') === textbook,
+      );
       const id = item.id && !content.words.items.some((word) => word.id === item.id)
         ? item.id
         : existing?.id ?? nextWordId(content, text);
@@ -80,6 +83,8 @@ export function applyWordLibrary(content, items, mode = 'merge') {
         unit: Number(item.unit ?? 1),
         unitId: item.unitId ?? `g${Number(item.grade ?? 1)}-s${item.term === '上' ? '1' : '2'}-u${Number(item.unit ?? 1)}`,
         unitLabel: item.unitLabel ?? `${Number(item.grade ?? 1) === 1 ? '一' : '二'}年级${item.term === '上' ? '上' : '下'} · 第${Number(item.unit ?? 1)}单元`,
+        textbook,
+        textbookLabel: labelFor(textbook),
       }, mode);
       counts[result] += 1;
     } catch (error) {

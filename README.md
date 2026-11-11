@@ -203,7 +203,8 @@ tools/serve.mjs   零依赖静态服务器
 
 ## P9 已实现
 
-- 2026 人教新起点 1—6 年级基础词库：583 个词、72 个单元、12 个学期；来源与质量报告见 [`docs/PEP_VOCAB_BASE.md`](docs/PEP_VOCAB_BASE.md)。
+- 两套教材词库：人教版新起点 583 词、外研版新交际（北京专版）891 词；后台可切换当前教材。
+- 词库来源/质量/优化报告：[`docs/PEP_VOCAB_BASE.md`](docs/PEP_VOCAB_BASE.md)、[`docs/FLTRP_VOCAB_BASE.md`](docs/FLTRP_VOCAB_BASE.md)。
 - 练习设计页：一至六年级上/下折叠；每个学期下多选 unit；Review/Effort；不选题量。
 - 后台题量默认 20，设置页 `/src/admin/settings.html`，面包屑返回内容库。
 - 题量、单元、模式进入 Scheduler；真实 attempts 校准选词权重；当前会话不因内容更新中断。

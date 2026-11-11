@@ -20,6 +20,7 @@ import {
 } from './ContentEditor.js';
 import { countAttemptsByWord } from './AttemptStats.js';
 import { applyWordLibrary, buildWordLibrary, parseWordLibrary } from './WordLibrary.js';
+import { DEFAULT_TEXTBOOK, TEXTBOOKS, readActiveTextbook, saveActiveTextbook, textbookLabel } from '../storage/textbooks.js';
 import { buildExport, validateContent } from './ContentValidator.js';
 import { autoSegment, parseBatch } from './WordImporter.js';
 
@@ -94,8 +95,12 @@ export async function mountAdmin(root) {
     return;
   }
 
+  let activeTextbook = adapter ? await readActiveTextbook(adapter) : DEFAULT_TEXTBOOK;
+  const activeWords = () => content.words.items.filter(
+    (item) => (item.textbook ?? DEFAULT_TEXTBOOK) === activeTextbook,
+  );
   let saved = cloneContent(content);
-  let selectedWordId = content.words.items[0]?.id ?? null;
+  let selectedWordId = activeWords()[0]?.id ?? null;
   let attemptStats = {};
   try {
     if (adapter) attemptStats = countAttemptsByWord(await adapter.query('attempts', {}));
@@ -103,7 +108,7 @@ export async function mountAdmin(root) {
     attemptStats = {};
   }
   const selectedUnit = content.words.items.find((item) => item.id === selectedWordId)?.unitId;
-  const collapsedLevels = new Set(content.words.items.map((item) => String(item.unitId ?? `level-${item.level ?? 1}`)));
+  const collapsedLevels = new Set(activeWords().map((item) => String(item.unitId ?? `level-${item.level ?? 1}`)));
   if (selectedUnit) collapsedLevels.delete(String(selectedUnit));
   let adding = false;
   let batchOpen = false;
@@ -115,7 +120,7 @@ export async function mountAdmin(root) {
   let notice = '';
 
   const graphemeByText = () => Object.fromEntries(content.graphemes.items.map((item) => [item.text, item.id]));
-  const currentWord = () => content.words.items.find((item) => item.id === selectedWordId) ?? null;
+  const currentWord = () => activeWords().find((item) => item.id === selectedWordId) ?? null;
   const savedWord = (id) => saved.words.items.find((item) => item.id === id) ?? null;
   const isDirty = (word) => word && JSON.stringify(word) !== JSON.stringify(savedWord(word.id));
   const anyDirty = () => content.words.items.some((word) => isDirty(word));
@@ -161,7 +166,7 @@ export async function mountAdmin(root) {
     const dirty = isDirty(word);
     const tokens = word ? (word.units ?? []).map((unit) => unit.text) : [];
     const unitGroups = new Map();
-    for (const item of content.words.items) {
+    for (const item of activeWords()) {
       const key = String(item.unitId ?? `level-${item.level ?? 1}`);
       if (!unitGroups.has(key)) {
         unitGroups.set(key, {
@@ -204,7 +209,7 @@ export async function mountAdmin(root) {
     let batchPreviewHtml = '';
     let batchActions = [];
     if (batchPreview) {
-      const existingTexts = new Set(content.words.items.map((item) => item.text));
+      const existingTexts = new Set(activeWords().map((item) => item.text));
       const seen = new Set();
       batchActions = batchPreview.entries.map((entry) => {
         const duplicate = existingTexts.has(entry.text) || seen.has(entry.text);
@@ -248,9 +253,14 @@ export async function mountAdmin(root) {
       <section class="sw-panel sw-admin__overview">
         <div>
           <h2>内容概览</h2>
-          <p class="sw-admin__muted">words ${content.words.items.length} · graphemes ${content.graphemes.items.length} · sentences ${content.sentences.items.length} · confusables ${content.confusables.items.length}</p>
+          <p class="sw-admin__muted">${escape(textbookLabel(activeTextbook))} · words ${activeWords().length} · graphemes ${content.graphemes.items.length} · sentences ${content.sentences.items.length} · confusables ${content.confusables.items.length}</p>
         </div>
         <div class="sw-admin__overview-actions">
+          <label class="sw-admin__inline-field">教材版本
+            <select data-textbook-select>
+              ${TEXTBOOKS.map((book) => `<option value="${escape(book.id)}" ${activeTextbook === book.id ? 'selected' : ''}>${escape(book.label)}</option>`).join('')}
+            </select>
+          </label>
           <a class="sw-text-button" href="/src/admin/settings.html">练习设置</a>
           <a class="sw-text-button" href="/migration/index.html">本机数据迁移</a>
           <span class="sw-admin__badge ${report.valid ? 'is-ok' : 'is-bad'}">${report.valid ? 'V1—V9 通过' : `${report.errors.length} 个问题`}</span>
@@ -412,12 +422,25 @@ export async function mountAdmin(root) {
       duplicateMode = event.target.value;
       render();
     });
+    root.querySelector('[data-textbook-select]')?.addEventListener('change', async (event) => {
+      activeTextbook = event.target.value;
+      if (adapter) await saveActiveTextbook(adapter, activeTextbook);
+      selectedWordId = activeWords()[0]?.id ?? null;
+      collapsedLevels.clear();
+      for (const word of activeWords()) {
+        collapsedLevels.add(String(word.unitId ?? `level-${word.level ?? 1}`));
+      }
+      const selectedUnitId = activeWords().find((word) => word.id === selectedWordId)?.unitId;
+      if (selectedUnitId) collapsedLevels.delete(String(selectedUnitId));
+      notice = `已切换到 ${textbookLabel(activeTextbook)}。`;
+      render();
+    });
     root.querySelector('[data-word-import-mode]')?.addEventListener('change', (event) => {
       wordImportMode = event.target.value;
       render();
     });
     root.querySelector('[data-export-words]')?.addEventListener('click', () => {
-      const library = buildWordLibrary(content.words.items);
+      const library = buildWordLibrary(activeWords());
       const blob = new Blob([JSON.stringify(library, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -441,7 +464,7 @@ export async function mountAdmin(root) {
       }
       const before = cloneContent(content);
       try {
-        const counts = applyWordLibrary(content, parsed.items, wordImportMode);
+        const counts = applyWordLibrary(content, parsed.items, wordImportMode, activeTextbook);
         const report = validateContent(content);
         if (!report.valid || counts.errors.length > 0) {
           content = before;
@@ -472,12 +495,14 @@ export async function mountAdmin(root) {
           unit: entry.unit ?? baseUnit?.unit ?? 1,
           unitId: entry.unitId ?? baseUnit?.unitId ?? 'g1-s2-u1',
           unitLabel: entry.unitLabel ?? baseUnit?.unitLabel ?? '一年级下 · 第1单元',
+          textbook: activeTextbook,
+          textbookLabel: textbookLabel(activeTextbook),
         }, duplicateMode);
         counts[result === 'created' ? 'created' : result === 'merged' ? 'merged' : result === 'replaced' ? 'replaced' : 'skipped'] += 1;
       }
       const changed = counts.created + counts.merged + counts.replaced;
       const lastText = [...batchActions].reverse().find((item) => item.action !== 'skip')?.entry.text;
-      if (lastText) selectedWordId = content.words.items.find((item) => item.text === lastText)?.id ?? selectedWordId;
+      if (lastText) selectedWordId = activeWords().find((item) => item.text === lastText)?.id ?? selectedWordId;
       batchOpen = false;
       batchPreview = null;
       batchText = '';
@@ -506,6 +531,8 @@ export async function mountAdmin(root) {
         unitId: baseUnit?.unitId ?? 'g1-s2-u1',
         unitLabel: baseUnit?.unitLabel ?? '一年级下 · 第1单元',
         units: [],
+        textbook: activeTextbook,
+        textbookLabel: textbookLabel(activeTextbook),
         reviewStatus: 'unreviewed',
       });
       selectedWordId = created.id;
@@ -553,7 +580,7 @@ export async function mountAdmin(root) {
       root.querySelector('[data-delete-word]')?.addEventListener('click', () => {
         if (!window.confirm(`删除 ${word.id}？相关句子会成为悬空引用。`)) return;
         deleteWord(content, word.id);
-        selectedWordId = content.words.items[0]?.id ?? null;
+        selectedWordId = activeWords()[0]?.id ?? null;
         notice = '已从草稿删除；保存到本机后生效。';
         render();
       });

@@ -36,20 +36,20 @@ test('V1—V9：当前种子内容结构有效', async () => {
   const report = validateContent(await load());
   assertEqual(report.valid, true);
   assertEqual(report.errors.length, 0);
-  assertEqual(report.counts.words, 583);
+  assertEqual(report.counts.words, 1474);
 });
 
 test('V10：当前种子全部 unreviewed，生产导出阻断', async () => {
   const content = await load();
   const error = assertThrows(() => buildExport(content), 'CONTENT_EXPORT_UNREVIEWED');
   assertEqual(error.code, 'CONTENT_EXPORT_UNREVIEWED');
-  assertEqual(error.details.unreviewed.length, 685);
+  assertEqual(error.details.unreviewed.length, 1576);
 });
 
 test('V10：全部 reviewed 后导出成功且只含 reviewed', async () => {
   const content = reviewed(await load());
   const snapshot = buildExport(content);
-  assertEqual(snapshot.counts.words, 583);
+  assertEqual(snapshot.counts.words, 1474);
   assertEqual(snapshot.counts.graphemes, 96);
   assertEqual(snapshot.counts.sentences, 4);
   assertEqual(snapshot.counts.confusables, 2);

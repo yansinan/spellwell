@@ -13,10 +13,11 @@ import { Scheduler } from '../../src/scheduler/Scheduler.js';
 import { assert, assertEqual, test } from '../harness.js';
 
 const words = JSON.parse(await readFile(new URL('../../src/content/words.json', import.meta.url), 'utf8'));
+const pepWords = { ...words, items: words.items.filter((word) => (word.textbook ?? 'pep-2026') === 'pep-2026') };
 const graphemes = JSON.parse(await readFile(new URL('../../src/content/graphemes.json', import.meta.url), 'utf8'));
 
 async function setup() {
-  const adapter = new MemoryAdapter({ initialData: { words: words.items, graphemes: graphemes.items } });
+  const adapter = new MemoryAdapter({ initialData: { words: pepWords.items, graphemes: graphemes.items } });
   await adapter.init();
   const scheduler = new Scheduler({
     wordRepository: new WordRepository(adapter),

@@ -42,6 +42,7 @@
 │   │   ├── IndexedDBAdapter.js # P2 实现：7 方法、事务、导出导入
 │   │   ├── contentImport.js    # P2 内容导入：4 库 + meta.contentVersion
 │   │   ├── practiceSettings.js # P9 后台题量/默认模式
+│   │   ├── textbooks.js        # P9 教材版本注册/activeTextbook
 │   │   └── schema.js           # store 名、keyPath、索引、DB 版本
 │   ├── repositories/           # 领域查询；只调用 StorageAdapter 的 7 个方法
 │   │   ├── BaseRepository.js

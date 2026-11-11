@@ -25,6 +25,7 @@
 | [0019](0019-attempt-calibrated-weights.md) | 用真实 attempts 校准选词权重 | Accepted | 按词/题型错误率、小样本平滑、同层排序、约束优先 |
 | [0020](0020-prompt-resource-priority.md) | 提示词资源优先级 | Accepted | 句子→音标→中文→单词；只读；CLOZE 不重复 |
 | [0021](0021-word-library-import-export.md) | 词库单独导入/导出 | Accepted | 只含 words；合并/替换/不动；导入校验后落库 |
+| [0022](0022-textbook-switch.md) | 多教材版本与后台切换 | Accepted | textbook 字段；meta.activeTextbook；两套词库共存 |
 
 新增 ADR 的模板：
 

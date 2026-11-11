@@ -11,6 +11,7 @@ import { MemoryAdapter } from '../storage/MemoryAdapter.js';
 import { IndexedDBAdapter } from '../storage/IndexedDBAdapter.js';
 import { CONTENT_VERSION, importContent, migrateContentV2ToV3, readContentVersion } from '../storage/contentImport.js';
 import { readPracticeSettings } from '../storage/practiceSettings.js';
+import { DEFAULT_TEXTBOOK, readActiveTextbook } from '../storage/textbooks.js';
 import { GraphemeRepository } from '../repositories/GraphemeRepository.js';
 import { WordRepository } from '../repositories/WordRepository.js';
 import { StateRepository } from '../repositories/StateRepository.js';
@@ -65,10 +66,13 @@ async function readContent(adapter) {
     adapter.query('sentences', {}),
   ]);
   const settings = await readPracticeSettings(adapter);
+  const activeTextbook = await readActiveTextbook(adapter);
   const revisionRecord = await adapter.get('meta', 'contentRevision');
   const graphemeMap = Object.fromEntries(graphemes.map((item) => [item.id, item]));
   const sentenceByWord = Object.fromEntries(sentences.map((item) => [String(item.wordId), item]));
-  const activeWords = words.filter((word) => word.reviewStatus !== 'retired');
+  const activeWords = words.filter((word) =>
+    (word.textbook ?? DEFAULT_TEXTBOOK) === activeTextbook && word.reviewStatus !== 'retired',
+  );
   const unitMap = new Map();
   for (const word of activeWords) {
     const id = String(word.unitId ?? `level-${word.level ?? 1}`);
@@ -98,6 +102,7 @@ async function readContent(adapter) {
     sentences,
     sentenceByWord,
     settings,
+    activeTextbook,
     revision: Number(revisionRecord?.value ?? 0),
     units,
     terms,
@@ -193,6 +198,7 @@ export async function createPracticeWorkspace() {
     storage,
     contentSeeded: content.seeded,
     get revision() { return snapshot.revision; },
+    get textbook() { return snapshot.activeTextbook; },
     get units() { return snapshot.units; },
     get terms() { return snapshot.terms; },
     get settings() { return snapshot.settings; },
