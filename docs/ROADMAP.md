@@ -1,19 +1,19 @@
 # 开发路线图 · ROADMAP
 
-**当前阶段**：P1 ✅（2026-11-11）
-**下一阶段**：P2（IndexedDB 持久化与内容导入）
-**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P1 不通过不进入 P2。
+**当前阶段**：P2 ✅（2026-11-11）
+**下一阶段**：P3（记忆曲线与错词调度）
+**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P2 不通过不进入 P3。
 
 ---
 
 ## 1. 门禁命令
 
 ```bash
-# 当前阶段（P1，累计 p0+p1）
-node tests/runTests.js --phase=p1
+# 当前阶段（P2，累计 p0..p2）
+node tests/runTests.js --phase=p2
 
 # 后续阶段（累计运行 p0..pN）
-node tests/runTests.js --phase=p2
+node tests/runTests.js --phase=p3
 
 # 默认：自动跑到仓库中已存在的最高阶段
 node tests/runTests.js
@@ -34,8 +34,8 @@ node tools/serve.mjs
 |---|---|---|---|
 | **P0** | 契约与骨架 | `--phase=p0` PASS | ✅ 完成 |
 | **P1** | 最小拼写闭环（T-SEQUENCE/T-FILL/T-TYPE） | `--phase=p1` PASS + 3 词 3 题型人工验收 | ✅ 完成 |
-| **P2** | IndexedDB 持久化与内容导入 | `--phase=p2` PASS + 刷新不丢、导出导入一致 | ⏳ 下一步 |
-| **P3** | 记忆曲线与错词调度 | `--phase=p3` PASS + 次日必现 | ⏳ |
+| **P2** | IndexedDB 持久化与内容导入 | `--phase=p2` PASS + 刷新不丢、导出导入一致 | ✅ 完成 |
+| **P3** | 记忆曲线与错词调度 | `--phase=p3` PASS + 次日必现 | ⏳ 下一步 |
 | **P4** | 顺序/边界错闭环（T-REORDER/T-EDIT/T-SEGMENT） | `--phase=p4` PASS + 三类错误触发对应修复 | ⏳ |
 | **P5** | 组合强化与配对（T-MATCH） | `--phase=p5` PASS + 跨 2 词连续正确 | ⏳ |
 | **P6** | 判断纠错与语境抽查（T-JUDGE-FIX/T-CLOZE） | `--phase=p6` PASS + 假掌握被拦下 | ⏳ |
@@ -133,35 +133,71 @@ node tests/runTests.js --phase=p1
 
 ---
 
-## 5. P2 任务书（下一阶段）
+## 5. P2 任务书（已完成）
 
 **目标**：把 P1 的内存内容切到 IndexedDB，做到刷新不丢、导出导入一致。
 
-### 范围
+### 交付物
 
-1. 实现 `IndexedDBAdapter` 的 7 个方法，严格使用 `schema.js` 的 8 个 store 与索引。
-2. 内容导入：把 `src/content/*.json` 写入 `words/graphemes/sentences/confusables`，带版本与幂等策略。
-3. `PracticeSession` 的内容装配切到 `IndexedDBAdapter`；题型层与 session 接口不变。
-4. 刷新后 3 个词仍可用；`exportAll` / `importAll` 往返一致。
-5. `tests/p2/`：适配器契约套件、导入幂等、刷新级持久化、导出导入一致性。
-6. 保持 P1 行为不回退；仍不写学习状态、不做调度。
+- [x] 实现 `IndexedDBAdapter` 的 7 个方法，使用 `schema.js` 的 8 个 store 与索引。
+- [x] 内容导入 `contentImport.js`：4 个内容库 + `meta.contentVersion`，同版本幂等跳过。
+- [x] `bootstrap.js` 优先 `IndexedDBAdapter`，不可用时回退 `MemoryAdapter`。
+- [x] `exportAll` / `importAll` 覆盖 8 个 store，事务内 clear + put。
+- [x] `?debug=1` 暴露只读调试句柄：`window.__SPELLWELL_DEBUG__ = { session, adapter, storage, contentSeeded }`。
+- [x] `tests/p2/`：内容导入幂等/版本/非法内容、适配器 7 方法结构、无 IndexedDB 降级、未 init 报错；浏览器验收持久化。
+- [x] 写出 ADR-0008（IndexedDB 内容导入与降级）。
 
-### 验收
+### 验收结果
 
-- `node tests/runTests.js --phase=p2` PASS。
-- 浏览器：完成一轮后刷新，内容仍在；导出再导入后 session 的 9 条 spec 不漂移。
-- 换回 `MemoryAdapter` 时仓库零改动（同一契约套件）。
-- `docs/TRACEABILITY.md` 更新 R-STORE-06 为 ✅，写 P3 任务书。
+```bash
+node tests/runTests.js --phase=p2
+# PASS  p2 gate · 142 passed · 0 failed · 21 files
+```
 
-### 启动提示词（可直接交给 agent）
+- 浏览器首次加载：`storage = indexeddb`、`contentSeeded = true`，内容计数 `10 / 22 / 4 / 2`。
+- 刷新后：`contentSeeded = false`，`/src/content/` 网络请求为 0，9 题仍可开始。
+- `exportAll` → `importAll` 往返导入 39 条记录，内容计数一致；临时 meta 在回滚后消失。
+- Node 无 IndexedDB 时明确报 `STORAGE_UNAVAILABLE`；浏览器不可用时回退内存。
+- P0/P1 测试无回退；仍不写 `wordStates` / `graphemeStates` / `attempts`。
 
-> 只做 P2。先读 `AGENTS.md`、`docs/DESIGN.md §5.3`、`docs/TRACEABILITY.md` 的 R-STORE-06。
-> 实现 IndexedDBAdapter 与内容导入，把 P1 的 bootstrap 切到 adapter；不改题型层、不写学习状态。
-> 每步运行 `node tests/runTests.js --phase=p2`，最后更新 TRACEABILITY 与 CHANGELOG。
+### P2 明确不做
+
+- 不写学习状态、不做每日队列/次日错词（P3）。
+- 不做 P4 题型、家长端、后台。
+- 内容版本变化时暂不删除旧记录（P2 只覆盖写入，P7 再做完整迁移/校验）。
 
 ---
 
-## 6. 后续阶段要点（防止提前实现）
+## 6. P3 任务书（下一阶段）
+
+**目标**：把 P2 的内容持久化接到记忆曲线与错词调度，让“答错降档、次日必现、按错误类型选题型”真正跑起来。
+
+### 范围
+
+1. `Scheduler.buildDailyQueue()`：5—8 个词，包含昨日错词、到期复习、新词；可复现。
+2. `Scheduler.recordAttempt()`：写 `attempts`，按 `IntervalPolicy` 更新 `wordStates`；答错降 2 档、连续错归零。
+3. 次日到期：答错后 `dueDate = 明天`；下次队列强制包含。
+4. `ErrorProfile` 写入状态；`TypeSelector` 按错误类型选择 P1 题型。
+5. 队列/状态全部走 repositories + IndexedDB；刷新不丢。
+6. `tests/p3/`：固定时钟、队列 5—8、次日必现、题型映射、状态持久化、不提前做 P4。
+7. 最小只读家长视图（今日卡点/待抽查计数）可选，若做不得提供修改入口。
+
+### 验收
+
+- `node tests/runTests.js --phase=p3` PASS。
+- 模拟 3 天：今天答错 → 明天队列包含该词 → 答对升级 → 3 天后再现。
+- 刷新后状态仍在；挑战/调试不写主状态。
+- 不实现 T-REORDER/T-EDIT/T-SEGMENT；不做后台。
+
+### 启动提示词（可直接交给 agent）
+
+> 只做 P3，不提前做 P4。先读 `AGENTS.md`、`docs/DESIGN.md §1.3/§2.1/§3.3`、`docs/TRACEABILITY.md` 的 R-SCHED-01/02/03。
+> 实现 Scheduler 每日队列与 recordAttempt，用固定时钟测试次日必现；复用 P1 三题型，不新增 P4 题型。
+> 每步运行 `node tests/runTests.js --phase=p3`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+
+---
+
+## 7. 后续阶段要点（防止提前实现）
 
 | 阶段 | 关键新增 | 不得提前做的事 |
 |---|---|---|
@@ -188,7 +224,7 @@ P1 不实现字母级/混合粒度。
 
 ---
 
-## 7. 阶段完成检查
+## 8. 阶段完成检查
 
 - [ ] 本阶段门禁 PASS，且低阶段测试未回退。
 - [ ] `TRACEABILITY.md` 中本阶段条目从 ⏳/🧪 改为 ✅。

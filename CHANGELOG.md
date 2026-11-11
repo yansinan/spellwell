@@ -1,5 +1,49 @@
 # CHANGELOG
 
+## [0.3.0] — 2026-11-11 · P2 IndexedDB 持久化与内容导入
+
+### Added
+
+- `src/storage/IndexedDBAdapter.js`：实现 `init/get/put/query/transaction/exportAll/importAll`；
+  - 使用 `schema.js` 的 8 个 store 与索引；
+  - `query` 保持等值过滤 + 主键字典序 + offset/limit；
+  - `importAll` 单事务 clear + put，失败整体回滚；
+  - IndexedDB 不可用明确抛 `STORAGE_UNAVAILABLE`。
+- `src/storage/contentImport.js`：4 个内容库 + `meta.contentVersion`，同版本幂等，版本变化覆盖写入。
+- `src/ui/bootstrap.js`：IndexedDB 优先；首次加载 fetch + import，刷新按版本跳过网络；失败回退 MemoryAdapter。
+- `?debug=1` 暴露 `window.__SPELLWELL_DEBUG__ = { session, adapter, storage, contentSeeded }`。
+- `tests/p2/`：内容导入/幂等/版本/非法内容、7 方法契约、无 IndexedDB 降级、未 init 报错。
+- ADR-0008：IndexedDB 内容导入、持久化与降级。
+
+### Changed
+
+- `package.json` 版本 `0.2.0` → `0.3.0`；新增 `test:p2`。
+- P0 存储测试从“IndexedDB 必须抛未实现”改为“无 IndexedDB 时明确报 `STORAGE_UNAVAILABLE`”。
+- `README` / `ROADMAP` / `TRACEABILITY` / `AGENTS` / `FILE_SPEC` 状态推进到 P3。
+
+### Verification
+
+```bash
+node tests/runTests.js --phase=p2
+# PASS  p2 gate · 142 passed · 0 failed · 21 files
+```
+
+浏览器验收：
+
+- 首次加载 `storage=indexeddb`、`contentSeeded=true`，内容计数 `10 / 22 / 4 / 2`；
+- 刷新后 `contentSeeded=false`，`/src/content/` 请求 0 个，9 题仍可开始；
+- `exportAll` → `importAll` 往返 39 条记录，内容计数一致；
+- 事务内临时 meta 写入可见，`importAll` 回滚快照后消失；
+- 无控制台异常；P0/P1 测试无回退。
+
+### Known limitations
+
+- 内容版本升级只覆盖写入，不删除旧记录；完整迁移/校验留 P7。
+- `query` 仍为全表扫描；词库规模小，索引优化留到需要时。
+- 学习状态（wordStates/graphemeStates/attempts）仍未写入，P3 才接调度。
+
+---
+
 ## [0.2.0] — 2026-11-11 · P1 最小拼写闭环
 
 ### Added

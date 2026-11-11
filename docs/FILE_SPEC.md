@@ -1,6 +1,6 @@
 # 文件与工程规范 · FILE_SPEC
 
-**适用版本**：DESIGN v1.1 / 仓库 v0.2.0（P1）
+**适用版本**：DESIGN v1.1 / 仓库 v0.3.0（P2）
 **地位**：本文件是 `docs/DESIGN.md` 的工程实施细则。与 DESIGN 冲突时，以 DESIGN 为准；本文件负责把 DESIGN 翻译成可机械检查的规则。
 
 ---
@@ -37,7 +37,8 @@
 │   ├── storage/                # 只认 adapter 接口，不认业务
 │   │   ├── StorageAdapter.js   # 抽象基类 + assertStorageAdapter + 方法白名单
 │   │   ├── MemoryAdapter.js    # P0 测试/演示用；支持事务回滚与导出导入
-│   │   ├── IndexedDBAdapter.js # P2 实现；P0 仅保留骨架
+│   │   ├── IndexedDBAdapter.js # P2 实现：7 方法、事务、导出导入
+│   │   ├── contentImport.js    # P2 内容导入：4 库 + meta.contentVersion
 │   │   └── schema.js           # store 名、keyPath、索引、DB 版本
 │   ├── repositories/           # 领域查询；只调用 StorageAdapter 的 7 个方法
 │   │   ├── BaseRepository.js
@@ -64,7 +65,7 @@
 │   ├── ui/                     # DOM 渲染与流程编排；不得实现判定算法
 │   │   ├── App.js               # P0 状态页（?dev=1）
 │   │   ├── PracticeSession.js   # P1 9 题会话与 spec 生成
-│   │   ├── bootstrap.js         # P1 内容装配（P2 切 adapter）
+│   │   ├── bootstrap.js         # P2：IndexedDB 优先，失败回退 Memory
 │   │   ├── PracticeScreen.js    # P1 学习端（点选/拖拽/显式 Check）
 │   │   ├── dragGeometry.js      # 64px 吸附半径与最近槽位
 │   │   ├── sequenceOrder.js     # 已到位块插入式重排
@@ -217,7 +218,7 @@ questionTypes  ←  scheduler
 - `core/contracts.js` 导出 `CONTRACT_VERSION`；跨层结构变更必须 +1，并写 ADR。
 - 存储 `schema.js` 导出 `DB_VERSION`；IndexedDB 升级必须写迁移函数与测试（P2 起）。
 - 内容 JSON 顶层带 `"version": 1`；内容格式变更 +1，并更新 `CONTENT_SPEC.md`。
-- `package.json` 版本跟阶段走：P0 `0.1.0`，P1 `0.2.0`，以此类推；P10 `1.0.0`。
+- `package.json` 版本跟阶段走：P0 `0.1.0`，P1 `0.2.0`，P2 `0.3.0`，以此类推；P10 `1.0.0`。
 
 ---
 

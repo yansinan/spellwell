@@ -156,9 +156,9 @@ test('assertStorageAdapter：缺少任一方法即拒绝', () => {
   );
 });
 
-test('IndexedDBAdapter：P0 明确抛 PHASE_NOT_IMPLEMENTED，不伪装可用', async () => {
+test('IndexedDBAdapter：Node 无 IndexedDB 时明确报 STORAGE_UNAVAILABLE', async () => {
   const adapter = new IndexedDBAdapter();
-  const error = await assertRejects(() => adapter.init(), 'PHASE_NOT_IMPLEMENTED');
-  assertEqual(error.phase, 'P2');
+  const error = await assertRejects(() => adapter.init(), 'STORAGE_UNAVAILABLE');
+  assertEqual(error.code, 'STORAGE_UNAVAILABLE');
   assert(error instanceof Error);
 });

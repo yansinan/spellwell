@@ -1,7 +1,7 @@
 # AGENTS.md · 项目执行契约
 
 > 任何 agent、贡献者进入本仓库，先读本文件。它规定“怎么做事”，`docs/DESIGN.md` 规定“做什么”。
-> 当前阶段：**P1 已完成，P2 是下一步**。不要提前实现 P2 及以后的功能。
+> 当前阶段：**P2 已完成，P3 是下一步**。不要提前实现 P3 及以后的功能。
 
 ---
 
@@ -23,17 +23,18 @@
 |---|---|---|---|
 | P0 | ✅ 完成 | 修 P0 测试、文档错字、架构守卫误报 | 改契约语义、加新题型 |
 | P1 | ✅ 完成 | 修 P1 测试、文档、P1 UI/判定缺陷 | 接 IndexedDB、写调度状态、做 P4 题型 |
-| P2 | ⏳ 下一步 | IndexedDBAdapter、内容导入、导出导入 | 写学习状态、做调度队列、做 P4 题型 |
+| P2 | ✅ 完成 | 修 P2 测试、IndexedDB 适配器/导入缺陷 | 写学习状态、做调度队列、做 P4 题型 |
+| P3 | ⏳ 下一步 | Scheduler 每日队列、错词次日调度、状态持久化 | 做 P4 题型、后台、家长端完整报表 |
 
-**判断标准**：如果你写的代码在 `docs/ROADMAP.md` 的“P1 明确不做”或“后续阶段要点”里，停手。
+**判断标准**：如果你写的代码在 `docs/ROADMAP.md` 的“P2 明确不做”或“后续阶段要点”里，停手。
 
 ---
 
 ## 2. 命令
 
 ```bash
-# 阶段门禁（唯一验收标准；当前 P1）
-node tests/runTests.js --phase=p1
+# 阶段门禁（唯一验收标准；当前 P2）
+node tests/runTests.js --phase=p2
 
 # 本地预览（必须 HTTP）
 node tools/serve.mjs
@@ -73,7 +74,7 @@ node tools/serve.mjs
 10. **偏离 DESIGN 必须先写 ADR。** 先改文档再改代码；禁止“代码即文档”。
 11. **后台不写学习状态。** `src/admin/**` 不得触碰 `wordStates/graphemeStates/attempts`。
 12. **挑战模式不写主状态。** `RapidTapChallenge` 的结果不得进入调度/错误画像。
-13. **阶段顺序不可跳。** P1 不通过不进入 P2；当前 P1 已完成，只允许修 P1 缺陷，不提前接 P2 持久化。
+13. **阶段顺序不可跳。** P2 不通过不进入 P3；当前 P2 已完成，只允许修 P2 缺陷，不提前写学习状态或调度队列。
 
 这些规则中 2/3/4/5/6/10 有自动检查（`architecture.test.js`、`traceability.test.js`、`content.test.js`）；其余靠评审。
 
@@ -132,11 +133,11 @@ node tools/serve.mjs
 
 ## 8. 下一阶段启动提示词（复制给 agent）
 
-> 只做 P2，不提前做 P3。先读 `AGENTS.md`、`docs/DESIGN.md §5.3`、`docs/TRACEABILITY.md` 的 R-STORE-06。
-> 实现 IndexedDBAdapter 的 7 个方法与内容导入，把 P1 的 `bootstrap.js` 从 MemoryAdapter 切到 IndexedDBAdapter；
-> 保持 `PracticeSession`/题型层接口不变，不写学习状态、不做调度队列。
-> 每完成一步运行 `node tests/runTests.js --phase=p2`，最后更新 TRACEABILITY 与 CHANGELOG。
-> 不新增依赖、不做 P4 题型、不做家长端。
+> 只做 P3，不提前做 P4。先读 `AGENTS.md`、`docs/DESIGN.md §1.3/§2.1/§3.3`、`docs/TRACEABILITY.md` 的 R-SCHED-01/02/03。
+> 实现 Scheduler 每日队列与 recordAttempt，用固定时钟测试“答错降档、次日必现、按错误类型选题型”；
+> 复用 P1 三题型与 P2 IndexedDB 状态仓库，不新增 P4 题型。
+> 每步运行 `node tests/runTests.js --phase=p3`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
+> 不新增依赖、不做后台、不做家长端完整报表。
 
 ---
 
@@ -146,11 +147,12 @@ node tools/serve.mjs
 - `wordState.errorProfile` 是**有界数组**，`AttemptResult.firstError` 是单条主错误：见 ADR-0001。
 - `query` 只做等值过滤 + `limit/offset`，复杂查询在仓库内存过滤：见 ADR-0001。
 - P0 种子内容全部 `unreviewed`，生产导出必须 `reviewed`：见 CONTENT_SPEC。
-- P1 的内容装配是“同源 JSON → MemoryAdapter”，9 题是固定演示队列；P2 才切 IndexedDB，P3 才切 Scheduler：见 ADR-0003。
+- P1 的内容装配是“同源 JSON → MemoryAdapter”；P2 已切到 IndexedDBAdapter，P3 才接 Scheduler：见 ADR-0003、ADR-0008。
 - P1 的 judge 上下文为 `{ spec, renderModel, events, bundle, now }`；`bundle` 只读，`now` 可注入：见 ADR-0003。
-- P1 不持久化；`IndexedDBAdapter` 仍是 P2 骨架。不要为了“刷新不丢”提前写。
+- P2 持久化内容与 8 个 store；P3 才写学习状态。不要提前写调度状态。
 - T-SEQUENCE 的点选/拖拽/取消是 P1 UI 行为；P8 再扩到 PointerAdapter 与全部题型。
 - 组合拆分粒度用 spec 参数，不由题型层猜；当前只 grapheme，P3/P4 支持 letter/mixed：见 ADR-0004。
 - 拖拽 64px 吸附、未命中 240ms 弹回；音效是低音量 Web Audio 合成音，不引入音频资源：见 ADR-0005。
 - 同词同脚手架：grapheme 块选 < mixed < letter；难度是多维向量，P3 才校准权重：见 DESIGN §3.5 与 ADR-0006。
 - 已到位块可重排；目标槽位左半边插前、右半边插后；拖拽中其他块实时侧滑、显示插入缺口；满槽候选弹回；已使用待选块置灰禁用：见 ADR-0007。
+- P2 内容导入按 meta.contentVersion 幂等；IndexedDB 不可用回退 MemoryAdapter：见 ADR-0008。

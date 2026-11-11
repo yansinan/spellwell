@@ -11,6 +11,7 @@
 | [0005](0005-interaction-feedback.md) | 拖拽吸附/弹回与互动音效 | Accepted | 64px 吸附、240ms 弹回、Web Audio 轻音效、静音开关 |
 | [0006](0006-difficulty-gradient.md) | 难度梯度与选题计算 | Accepted（权重 P3 校准） | grapheme < mixed < letter、难度向量、P3 DifficultyPolicy |
 | [0007](0007-ordered-reorder.md) | 按序选择的插入式重排 | Accepted | 左右半边插入、移源后边界修正、满槽拒绝、连续 slotIndex |
+| [0008](0008-indexeddb-content.md) | IndexedDB 内容导入与降级 | Accepted | contentVersion 幂等、IndexedDB 优先、Memory 回退、8 库导出导入 |
 
 新增 ADR 的模板：
 

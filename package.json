@@ -1,6 +1,6 @@
 {
   "name": "spellwell",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "description": "小学 1—2 年级英文拼写记忆工具：只做拼写输出，纯前端 ES Modules，无构建无依赖。",
@@ -11,6 +11,7 @@
     "test": "node tests/runTests.js",
     "test:p0": "node tests/runTests.js --phase=p0",
     "start": "node tools/serve.mjs",
-    "test:p1": "node tests/runTests.js --phase=p1"
+    "test:p1": "node tests/runTests.js --phase=p1",
+    "test:p2": "node tests/runTests.js --phase=p2"
   }
 }

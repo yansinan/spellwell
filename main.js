@@ -30,7 +30,10 @@ async function boot() {
   }
 
   document.documentElement.lang = 'en';
-  const { session } = await createP1Session();
+  const { session, adapter, storage, contentSeeded } = await createP1Session();
+  if (params.get('debug') === '1') {
+    window.__SPELLWELL_DEBUG__ = { session, adapter, storage, contentSeeded };
+  }
   new PracticeScreen({
     root,
     session,

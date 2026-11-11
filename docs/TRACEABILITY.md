@@ -55,10 +55,14 @@
 | R-STORE-03 | §3.2 查询不暴露底层细节 | `query(store,{where,limit,offset})` | `tests/p0/storage.test.js` | P0 | ✅ |
 | R-STORE-04 | 事务失败回滚 | `MemoryAdapter.transaction` | `tests/p0/storage.test.js` | P0 | ✅ |
 | R-STORE-05 | 导出/导入一致 | `exportAll/importAll` | `tests/p0/storage.test.js` 往返断言 | P0 | ✅ |
-| R-STORE-06 | IndexedDB 持久化 | `src/storage/IndexedDBAdapter.js` | P2 浏览器测试 | P2 | ⏳ |
+| R-STORE-06 | IndexedDB 持久化 | `src/storage/IndexedDBAdapter.js` | `tests/p2/indexeddbAdapter.test.js` + 浏览器刷新不丢 | P2 | ✅ |
 | R-STORE-07 | 内容仓库查询 | `WordRepository` 等 | `tests/p0/repositories.test.js` | P0 | ✅ |
 | R-STORE-08 | 状态默认值与到期查询 | `StateRepository` | `tests/p0/repositories.test.js` | P0 | ✅ |
 | R-STORE-09 | 尝试记录只追加 | `AttemptRepository` | `tests/p0/repositories.test.js` | P0 | ✅ |
+| R-P2-01 | 内容导入 4 库 + meta 版本，幂等 | `contentImport.js` | `tests/p2/contentImport.test.js` | P2 | ✅ |
+| R-P2-02 | 刷新后内容仍在，不重复 fetch | `bootstrap.js` + IndexedDB | 浏览器 reload：0 个 content 请求 | P2 | ✅ |
+| R-P2-03 | exportAll/importAll 往返一致 | `IndexedDBAdapter` | 浏览器 39 条记录往返 + `tests/p0/storage.test.js` | P2 | ✅ |
+| R-P2-04 | IndexedDB 不可用回退 MemoryAdapter | `bootstrap.js` | 无 IndexedDB 时 `STORAGE_UNAVAILABLE` / 浏览器 fallback | P2 | ✅ |
 
 ## 5. 调度与题型
 
@@ -153,6 +157,7 @@
 | A-07 | 是否只能按 grapheme 整块选择 | 内容仍人工标注 grapheme；P3/P4 用 spec 粒度参数支持字母/混合，不由题型猜 | ADR-0004 |
 | A-08 | 拖拽未命中如何处理、音效尺度 | 64px 吸附 + 240ms 弹回；Web Audio 低音量合成音 + Sound/Muted | ADR-0005 |
 | A-09 | 已到位块如何重排/插入 | 左右半边决定插前/插后；移源后修正边界；满槽拒绝新候选 | ADR-0007 |
+| A-10 | 内容如何进入 IndexedDB、失败如何降级 | meta.contentVersion 幂等；IndexedDB 优先、Memory 回退；导出导入覆盖 8 库 | ADR-0008 |
 
 ---
 

@@ -1,13 +1,15 @@
 /**
  * @layer ui
- * @phase P1
+ * @phase P2
  * @doc §2.1 孩子端（学习模块）
  *
- * P1 内容装配：同源读取 content JSON → MemoryAdapter → repositories → ResourceBundle。
- * 这是 P1 的临时边界；P2 会把内容导入切到 IndexedDBAdapter，P3 才接调度队列。
+ * P2 内容装配：优先 IndexedDBAdapter；首次加载导入 content JSON，
+ * 之后按 meta.contentVersion 幂等跳过网络与写入。IndexedDB 不可用时回退 MemoryAdapter。
  */
 
 import { MemoryAdapter } from '../storage/MemoryAdapter.js';
+import { IndexedDBAdapter } from '../storage/IndexedDBAdapter.js';
+import { CONTENT_VERSION, importContent, readContentVersion } from '../storage/contentImport.js';
 import { GraphemeRepository } from '../repositories/GraphemeRepository.js';
 import { WordRepository } from '../repositories/WordRepository.js';
 import { PracticeSession } from './PracticeSession.js';
@@ -27,22 +29,58 @@ async function fetchJson(relativePath) {
 }
 
 /**
- * @param {{wordIds?: readonly string[], seed?: number|string}} [options]
- * @returns {Promise<{session: PracticeSession, debug: boolean}>}
+ * @returns {Promise<{adapter: MemoryAdapter|IndexedDBAdapter, storage: 'indexeddb'|'memory'}>}
  */
-export async function createP1Session({ wordIds = P1_WORD_IDS, seed = 20261111 } = {}) {
-  const [wordsDoc, graphemesDoc] = await Promise.all([
+async function createAdapter() {
+  try {
+    const adapter = new IndexedDBAdapter();
+    await adapter.init();
+    return { adapter, storage: 'indexeddb' };
+  } catch (error) {
+    console.warn('[SpellWell] IndexedDB unavailable, falling back to memory', error);
+  }
+  const adapter = new MemoryAdapter();
+  await adapter.init();
+  return { adapter, storage: 'memory' };
+}
+
+/**
+ * @param {MemoryAdapter|IndexedDBAdapter} adapter
+ * @returns {Promise<{seeded: boolean, version: number, counts: Record<string, number>}>}
+ */
+async function ensureContent(adapter) {
+  const current = await readContentVersion(adapter);
+  if (current === CONTENT_VERSION) {
+    return { seeded: false, version: CONTENT_VERSION, counts: {} };
+  }
+
+  const [words, graphemes, sentences, confusables] = await Promise.all([
     fetchJson('../content/words.json'),
     fetchJson('../content/graphemes.json'),
+    fetchJson('../content/sentences.json'),
+    fetchJson('../content/confusables.json'),
   ]);
-
-  const adapter = new MemoryAdapter({
-    initialData: {
-      words: wordsDoc.items,
-      graphemes: graphemesDoc.items,
-    },
+  return importContent(adapter, {
+    words,
+    graphemes,
+    sentences,
+    confusables,
+    version: CONTENT_VERSION,
   });
-  await adapter.init();
+}
+
+/**
+ * @param {{wordIds?: readonly string[], seed?: number|string}} [options]
+ * @returns {Promise<{
+ *   session: PracticeSession,
+ *   adapter: MemoryAdapter|IndexedDBAdapter,
+ *   storage: 'indexeddb'|'memory',
+ *   contentSeeded: boolean
+ * }>}
+ */
+export async function createP1Session({ wordIds = P1_WORD_IDS, seed = 20261111 } = {}) {
+  const { adapter, storage } = await createAdapter();
+  const content = await ensureContent(adapter);
 
   const wordRepository = new WordRepository(adapter);
   const graphemeRepository = new GraphemeRepository(adapter);
@@ -66,5 +104,10 @@ export async function createP1Session({ wordIds = P1_WORD_IDS, seed = 20261111 }
     distractorPool: allGraphemes.map((grapheme) => ({ id: grapheme.id, text: grapheme.text })),
     seed,
   });
-  return { session, debug: false };
+  return {
+    session,
+    adapter,
+    storage,
+    contentSeeded: content.seeded,
+  };
 }
