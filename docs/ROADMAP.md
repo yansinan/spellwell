@@ -324,7 +324,7 @@ node tests/runTests.js --phase=p6
 
 - [x] `ContentValidator`：V1—V9 结构校验 + V10 reviewed-only。
 - [x] `buildExport`：无效/未审核内容阻断，返回可定位 `unreviewed[]`。
-- [x] `AdminApp`：同源加载 4 库、双栏单词列表/编辑器、保存到共享 IndexedDB；后台不 import 状态仓库。
+- [x] `AdminApp`：按 level 折叠列表、只读错/对次数、双栏单词列表/编辑器、保存到共享 IndexedDB；后台不写状态。
 - [x] 单词库/unit 编辑器：搜索/列表/内联新增、编辑 text/unit、选择 grapheme、未保存状态、撤销、共享 IndexedDB 保存。
 - [x] 内容导出入口移除；本机迁移独立 `/migration/index.html`。
 - [x] `/src/admin/index.html` 可访问；学习端不暴露入口。
@@ -335,7 +335,7 @@ node tests/runTests.js --phase=p6
 
 ```bash
 node tests/runTests.js --phase=p7
-# PASS  p7 gate · 176 passed · 0 failed · 31 files
+# PASS  p7 gate · 177 passed · 0 failed · 32 files
 ```
 
 - 当前种子：V1—V9 通过；V10 仍识别 112 条 unreviewed。
@@ -371,7 +371,7 @@ node tests/runTests.js --phase=p7
 
 ```bash
 node tests/runTests.js --phase=p8
-# PASS  p8 gate · 179 passed · 0 failed · 32 files
+# PASS  p8 gate · 180 passed · 0 failed · 33 files
 ```
 
 - 浏览器 Stats：4 answers / 50%，最近 4 天按日正确率，learning/reviewing 分布，最近 4 条答案。

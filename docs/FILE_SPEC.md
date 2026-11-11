@@ -87,6 +87,7 @@
 │       ├── AdminApp.js
 │       ├── ContentEditor.js    # 单词/unit 编辑纯函数
 │       ├── WordImporter.js     # 批量/自动切分建议
+│       ├── AttemptStats.js     # 后台只读错/对次数聚合
 │       └── ContentValidator.js # V1—V10 + buildExport
 ├── tests/
 │   ├── runTests.js             # 阶段门 runner；无测试框架

@@ -813,3 +813,47 @@ code {
   color: var(--sw-ink);
   font: inherit;
 }
+
+/* 后台单词按 level 折叠 + 错/对统计 */
+.sw-admin__level-group {
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--sw-line);
+}
+
+.sw-admin__level-group:last-child {
+  border-bottom: 0;
+}
+
+.sw-admin__level-group summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 4px;
+  cursor: pointer;
+  color: var(--sw-ink);
+  font-size: 13px;
+}
+
+.sw-admin__level-group summary strong {
+  min-width: 22px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--sw-surface-strong);
+  color: var(--sw-ink-soft);
+  text-align: center;
+}
+
+.sw-admin__level-group .sw-admin__word-list {
+  max-height: none;
+  padding: 2px 0 8px;
+}
+
+.sw-admin__word-stats {
+  color: var(--sw-ink-soft);
+  font-size: 12px;
+}
+
+.sw-admin__word-stats strong {
+  color: var(--sw-ink);
+}

@@ -11,6 +11,7 @@
   - 只读报告，无积分/排行榜，不参与调度。
 - 组合库扩充到 96 项（单字母 + 常见 digraph/vowel-team/r-controlled/trigraph/suffix）。
 - 后台批量录入：每行一词，逗号显式切分，无逗号最长匹配自动建议；支持中文/音标。
+- 后台单词列表按 level 折叠（1 单元/一年级下学期、2 单元/二年级上学期），显示只读错/对次数，隐藏内部 ID。
 - 后台单词库/unit 编辑器（交互重做）：
   - 左侧搜索/单词列表，右侧编辑器；内联新增，不再 prompt；
   - 增删改 unit、人工选择 grapheme、拼接一致性提示；
@@ -35,10 +36,10 @@
 
 ```bash
 node tests/runTests.js --phase=p7
-# PASS  p7 gate · 176 passed · 0 failed · 31 files
+# PASS  p7 gate · 177 passed · 0 failed · 32 files
 
 node tests/runTests.js --phase=p8
-# PASS  p8 gate · 179 passed · 0 failed · 32 files
+# PASS  p8 gate · 180 passed · 0 failed · 33 files
 ```
 
 - Stats：4 answers / 50%，按日正确率、词状态、最近 4 条答案均显示。

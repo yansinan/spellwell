@@ -78,7 +78,7 @@ node tools/serve.mjs
 8. **颜色/圆角/动效只来自 `styles/tokens.css`。** 不使用刺眼红色，不做强阴影。
 9. **不新增依赖、不引入构建工具、不引入框架。** 纯 ESM + Node 脚本。
 10. **偏离 DESIGN 必须先写 ADR。** 先改文档再改代码；禁止“代码即文档”。
-11. **后台不写学习状态。** `src/admin/**` 不得触碰 `wordStates/graphemeStates/attempts`。
+11. **后台不写学习状态。** `src/admin/**` 不得写 `wordStates/graphemeStates/attempts`；单词列表可只读 `attempts` 聚合错/对次数。
 12. **挑战模式不写主状态。** `RapidTapChallenge` 的结果不得进入调度/错误画像。
 13. **阶段顺序不可跳。** P8 不通过不进入 P9；当前 P8 已完成，只允许修 P8 缺陷，不提前写 P9 输入适配。
 
@@ -168,3 +168,4 @@ node tools/serve.mjs
 - P7 ContentValidator V1—V10；单词/unit 编辑器；导出只放行 reviewed，未审核阻断：见 ADR-0013。
 - P8 前台 Stats：本次/历史/按日/状态报告；纯统计只读，不参与调度：见 ADR-0014。
 - 后台自动切分只生成草稿建议；组合库 96 项；批量格式 `w,ea,th,er | 中文 | 音标`；见 ADR-0016。
+- 后台列表按 level 折叠，展示错/对次数；只读 attempts，不写学习状态。

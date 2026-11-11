@@ -18,6 +18,7 @@ import {
   nextWordId,
   updateWord,
 } from './ContentEditor.js';
+import { countAttemptsByWord } from './AttemptStats.js';
 import { buildExport, validateContent } from './ContentValidator.js';
 import { autoSegment, parseBatch } from './WordImporter.js';
 
@@ -91,6 +92,13 @@ export async function mountAdmin(root) {
 
   let saved = cloneContent(content);
   let selectedWordId = content.words.items[0]?.id ?? null;
+  let attemptStats = {};
+  try {
+    if (adapter) attemptStats = countAttemptsByWord(await adapter.query('attempts', {}));
+  } catch {
+    attemptStats = {};
+  }
+  const collapsedLevels = new Set();
   let adding = false;
   let batchOpen = false;
   let batchText = '';
@@ -141,19 +149,39 @@ export async function mountAdmin(root) {
     const word = currentWord();
     const dirty = isDirty(word);
     const tokens = word ? (word.units ?? []).map((unit) => unit.text) : [];
-    const wordItems = content.words.items.map((item) => {
-      const active = item.id === selectedWordId;
-      const wordDirty = isDirty(item);
-      const translation = item.translation ? ` · ${escape(item.translation)}` : '';
+    const levelLabels = {
+      1: '1 单元 · 一年级下学期',
+      2: '2 单元 · 二年级上学期',
+    };
+    const levels = [...new Set(content.words.items.map((item) => Number(item.level) || 1))]
+      .sort((a, b) => a - b);
+    const wordItems = levels.map((level) => {
+      const items = content.words.items.filter((item) => (Number(item.level) || 1) === level);
+      const open = !collapsedLevels.has(level)
+        || items.some((item) => item.id === selectedWordId);
       return `
-        <li>
-          <button type="button" class="sw-admin__word-item ${active ? 'is-active' : ''}" data-select-word="${escape(item.id)}">
-            <span class="sw-admin__word-text">${escape(item.text)}${translation}</span>
-            <span class="sw-admin__word-meta">${escape(item.id)} · ${escape(item.reviewStatus)}${wordDirty ? ' · 未保存' : ''}</span>
-          </button>
-        </li>
+        <details class="sw-admin__level-group" data-level-group="${level}" ${open ? 'open' : ''}>
+          <summary><span>${escape(levelLabels[level] ?? `Level ${level}`)}</span><strong>${items.length}</strong></summary>
+          <ul class="sw-admin__word-list">
+            ${items.map((item) => {
+              const active = item.id === selectedWordId;
+              const wordDirty = isDirty(item);
+              const translation = item.translation ? ` · ${escape(item.translation)}` : '';
+              const stats = attemptStats[item.id] ?? { wrong: 0, correct: 0 };
+              return `
+                <li>
+                  <button type="button" class="sw-admin__word-item ${active ? 'is-active' : ''}" data-select-word="${escape(item.id)}">
+                    <span class="sw-admin__word-text">${escape(item.text)}${translation}</span>
+                    <span class="sw-admin__word-stats">错 <strong>${stats.wrong}</strong> / 对 <strong>${stats.correct}</strong>${wordDirty ? ' · 未保存' : ''}</span>
+                  </button>
+                </li>
+              `;
+            }).join('')}
+          </ul>
+        </details>
       `;
     }).join('');
+
 
     let batchPreviewHtml = '';
     let batchActions = [];
@@ -301,12 +329,26 @@ export async function mountAdmin(root) {
     const search = root.querySelector('[data-word-search]');
     search?.addEventListener('input', () => {
       const query = search.value.trim().toLowerCase();
-      for (const button of root.querySelectorAll('[data-select-word]')) {
-        const text = button.textContent?.toLowerCase() ?? '';
-        button.parentElement.style.display = !query || text.includes(query) ? '' : 'none';
+      for (const group of root.querySelectorAll('[data-level-group]')) {
+        let visible = 0;
+        for (const button of group.querySelectorAll('[data-select-word]')) {
+          const text = button.textContent?.toLowerCase() ?? '';
+          const show = !query || text.includes(query);
+          button.parentElement.style.display = show ? '' : 'none';
+          if (show) visible += 1;
+        }
+        group.style.display = visible > 0 ? '' : 'none';
+        if (query) group.open = true;
       }
     });
 
+    for (const details of root.querySelectorAll('[data-level-group]')) {
+      details.addEventListener('toggle', () => {
+        const level = Number(details.dataset.levelGroup);
+        if (details.open) collapsedLevels.delete(level);
+        else collapsedLevels.add(level);
+      });
+    }
     for (const button of root.querySelectorAll('[data-select-word]')) {
       button.addEventListener('click', () => { selectedWordId = button.dataset.selectWord; notice = ''; render(); });
     }
