@@ -70,7 +70,7 @@ test('graphemes：文本与 ID 一致、T1—T4 分层受控', () => {
   for (const item of graphemesDoc.items) {
     assertEqual(item.text, item.id.slice(2), item.id);
     assert(TIERS.has(item.tier), `${item.id} has invalid tier`);
-    assert(['letter', 'digraph', 'trigraph', 'vowel-team'].includes(item.kind), `${item.id} kind`);
+    assert(['letter', 'digraph', 'trigraph', 'vowel-team', 'r-controlled', 'quadgraph', 'suffix'].includes(item.kind), `${item.id} kind`);
   }
   const tiers = new Set(graphemesDoc.items.map((item) => item.tier));
   assert(tiers.has('T1') && tiers.has('T2') && tiers.has('T3'));

@@ -5,7 +5,7 @@
 
 - **定位**：纯前端 ES Modules，无构建、无框架、无运行时依赖；后期可平移 Node 后端。
 - **当前阶段**：**P8 前台学习分析 ✅**；下一步 P9 输入适配与移动端。
-- **需求源**：[`docs/DESIGN.md`](docs/DESIGN.md)（定稿 v1.1）。
+- **需求源**：[`docs/DESIGN.md`](docs/DESIGN.md)（定稿 v1.2）。
 
 ---
 
@@ -174,12 +174,18 @@ tools/serve.mjs   零依赖静态服务器
 
 - `ContentValidator`：V1—V9 内容结构校验；V10 只导出 reviewed。
 - 内容后台 `/src/admin/index.html`：搜索/列表/编辑器、单词/unit 维护、保存到共享 IndexedDB；学习端刷新可见。
+- 批量录入：逗号显式切分，无逗号自动建议；支持中文翻译/音标。
+- 组合库扩充到 96 项，覆盖常见单字母/组合/后缀。
 - 本机数据迁移独立：`/migration/index.html`，仅用于换主机时全量导出/导入 8 个 store。
 - 后台不再要求内容 JSON 导出/导入；reviewed-only 校验保留，内容导出入口移除。
-- 当前种子全部 `unreviewed`；V10 仍识别 38 条阻断，内容导出入口已移除。
+- 当前种子全部 `unreviewed`；V10 仍识别 112 条阻断，内容导出入口已移除。
 - 后台不 import 状态仓库，不触碰 wordStates/graphemeStates/attempts。
 
 ![P7 内容后台](docs/p7-preview.png)
+
+批量预览：
+
+![P7 批量录入](docs/p7-batch-preview.png)
 
 ---
 

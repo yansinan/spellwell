@@ -335,10 +335,10 @@ node tests/runTests.js --phase=p6
 
 ```bash
 node tests/runTests.js --phase=p7
-# PASS  p7 gate · 170 passed · 0 failed · 30 files
+# PASS  p7 gate · 175 passed · 0 failed · 31 files
 ```
 
-- 当前种子：V1—V9 通过；V10 仍识别 38 条 unreviewed。
+- 当前种子：V1—V9 通过；V10 仍识别 112 条 unreviewed。
 - `buildExport` 测试副本：全部 reviewed 时导出 10/22/4/2，只含 reviewed。
 - 切分不闭合、缺组合、重复 ID、句子答案错、混淆项重复均能定位。
 - 后台浏览器：双栏编辑器、单词/unit 保存到共享 IndexedDB；学习端刷新可见。
@@ -371,7 +371,7 @@ node tests/runTests.js --phase=p7
 
 ```bash
 node tests/runTests.js --phase=p8
-# PASS  p8 gate · 173 passed · 0 failed · 31 files
+# PASS  p8 gate · 178 passed · 0 failed · 32 files
 ```
 
 - 浏览器 Stats：4 answers / 50%，最近 4 天按日正确率，learning/reviewing 分布，最近 4 条答案。

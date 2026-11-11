@@ -9,11 +9,15 @@
   - Header `Stats` 报告页：本次练习、历史总览、最近 5 天、Word states、最近 10 次答案；
   - Done 页显示本次 `correct / total` 与正确率；
   - 只读报告，无积分/排行榜，不参与调度。
+- 组合库扩充到 96 项（单字母 + 常见 digraph/vowel-team/r-controlled/trigraph/suffix）。
+- 后台批量录入：每行一词，逗号显式切分，无逗号最长匹配自动建议；支持中文/音标。
 - 后台单词库/unit 编辑器（交互重做）：
   - 左侧搜索/单词列表，右侧编辑器；内联新增，不再 prompt；
   - 增删改 unit、人工选择 grapheme、拼接一致性提示；
+  - 从共享 IndexedDB 读取内容，保存后再读仍是编辑后的内容；
   - 保存到与学习端共享的 IndexedDB，BroadcastChannel 提示学习端刷新；
-  - 未保存/已同步状态、撤销、全局校验；
+  - 未保存/已同步状态、撤销、删除、全局校验；
+  - 逗号切分输入 + 实时 chip 预览 + 自动切分/按字母；
   - 移除内容“下载/导入”假流程，避免与迁移混淆。
 - 本机数据迁移独立页面 `/migration/index.html`：全量 8 store 导出/导入，仅用于换主机；不在 AdminApp 中导出内容。
 - `tests/p7/editor.test.js`、`tests/p8/analytics.test.js`。
@@ -31,14 +35,14 @@
 
 ```bash
 node tests/runTests.js --phase=p7
-# PASS  p7 gate · 170 passed · 0 failed · 30 files
+# PASS  p7 gate · 175 passed · 0 failed · 31 files
 
 node tests/runTests.js --phase=p8
-# PASS  p8 gate · 173 passed · 0 failed · 31 files
+# PASS  p8 gate · 178 passed · 0 failed · 32 files
 ```
 
 - Stats：4 answers / 50%，按日正确率、词状态、最近 4 条答案均显示。
-- 后台：新增/编辑 word + units，保存到 IndexedDB；当前种子仍 38 条 unreviewed，导出阻断。
+- 后台：批量/单条 word + units，自动切分建议，中文/音标；保存到 IndexedDB；当前种子仍 112 条 unreviewed，发布校验阻断。
 - 390px Stats 无横向滚动。
 
 ### Known limitations

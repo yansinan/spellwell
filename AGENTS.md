@@ -73,7 +73,7 @@ node tools/serve.mjs
 3. **调度层不渲染、不判定、不依赖 DOM。** 必须能在 Node 跑。
 4. **仓库层只调用 StorageAdapter 的 7 个方法**：`init/get/put/query/transaction/exportAll/importAll`；禁止 `indexedDB`/`fetch`/`localStorage`。
 5. **所有随机只用 `spec.seed` + `mulberry32`。** 全仓库禁止 `Math.random`。
-6. **切分只人工。** 禁止写自动推断 grapheme 的代码；内容 `units[]` 是唯一真相。
+6. **切分以人工确认为准。** 学习端/题型层禁止自动推断 grapheme；后台可基于组合库生成建议切分，但保存前必须人工确认，`units[]` 仍是唯一真相。
 7. **学习端不出现中文。** 家长端/后台可以中文；按钮用图标+短词。
 8. **颜色/圆角/动效只来自 `styles/tokens.css`。** 不使用刺眼红色，不做强阴影。
 9. **不新增依赖、不引入构建工具、不引入框架。** 纯 ESM + Node 脚本。
@@ -167,3 +167,4 @@ node tools/serve.mjs
 - P6 T-JUDGE-FIX 判断+改错、T-CLOZE 句子填空；probe 60 天，答错退回、答对 mastered：见 ADR-0012。
 - P7 ContentValidator V1—V10；单词/unit 编辑器；导出只放行 reviewed，未审核阻断：见 ADR-0013。
 - P8 前台 Stats：本次/历史/按日/状态报告；纯统计只读，不参与调度：见 ADR-0014。
+- 后台自动切分只生成草稿建议；组合库 96 项；批量格式 `w,ea,th,er | 中文 | 音标`；见 ADR-0016。

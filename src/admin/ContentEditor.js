@@ -90,3 +90,34 @@ export function removeUnit(word, index) {
   word.units.splice(index, 1);
   return word;
 }
+
+/**
+ * 用逗号切分 token 写入 units；token 必须已有 grapheme。
+ * @param {any} word
+ * @param {string[]} tokens
+ * @param {Record<string, string>} graphemeByText
+ */
+export function applySegments(word, tokens, graphemeByText) {
+  const clean = tokens.map((token) => String(token).trim().toLowerCase()).filter(Boolean);
+  if (clean.length === 0) throw new ContractError('CONTENT_EDIT_INVALID', 'segmentation is empty');
+  const units = clean.map((text) => {
+    if (!/^[a-z]+$/.test(text)) throw new ContractError('CONTENT_EDIT_INVALID', `invalid unit ${text}`);
+    const graphemeId = graphemeByText[text];
+    if (!graphemeId) throw new ContractError('CONTENT_EDIT_INVALID', `no grapheme for ${text}`);
+    return { text, graphemeId };
+  });
+  word.units = units;
+  return word;
+}
+
+/**
+ * 删除单词（不删除内容库中的其他引用；校验会提示悬空句子）。
+ * @param {{words: {items: any[]}}} content
+ * @param {string} wordId
+ */
+export function deleteWord(content, wordId) {
+  const index = content.words.items.findIndex((item) => item.id === wordId);
+  if (index < 0) throw new ContractError('CONTENT_EDIT_MISSING', `missing word ${wordId}`);
+  const [removed] = content.words.items.splice(index, 1);
+  return removed;
+}

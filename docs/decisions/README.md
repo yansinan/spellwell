@@ -19,6 +19,7 @@
 | [0013](0013-content-admin-export.md) | ContentValidator、后台与生产导出阻断 | Accepted | V1—V10、只读后台、reviewed-only 导出 |
 | [0014](0014-learning-analytics.md) | 前台学习分析与历史答题统计 | Accepted | 本次/历史/按日/状态报告；无积分排名；P8 新增 |
 | [0015](0015-shared-content-migration.md) | 后台与前台共享 IndexedDB；迁移独立 | Accepted | 内容直写共享库；BroadcastChannel 提示；迁移全量快照 |
+| [0016](0016-auto-segmentation-batch.md) | 后台自动切分建议、组合库扩充与批量录入 | Accepted | 最长匹配建议、人工确认、批量格式、翻译/音标 |
 
 新增 ADR 的模板：
 

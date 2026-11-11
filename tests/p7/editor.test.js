@@ -4,7 +4,7 @@
  * @doc §2.3 内容后台
  */
 
-import { addUnit, addWord, cloneContent, nextWordId, removeUnit, updateUnit, updateWord } from '../../src/admin/ContentEditor.js';
+import { addUnit, addWord, cloneContent, deleteWord, nextWordId, removeUnit, updateUnit, updateWord } from '../../src/admin/ContentEditor.js';
 import { assertDeepEqual, assertEqual, assertThrows, test } from '../harness.js';
 
 function base() {
@@ -35,4 +35,6 @@ test('后台编辑：增删改 unit 并保留人工切分', () => {
   assertDeepEqual(word.units, [{ text: 'i', graphemeId: 'g.f' }, { text: 'sh', graphemeId: 'g.sh' }]);
   assertEqual(content.words.items[0].reviewStatus, 'reviewed');
   assertEqual(cloneContent(content) === content, false);
+  deleteWord(content, 'w.fish');
+  assertEqual(content.words.items.length, 0);
 });

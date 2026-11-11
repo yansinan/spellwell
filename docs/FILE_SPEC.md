@@ -1,6 +1,6 @@
 # 文件与工程规范 · FILE_SPEC
 
-**适用版本**：DESIGN v1.1 / 仓库 v0.9.0（P8）
+**适用版本**：DESIGN v1.2 / 仓库 v0.9.0（P8）
 **地位**：本文件是 `docs/DESIGN.md` 的工程实施细则。与 DESIGN 冲突时，以 DESIGN 为准；本文件负责把 DESIGN 翻译成可机械检查的规则。
 
 ---
@@ -86,6 +86,7 @@
 │       ├── index.html
 │       ├── AdminApp.js
 │       ├── ContentEditor.js    # 单词/unit 编辑纯函数
+│       ├── WordImporter.js     # 批量/自动切分建议
 │       └── ContentValidator.js # V1—V10 + buildExport
 ├── tests/
 │   ├── runTests.js             # 阶段门 runner；无测试框架

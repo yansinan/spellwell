@@ -49,11 +49,13 @@
 | `units` | 非空、有序；`units.map(u => u.text).join('') === text` |
 | `units[].text` | 连续字母子串，不得为空 |
 | `units[].graphemeId` | 必须存在于 `graphemes.json`，且组合文本等于 `unit.text` |
+| `translation` | 可选，中文翻译；只展示，不参与判定/调度 |
+| `phonetic` | 可选，音标字符串；只展示，不参与判定/调度 |
 | `tags` | 可选，小写短标签；不参与调度 |
 | `sentenceIds` | 可为空；每个 ID 必须存在且句子的 `wordId` 回指本词 |
 | `reviewStatus` | `unreviewed` / `reviewed` / `retired`；生产导出仅 `reviewed` |
 
-**切分示例（人工）**：
+**切分示例（人工确认）**：
 
 | 单词 | 正确切分 | 常见错误切分 |
 |---|---|---|
@@ -62,7 +64,27 @@
 | `rain` | `r` / `ai` / `n` | `r` / `a` / `in` |
 | `duck` | `d` / `u` / `ck` | `d` / `uc` / `k` |
 
-> `ea`、`ou`、`igh` 等歧义组合一律人工判断；同一文本在不同词中允许不同切分，但必须逐词显式标注。
+> `ea`、`ou`、`igh` 等歧义组合一律人工确认；同一文本在不同词中允许不同切分，但必须逐词显式标注。
+> 后台可基于组合库生成建议切分，保存前必须人工确认；学习端/题型层不得自动推断。
+
+**批量录入格式**：
+
+```text
+# 每行一个词；逗号显式切分，无逗号自动建议
+w,ea,th,er | 天气 | /ˈweðər/
+weather | 天气 | /ˈweðər/
+fish
+```
+
+**自动切分（后台建议）**：
+
+1. 用 `graphemes.json` 构建 `text → id` 表；
+2. 从左到右做最长匹配（最多 6 字符）；
+3. 匹配不到时使用单字母；单字母也不存在则报错；
+4. 结果只填入草稿，保存时仍走 V1—V10。
+
+示例：`weather → w / ea / th / er`、`teacher → t / ea / ch / er`、`night → n / igh / t`。
+这不是语言学意义上的唯一正确切分；歧义仍由人工确认。
 
 ---
 
@@ -83,7 +105,7 @@
 | `id` | `g.<text>`，一个文本只允许一个 ID |
 | `text` | 小写 ASCII 字母串，与 ID 后缀一致 |
 | `tier` | `T1` / `T2` / `T3` / `T4` |
-| `kind` | `letter` / `digraph` / `trigraph` / `vowel-team` |
+| `kind` | `letter` / `digraph` / `trigraph` / `vowel-team` / `r-controlled` / `quadgraph` / `suffix` |
 | `reviewStatus` | 同上 |
 
 **T1—T4 分层（P0 暂定，P7 教学评审后冻结）**：
@@ -93,7 +115,7 @@
 | T1 | 透明单字母 + 常见辅音组合 | `a`—`z`、`sh`、`ch`、`ck` |
 | T2 | 常见元音组合 | `ai`、`ee`、`oo` |
 | T3 | 较少见/多字母组合 | `igh` |
-| T4 | 高歧义组合 | `ea`、`ou`、`ow`（暂未入库） |
+| T4 | 高歧义组合 | `ea`、`ou`、`ow`、`ough`、`eigh` |
 
 > 分层不是难度总分，而是“教学引入顺序 + 强化包优先级”的标签；
 > 选择粒度（grapheme 块选 < mixed < letter）是另一个独立维度，见 DESIGN §3.5 与 ADR-0006。

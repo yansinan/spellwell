@@ -1,27 +1,677 @@
 {
   "version": 1,
   "items": [
-    { "id": "g.a", "text": "a", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.b", "text": "b", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.c", "text": "c", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.d", "text": "d", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.e", "text": "e", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.f", "text": "f", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.i", "text": "i", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.k", "text": "k", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.n", "text": "n", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.o", "text": "o", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.p", "text": "p", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.r", "text": "r", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.s", "text": "s", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.t", "text": "t", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.u", "text": "u", "tier": "T1", "kind": "letter", "reviewStatus": "unreviewed" },
-    { "id": "g.sh", "text": "sh", "tier": "T1", "kind": "digraph", "reviewStatus": "unreviewed" },
-    { "id": "g.ch", "text": "ch", "tier": "T1", "kind": "digraph", "reviewStatus": "unreviewed" },
-    { "id": "g.ck", "text": "ck", "tier": "T1", "kind": "digraph", "reviewStatus": "unreviewed" },
-    { "id": "g.ai", "text": "ai", "tier": "T2", "kind": "vowel-team", "reviewStatus": "unreviewed" },
-    { "id": "g.ee", "text": "ee", "tier": "T2", "kind": "vowel-team", "reviewStatus": "unreviewed" },
-    { "id": "g.oo", "text": "oo", "tier": "T2", "kind": "vowel-team", "reviewStatus": "unreviewed" },
-    { "id": "g.igh", "text": "igh", "tier": "T3", "kind": "trigraph", "reviewStatus": "unreviewed" }
+    {
+      "id": "g.a",
+      "text": "a",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.b",
+      "text": "b",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.c",
+      "text": "c",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.d",
+      "text": "d",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.e",
+      "text": "e",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.f",
+      "text": "f",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.i",
+      "text": "i",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.k",
+      "text": "k",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.n",
+      "text": "n",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.o",
+      "text": "o",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.p",
+      "text": "p",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.r",
+      "text": "r",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.s",
+      "text": "s",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.t",
+      "text": "t",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.u",
+      "text": "u",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.sh",
+      "text": "sh",
+      "tier": "T1",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ch",
+      "text": "ch",
+      "tier": "T1",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ck",
+      "text": "ck",
+      "tier": "T1",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ai",
+      "text": "ai",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ee",
+      "text": "ee",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.oo",
+      "text": "oo",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.igh",
+      "text": "igh",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.g",
+      "text": "g",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.h",
+      "text": "h",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.j",
+      "text": "j",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.l",
+      "text": "l",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.m",
+      "text": "m",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.q",
+      "text": "q",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.v",
+      "text": "v",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.w",
+      "text": "w",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.x",
+      "text": "x",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.y",
+      "text": "y",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.z",
+      "text": "z",
+      "tier": "T1",
+      "kind": "letter",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.th",
+      "text": "th",
+      "tier": "T1",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.wh",
+      "text": "wh",
+      "tier": "T1",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ph",
+      "text": "ph",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ng",
+      "text": "ng",
+      "tier": "T1",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.qu",
+      "text": "qu",
+      "tier": "T1",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.kn",
+      "text": "kn",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.wr",
+      "text": "wr",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.gh",
+      "text": "gh",
+      "tier": "T3",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.gn",
+      "text": "gn",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.mb",
+      "text": "mb",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.dge",
+      "text": "dge",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.tch",
+      "text": "tch",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ay",
+      "text": "ay",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ea",
+      "text": "ea",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ey",
+      "text": "ey",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ie",
+      "text": "ie",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.oa",
+      "text": "oa",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.oe",
+      "text": "oe",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.oi",
+      "text": "oi",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.oy",
+      "text": "oy",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ou",
+      "text": "ou",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ow",
+      "text": "ow",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ue",
+      "text": "ue",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ui",
+      "text": "ui",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.au",
+      "text": "au",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.aw",
+      "text": "aw",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ew",
+      "text": "ew",
+      "tier": "T2",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.eu",
+      "text": "eu",
+      "tier": "T3",
+      "kind": "vowel-team",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ar",
+      "text": "ar",
+      "tier": "T2",
+      "kind": "r-controlled",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.er",
+      "text": "er",
+      "tier": "T2",
+      "kind": "r-controlled",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ir",
+      "text": "ir",
+      "tier": "T2",
+      "kind": "r-controlled",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.or",
+      "text": "or",
+      "tier": "T2",
+      "kind": "r-controlled",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ur",
+      "text": "ur",
+      "tier": "T2",
+      "kind": "r-controlled",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.air",
+      "text": "air",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ear",
+      "text": "ear",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.eer",
+      "text": "eer",
+      "tier": "T3",
+      "kind": "trigraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.are",
+      "text": "are",
+      "tier": "T3",
+      "kind": "r-controlled",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ere",
+      "text": "ere",
+      "tier": "T3",
+      "kind": "r-controlled",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ire",
+      "text": "ire",
+      "tier": "T3",
+      "kind": "r-controlled",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ore",
+      "text": "ore",
+      "tier": "T3",
+      "kind": "r-controlled",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ure",
+      "text": "ure",
+      "tier": "T3",
+      "kind": "r-controlled",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.oar",
+      "text": "oar",
+      "tier": "T3",
+      "kind": "r-controlled",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.our",
+      "text": "our",
+      "tier": "T3",
+      "kind": "r-controlled",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ough",
+      "text": "ough",
+      "tier": "T4",
+      "kind": "quadgraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.augh",
+      "text": "augh",
+      "tier": "T4",
+      "kind": "quadgraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.eigh",
+      "text": "eigh",
+      "tier": "T4",
+      "kind": "quadgraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ing",
+      "text": "ing",
+      "tier": "T2",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ed",
+      "text": "ed",
+      "tier": "T2",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.es",
+      "text": "es",
+      "tier": "T2",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ly",
+      "text": "ly",
+      "tier": "T2",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.est",
+      "text": "est",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.tion",
+      "text": "tion",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.sion",
+      "text": "sion",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ment",
+      "text": "ment",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ness",
+      "text": "ness",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ful",
+      "text": "ful",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.less",
+      "text": "less",
+      "tier": "T3",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ge",
+      "text": "ge",
+      "tier": "T2",
+      "kind": "digraph",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.le",
+      "text": "le",
+      "tier": "T2",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.al",
+      "text": "al",
+      "tier": "T2",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.el",
+      "text": "el",
+      "tier": "T2",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.ture",
+      "text": "ture",
+      "tier": "T4",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "g.sure",
+      "text": "sure",
+      "tier": "T4",
+      "kind": "suffix",
+      "reviewStatus": "unreviewed"
+    }
   ]
 }
