@@ -29,6 +29,7 @@ ck / k / c
 ### D2：T-FILL/T-SEQUENCE
 
 `QuestionSpecBuilder` 根据 focus 组合取最多 2 个同组干扰项。
+T-FILL 的候选池只保留“空位正确答案 + 相关干扰项”，固定骨架字母不再作为可点击 tile。
 例：
 
 ```text

@@ -77,7 +77,6 @@ function buildFill(spec, bundle) {
   const allWordUnits = renderUnitsForWord(word);
   const candidates = vowelSplit
     ? [
-      ...allWordUnits.filter((unit, index) => index !== vowelSplit.unitIndex),
       ...vowelSplit.letters.map((letter, index) => ({
         unitId: `split-${vowelSplit.unitIndex}-${index}`,
         text: letter,
@@ -85,7 +84,10 @@ function buildFill(spec, bundle) {
       })),
       ...distractorUnits(spec, bundle).filter((unit) => !vowelSplit.letters.includes(unit.text)),
     ]
-    : [...allWordUnits, ...distractorUnits(spec, bundle)];
+    : [
+      ...blankIndexes.map((index) => allWordUnits[index]),
+      ...distractorUnits(spec, bundle).filter((unit) => !blankIndexes.some((index) => word.units[index].text === unit.text)),
+    ];
   const units = createRng(spec.seed).shuffle(candidates);
 
   return {

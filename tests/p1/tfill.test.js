@@ -44,7 +44,7 @@ test('T-FILL：build 只留一个空位，骨架由词条单位确定', () => {
   assertEqual(renderModel.slots[0].index, 2);
   assertDeepEqual(
     renderModel.units.map((unit) => unit.text).sort(),
-    ['ch', 'f', 'i', 'sh'],
+    ['ch', 'sh'],
   );
   assertEqual(spec.params.blankUnitIndex, 2);
   assertEqual(renderModel.focus.id, 'g.sh');
@@ -75,12 +75,12 @@ test('T-FILL：未选择定位为 OMISSION', () => {
 
 test('T-FILL：选中错误组合定位为 SUBSTITUTION', () => {
   const { spec, renderModel } = build(2);
-  const result = judge(spec, renderModel, [tap(wordUnitId(fish.word, 0), 2)]);
+  const result = judge(spec, renderModel, [tap(tileByText(renderModel, 'ch').unitId, 2)]);
   assertEqual(result.wordCorrect, false);
   assertEqual(result.firstError.type, 'SUBSTITUTION');
   assertEqual(result.firstError.position, 2);
   assertEqual(result.firstError.expected, 'sh');
-  assertEqual(result.firstError.actual, 'f');
+  assertEqual(result.firstError.actual, 'ch');
 });
 
 test('T-FILL：干扰组合 ch 触发替换错，且 focus 为错', () => {
