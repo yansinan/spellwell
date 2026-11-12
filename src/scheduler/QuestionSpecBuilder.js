@@ -10,6 +10,7 @@ import { ContractError } from '../core/errors.js';
 import { validateQuestionSpec } from '../core/contracts.js';
 import { createRng, hashSeed } from '../core/seedRandom.js';
 import { confusableGraphemes } from './ConfusableGraphemes.js';
+import { historicalActuals } from './ErrorHistory.js';
 
 export const P1_AVAILABLE_TYPES = Object.freeze(['T-SEQUENCE', 'T-FILL', 'T-TYPE']);
 export const P4_AVAILABLE_TYPES = Object.freeze([...P1_AVAILABLE_TYPES, 'T-REORDER', 'T-EDIT', 'T-SEGMENT']);
@@ -37,18 +38,26 @@ export function chooseFocusIndex(word, seed = 0) {
  * @param {{id: string, units: {text: string, graphemeId: string}[]}} word
  * @param {{id: string, text: string}[]} pool
  * @param {number|string} seed
- * @returns {string[]}
+ * @returns {{ids: string[], confusableCount: number, historicalCount: number}}
  */
-function chooseDistractorIds(word, pool, seed, focusText = '') {
+function chooseDistractorIds(word, pool, seed, focusText = '', errorHistory = null) {
   const usedIds = new Set(word.units.map((unit) => unit.graphemeId));
   const usedTexts = new Set(word.units.map((unit) => unit.text));
   const candidates = pool.filter(
     (grapheme) => !usedIds.has(grapheme.id) && !usedTexts.has(grapheme.text),
   );
-  if (candidates.length === 0) return { ids: [], confusableCount: 0 };
+  if (candidates.length === 0) return { ids: [], confusableCount: 0, historicalCount: 0 };
   const rng = createRng(hashSeed(`${word.id}|distractor|${seed}`));
+  const ids = [];
+  for (const actual of historicalActuals(errorHistory, { wordId: String(word.id), expected: focusText }, 2)) {
+    const candidate = candidates.find((grapheme) => grapheme.text === actual && !ids.includes(grapheme.id));
+    if (candidate) ids.push(candidate.id);
+  }
+  const historicalCount = ids.length;
   const similar = rng.shuffle(confusableGraphemes(focusText, candidates)).slice(0, 2);
-  const ids = similar.map((grapheme) => grapheme.id);
+  for (const grapheme of similar) {
+    if (ids.length < 2 && !ids.includes(grapheme.id)) ids.push(grapheme.id);
+  }
   if (ids.length < 2) {
     const multi = rng.shuffle(candidates.filter(
       (grapheme) => !ids.includes(grapheme.id) && grapheme.text.length > 1,
@@ -58,7 +67,7 @@ function chooseDistractorIds(word, pool, seed, focusText = '') {
       : rng.shuffle(candidates.filter((grapheme) => !ids.includes(grapheme.id)));
     if (fallback.length > 0) ids.push(fallback[0].id);
   }
-  return { ids, confusableCount: Math.min(ids.length, similar.length) };
+  return { ids, confusableCount: ids.length, historicalCount };
 }
 
 /**
@@ -146,6 +155,7 @@ export function buildWordSpec({
   sentence = null,
   claim,
   specId,
+  errorHistory = null,
 }) {
   if (!word || typeof word.id !== 'string' || !Array.isArray(word.units) || word.units.length === 0) {
     throw new ContractError('SPEC_BUILD_INVALID', 'word with at least one unit is required');
@@ -173,7 +183,7 @@ export function buildWordSpec({
     }
   }
   const focusUnit = word.units[focusIndex];
-  const distractorSelection = chooseDistractorIds(word, distractorPool, seed, focusUnit.text);
+  const distractorSelection = chooseDistractorIds(word, distractorPool, seed, focusUnit.text, errorHistory);
   const distractors = distractorSelection.ids;
   const params = typeId === 'T-SEQUENCE'
     ? { distractorGraphemeIds: distractors }
@@ -211,6 +221,7 @@ export function buildWordSpec({
     ),
     distractorCount: ['T-SEQUENCE', 'T-FILL'].includes(typeId) ? distractors.length : 0,
     confusableCount: distractorSelection.confusableCount,
+    historicalCount: distractorSelection.historicalCount,
     inputMode: ['T-TYPE', 'T-EDIT', 'T-CLOZE', 'T-JUDGE-FIX'].includes(typeId) ? 'keyboard' : 'tap',
   };
 

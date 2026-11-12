@@ -15,6 +15,7 @@ import { ContractError } from '../core/errors.js';
 import { addDays, isDayKey, toDayKey } from '../core/time.js';
 import { createRng, hashSeed } from '../core/seedRandom.js';
 import { confusableGraphemes } from './ConfusableGraphemes.js';
+import { buildErrorHistory, historicalActuals } from './ErrorHistory.js';
 import {
   applyWordReview,
   dueDateFor,
@@ -91,7 +92,7 @@ export class Scheduler {
    * @param {Record<string, any>[]} words
    * @returns {Promise<import('../core/contracts.js').QuestionSpec|null>}
    */
-  async #buildGraphemeDrill(today, seed, words) {
+  async #buildGraphemeDrill(today, seed, words, errorHistory = null) {
     const due = await this.stateRepository.listDueGraphemes(today);
     if (due.length === 0) return null;
 
@@ -101,9 +102,11 @@ export class Scheduler {
       const containing = words.filter((word) => word.units.some((unit) => unit.graphemeId === state.graphemeId));
       if (containing.length < 2) continue;
       const correctWords = containing.slice(0, 3);
-      const similarIds = new Set(
-        confusableGraphemes(grapheme.text, this.distractorPool).map((item) => item.id),
-      );
+      const historyTexts = new Set(historicalActuals(errorHistory, { expected: grapheme.text }, 2));
+      const similarIds = new Set([
+        ...confusableGraphemes(grapheme.text, this.distractorPool).map((item) => item.id),
+        ...this.distractorPool.filter((item) => historyTexts.has(item.text)).map((item) => item.id),
+      ]);
       const available = words.filter((word) => !containing.some((item) => item.id === word.id));
       const similarWords = available.filter((word) => word.units.some((unit) => similarIds.has(unit.graphemeId)));
       const distractors = [...similarWords, ...available.filter((word) => !similarWords.includes(word))].slice(0, 2);
@@ -169,6 +172,8 @@ export class Scheduler {
     const states = await this.stateRepository.listWordStates();
     const stateByWord = new Map(states.map((state) => [state.wordId, state]));
     const attempts = this.attemptRepository?.recent ? await this.attemptRepository.recent(1000) : [];
+    const historyAttempts = this.attemptRepository?.all ? await this.attemptRepository.all() : attempts;
+    const errorHistory = buildErrorHistory(historyAttempts);
     const weights = calibrateWeights(attempts);
     const scoreFor = (word) => scoreWord({
       word,
@@ -280,6 +285,7 @@ export class Scheduler {
         errorType: latestError?.type,
         sentence,
         claim: String(word.text),
+        errorHistory,
         specId: `spec.daily.${String(word.id)}.${typeId}.${index}`,
       });
       const reason = state?.status === 'probe'
@@ -304,7 +310,7 @@ export class Scheduler {
       };
       return spec;
     });
-    const drill = await this.#buildGraphemeDrill(today, seed, words);
+    const drill = await this.#buildGraphemeDrill(today, seed, words, errorHistory);
     if (drill && specs.length < MAX_QUEUE_SIZE) specs.push(drill);
     return specs;
   }

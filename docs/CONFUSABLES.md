@@ -48,6 +48,17 @@ phone → fone（f）
 
 这些错词不一定在词库中，只用于说明“为什么这些组合容易混”。
 
+## 历史错误优先
+
+真实 attempts 中的 `firstError.actual` 优先于本表：
+
+```text
+同词历史 actual
+→ 同 expected 跨词历史 actual
+→ 人工相似组
+→ 随机兜底
+```
+
 ## 应用方式
 
 ### T-FILL

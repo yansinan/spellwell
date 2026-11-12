@@ -166,3 +166,34 @@ test('相似干扰项：bread 的 ea 会带出 e/a，接近 bred/brad', async ()
   assert(found, 'expected an ea-focus spec');
   assert(['g.e', 'g.a'].some((id) => found.params.distractorGraphemeIds.includes(id)));
 });
+
+test('历史错误优先：bird 的 ir 曾错成 er，干扰项优先 er', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const words = JSON.parse(await readFile(new URL('../../src/content/words.json', import.meta.url), 'utf8'));
+  const graphemes = JSON.parse(await readFile(new URL('../../src/content/graphemes.json', import.meta.url), 'utf8'));
+  const word = words.items.find((item) => item.text === 'bird' && item.textbook === 'pep-2026');
+  const map = Object.fromEntries(graphemes.items.map((item) => [item.id, item]));
+  const pool = graphemes.items.map((item) => ({ id: item.id, text: item.text }));
+  const { buildErrorHistory } = await import('../../src/scheduler/ErrorHistory.js');
+  const { buildWordSpec } = await import('../../src/scheduler/QuestionSpecBuilder.js');
+  const history = buildErrorHistory([
+    { wordId: 'w.bird', firstError: { expected: 'ir', actual: 'er', unitId: 'g.ir' } },
+    { wordId: 'w.girl', firstError: { expected: 'ir', actual: 'ur', unitId: 'g.ir' } },
+  ]);
+  let found = null;
+  for (let seed = 0; seed < 40 && !found; seed += 1) {
+    const spec = buildWordSpec({
+      word,
+      typeId: 'T-FILL',
+      graphemeMap: map,
+      distractorPool: pool,
+      seed,
+      specId: `spec.test.bird.history.${seed}`,
+      errorHistory: history,
+    });
+    if (spec.focus.id === 'g.ir') found = spec;
+  }
+  assert(found, 'expected an ir-focus spec');
+  assertEqual(found.params.distractorGraphemeIds[0], 'g.er');
+  assertEqual(found.params.difficulty.historicalCount >= 1, true);
+});

@@ -28,6 +28,7 @@
 - T-FILL 约 1/3 把纯元音组合拆成字母双空（如 r _ _ n）。
 - 干扰项优先相似音/相似拼写组合（ir/er/ur、ea/ee/e/a），T-MATCH 同步。
 - T-FILL 候选池去掉固定骨架字母，只保留空位答案 + 相关干扰项。
+- 干扰项优先读取真实 attempts 历史错误，其次人工相似组。
 - `contentRevision`：后台保存递增；下一轮重新读内容。
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
 - 计划项带 `params.plan.reason/mode/policyVersion`。
@@ -48,7 +49,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 224 passed · 0 failed · 48 files
+# PASS  p9 gate · 227 passed · 0 failed · 49 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。
