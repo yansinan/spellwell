@@ -95,3 +95,11 @@ test('IPA：hat / football 不是方括号或空格拼写', async () => {
     assert(!word.phonetic.includes('[') && !word.phonetic.includes(']') && !word.phonetic.includes(' '), text);
   }
 });
+
+test('例句：全部带中文翻译，T-CLOZE 可消除歧义', async () => {
+  const current = await load();
+  for (const sentence of current.sentences.items) {
+    assert(typeof sentence.translation === 'string' && sentence.translation.trim().length > 0, sentence.id);
+    assert(/[\u4e00-\u9fff]/.test(sentence.translation), sentence.id);
+  }
+});

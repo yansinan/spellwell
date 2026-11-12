@@ -1,4 +1,4 @@
-# 预制内容清单（contentVersion 11）
+# 预制内容清单（contentVersion 12）
 
 ## 1. 已内置
 
@@ -44,5 +44,5 @@ src/content/sentences.json
 src/content/confusables.json
 ```
 
-`contentVersion=11`，首次启动从同源静态文件导入 IndexedDB；
+`contentVersion=12`，首次启动从同源静态文件导入 IndexedDB；
 不依赖外部接口、运行时网络或远程词库。

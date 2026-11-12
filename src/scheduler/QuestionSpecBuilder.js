@@ -244,7 +244,7 @@ export function buildWordSpec({
         : typeId === 'T-JUDGE-FIX'
           ? { claim: typeof claim === 'string' ? claim : (judgeClaim ?? word.text) }
           : typeId === 'T-CLOZE'
-            ? { sentence: sentence?.text ?? word.text }
+            ? { sentence: sentence?.text ?? word.text, sentenceTranslation: sentence?.translation ?? '' }
             : {};
 
   params.difficulty = {

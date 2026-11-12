@@ -126,6 +126,9 @@ export function validateContent(content) {
     if (!word) {
       errors.push(error('SENTENCE_WORD_MISSING', `${path}.wordId`, `unknown word ${String(sentence.wordId)}`));
     }
+    if (typeof sentence.translation !== 'string' || sentence.translation.trim().length === 0) {
+      errors.push(error('SENTENCE_TRANSLATION_MISSING', `${path}.translation`, 'sentence needs Chinese translation'));
+    }
     if (typeof sentence.text !== 'string' || typeof sentence.answer !== 'string'
       || sentence.blank !== sentence.answer || sentence.answer !== word?.text) {
       errors.push(error('SENTENCE_BLANK_INVALID', path, 'blank/answer must equal the target word'));

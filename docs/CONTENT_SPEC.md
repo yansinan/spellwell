@@ -155,6 +155,7 @@ boat
   "text": "A fish can swim.",
   "blank": "fish",
   "answer": "fish",
+  "translation": "鱼会游泳。",
   "reviewStatus": "unreviewed"
 }
 ```
@@ -166,6 +167,7 @@ boat
 | `text` | 英文单句，首字母大写、有标点；不得包含中文 |
 | `blank` | 必须与 `answer` 完全一致，且在 `text` 中恰好出现一次 |
 | `answer` | 等于目标词的 `text`（大小写按句中使用形式；当前全小写） |
+| `translation` | 必填中文翻译；T-CLOZE 显示，用于消除答案歧义 |
 | `reviewStatus` | 同上 |
 
 **语义唯一**：句子挖空后，只能填目标词（或目标词的同形词），不能有多个合理答案。这是人工评审项，P7 在导出前强制确认。

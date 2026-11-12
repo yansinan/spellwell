@@ -7,7 +7,8 @@
       "text": "A fish can swim.",
       "blank": "fish",
       "answer": "fish",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "鱼会游泳。"
     },
     {
       "id": "s.ship.01",
@@ -15,7 +16,8 @@
       "text": "The ship is big.",
       "blank": "ship",
       "answer": "ship",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这艘船很大。"
     },
     {
       "id": "s.rain.01",
@@ -23,7 +25,8 @@
       "text": "I like the rain.",
       "blank": "rain",
       "answer": "rain",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢雨。"
     },
     {
       "id": "s.night.01",
@@ -31,7 +34,8 @@
       "text": "The moon shines at night.",
       "blank": "night",
       "answer": "night",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "月亮在夜晚照耀。"
     },
     {
       "id": "s.fltrpbook.01",
@@ -39,7 +43,8 @@
       "text": "I read a book.",
       "blank": "book",
       "answer": "book",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我读一本书。"
     },
     {
       "id": "s.book.01",
@@ -47,7 +52,8 @@
       "text": "I read a book.",
       "blank": "book",
       "answer": "book",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我读一本书。"
     },
     {
       "id": "s.fltrpcat.01",
@@ -55,7 +61,8 @@
       "text": "The cat is small.",
       "blank": "cat",
       "answer": "cat",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只猫很小。"
     },
     {
       "id": "s.cat.01",
@@ -63,7 +70,8 @@
       "text": "The cat is small.",
       "blank": "cat",
       "answer": "cat",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只猫很小。"
     },
     {
       "id": "s.fltrpdog.01",
@@ -71,7 +79,8 @@
       "text": "The dog can run.",
       "blank": "dog",
       "answer": "dog",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只狗会跑。"
     },
     {
       "id": "s.dog.01",
@@ -79,7 +88,8 @@
       "text": "The dog can run.",
       "blank": "dog",
       "answer": "dog",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只狗会跑。"
     },
     {
       "id": "s.fltrpsun.01",
@@ -87,7 +97,8 @@
       "text": "The sun is hot.",
       "blank": "sun",
       "answer": "sun",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "太阳很热。"
     },
     {
       "id": "s.sun.01",
@@ -95,7 +106,8 @@
       "text": "The sun is hot.",
       "blank": "sun",
       "answer": "sun",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "太阳很热。"
     },
     {
       "id": "s.fltrptree.01",
@@ -103,7 +115,8 @@
       "text": "The tree is tall.",
       "blank": "tree",
       "answer": "tree",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这棵树很高。"
     },
     {
       "id": "s.tree.01",
@@ -111,7 +124,8 @@
       "text": "The tree is tall.",
       "blank": "tree",
       "answer": "tree",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这棵树很高。"
     },
     {
       "id": "s.fltrpapple.01",
@@ -119,7 +133,8 @@
       "text": "I eat an apple.",
       "blank": "apple",
       "answer": "apple",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我吃一个苹果。"
     },
     {
       "id": "s.apple.01",
@@ -127,7 +142,8 @@
       "text": "I eat an apple.",
       "blank": "apple",
       "answer": "apple",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我吃一个苹果。"
     },
     {
       "id": "s.fltrpbanana.01",
@@ -135,7 +151,8 @@
       "text": "The banana is yellow.",
       "blank": "banana",
       "answer": "banana",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "香蕉是黄色的。"
     },
     {
       "id": "s.banana.01",
@@ -143,7 +160,8 @@
       "text": "The banana is yellow.",
       "blank": "banana",
       "answer": "banana",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "香蕉是黄色的。"
     },
     {
       "id": "s.fltrporange.01",
@@ -151,7 +169,8 @@
       "text": "I like orange.",
       "blank": "orange",
       "answer": "orange",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢橙子。"
     },
     {
       "id": "s.orange.01",
@@ -159,7 +178,8 @@
       "text": "I like orange.",
       "blank": "orange",
       "answer": "orange",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢橙子。"
     },
     {
       "id": "s.fltrpred.01",
@@ -167,7 +187,8 @@
       "text": "The apple is red.",
       "blank": "red",
       "answer": "red",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这个苹果是红色的。"
     },
     {
       "id": "s.red.01",
@@ -175,7 +196,8 @@
       "text": "The apple is red.",
       "blank": "red",
       "answer": "red",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这个苹果是红色的。"
     },
     {
       "id": "s.fltrpgreen.01",
@@ -183,7 +205,8 @@
       "text": "The grass is green.",
       "blank": "green",
       "answer": "green",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "草是绿色的。"
     },
     {
       "id": "s.green.01",
@@ -191,7 +214,8 @@
       "text": "The grass is green.",
       "blank": "green",
       "answer": "green",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "草是绿色的。"
     },
     {
       "id": "s.fltrpblue.01",
@@ -199,7 +223,8 @@
       "text": "The sky is blue.",
       "blank": "blue",
       "answer": "blue",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "天空是蓝色的。"
     },
     {
       "id": "s.blue.01",
@@ -207,7 +232,8 @@
       "text": "The sky is blue.",
       "blank": "blue",
       "answer": "blue",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "天空是蓝色的。"
     },
     {
       "id": "s.fltrpblack.01",
@@ -215,7 +241,8 @@
       "text": "The cat is black.",
       "blank": "black",
       "answer": "black",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只猫是黑色的。"
     },
     {
       "id": "s.black.01",
@@ -223,7 +250,8 @@
       "text": "The cat is black.",
       "blank": "black",
       "answer": "black",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只猫是黑色的。"
     },
     {
       "id": "s.fltrpwhite.01",
@@ -231,7 +259,8 @@
       "text": "The snow is white.",
       "blank": "white",
       "answer": "white",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "雪是白色的。"
     },
     {
       "id": "s.fltrpyellow.01",
@@ -239,7 +268,8 @@
       "text": "The sun is yellow.",
       "blank": "yellow",
       "answer": "yellow",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "太阳是黄色的。"
     },
     {
       "id": "s.yellow.01",
@@ -247,7 +277,8 @@
       "text": "The sun is yellow.",
       "blank": "yellow",
       "answer": "yellow",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "太阳是黄色的。"
     },
     {
       "id": "s.fltrpschool.01",
@@ -255,7 +286,8 @@
       "text": "I go to school.",
       "blank": "school",
       "answer": "school",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我去上学。"
     },
     {
       "id": "s.school.01",
@@ -263,7 +295,8 @@
       "text": "I go to school.",
       "blank": "school",
       "answer": "school",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我去上学。"
     },
     {
       "id": "s.fltrpteacher.01",
@@ -271,7 +304,8 @@
       "text": "My teacher is kind.",
       "blank": "teacher",
       "answer": "teacher",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我的老师很和善。"
     },
     {
       "id": "s.teacher.01",
@@ -279,7 +313,8 @@
       "text": "My teacher is kind.",
       "blank": "teacher",
       "answer": "teacher",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我的老师很和善。"
     },
     {
       "id": "s.fltrpfriend.01",
@@ -287,7 +322,8 @@
       "text": "She is my friend.",
       "blank": "friend",
       "answer": "friend",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "她是我的朋友。"
     },
     {
       "id": "s.friend.01",
@@ -295,7 +331,8 @@
       "text": "She is my friend.",
       "blank": "friend",
       "answer": "friend",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "她是我的朋友。"
     },
     {
       "id": "s.fltrpfamily.01",
@@ -303,7 +340,8 @@
       "text": "I love my family.",
       "blank": "family",
       "answer": "family",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我爱我的家人。"
     },
     {
       "id": "s.family.01",
@@ -311,7 +349,8 @@
       "text": "I love my family.",
       "blank": "family",
       "answer": "family",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我爱我的家人。"
     },
     {
       "id": "s.mother.01",
@@ -319,7 +358,8 @@
       "text": "My mother is kind.",
       "blank": "mother",
       "answer": "mother",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我妈妈很和善。"
     },
     {
       "id": "s.father.01",
@@ -327,7 +367,8 @@
       "text": "My father is tall.",
       "blank": "father",
       "answer": "father",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我爸爸很高。"
     },
     {
       "id": "s.fltrpbrother.01",
@@ -335,7 +376,8 @@
       "text": "My brother can run.",
       "blank": "brother",
       "answer": "brother",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我哥哥会跑。"
     },
     {
       "id": "s.brother.01",
@@ -343,7 +385,8 @@
       "text": "My brother can run.",
       "blank": "brother",
       "answer": "brother",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我哥哥会跑。"
     },
     {
       "id": "s.fltrpsister.01",
@@ -351,7 +394,8 @@
       "text": "My sister can sing.",
       "blank": "sister",
       "answer": "sister",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我姐姐会唱歌。"
     },
     {
       "id": "s.sister.01",
@@ -359,7 +403,8 @@
       "text": "My sister can sing.",
       "blank": "sister",
       "answer": "sister",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我姐姐会唱歌。"
     },
     {
       "id": "s.fltrphappy.01",
@@ -367,7 +412,8 @@
       "text": "I am happy.",
       "blank": "happy",
       "answer": "happy",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我很开心。"
     },
     {
       "id": "s.happy.01",
@@ -375,7 +421,8 @@
       "text": "I am happy.",
       "blank": "happy",
       "answer": "happy",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我很开心。"
     },
     {
       "id": "s.fltrpsad.01",
@@ -383,7 +430,8 @@
       "text": "He is sad.",
       "blank": "sad",
       "answer": "sad",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "他很难过。"
     },
     {
       "id": "s.sad.01",
@@ -391,7 +439,8 @@
       "text": "He is sad.",
       "blank": "sad",
       "answer": "sad",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "他很难过。"
     },
     {
       "id": "s.fltrpbig.01",
@@ -399,7 +448,8 @@
       "text": "The dog is big.",
       "blank": "big",
       "answer": "big",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只狗很大。"
     },
     {
       "id": "s.big.01",
@@ -407,7 +457,8 @@
       "text": "The dog is big.",
       "blank": "big",
       "answer": "big",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只狗很大。"
     },
     {
       "id": "s.fltrpsmall.01",
@@ -415,7 +466,8 @@
       "text": "The cat is small.",
       "blank": "small",
       "answer": "small",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只猫很小。"
     },
     {
       "id": "s.small.01",
@@ -423,7 +475,8 @@
       "text": "The cat is small.",
       "blank": "small",
       "answer": "small",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只猫很小。"
     },
     {
       "id": "s.fltrprun.01",
@@ -431,7 +484,8 @@
       "text": "I can run.",
       "blank": "run",
       "answer": "run",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我会跑。"
     },
     {
       "id": "s.run.01",
@@ -439,7 +493,8 @@
       "text": "I can run.",
       "blank": "run",
       "answer": "run",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我会跑。"
     },
     {
       "id": "s.fltrpjump.01",
@@ -447,7 +502,8 @@
       "text": "I can jump.",
       "blank": "jump",
       "answer": "jump",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我会跳。"
     },
     {
       "id": "s.fltrpswim.01",
@@ -455,7 +511,8 @@
       "text": "I can swim.",
       "blank": "swim",
       "answer": "swim",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我会游泳。"
     },
     {
       "id": "s.swim.01",
@@ -463,7 +520,8 @@
       "text": "I can swim.",
       "blank": "swim",
       "answer": "swim",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我会游泳。"
     },
     {
       "id": "s.fltrpread.01",
@@ -471,7 +529,8 @@
       "text": "I read a book.",
       "blank": "read",
       "answer": "read",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我读一本书。"
     },
     {
       "id": "s.fltrpwrite.01",
@@ -479,7 +538,8 @@
       "text": "I can write.",
       "blank": "write",
       "answer": "write",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我会写字。"
     },
     {
       "id": "s.fltrpsing.01",
@@ -487,7 +547,8 @@
       "text": "I can sing.",
       "blank": "sing",
       "answer": "sing",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我会唱歌。"
     },
     {
       "id": "s.fltrpdance.01",
@@ -495,7 +556,8 @@
       "text": "I can dance.",
       "blank": "dance",
       "answer": "dance",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我会跳舞。"
     },
     {
       "id": "s.dance.01",
@@ -503,7 +565,8 @@
       "text": "I can dance.",
       "blank": "dance",
       "answer": "dance",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我会跳舞。"
     },
     {
       "id": "s.fltrpeat.01",
@@ -511,7 +574,8 @@
       "text": "I eat an apple.",
       "blank": "eat",
       "answer": "eat",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我吃一个苹果。"
     },
     {
       "id": "s.fltrpdrink.01",
@@ -519,7 +583,8 @@
       "text": "I drink water.",
       "blank": "drink",
       "answer": "drink",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喝水。"
     },
     {
       "id": "s.drink.01",
@@ -527,7 +592,8 @@
       "text": "I drink water.",
       "blank": "drink",
       "answer": "drink",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喝水。"
     },
     {
       "id": "s.fltrpplay.01",
@@ -535,7 +601,8 @@
       "text": "I play with my friend.",
       "blank": "play",
       "answer": "play",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我和朋友一起玩。"
     },
     {
       "id": "s.fltrpgo.01",
@@ -543,7 +610,8 @@
       "text": "I go to school.",
       "blank": "go",
       "answer": "go",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我去上学。"
     },
     {
       "id": "s.go.01",
@@ -551,7 +619,8 @@
       "text": "I go to school.",
       "blank": "go",
       "answer": "go",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我去上学。"
     },
     {
       "id": "s.fltrplike.01",
@@ -559,7 +628,8 @@
       "text": "I like apples.",
       "blank": "like",
       "answer": "like",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢苹果。"
     },
     {
       "id": "s.like.01",
@@ -567,7 +637,8 @@
       "text": "I like apples.",
       "blank": "like",
       "answer": "like",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢苹果。"
     },
     {
       "id": "s.fltrplove.01",
@@ -575,7 +646,8 @@
       "text": "I love my family.",
       "blank": "love",
       "answer": "love",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我爱我的家人。"
     },
     {
       "id": "s.love.01",
@@ -583,7 +655,8 @@
       "text": "I love my family.",
       "blank": "love",
       "answer": "love",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我爱我的家人。"
     },
     {
       "id": "s.fltrphave.01",
@@ -591,7 +664,8 @@
       "text": "I have a book.",
       "blank": "have",
       "answer": "have",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我有一本书。"
     },
     {
       "id": "s.have.01",
@@ -599,7 +673,8 @@
       "text": "I have a book.",
       "blank": "have",
       "answer": "have",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我有一本书。"
     },
     {
       "id": "s.fltrpsee.01",
@@ -607,7 +682,8 @@
       "text": "I see a bird.",
       "blank": "see",
       "answer": "see",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我看见一只鸟。"
     },
     {
       "id": "s.fltrpgood.01",
@@ -615,7 +691,8 @@
       "text": "This is a good book.",
       "blank": "good",
       "answer": "good",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这是一本好书。"
     },
     {
       "id": "s.fltrpbad.01",
@@ -623,7 +700,8 @@
       "text": "That is a bad day.",
       "blank": "bad",
       "answer": "bad",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "那是糟糕的一天。"
     },
     {
       "id": "s.bad.01",
@@ -631,7 +709,8 @@
       "text": "That is a bad day.",
       "blank": "bad",
       "answer": "bad",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "那是糟糕的一天。"
     },
     {
       "id": "s.fltrphot.01",
@@ -639,7 +718,8 @@
       "text": "The sun is hot.",
       "blank": "hot",
       "answer": "hot",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "太阳很热。"
     },
     {
       "id": "s.hot.01",
@@ -647,7 +727,8 @@
       "text": "The sun is hot.",
       "blank": "hot",
       "answer": "hot",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "太阳很热。"
     },
     {
       "id": "s.fltrpcold.01",
@@ -655,7 +736,8 @@
       "text": "The water is cold.",
       "blank": "cold",
       "answer": "cold",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "水很冷。"
     },
     {
       "id": "s.cold.01",
@@ -663,7 +745,8 @@
       "text": "The water is cold.",
       "blank": "cold",
       "answer": "cold",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "水很冷。"
     },
     {
       "id": "s.fltrpday.01",
@@ -671,7 +754,8 @@
       "text": "It is a sunny day.",
       "blank": "day",
       "answer": "day",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这是一个晴天。"
     },
     {
       "id": "s.day.01",
@@ -679,7 +763,8 @@
       "text": "It is a sunny day.",
       "blank": "day",
       "answer": "day",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这是一个晴天。"
     },
     {
       "id": "s.fltrpmorning.01",
@@ -687,7 +772,8 @@
       "text": "Good morning.",
       "blank": "morning",
       "answer": "morning",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "早上好。"
     },
     {
       "id": "s.morning.01",
@@ -695,7 +781,8 @@
       "text": "Good morning.",
       "blank": "morning",
       "answer": "morning",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "早上好。"
     },
     {
       "id": "s.fltrpafternoon.01",
@@ -703,7 +790,8 @@
       "text": "Good afternoon.",
       "blank": "afternoon",
       "answer": "afternoon",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "下午好。"
     },
     {
       "id": "s.afternoon.01",
@@ -711,7 +799,8 @@
       "text": "Good afternoon.",
       "blank": "afternoon",
       "answer": "afternoon",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "下午好。"
     },
     {
       "id": "s.fltrpevening.01",
@@ -719,7 +808,8 @@
       "text": "Good evening.",
       "blank": "evening",
       "answer": "evening",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "晚上好。"
     },
     {
       "id": "s.evening.01",
@@ -727,7 +817,8 @@
       "text": "Good evening.",
       "blank": "evening",
       "answer": "evening",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "晚上好。"
     },
     {
       "id": "s.fltrpweek.01",
@@ -735,7 +826,8 @@
       "text": "I go to school five days a week.",
       "blank": "week",
       "answer": "week",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我一周上五天学。"
     },
     {
       "id": "s.week.01",
@@ -743,7 +835,8 @@
       "text": "I go to school five days a week.",
       "blank": "week",
       "answer": "week",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我一周上五天学。"
     },
     {
       "id": "s.fltrpyear.01",
@@ -751,7 +844,8 @@
       "text": "This year is fun.",
       "blank": "year",
       "answer": "year",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "今年很有趣。"
     },
     {
       "id": "s.year.01",
@@ -759,7 +853,8 @@
       "text": "This year is fun.",
       "blank": "year",
       "answer": "year",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "今年很有趣。"
     },
     {
       "id": "s.fltrpbirthday.01",
@@ -767,7 +862,8 @@
       "text": "Today is my birthday.",
       "blank": "birthday",
       "answer": "birthday",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "今天是我的生日。"
     },
     {
       "id": "s.birthday.01",
@@ -775,7 +871,8 @@
       "text": "Today is my birthday.",
       "blank": "birthday",
       "answer": "birthday",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "今天是我的生日。"
     },
     {
       "id": "s.fltrpspring.01",
@@ -783,7 +880,8 @@
       "text": "Flowers grow in spring.",
       "blank": "spring",
       "answer": "spring",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "花在春天生长。"
     },
     {
       "id": "s.spring.01",
@@ -791,7 +889,8 @@
       "text": "Flowers grow in spring.",
       "blank": "spring",
       "answer": "spring",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "花在春天生长。"
     },
     {
       "id": "s.fltrpsummer.01",
@@ -799,7 +898,8 @@
       "text": "It is hot in summer.",
       "blank": "summer",
       "answer": "summer",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "夏天很热。"
     },
     {
       "id": "s.summer.01",
@@ -807,7 +907,8 @@
       "text": "It is hot in summer.",
       "blank": "summer",
       "answer": "summer",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "夏天很热。"
     },
     {
       "id": "s.fltrpautumn.01",
@@ -815,7 +916,8 @@
       "text": "Leaves fall in autumn.",
       "blank": "autumn",
       "answer": "autumn",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "树叶在秋天落下。"
     },
     {
       "id": "s.autumn.01",
@@ -823,7 +925,8 @@
       "text": "Leaves fall in autumn.",
       "blank": "autumn",
       "answer": "autumn",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "树叶在秋天落下。"
     },
     {
       "id": "s.fltrpwinter.01",
@@ -831,7 +934,8 @@
       "text": "It is cold in winter.",
       "blank": "winter",
       "answer": "winter",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "冬天很冷。"
     },
     {
       "id": "s.winter.01",
@@ -839,7 +943,8 @@
       "text": "It is cold in winter.",
       "blank": "winter",
       "answer": "winter",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "冬天很冷。"
     },
     {
       "id": "s.fltrpweather.01",
@@ -847,7 +952,8 @@
       "text": "The weather is nice.",
       "blank": "weather",
       "answer": "weather",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "天气很好。"
     },
     {
       "id": "s.weather.01",
@@ -855,7 +961,8 @@
       "text": "The weather is nice.",
       "blank": "weather",
       "answer": "weather",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "天气很好。"
     },
     {
       "id": "s.fltrpcloud.01",
@@ -863,7 +970,8 @@
       "text": "The cloud is white.",
       "blank": "cloud",
       "answer": "cloud",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "云是白色的。"
     },
     {
       "id": "s.cloud.01",
@@ -871,7 +979,8 @@
       "text": "The cloud is white.",
       "blank": "cloud",
       "answer": "cloud",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "云是白色的。"
     },
     {
       "id": "s.fltrpwind.01",
@@ -879,7 +988,8 @@
       "text": "The wind is strong.",
       "blank": "wind",
       "answer": "wind",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "风很大。"
     },
     {
       "id": "s.fltrpsnow.01",
@@ -887,7 +997,8 @@
       "text": "I like the snow.",
       "blank": "snow",
       "answer": "snow",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢雪。"
     },
     {
       "id": "s.snow.01",
@@ -895,7 +1006,8 @@
       "text": "I like the snow.",
       "blank": "snow",
       "answer": "snow",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢雪。"
     },
     {
       "id": "s.fltrpwater.01",
@@ -903,7 +1015,8 @@
       "text": "I drink water.",
       "blank": "water",
       "answer": "water",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喝水。"
     },
     {
       "id": "s.water.01",
@@ -911,7 +1024,8 @@
       "text": "I drink water.",
       "blank": "water",
       "answer": "water",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喝水。"
     },
     {
       "id": "s.fltrpmilk.01",
@@ -919,7 +1033,8 @@
       "text": "I drink milk.",
       "blank": "milk",
       "answer": "milk",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喝牛奶。"
     },
     {
       "id": "s.milk.01",
@@ -927,7 +1042,8 @@
       "text": "I drink milk.",
       "blank": "milk",
       "answer": "milk",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喝牛奶。"
     },
     {
       "id": "s.fltrpbread.01",
@@ -935,7 +1051,8 @@
       "text": "I eat bread.",
       "blank": "bread",
       "answer": "bread",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我吃面包。"
     },
     {
       "id": "s.bread.01",
@@ -943,7 +1060,8 @@
       "text": "I eat bread.",
       "blank": "bread",
       "answer": "bread",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我吃面包。"
     },
     {
       "id": "s.fltrprice.01",
@@ -951,7 +1069,8 @@
       "text": "I eat rice.",
       "blank": "rice",
       "answer": "rice",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我吃米饭。"
     },
     {
       "id": "s.rice.01",
@@ -959,7 +1078,8 @@
       "text": "I eat rice.",
       "blank": "rice",
       "answer": "rice",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我吃米饭。"
     },
     {
       "id": "s.fltrpegg.01",
@@ -967,7 +1087,8 @@
       "text": "I eat an egg.",
       "blank": "egg",
       "answer": "egg",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我吃一个鸡蛋。"
     },
     {
       "id": "s.egg.01",
@@ -975,7 +1096,8 @@
       "text": "I eat an egg.",
       "blank": "egg",
       "answer": "egg",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我吃一个鸡蛋。"
     },
     {
       "id": "s.fltrpcake.01",
@@ -983,7 +1105,8 @@
       "text": "The cake is sweet.",
       "blank": "cake",
       "answer": "cake",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "蛋糕很甜。"
     },
     {
       "id": "s.cake.01",
@@ -991,7 +1114,8 @@
       "text": "The cake is sweet.",
       "blank": "cake",
       "answer": "cake",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "蛋糕很甜。"
     },
     {
       "id": "s.fltrptoy.01",
@@ -999,7 +1123,8 @@
       "text": "This is my toy.",
       "blank": "toy",
       "answer": "toy",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这是我的玩具。"
     },
     {
       "id": "s.toy.01",
@@ -1007,7 +1132,8 @@
       "text": "This is my toy.",
       "blank": "toy",
       "answer": "toy",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这是我的玩具。"
     },
     {
       "id": "s.fltrpball.01",
@@ -1015,7 +1141,8 @@
       "text": "I play with a ball.",
       "blank": "ball",
       "answer": "ball",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我玩球。"
     },
     {
       "id": "s.ball.01",
@@ -1023,7 +1150,8 @@
       "text": "I play with a ball.",
       "blank": "ball",
       "answer": "ball",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我玩球。"
     },
     {
       "id": "s.fltrpkite.01",
@@ -1031,7 +1159,8 @@
       "text": "I fly a kite.",
       "blank": "kite",
       "answer": "kite",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我放风筝。"
     },
     {
       "id": "s.fltrpbike.01",
@@ -1039,7 +1168,8 @@
       "text": "I ride a bike.",
       "blank": "bike",
       "answer": "bike",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我骑自行车。"
     },
     {
       "id": "s.fltrpbus.01",
@@ -1047,7 +1177,8 @@
       "text": "I go by bus.",
       "blank": "bus",
       "answer": "bus",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我坐公共汽车去。"
     },
     {
       "id": "s.fltrpcar.01",
@@ -1055,7 +1186,8 @@
       "text": "The car is red.",
       "blank": "car",
       "answer": "car",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这辆车是红色的。"
     },
     {
       "id": "s.car.01",
@@ -1063,7 +1195,8 @@
       "text": "The car is red.",
       "blank": "car",
       "answer": "car",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这辆车是红色的。"
     },
     {
       "id": "s.fltrptrain.01",
@@ -1071,7 +1204,8 @@
       "text": "The train is fast.",
       "blank": "train",
       "answer": "train",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "火车很快。"
     },
     {
       "id": "s.train.01",
@@ -1079,7 +1213,8 @@
       "text": "The train is fast.",
       "blank": "train",
       "answer": "train",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "火车很快。"
     },
     {
       "id": "s.fltrpplane.01",
@@ -1087,7 +1222,8 @@
       "text": "The plane is big.",
       "blank": "plane",
       "answer": "plane",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "飞机很大。"
     },
     {
       "id": "s.plane.01",
@@ -1095,7 +1231,8 @@
       "text": "The plane is big.",
       "blank": "plane",
       "answer": "plane",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "飞机很大。"
     },
     {
       "id": "s.fltrpboat.01",
@@ -1103,7 +1240,8 @@
       "text": "The boat is on the water.",
       "blank": "boat",
       "answer": "boat",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "船在水上。"
     },
     {
       "id": "s.boat.01",
@@ -1111,7 +1249,8 @@
       "text": "The boat is on the water.",
       "blank": "boat",
       "answer": "boat",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "船在水上。"
     },
     {
       "id": "s.park.01",
@@ -1119,7 +1258,8 @@
       "text": "I play in the park.",
       "blank": "park",
       "answer": "park",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我在公园里玩。"
     },
     {
       "id": "s.fltrpzoo.01",
@@ -1127,7 +1267,8 @@
       "text": "I go to the zoo.",
       "blank": "zoo",
       "answer": "zoo",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我去动物园。"
     },
     {
       "id": "s.zoo.01",
@@ -1135,7 +1276,8 @@
       "text": "I go to the zoo.",
       "blank": "zoo",
       "answer": "zoo",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我去动物园。"
     },
     {
       "id": "s.fltrphome.01",
@@ -1143,7 +1285,8 @@
       "text": "I go home.",
       "blank": "home",
       "answer": "home",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我回家。"
     },
     {
       "id": "s.home.01",
@@ -1151,7 +1294,8 @@
       "text": "I go home.",
       "blank": "home",
       "answer": "home",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我回家。"
     },
     {
       "id": "s.fltrproom.01",
@@ -1159,7 +1303,8 @@
       "text": "This is my room.",
       "blank": "room",
       "answer": "room",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这是我的房间。"
     },
     {
       "id": "s.room.01",
@@ -1167,7 +1312,8 @@
       "text": "This is my room.",
       "blank": "room",
       "answer": "room",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这是我的房间。"
     },
     {
       "id": "s.fltrpdoor.01",
@@ -1175,7 +1321,8 @@
       "text": "Open the door.",
       "blank": "door",
       "answer": "door",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "打开门。"
     },
     {
       "id": "s.door.01",
@@ -1183,7 +1330,8 @@
       "text": "Open the door.",
       "blank": "door",
       "answer": "door",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "打开门。"
     },
     {
       "id": "s.fltrpwindow.01",
@@ -1191,7 +1339,8 @@
       "text": "Look out the window.",
       "blank": "window",
       "answer": "window",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "看窗外。"
     },
     {
       "id": "s.fltrpchair.01",
@@ -1199,7 +1348,8 @@
       "text": "Sit on the chair.",
       "blank": "chair",
       "answer": "chair",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "坐在椅子上。"
     },
     {
       "id": "s.chair.01",
@@ -1207,7 +1357,8 @@
       "text": "Sit on the chair.",
       "blank": "chair",
       "answer": "chair",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "坐在椅子上。"
     },
     {
       "id": "s.fltrpdesk.01",
@@ -1215,7 +1366,8 @@
       "text": "The book is on the desk.",
       "blank": "desk",
       "answer": "desk",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "书在桌子上。"
     },
     {
       "id": "s.desk.01",
@@ -1223,7 +1375,8 @@
       "text": "The book is on the desk.",
       "blank": "desk",
       "answer": "desk",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "书在桌子上。"
     },
     {
       "id": "s.fltrppencil.01",
@@ -1231,7 +1384,8 @@
       "text": "I have a pencil.",
       "blank": "pencil",
       "answer": "pencil",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我有一支铅笔。"
     },
     {
       "id": "s.pencil.01",
@@ -1239,7 +1393,8 @@
       "text": "I have a pencil.",
       "blank": "pencil",
       "answer": "pencil",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我有一支铅笔。"
     },
     {
       "id": "s.fltrpruler.01",
@@ -1247,7 +1402,8 @@
       "text": "This is my ruler.",
       "blank": "ruler",
       "answer": "ruler",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这是我的尺子。"
     },
     {
       "id": "s.ruler.01",
@@ -1255,7 +1411,8 @@
       "text": "This is my ruler.",
       "blank": "ruler",
       "answer": "ruler",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这是我的尺子。"
     },
     {
       "id": "s.fltrpbag.01",
@@ -1263,7 +1420,8 @@
       "text": "My bag is blue.",
       "blank": "bag",
       "answer": "bag",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我的书包是蓝色的。"
     },
     {
       "id": "s.phone.01",
@@ -1271,7 +1429,8 @@
       "text": "I see a phone.",
       "blank": "phone",
       "answer": "phone",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我看见一部手机。"
     },
     {
       "id": "s.fltrpmusic.01",
@@ -1279,7 +1438,8 @@
       "text": "I like music.",
       "blank": "music",
       "answer": "music",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢音乐。"
     },
     {
       "id": "s.music.01",
@@ -1287,7 +1447,8 @@
       "text": "I like music.",
       "blank": "music",
       "answer": "music",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢音乐。"
     },
     {
       "id": "s.fltrpgame.01",
@@ -1295,7 +1456,8 @@
       "text": "Let us play a game.",
       "blank": "game",
       "answer": "game",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我们玩个游戏吧。"
     },
     {
       "id": "s.fltrpanimal.01",
@@ -1303,7 +1465,8 @@
       "text": "I like this animal.",
       "blank": "animal",
       "answer": "animal",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢这只动物。"
     },
     {
       "id": "s.animal.01",
@@ -1311,7 +1474,8 @@
       "text": "I like this animal.",
       "blank": "animal",
       "answer": "animal",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢这只动物。"
     },
     {
       "id": "s.fltrpbear.01",
@@ -1319,7 +1483,8 @@
       "text": "The bear is big.",
       "blank": "bear",
       "answer": "bear",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只熊很大。"
     },
     {
       "id": "s.bear.01",
@@ -1327,7 +1492,8 @@
       "text": "The bear is big.",
       "blank": "bear",
       "answer": "bear",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只熊很大。"
     },
     {
       "id": "s.fltrpbird.01",
@@ -1335,7 +1501,8 @@
       "text": "The bird can fly.",
       "blank": "bird",
       "answer": "bird",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只鸟会飞。"
     },
     {
       "id": "s.bird.01",
@@ -1343,7 +1510,8 @@
       "text": "The bird can fly.",
       "blank": "bird",
       "answer": "bird",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只鸟会飞。"
     },
     {
       "id": "s.fltrpduck.01",
@@ -1351,7 +1519,8 @@
       "text": "The duck can swim.",
       "blank": "duck",
       "answer": "duck",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只鸭子会游泳。"
     },
     {
       "id": "s.duck.01",
@@ -1359,7 +1528,8 @@
       "text": "The duck can swim.",
       "blank": "duck",
       "answer": "duck",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只鸭子会游泳。"
     },
     {
       "id": "s.fltrpelephant.01",
@@ -1367,7 +1537,8 @@
       "text": "The elephant is big.",
       "blank": "elephant",
       "answer": "elephant",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这头大象很大。"
     },
     {
       "id": "s.elephant.01",
@@ -1375,7 +1546,8 @@
       "text": "The elephant is big.",
       "blank": "elephant",
       "answer": "elephant",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这头大象很大。"
     },
     {
       "id": "s.fltrplion.01",
@@ -1383,7 +1555,8 @@
       "text": "The lion is strong.",
       "blank": "lion",
       "answer": "lion",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只狮子很强壮。"
     },
     {
       "id": "s.fltrpmonkey.01",
@@ -1391,7 +1564,8 @@
       "text": "The monkey can climb.",
       "blank": "monkey",
       "answer": "monkey",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只猴子会爬。"
     },
     {
       "id": "s.monkey.01",
@@ -1399,7 +1573,8 @@
       "text": "The monkey can climb.",
       "blank": "monkey",
       "answer": "monkey",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只猴子会爬。"
     },
     {
       "id": "s.fltrppanda.01",
@@ -1407,7 +1582,8 @@
       "text": "The panda is black and white.",
       "blank": "panda",
       "answer": "panda",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只熊猫是黑白相间的。"
     },
     {
       "id": "s.panda.01",
@@ -1415,7 +1591,8 @@
       "text": "The panda is black and white.",
       "blank": "panda",
       "answer": "panda",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只熊猫是黑白相间的。"
     },
     {
       "id": "s.fltrptiger.01",
@@ -1423,7 +1600,8 @@
       "text": "The tiger is fast.",
       "blank": "tiger",
       "answer": "tiger",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只老虎很快。"
     },
     {
       "id": "s.tiger.01",
@@ -1431,7 +1609,8 @@
       "text": "The tiger is fast.",
       "blank": "tiger",
       "answer": "tiger",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只老虎很快。"
     },
     {
       "id": "s.fltrprabbit.01",
@@ -1439,7 +1618,8 @@
       "text": "The rabbit can jump.",
       "blank": "rabbit",
       "answer": "rabbit",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只兔子会跳。"
     },
     {
       "id": "s.rabbit.01",
@@ -1447,7 +1627,8 @@
       "text": "The rabbit can jump.",
       "blank": "rabbit",
       "answer": "rabbit",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只兔子会跳。"
     },
     {
       "id": "s.fltrphorse.01",
@@ -1455,7 +1636,8 @@
       "text": "The horse can run.",
       "blank": "horse",
       "answer": "horse",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这匹马会跑。"
     },
     {
       "id": "s.horse.01",
@@ -1463,7 +1645,8 @@
       "text": "The horse can run.",
       "blank": "horse",
       "answer": "horse",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这匹马会跑。"
     },
     {
       "id": "s.fltrpcow.01",
@@ -1471,7 +1654,8 @@
       "text": "The cow is on the farm.",
       "blank": "cow",
       "answer": "cow",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "奶牛在农场里。"
     },
     {
       "id": "s.cow.01",
@@ -1479,7 +1663,8 @@
       "text": "The cow is on the farm.",
       "blank": "cow",
       "answer": "cow",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "奶牛在农场里。"
     },
     {
       "id": "s.fltrpsheep.01",
@@ -1487,7 +1672,8 @@
       "text": "The sheep is white.",
       "blank": "sheep",
       "answer": "sheep",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只羊是白色的。"
     },
     {
       "id": "s.sheep.01",
@@ -1495,7 +1681,8 @@
       "text": "The sheep is white.",
       "blank": "sheep",
       "answer": "sheep",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只羊是白色的。"
     },
     {
       "id": "s.fltrppig.01",
@@ -1503,7 +1690,8 @@
       "text": "The pig is pink.",
       "blank": "pig",
       "answer": "pig",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只猪是粉色的。"
     },
     {
       "id": "s.pig.01",
@@ -1511,7 +1699,8 @@
       "text": "The pig is pink.",
       "blank": "pig",
       "answer": "pig",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只猪是粉色的。"
     },
     {
       "id": "s.fltrpchicken.01",
@@ -1519,7 +1708,8 @@
       "text": "The chicken is small.",
       "blank": "chicken",
       "answer": "chicken",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只小鸡很小。"
     },
     {
       "id": "s.chicken.01",
@@ -1527,7 +1717,8 @@
       "text": "The chicken is small.",
       "blank": "chicken",
       "answer": "chicken",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只小鸡很小。"
     },
     {
       "id": "s.fltrpmouse.01",
@@ -1535,7 +1726,8 @@
       "text": "The mouse is small.",
       "blank": "mouse",
       "answer": "mouse",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只老鼠很小。"
     },
     {
       "id": "s.snake.01",
@@ -1543,7 +1735,8 @@
       "text": "The snake is long.",
       "blank": "snake",
       "answer": "snake",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这条蛇很长。"
     },
     {
       "id": "s.frog.01",
@@ -1551,7 +1744,8 @@
       "text": "The frog can jump.",
       "blank": "frog",
       "answer": "frog",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只青蛙会跳。"
     },
     {
       "id": "s.fltrpclassroom.01",
@@ -1559,7 +1753,8 @@
       "text": "This is my classroom.",
       "blank": "classroom",
       "answer": "classroom",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这是我的教室。"
     },
     {
       "id": "s.classroom.01",
@@ -1567,7 +1762,8 @@
       "text": "This is my classroom.",
       "blank": "classroom",
       "answer": "classroom",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这是我的教室。"
     },
     {
       "id": "s.fltrpplayground.01",
@@ -1575,7 +1771,8 @@
       "text": "We play on the playground.",
       "blank": "playground",
       "answer": "playground",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我们在操场上玩。"
     },
     {
       "id": "s.playground.01",
@@ -1583,7 +1780,8 @@
       "text": "We play on the playground.",
       "blank": "playground",
       "answer": "playground",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我们在操场上玩。"
     },
     {
       "id": "s.fltrplibrary.01",
@@ -1591,7 +1789,8 @@
       "text": "I read in the library.",
       "blank": "library",
       "answer": "library",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我在图书馆看书。"
     },
     {
       "id": "s.library.01",
@@ -1599,7 +1798,8 @@
       "text": "I read in the library.",
       "blank": "library",
       "answer": "library",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我在图书馆看书。"
     },
     {
       "id": "s.fltrpoffice.01",
@@ -1607,7 +1807,8 @@
       "text": "My mother works in an office.",
       "blank": "office",
       "answer": "office",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我妈妈在办公室工作。"
     },
     {
       "id": "s.office.01",
@@ -1615,7 +1816,8 @@
       "text": "My mother works in an office.",
       "blank": "office",
       "answer": "office",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我妈妈在办公室工作。"
     },
     {
       "id": "s.fltrpgym.01",
@@ -1623,7 +1825,8 @@
       "text": "We play in the gym.",
       "blank": "gym",
       "answer": "gym",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我们在体育馆里玩。"
     },
     {
       "id": "s.fltrpbreakfast.01",
@@ -1631,7 +1834,8 @@
       "text": "I eat breakfast in the morning.",
       "blank": "breakfast",
       "answer": "breakfast",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我早上吃早餐。"
     },
     {
       "id": "s.fltrplunch.01",
@@ -1639,7 +1843,8 @@
       "text": "We eat lunch at school.",
       "blank": "lunch",
       "answer": "lunch",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我们在学校吃午饭。"
     },
     {
       "id": "s.fltrpdinner.01",
@@ -1647,7 +1852,8 @@
       "text": "We eat dinner at home.",
       "blank": "dinner",
       "answer": "dinner",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我们在家吃晚饭。"
     },
     {
       "id": "s.fltrphamburger.01",
@@ -1655,7 +1861,8 @@
       "text": "I like hamburgers.",
       "blank": "hamburger",
       "answer": "hamburger",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢汉堡包。"
     },
     {
       "id": "s.hamburger.01",
@@ -1663,7 +1870,8 @@
       "text": "I like hamburgers.",
       "blank": "hamburger",
       "answer": "hamburger",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢汉堡包。"
     },
     {
       "id": "s.noodles.01",
@@ -1671,7 +1879,8 @@
       "text": "I like noodles.",
       "blank": "noodles",
       "answer": "noodles",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喜欢面条。"
     },
     {
       "id": "s.fltrpjuice.01",
@@ -1679,7 +1888,8 @@
       "text": "I drink juice.",
       "blank": "juice",
       "answer": "juice",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喝果汁。"
     },
     {
       "id": "s.juice.01",
@@ -1687,7 +1897,8 @@
       "text": "I drink juice.",
       "blank": "juice",
       "answer": "juice",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我喝果汁。"
     },
     {
       "id": "s.tea.01",
@@ -1695,7 +1906,8 @@
       "text": "My father drinks tea.",
       "blank": "tea",
       "answer": "tea",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我爸爸喝茶。"
     },
     {
       "id": "s.fltrpwalk.01",
@@ -1703,7 +1915,8 @@
       "text": "I walk to school.",
       "blank": "walk",
       "answer": "walk",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我步行去上学。"
     },
     {
       "id": "s.fltrptalk.01",
@@ -1711,7 +1924,8 @@
       "text": "I talk to my friend.",
       "blank": "talk",
       "answer": "talk",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我和朋友说话。"
     },
     {
       "id": "s.talk.01",
@@ -1719,7 +1933,8 @@
       "text": "I talk to my friend.",
       "blank": "talk",
       "answer": "talk",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我和朋友说话。"
     },
     {
       "id": "s.fltrplisten.01",
@@ -1727,7 +1942,8 @@
       "text": "I listen to music.",
       "blank": "listen",
       "answer": "listen",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我听音乐。"
     },
     {
       "id": "s.fltrpdraw.01",
@@ -1735,7 +1951,8 @@
       "text": "I can draw a cat.",
       "blank": "draw",
       "answer": "draw",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我会画一只猫。"
     },
     {
       "id": "s.fltrppaint.01",
@@ -1743,7 +1960,8 @@
       "text": "I paint a picture.",
       "blank": "paint",
       "answer": "paint",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我画一幅画。"
     },
     {
       "id": "s.paint.01",
@@ -1751,7 +1969,8 @@
       "text": "I paint a picture.",
       "blank": "paint",
       "answer": "paint",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我画一幅画。"
     },
     {
       "id": "s.fltrpclean.01",
@@ -1759,7 +1978,8 @@
       "text": "My room is clean.",
       "blank": "clean",
       "answer": "clean",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我的房间很干净。"
     },
     {
       "id": "s.cook.01",
@@ -1767,7 +1987,8 @@
       "text": "My mother can cook.",
       "blank": "cook",
       "answer": "cook",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我妈妈会做饭。"
     },
     {
       "id": "s.fltrpsleep.01",
@@ -1775,7 +1996,8 @@
       "text": "I sleep at night.",
       "blank": "sleep",
       "answer": "sleep",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我晚上睡觉。"
     },
     {
       "id": "s.fltrpwake.01",
@@ -1783,7 +2005,8 @@
       "text": "I wake up in the morning.",
       "blank": "wake",
       "answer": "wake",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我早上醒来。"
     },
     {
       "id": "s.fltrpbeautiful.01",
@@ -1791,7 +2014,8 @@
       "text": "The flower is beautiful.",
       "blank": "beautiful",
       "answer": "beautiful",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这朵花很美。"
     },
     {
       "id": "s.beautiful.01",
@@ -1799,7 +2023,8 @@
       "text": "The flower is beautiful.",
       "blank": "beautiful",
       "answer": "beautiful",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这朵花很美。"
     },
     {
       "id": "s.fltrpstrong.01",
@@ -1807,7 +2032,8 @@
       "text": "The horse is strong.",
       "blank": "strong",
       "answer": "strong",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这匹马很强壮。"
     },
     {
       "id": "s.fltrpyoung.01",
@@ -1815,7 +2041,8 @@
       "text": "The baby is young.",
       "blank": "young",
       "answer": "young",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这个婴儿很小。"
     },
     {
       "id": "s.young.01",
@@ -1823,7 +2050,8 @@
       "text": "The baby is young.",
       "blank": "young",
       "answer": "young",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这个婴儿很小。"
     },
     {
       "id": "s.fltrpfunny.01",
@@ -1831,7 +2059,8 @@
       "text": "The monkey is funny.",
       "blank": "funny",
       "answer": "funny",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只猴子很有趣。"
     },
     {
       "id": "s.fltrpquiet.01",
@@ -1839,7 +2068,8 @@
       "text": "Please be quiet.",
       "blank": "quiet",
       "answer": "quiet",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "请安静。"
     },
     {
       "id": "s.quiet.01",
@@ -1847,7 +2077,8 @@
       "text": "Please be quiet.",
       "blank": "quiet",
       "answer": "quiet",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "请安静。"
     },
     {
       "id": "s.fltrpbusy.01",
@@ -1855,7 +2086,8 @@
       "text": "My father is busy.",
       "blank": "busy",
       "answer": "busy",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我爸爸很忙。"
     },
     {
       "id": "s.busy.01",
@@ -1863,7 +2095,8 @@
       "text": "My father is busy.",
       "blank": "busy",
       "answer": "busy",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我爸爸很忙。"
     },
     {
       "id": "s.fltrpdirty.01",
@@ -1871,7 +2104,8 @@
       "text": "My shoes are dirty.",
       "blank": "dirty",
       "answer": "dirty",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我的鞋子很脏。"
     },
     {
       "id": "s.dirty.01",
@@ -1879,7 +2113,8 @@
       "text": "My shoes are dirty.",
       "blank": "dirty",
       "answer": "dirty",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我的鞋子很脏。"
     },
     {
       "id": "s.fltrpeasy.01",
@@ -1887,7 +2122,8 @@
       "text": "This book is easy.",
       "blank": "easy",
       "answer": "easy",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这本书很简单。"
     },
     {
       "id": "s.fltrpdifficult.01",
@@ -1895,7 +2131,8 @@
       "text": "This game is difficult.",
       "blank": "difficult",
       "answer": "difficult",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这个游戏很难。"
     },
     {
       "id": "s.friendly.01",
@@ -1903,7 +2140,8 @@
       "text": "My teacher is friendly.",
       "blank": "friendly",
       "answer": "friendly",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我的老师很友好。"
     },
     {
       "id": "s.kind.01",
@@ -1911,7 +2149,8 @@
       "text": "My friend is kind.",
       "blank": "kind",
       "answer": "kind",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "我的朋友很和善。"
     },
     {
       "id": "s.fltrpclever.01",
@@ -1919,7 +2158,8 @@
       "text": "The fox is clever.",
       "blank": "clever",
       "answer": "clever",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只狐狸很聪明。"
     },
     {
       "id": "s.clever.01",
@@ -1927,7 +2167,8 @@
       "text": "The fox is clever.",
       "blank": "clever",
       "answer": "clever",
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "translation": "这只狐狸很聪明。"
     }
   ]
 }

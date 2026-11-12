@@ -33,6 +33,7 @@
 - 新增出题逻辑审查记录 `docs/QUESTION_AUDIT.md`。
 - T-JUDGE-FIX 改为只在有该词历史错误时出现，claim 回放自己的错误；无历史用 T-TYPE。
 - 修复 `hat` 的 IPA 和 T-JUDGE 空白历史错误生成 `h t` 的问题；内容版本升到 11。
+- 241 条例句补中文翻译；T-CLOZE 显示中文，消除答案歧义；内容版本升到 12。
 - 视觉收口：提示去 Meaning/Sounds 标签、减少重复 hint、圆角绿色主按钮；后台入口改 `/admin`。
 - `contentRevision`：后台保存递增；下一轮重新读内容。
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
@@ -54,7 +55,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 233 passed · 0 failed · 50 files
+# PASS  p9 gate · 234 passed · 0 failed · 50 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。
@@ -104,10 +105,10 @@ node tests/runTests.js --phase=p9
 
 ```bash
 node tests/runTests.js --phase=p7
-# PASS  p7 gate · 190 passed · 0 failed · 34 files
+# PASS  p7 gate · 191 passed · 0 failed · 34 files
 
 node tests/runTests.js --phase=p8
-# PASS  p8 gate · 193 passed · 0 failed · 35 files
+# PASS  p8 gate · 194 passed · 0 failed · 35 files
 ```
 
 - Stats：4 answers / 50%，按日正确率、词状态、最近 4 条答案均显示。

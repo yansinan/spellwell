@@ -505,6 +505,7 @@ export class PracticeScreen {
     return `
       <div class="sw-cloze" data-role="cloze">
         <p class="sw-cloze__sentence">${escapeHtml(this.#current.renderModel.fixedText ?? '')}</p>
+        ${this.#current.spec.params?.sentenceTranslation ? `<p class="sw-cloze__translation">${escapeHtml(this.#current.spec.params.sentenceTranslation)}</p>` : ''}
         <div class="sw-type-row">
           <input
             class="sw-type-input"
