@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [0.12.1] — 2026-11-12 · 复习间隔与进度修正
+
+- 未到期旧词不再作为 filler 补题；优先到期/新词。
+- 未 mastered 的单元进度封顶 88/92/96%，不再提前显示 100%。
+- 新增复习间隔回归测试。
+
 ## [0.12.0] — 2026-11-12 · P10/P11 输入适配与挑战
 
 - 新增 PointerAdapter / KeyboardAdapter 双端语义事件适配与测试。
@@ -65,9 +71,9 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 240 passed · 0 failed · 52 files
-# PASS  p10 gate · 242 passed · 0 failed · 53 files
-# PASS  p11 gate · 244 passed · 0 failed · 54 files
+# PASS  p9 gate · 242 passed · 0 failed · 52 files
+# PASS  p10 gate · 244 passed · 0 failed · 53 files
+# PASS  p11 gate · 248 passed · 0 failed · 55 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。

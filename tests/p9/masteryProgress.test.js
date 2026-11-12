@@ -71,3 +71,11 @@ test('未开始状态：进度 0，且不算 practiced/mastered', () => {
   assertEqual(result.practiced, 0);
   assertEqual(result.mastered, 0);
 });
+
+test('进度封顶：probe/reviewing 未 mastered 不显示 100%', () => {
+  const probe = { status: 'probe', intervalIndex: 4, consecutiveCorrect: 5, errorProfile: [], lastResult: 'correct' };
+  const reviewing = { status: 'reviewing', intervalIndex: 4, consecutiveCorrect: 4, errorProfile: [], lastResult: 'correct' };
+  assertEqual(wordProgress(probe) < 1, true);
+  assertEqual(wordProgress(reviewing) < 1, true);
+  assertEqual(wordProgress({ status: 'mastered', errorProfile: [] }), 1);
+});

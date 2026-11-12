@@ -95,3 +95,24 @@ test('未开始状态：调度器把它当作新词，而不是旧复习', async
   assertEqual(book.params.plan.phase, 'new');
   assertEqual(book.typeId, 'T-SEQUENCE');
 });
+
+test('复习间隔：未到期旧词不再作为 filler 重复刷', async () => {
+  const { scheduler, adapter } = await setup();
+  const oldWords = (await adapter.query('words', {})).filter((word) => word.unitId === 'g1-s1-u1');
+  for (const word of oldWords) {
+    await adapter.put('wordStates', {
+      wordId: word.id,
+      intervalIndex: 2,
+      consecutiveCorrect: 2,
+      lastResult: 'correct',
+      errorProfile: [],
+      status: 'reviewing',
+      dueDate: '2099-01-01',
+      updatedAt: new Date().toISOString(),
+    });
+  }
+  const specs = await scheduler.buildDailyQueue({ size: 20, units: ['g1-s1-u1', 'g1-s1-u2'], mode: 'review' });
+  assertEqual(specs.some((spec) => spec.target.id === 'w.book'), false);
+  assertEqual(specs.some((spec) => spec.params.plan?.reason === 'filler'), false);
+  assertEqual(specs.length > 0, true);
+});

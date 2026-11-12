@@ -51,13 +51,14 @@ export function wordProgress(state, stats, priorAccuracy = 0.5) {
   const model = Math.max(0, Math.min(1, memory * 0.55 + streak * 0.45 - errorPenalty - wrongPenalty));
 
   const observed = stats ? stats.correct + stats.wrong : 0;
-  if (observed === 0) return Number(model.toFixed(4));
+  const cap = state.status === 'probe' ? 0.96 : state.status === 'reviewing' ? 0.92 : 0.88;
+  if (observed === 0) return Number(Math.min(cap, model).toFixed(4));
 
   // 真实答题准确率：小样本向全局准确率平滑；样本越多，权重越高。
   const empirical = (stats.correct + priorAccuracy * 4) / (observed + 4);
   const confidence = Math.min(1, observed / 8);
   const calibrated = model * (1 - 0.45 * confidence) + empirical * (0.45 * confidence);
-  return Number(Math.max(0, Math.min(1, calibrated)).toFixed(4));
+  return Number(Math.max(0, Math.min(cap, calibrated)).toFixed(4));
 }
 
 /**

@@ -243,8 +243,11 @@ export class Scheduler {
       push(words.find((word) => String(word.id) === state.wordId), 'review');
     }
     for (const word of newWords) push(word, 'new');
-    for (const word of fillers) push(word, 'practice');
-    for (const word of words) push(word, 'practice');
+    // 到期/新词优先。只有在完全没有到期/新词时，才做“额外练习”；
+    // 否则未到期的词会每天作为 filler 重复，压缩记忆曲线。
+    if (selected.length === 0) {
+      for (const word of fillers) push(word, 'practice');
+    }
 
     if (selected.length === 0) {
       throw new ContractError('SCHEDULER_QUEUE_EMPTY', 'daily queue has no words');
