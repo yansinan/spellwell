@@ -63,6 +63,9 @@
 | `units[].graphemeId` | 必须存在于 `graphemes.json`，且组合文本等于 `unit.text` |
 | `translation` | 可选，中文翻译；只展示，不参与判定/调度 |
 | `phonetic` | 可选，音标字符串；只展示，不参与判定/调度 |
+| `magicE` | 可选，CVCe 魔法 e 标注 |
+| `magicEPattern` | 可选，如 `a_e`/`i_e`/`o_e`/`u_e` |
+| `familyKey` / `familyWords` | 可选，词族关联；只展示/辅助记忆 |
 | `tags` | 可选，小写短标签；不参与调度 |
 | `sentenceIds` | 可为空；每个 ID 必须存在且句子的 `wordId` 回指本词 |
 | `reviewStatus` | `unreviewed` / `reviewed` / `retired`；生产导出仅 `reviewed` |

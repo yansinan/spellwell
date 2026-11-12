@@ -73,6 +73,12 @@ tokens.join('') === word.text
 全字母保底仍然存在是合理的：`nice/five/name/home/...` 这类 CVC/CVCe 词按字母切分，
 在没有引入“魔法 e”教学标注前，不应强行拼成非连续块。
 
+## 3.1 魔法 e
+
+CVCe 词增加 `magicE`/`magicEPattern` 标注，最终 e 标 `silent:true`。
+当前 `units` 仍必须是连续字母，所以不直接合并成 `a_e` 单块；该标注用于教学、审核和难度。
+共 108 词；`have/love/live/move/come/some/one/everyone/welcome/chinese` 等例外排除。
+
 ## 4. 仍在观察的点
 
 - `neighbourhood` 的 `our` 在非重读音节中读 /ə/，但文字上仍是 `our`；

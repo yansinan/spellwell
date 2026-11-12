@@ -43,7 +43,7 @@ test('V10：当前种子全部 unreviewed，生产导出阻断', async () => {
   const content = await load();
   const error = assertThrows(() => buildExport(content), 'CONTENT_EXPORT_UNREVIEWED');
   assertEqual(error.code, 'CONTENT_EXPORT_UNREVIEWED');
-  assertEqual(error.details.unreviewed.length, 1795);
+  assertEqual(error.details.unreviewed.length, 1874);
 });
 
 test('V10：全部 reviewed 后导出成功且只含 reviewed', async () => {
@@ -51,7 +51,7 @@ test('V10：全部 reviewed 后导出成功且只含 reviewed', async () => {
   const snapshot = buildExport(content);
   assertEqual(snapshot.counts.words, 1474);
   assertEqual(snapshot.counts.graphemes, 152);
-  assertEqual(snapshot.counts.sentences, 162);
+  assertEqual(snapshot.counts.sentences, 241);
   assertEqual(snapshot.counts.confusables, 7);
   assertEqual(snapshot.stores.words.every((item) => item.reviewStatus === 'reviewed'), true);
 });

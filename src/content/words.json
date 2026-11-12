@@ -170,7 +170,12 @@
       "sentenceIds": [
         "s.fltrpplay.01"
       ],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "play",
+      "familyWords": [
+        "play",
+        "playground"
+      ]
     },
     {
       "id": "w.fltrp-i",
@@ -1324,7 +1329,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpclassroom.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -1413,7 +1420,13 @@
       "sentenceIds": [
         "s.fltrpwindow.01"
       ],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "win",
+      "familyWords": [
+        "win",
+        "window",
+        "winter"
+      ]
     },
     {
       "id": "w.fltrp-desk",
@@ -1615,7 +1628,12 @@
       "sentenceIds": [
         "s.fltrpteacher.01"
       ],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "teach",
+      "familyWords": [
+        "teach",
+        "teacher"
+      ]
     },
     {
       "id": "w.fltrp-very",
@@ -2470,7 +2488,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbird.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2614,7 +2634,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrprabbit.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2694,7 +2716,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpanimal.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2836,7 +2860,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrptiger.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2873,7 +2899,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrplion.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2902,7 +2930,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbear.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2943,7 +2973,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpmonkey.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -2984,7 +3016,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrppanda.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -4540,7 +4574,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpstrong.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -4908,7 +4944,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpclean.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -5550,7 +5588,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrplunch.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -5653,7 +5693,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbusy.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -6065,7 +6107,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpdinner.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -6695,7 +6739,13 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "rain",
+      "familyWords": [
+        "rain",
+        "rainy",
+        "rainbow"
+      ]
     },
     {
       "id": "w.fltrp-sunny",
@@ -6732,7 +6782,12 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "sun",
+      "familyWords": [
+        "sun",
+        "sunny"
+      ]
     },
     {
       "id": "w.fltrp-worry",
@@ -7092,7 +7147,13 @@
       "sentenceIds": [
         "s.fltrpwinter.01"
       ],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "win",
+      "familyWords": [
+        "win",
+        "window",
+        "winter"
+      ]
     },
     {
       "id": "w.fltrp-season",
@@ -7537,7 +7598,12 @@
       "sentenceIds": [
         "s.fltrpsun.01"
       ],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "sun",
+      "familyWords": [
+        "sun",
+        "sunny"
+      ]
     },
     {
       "id": "w.fltrp-jump",
@@ -7924,7 +7990,12 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "farm",
+      "familyWords": [
+        "farm",
+        "farmer"
+      ]
     },
     {
       "id": "w.fltrp-chinese",
@@ -8136,7 +8207,12 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "farm",
+      "familyWords": [
+        "farm",
+        "farmer"
+      ]
     },
     {
       "id": "w.fltrp-worker",
@@ -8370,7 +8446,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpcow.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -8411,7 +8489,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpchicken.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -8444,7 +8524,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpsheep.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -8614,7 +8696,12 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "help",
+      "familyWords": [
+        "help",
+        "helpful"
+      ]
     },
     {
       "id": "w.fltrp-painting",
@@ -9282,7 +9369,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpdraw.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -10382,7 +10471,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbeautiful.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -10567,7 +10658,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrplibrary.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -10653,8 +10746,15 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "sentenceIds": [
+        "s.fltrpplayground.01"
+      ],
+      "reviewStatus": "unreviewed",
+      "familyKey": "play",
+      "familyWords": [
+        "play",
+        "playground"
+      ]
     },
     {
       "id": "w.fltrp-everyone",
@@ -14092,7 +14192,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpsleep.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -14524,7 +14626,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpbreakfast.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -14566,7 +14670,13 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "rain",
+      "familyWords": [
+        "rain",
+        "rainy",
+        "rainbow"
+      ]
     },
     {
       "id": "w.fltrp-hamburger",
@@ -14610,7 +14720,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrphamburger.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -14647,7 +14759,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpjuice.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -14919,7 +15033,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpelephant.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -14993,7 +15109,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrplisten.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -15158,7 +15276,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrphorse.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -15220,7 +15340,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrppig.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -15290,7 +15412,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpfunny.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -15368,7 +15492,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpduck.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -15731,7 +15857,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpmouse.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -16828,7 +16956,13 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "win",
+      "familyWords": [
+        "win",
+        "window",
+        "winter"
+      ]
     },
     {
       "id": "w.fltrp-just",
@@ -17159,7 +17293,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpclever.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -17491,7 +17627,13 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "rain",
+      "familyWords": [
+        "rain",
+        "rainy",
+        "rainbow"
+      ]
     },
     {
       "id": "w.fltrp-boot",
@@ -18813,7 +18955,12 @@
         "base"
       ],
       "sentenceIds": [],
-      "reviewStatus": "unreviewed"
+      "reviewStatus": "unreviewed",
+      "familyKey": "teach",
+      "familyWords": [
+        "teach",
+        "teacher"
+      ]
     },
     {
       "id": "w.fltrp-kitty",
@@ -19032,7 +19179,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpwake.01"
+      ],
       "reviewStatus": "unreviewed",
       "magicE": true,
       "magicEPattern": "a_e"
@@ -20465,7 +20614,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpeasy.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -20666,7 +20817,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrppaint.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -20941,7 +21094,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpwalk.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -21439,7 +21594,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpdirty.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -22883,7 +23040,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpgym.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -22926,7 +23085,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpoffice.01"
+      ],
       "reviewStatus": "unreviewed",
       "magicE": true,
       "magicEPattern": "i_e"
@@ -23071,7 +23232,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpdifficult.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -23104,7 +23267,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrptalk.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -23593,7 +23758,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpquiet.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -25640,7 +25807,9 @@
         "fltrp",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.fltrpyoung.01"
+      ],
       "reviewStatus": "unreviewed"
     },
     {
@@ -33923,7 +34092,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.bird.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -33960,7 +34131,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.tiger.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -34001,7 +34174,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.monkey.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -35755,7 +35930,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.bear.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -35934,7 +36111,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.noodles.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -36051,7 +36230,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.chicken.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -36230,7 +36411,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.juice.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -36259,7 +36442,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.tea.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -38557,7 +38742,13 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "rain",
+      "familyWords": [
+        "rain",
+        "rainy",
+        "rainbow"
+      ]
     },
     {
       "id": "w.cloudy",
@@ -38705,7 +38896,12 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "sun",
+      "familyWords": [
+        "sun",
+        "sunny"
+      ]
     },
     {
       "id": "w.umbrella",
@@ -38978,7 +39174,13 @@
       ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "win",
+      "familyWords": [
+        "win",
+        "window",
+        "winter"
+      ]
     },
     {
       "id": "w.hot",
@@ -40554,7 +40756,12 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "help",
+      "familyWords": [
+        "help",
+        "helpful"
+      ]
     },
     {
       "id": "w.bad",
@@ -41214,7 +41421,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.duck.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -41255,7 +41464,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.rabbit.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -41327,7 +41538,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.snake.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）",
@@ -42889,7 +43102,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.classroom.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -42930,7 +43145,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.library.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -43012,10 +43229,17 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.playground.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "play",
+      "familyWords": [
+        "play",
+        "playground"
+      ]
     },
     {
       "id": "w.second",
@@ -43489,7 +43713,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.beautiful.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -44388,7 +44614,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.paint.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -44468,7 +44696,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.dirty.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -45514,7 +45744,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.hamburger.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -45810,7 +46042,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.cook.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -45891,7 +46125,12 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "farm",
+      "familyWords": [
+        "farm",
+        "farmer"
+      ]
     },
     {
       "id": "w.worker",
@@ -46097,7 +46336,12 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "teach",
+      "familyWords": [
+        "teach",
+        "teacher"
+      ]
     },
     {
       "id": "w.just",
@@ -46247,7 +46491,12 @@
       ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "teach",
+      "familyWords": [
+        "teach",
+        "teacher"
+      ]
     },
     {
       "id": "w.between",
@@ -46866,7 +47115,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.busy.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -48041,7 +48292,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.clever.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -48156,7 +48409,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.quiet.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -48197,7 +48452,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.friendly.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -48237,7 +48494,12 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "help",
+      "familyWords": [
+        "help",
+        "helpful"
+      ]
     },
     {
       "id": "w.active",
@@ -48361,7 +48623,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.talk.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -48756,7 +49020,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.young.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -48863,7 +49129,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.animal.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -48908,7 +49176,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.elephant.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -48949,7 +49219,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.panda.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -48986,7 +49258,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.horse.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -49015,7 +49289,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.cow.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -49048,7 +49324,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.pig.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -49081,7 +49359,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.sheep.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -49146,7 +49426,12 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "farm",
+      "familyWords": [
+        "farm",
+        "farmer"
+      ]
     },
     {
       "id": "w.fast",
@@ -50318,7 +50603,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.office.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）",
@@ -52240,7 +52527,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.kind.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -52823,7 +53112,13 @@
       "sentenceIds": [],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "win",
+      "familyWords": [
+        "win",
+        "window",
+        "winter"
+      ]
     },
     {
       "id": "w.race",
@@ -54896,7 +55191,9 @@
         "pep2026",
         "base"
       ],
-      "sentenceIds": [],
+      "sentenceIds": [
+        "s.frog.01"
+      ],
       "reviewStatus": "unreviewed",
       "textbook": "pep-2026",
       "textbookLabel": "人教版新起点（2026）"
@@ -55037,7 +55334,13 @@
       "term": "下",
       "unit": 2,
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "rain",
+      "familyWords": [
+        "rain",
+        "rainy",
+        "rainbow"
+      ]
     },
     {
       "id": "w.night",
@@ -55103,7 +55406,12 @@
       "term": "下",
       "unit": 1,
       "textbook": "pep-2026",
-      "textbookLabel": "人教版新起点（2026）"
+      "textbookLabel": "人教版新起点（2026）",
+      "familyKey": "sun",
+      "familyWords": [
+        "sun",
+        "sunny"
+      ]
     },
     {
       "id": "w.cloud",

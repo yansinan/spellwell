@@ -18,11 +18,18 @@ export const P6_AVAILABLE_TYPES = Object.freeze([...P4_AVAILABLE_TYPES, 'T-JUDGE
  * @param {{units: {text: string, graphemeId: string}[]}} word
  * @returns {number}
  */
-export function chooseFocusIndex(word) {
-  const multi = word.units
+export function chooseFocusIndex(word, seed = 0) {
+  const units = Array.isArray(word.units) ? word.units : [];
+  if (units.length === 0) return 0;
+  // 元音 unit 50% 权重，其余位置共享 50%：让 T-FILL 有机会练 _ish / f_sh / fi_h。
+  const all = units.map((_, index) => index);
+  const vowels = units
     .map((unit, index) => ({ unit, index }))
-    .filter((entry) => entry.unit.text.length > 1);
-  return (multi[0] ?? { index: word.units.length - 1 }).index;
+    .filter((entry) => /[aeiou]/.test(String(entry.unit.text)))
+    .map((entry) => entry.index);
+  const rng = createRng(hashSeed(`${word.id}|focus|${seed}`));
+  if (vowels.length > 0 && rng.float() < 0.5) return rng.pick(vowels);
+  return rng.pick(all);
 }
 
 /**
@@ -136,7 +143,7 @@ export function buildWordSpec({
     throw new ContractError('SPEC_BUILD_INVALID', `P6 cannot build type ${typeId}`);
   }
 
-  const focusIndex = chooseFocusIndex(word);
+  const focusIndex = chooseFocusIndex(word, seed);
   const focusUnit = word.units[focusIndex];
   const distractors = chooseDistractorIds(word, distractorPool, seed);
   const params = typeId === 'T-SEQUENCE'

@@ -195,6 +195,13 @@ export class PracticeScreen {
       practice: 'Practice',
     }[spec.params?.plan?.phase] ?? '';
     const progress = `${this.#session.currentIndex + 1} / ${this.#session.size}`;
+    const familyWords = Array.isArray(bundle.word.familyWords) ? bundle.word.familyWords : [];
+    const familyHtml = familyWords.length > 1
+      ? `<p class="sw-practice__family"><span>Word family</span>${familyWords.map((word) => escapeHtml(word)).join(' · ')}</p>`
+      : '';
+    const magicHtml = bundle.word.magicE
+      ? `<p class="sw-practice__magic"><span>Magic e</span>${escapeHtml(bundle.word.magicEPattern ?? '')}</p>`
+      : '';
     const isType = spec.typeId === 'T-TYPE';
     const isEdit = spec.typeId === 'T-EDIT';
     const isSegment = spec.typeId === 'T-SEGMENT';
@@ -240,6 +247,8 @@ export class PracticeScreen {
         <main class="sw-practice__stage">
           ${phaseLabel ? `<p class="sw-practice__phase">${phaseLabel}</p>` : ''}
           <p class="sw-practice__kind">${copy.title}</p>
+          ${familyHtml}
+          ${magicHtml}
           ${promptHtml}
           <p class="sw-practice__hint">${copy.hint}</p>
 

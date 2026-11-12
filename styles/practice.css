@@ -979,3 +979,41 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
+
+.sw-practice__family {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 8px;
+  margin: 2px 0 0;
+  color: var(--sw-ink-soft);
+  font-family: var(--sw-font-en);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sw-practice__family span {
+  color: var(--sw-ink-faint);
+  font-family: var(--sw-font-body);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sw-practice__magic {
+  margin: 0;
+  color: var(--sw-ink-soft);
+  font-family: var(--sw-font-body);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sw-practice__magic span {
+  margin-right: 6px;
+  color: var(--sw-ink-faint);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}

@@ -40,3 +40,12 @@ test('魔法 e：CVCe 词标记 silent e，非魔法 e 例外不标记', () => {
   assertEqual(byText.love.magicE, undefined);
   assertEqual(words.items.filter((word) => word.magicE).length, 108);
 });
+
+test('单词关联：win/window/winter 等词族已预填', () => {
+  const byText = Object.fromEntries(words.items.map((word) => [word.text, word]));
+  assertEqual(byText.win.familyKey, 'win');
+  assertDeepEqual(byText.window.familyWords, ['win', 'window', 'winter']);
+  assertDeepEqual(byText.winter.familyWords, ['win', 'window', 'winter']);
+  assertEqual(byText.sun.familyKey, 'sun');
+  assertDeepEqual(byText.rain.familyWords, ['rain', 'rainy', 'rainbow']);
+});

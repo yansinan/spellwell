@@ -9,7 +9,7 @@
 
 import { ContractError } from '../core/errors.js';
 
-export const CONTENT_VERSION = 8;
+export const CONTENT_VERSION = 9;
 
 const CONTENT_STORES = Object.freeze(['words', 'graphemes', 'sentences', 'confusables']);
 

@@ -1296,6 +1296,638 @@
       "blank": "game",
       "answer": "game",
       "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpanimal.01",
+      "wordId": "w.fltrp-animal",
+      "text": "I like this animal.",
+      "blank": "animal",
+      "answer": "animal",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.animal.01",
+      "wordId": "w.animal",
+      "text": "I like this animal.",
+      "blank": "animal",
+      "answer": "animal",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpbear.01",
+      "wordId": "w.fltrp-bear",
+      "text": "The bear is big.",
+      "blank": "bear",
+      "answer": "bear",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.bear.01",
+      "wordId": "w.bear",
+      "text": "The bear is big.",
+      "blank": "bear",
+      "answer": "bear",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpbird.01",
+      "wordId": "w.fltrp-bird",
+      "text": "The bird can fly.",
+      "blank": "bird",
+      "answer": "bird",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.bird.01",
+      "wordId": "w.bird",
+      "text": "The bird can fly.",
+      "blank": "bird",
+      "answer": "bird",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpduck.01",
+      "wordId": "w.fltrp-duck",
+      "text": "The duck can swim.",
+      "blank": "duck",
+      "answer": "duck",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.duck.01",
+      "wordId": "w.duck",
+      "text": "The duck can swim.",
+      "blank": "duck",
+      "answer": "duck",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpelephant.01",
+      "wordId": "w.fltrp-elephant",
+      "text": "The elephant is big.",
+      "blank": "elephant",
+      "answer": "elephant",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.elephant.01",
+      "wordId": "w.elephant",
+      "text": "The elephant is big.",
+      "blank": "elephant",
+      "answer": "elephant",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrplion.01",
+      "wordId": "w.fltrp-lion",
+      "text": "The lion is strong.",
+      "blank": "lion",
+      "answer": "lion",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpmonkey.01",
+      "wordId": "w.fltrp-monkey",
+      "text": "The monkey can climb.",
+      "blank": "monkey",
+      "answer": "monkey",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.monkey.01",
+      "wordId": "w.monkey",
+      "text": "The monkey can climb.",
+      "blank": "monkey",
+      "answer": "monkey",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrppanda.01",
+      "wordId": "w.fltrp-panda",
+      "text": "The panda is black and white.",
+      "blank": "panda",
+      "answer": "panda",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.panda.01",
+      "wordId": "w.panda",
+      "text": "The panda is black and white.",
+      "blank": "panda",
+      "answer": "panda",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrptiger.01",
+      "wordId": "w.fltrp-tiger",
+      "text": "The tiger is fast.",
+      "blank": "tiger",
+      "answer": "tiger",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.tiger.01",
+      "wordId": "w.tiger",
+      "text": "The tiger is fast.",
+      "blank": "tiger",
+      "answer": "tiger",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrprabbit.01",
+      "wordId": "w.fltrp-rabbit",
+      "text": "The rabbit can jump.",
+      "blank": "rabbit",
+      "answer": "rabbit",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.rabbit.01",
+      "wordId": "w.rabbit",
+      "text": "The rabbit can jump.",
+      "blank": "rabbit",
+      "answer": "rabbit",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrphorse.01",
+      "wordId": "w.fltrp-horse",
+      "text": "The horse can run.",
+      "blank": "horse",
+      "answer": "horse",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.horse.01",
+      "wordId": "w.horse",
+      "text": "The horse can run.",
+      "blank": "horse",
+      "answer": "horse",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpcow.01",
+      "wordId": "w.fltrp-cow",
+      "text": "The cow is on the farm.",
+      "blank": "cow",
+      "answer": "cow",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.cow.01",
+      "wordId": "w.cow",
+      "text": "The cow is on the farm.",
+      "blank": "cow",
+      "answer": "cow",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpsheep.01",
+      "wordId": "w.fltrp-sheep",
+      "text": "The sheep is white.",
+      "blank": "sheep",
+      "answer": "sheep",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.sheep.01",
+      "wordId": "w.sheep",
+      "text": "The sheep is white.",
+      "blank": "sheep",
+      "answer": "sheep",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrppig.01",
+      "wordId": "w.fltrp-pig",
+      "text": "The pig is pink.",
+      "blank": "pig",
+      "answer": "pig",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.pig.01",
+      "wordId": "w.pig",
+      "text": "The pig is pink.",
+      "blank": "pig",
+      "answer": "pig",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpchicken.01",
+      "wordId": "w.fltrp-chicken",
+      "text": "The chicken is small.",
+      "blank": "chicken",
+      "answer": "chicken",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.chicken.01",
+      "wordId": "w.chicken",
+      "text": "The chicken is small.",
+      "blank": "chicken",
+      "answer": "chicken",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpmouse.01",
+      "wordId": "w.fltrp-mouse",
+      "text": "The mouse is small.",
+      "blank": "mouse",
+      "answer": "mouse",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.snake.01",
+      "wordId": "w.snake",
+      "text": "The snake is long.",
+      "blank": "snake",
+      "answer": "snake",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.frog.01",
+      "wordId": "w.frog",
+      "text": "The frog can jump.",
+      "blank": "frog",
+      "answer": "frog",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpclassroom.01",
+      "wordId": "w.fltrp-classroom",
+      "text": "This is my classroom.",
+      "blank": "classroom",
+      "answer": "classroom",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.classroom.01",
+      "wordId": "w.classroom",
+      "text": "This is my classroom.",
+      "blank": "classroom",
+      "answer": "classroom",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpplayground.01",
+      "wordId": "w.fltrp-playground",
+      "text": "We play on the playground.",
+      "blank": "playground",
+      "answer": "playground",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.playground.01",
+      "wordId": "w.playground",
+      "text": "We play on the playground.",
+      "blank": "playground",
+      "answer": "playground",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrplibrary.01",
+      "wordId": "w.fltrp-library",
+      "text": "I read in the library.",
+      "blank": "library",
+      "answer": "library",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.library.01",
+      "wordId": "w.library",
+      "text": "I read in the library.",
+      "blank": "library",
+      "answer": "library",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpoffice.01",
+      "wordId": "w.fltrp-office",
+      "text": "My mother works in an office.",
+      "blank": "office",
+      "answer": "office",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.office.01",
+      "wordId": "w.office",
+      "text": "My mother works in an office.",
+      "blank": "office",
+      "answer": "office",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpgym.01",
+      "wordId": "w.fltrp-gym",
+      "text": "We play in the gym.",
+      "blank": "gym",
+      "answer": "gym",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpbreakfast.01",
+      "wordId": "w.fltrp-breakfast",
+      "text": "I eat breakfast in the morning.",
+      "blank": "breakfast",
+      "answer": "breakfast",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrplunch.01",
+      "wordId": "w.fltrp-lunch",
+      "text": "We eat lunch at school.",
+      "blank": "lunch",
+      "answer": "lunch",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpdinner.01",
+      "wordId": "w.fltrp-dinner",
+      "text": "We eat dinner at home.",
+      "blank": "dinner",
+      "answer": "dinner",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrphamburger.01",
+      "wordId": "w.fltrp-hamburger",
+      "text": "I like hamburgers.",
+      "blank": "hamburger",
+      "answer": "hamburger",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.hamburger.01",
+      "wordId": "w.hamburger",
+      "text": "I like hamburgers.",
+      "blank": "hamburger",
+      "answer": "hamburger",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.noodles.01",
+      "wordId": "w.noodles",
+      "text": "I like noodles.",
+      "blank": "noodles",
+      "answer": "noodles",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpjuice.01",
+      "wordId": "w.fltrp-juice",
+      "text": "I drink juice.",
+      "blank": "juice",
+      "answer": "juice",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.juice.01",
+      "wordId": "w.juice",
+      "text": "I drink juice.",
+      "blank": "juice",
+      "answer": "juice",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.tea.01",
+      "wordId": "w.tea",
+      "text": "My father drinks tea.",
+      "blank": "tea",
+      "answer": "tea",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpwalk.01",
+      "wordId": "w.fltrp-walk",
+      "text": "I walk to school.",
+      "blank": "walk",
+      "answer": "walk",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrptalk.01",
+      "wordId": "w.fltrp-talk",
+      "text": "I talk to my friend.",
+      "blank": "talk",
+      "answer": "talk",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.talk.01",
+      "wordId": "w.talk",
+      "text": "I talk to my friend.",
+      "blank": "talk",
+      "answer": "talk",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrplisten.01",
+      "wordId": "w.fltrp-listen",
+      "text": "I listen to music.",
+      "blank": "listen",
+      "answer": "listen",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpdraw.01",
+      "wordId": "w.fltrp-draw",
+      "text": "I can draw a cat.",
+      "blank": "draw",
+      "answer": "draw",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrppaint.01",
+      "wordId": "w.fltrp-paint",
+      "text": "I paint a picture.",
+      "blank": "paint",
+      "answer": "paint",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.paint.01",
+      "wordId": "w.paint",
+      "text": "I paint a picture.",
+      "blank": "paint",
+      "answer": "paint",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpclean.01",
+      "wordId": "w.fltrp-clean",
+      "text": "My room is clean.",
+      "blank": "clean",
+      "answer": "clean",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.cook.01",
+      "wordId": "w.cook",
+      "text": "My mother can cook.",
+      "blank": "cook",
+      "answer": "cook",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpsleep.01",
+      "wordId": "w.fltrp-sleep",
+      "text": "I sleep at night.",
+      "blank": "sleep",
+      "answer": "sleep",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpwake.01",
+      "wordId": "w.fltrp-wake",
+      "text": "I wake up in the morning.",
+      "blank": "wake",
+      "answer": "wake",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpbeautiful.01",
+      "wordId": "w.fltrp-beautiful",
+      "text": "The flower is beautiful.",
+      "blank": "beautiful",
+      "answer": "beautiful",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.beautiful.01",
+      "wordId": "w.beautiful",
+      "text": "The flower is beautiful.",
+      "blank": "beautiful",
+      "answer": "beautiful",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpstrong.01",
+      "wordId": "w.fltrp-strong",
+      "text": "The horse is strong.",
+      "blank": "strong",
+      "answer": "strong",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpyoung.01",
+      "wordId": "w.fltrp-young",
+      "text": "The baby is young.",
+      "blank": "young",
+      "answer": "young",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.young.01",
+      "wordId": "w.young",
+      "text": "The baby is young.",
+      "blank": "young",
+      "answer": "young",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpfunny.01",
+      "wordId": "w.fltrp-funny",
+      "text": "The monkey is funny.",
+      "blank": "funny",
+      "answer": "funny",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpquiet.01",
+      "wordId": "w.fltrp-quiet",
+      "text": "Please be quiet.",
+      "blank": "quiet",
+      "answer": "quiet",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.quiet.01",
+      "wordId": "w.quiet",
+      "text": "Please be quiet.",
+      "blank": "quiet",
+      "answer": "quiet",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpbusy.01",
+      "wordId": "w.fltrp-busy",
+      "text": "My father is busy.",
+      "blank": "busy",
+      "answer": "busy",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.busy.01",
+      "wordId": "w.busy",
+      "text": "My father is busy.",
+      "blank": "busy",
+      "answer": "busy",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpdirty.01",
+      "wordId": "w.fltrp-dirty",
+      "text": "My shoes are dirty.",
+      "blank": "dirty",
+      "answer": "dirty",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.dirty.01",
+      "wordId": "w.dirty",
+      "text": "My shoes are dirty.",
+      "blank": "dirty",
+      "answer": "dirty",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpeasy.01",
+      "wordId": "w.fltrp-easy",
+      "text": "This book is easy.",
+      "blank": "easy",
+      "answer": "easy",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpdifficult.01",
+      "wordId": "w.fltrp-difficult",
+      "text": "This game is difficult.",
+      "blank": "difficult",
+      "answer": "difficult",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.friendly.01",
+      "wordId": "w.friendly",
+      "text": "My teacher is friendly.",
+      "blank": "friendly",
+      "answer": "friendly",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.kind.01",
+      "wordId": "w.kind",
+      "text": "My friend is kind.",
+      "blank": "kind",
+      "answer": "kind",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.fltrpclever.01",
+      "wordId": "w.fltrp-clever",
+      "text": "The fox is clever.",
+      "blank": "clever",
+      "answer": "clever",
+      "reviewStatus": "unreviewed"
+    },
+    {
+      "id": "s.clever.01",
+      "wordId": "w.clever",
+      "text": "The fox is clever.",
+      "blank": "clever",
+      "answer": "clever",
+      "reviewStatus": "unreviewed"
     }
   ]
 }
