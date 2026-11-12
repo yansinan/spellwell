@@ -12,27 +12,32 @@
 
 ## 决定
 
-### D1：约一半正确、一半可信错误
+### D1：只在该词有历史错误时生成
 
-`buildWordSpec` 在 T-JUDGE-FIX 未显式传入 claim 时，用 `word.id + seed` 决定：
+T-JUDGE-FIX 不再对没有历史错误的词生成。
+probe 无句子时：
 
-- 50%：claim = 正确词；
-- 50%：从历史 actual 或人工相似组替换一个 unit，生成可信错词。
+- 有该词自己的历史错误 → T-JUDGE-FIX；
+- 没有 → T-TYPE。
+
+判断题 claim 只使用该词自己的历史 actual，并回放到对应 unit。
 
 例：
 
 ```text
-bird → berd / burd
-bread → bred / brad
+bird 曾把 ir 写成 er
+→ claim = berd
 ```
 
-### D2：优先历史错误
+### D2：回放自己的错误
 
-错词 claim 的替换候选顺序：
+错词 claim 只使用：
 
-1. 同词历史 actual；
-2. 同 expected 跨词历史 actual；
-3. 人工相似组。
+```text
+同词历史 actual + expected/unitId
+```
+
+不跨词、不使用人工相似组代替。
 
 ### D3：不改判定契约
 
@@ -47,6 +52,6 @@ Wrong → 输入正确拼写
 
 ## 后果
 
-- 正面：不会再出现 100% claim 正确的判断题；
-- 正面：错词 claim 与真实错误/相似组相关；
-- 负面：判断题仍有 50% 的二元猜测空间，但 Wrong 分支要求改对。
+- 正面：没有错题历史时不会出现无逻辑的判断题；
+- 正面：有历史时回放孩子自己的错误；
+- 负面：判断题数量会明显减少，集中在错题回顾。

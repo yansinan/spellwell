@@ -10,7 +10,7 @@ import { ContractError } from '../core/errors.js';
 import { validateQuestionSpec } from '../core/contracts.js';
 import { createRng, hashSeed } from '../core/seedRandom.js';
 import { confusableGraphemes } from './ConfusableGraphemes.js';
-import { historicalActuals } from './ErrorHistory.js';
+import { historicalActuals, historicalErrorsForWord } from './ErrorHistory.js';
 
 export const P1_AVAILABLE_TYPES = Object.freeze(['T-SEQUENCE', 'T-FILL', 'T-TYPE']);
 export const P4_AVAILABLE_TYPES = Object.freeze([...P1_AVAILABLE_TYPES, 'T-REORDER', 'T-EDIT', 'T-SEGMENT']);
@@ -146,24 +146,21 @@ function initialEditText({ word, focusIndex, errorType, distractorPool = [] }) {
  * @returns {import('../core/contracts.js').QuestionSpec}
  */
 /**
- * T-JUDGE-FIX 的 claim：约一半正确，一半用历史/相似组合制造可信错词。
- * @param {{word: any, focusIndex: number, pool: {id: string, text: string}[], errorHistory: any, seed: number|string}} input
+ * T-JUDGE-FIX 的 claim：只使用该词自己的历史错误，制造可信错词。
+ * @param {{word: any, focusIndex: number, errorHistory: any, seed: number|string}} input
  * @returns {{claim: string, focusIndex: number}|null}
  */
-function buildWrongClaim({ word, focusIndex, pool, errorHistory, seed }) {
+function buildWrongClaim({ word, errorHistory, seed }) {
   if (hashSeed(`${word.id}|claim-side|${seed}`) % 2 !== 0) return null;
-  const indexes = word.units.map((_, index) => index);
   const ranked = [];
-  for (const index of indexes) {
+  for (const error of historicalErrorsForWord(errorHistory, word.id)) {
+    const index = word.units.findIndex((unit) => (error.unitId && unit.graphemeId === error.unitId)
+      || unit.text === error.expected);
+    if (index < 0) continue;
     const unit = word.units[index];
-    const actuals = [
-      ...historicalActuals(errorHistory, { wordId: String(word.id), expected: unit.text }, 2),
-      ...confusableGraphemes(unit.text, pool).map((item) => item.text),
-    ].filter((text) => text && text !== unit.text);
-    for (const actual of actuals) {
-      if (!ranked.some((item) => item.actual === actual && item.index === index)) {
-        ranked.push({ index, actual });
-      }
+    if (!error.actual || error.actual === unit.text) continue;
+    if (!ranked.some((item) => item.index === index && item.actual === error.actual)) {
+      ranked.push({ index, actual: error.actual });
     }
   }
   if (ranked.length === 0) return null;
@@ -214,8 +211,6 @@ export function buildWordSpec({
   if (typeId === 'T-JUDGE-FIX' && typeof claim !== 'string') {
     const wrong = buildWrongClaim({
       word,
-      focusIndex,
-      pool: distractorPool,
       errorHistory,
       seed,
     });

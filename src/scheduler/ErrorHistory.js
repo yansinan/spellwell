@@ -14,13 +14,15 @@
 /**
  * @param {Record<string, any>[]} attempts
  * @returns {{
- *   byWord: Map<string, Map<string, HistoryActual[]>>,
- *   byExpected: Map<string, Map<string, HistoryActual[]>>
+ *   byWord: Map<string, Map<string, {actual: string, count: number, lastAt: number}>>,
+ *   byExpected: Map<string, Map<string, {actual: string, count: number, lastAt: number}>>,
+ *   byWordExpected: Map<string, Map<string, Map<string, {actual: string, count: number, lastAt: number, unitId: string}>>>
  * }}
  */
 export function buildErrorHistory(attempts) {
   const byWord = new Map();
   const byExpected = new Map();
+  const byWordExpected = new Map();
   const bump = (bucket, actual, at) => {
     const existing = bucket.get(actual);
     if (existing) {
@@ -40,6 +42,13 @@ export function buildErrorHistory(attempts) {
     byExpected.set(expected, bucket);
     return bucket;
   };
+  const ensureWordExpected = (wordId, expected) => {
+    const wordBucket = byWordExpected.get(wordId) ?? new Map();
+    const bucket = wordBucket.get(expected) ?? new Map();
+    wordBucket.set(expected, bucket);
+    byWordExpected.set(wordId, wordBucket);
+    return bucket;
+  };
 
   for (const [index, attempt] of (Array.isArray(attempts) ? attempts : []).entries()) {
     const error = attempt?.firstError;
@@ -47,10 +56,26 @@ export function buildErrorHistory(attempts) {
     if (typeof error.expected !== 'string' || error.expected.length === 0) continue;
     const at = Date.parse(attempt.timestamp ?? '') || index;
     const wordId = String(attempt.wordId ?? '');
-    if (wordId) bump(ensureWord(wordId), error.actual, at);
+    if (wordId) {
+      bump(ensureWord(wordId), error.actual, at);
+      const detail = ensureWordExpected(wordId, error.expected);
+      const existing = detail.get(error.actual);
+      if (existing) {
+        existing.count += 1;
+        existing.lastAt = Math.max(existing.lastAt, at);
+        existing.unitId = String(error.unitId ?? existing.unitId ?? '');
+      } else {
+        detail.set(error.actual, {
+          actual: error.actual,
+          count: 1,
+          lastAt: at,
+          unitId: String(error.unitId ?? ''),
+        });
+      }
+    }
     bump(ensureExpected(error.expected), error.actual, at);
   }
-  return { byWord, byExpected };
+  return { byWord, byExpected, byWordExpected };
 }
 
 /**
@@ -84,4 +109,24 @@ export function historicalActuals(history, { wordId = '', expected = '' }, limit
     if (expectedBucket) add([...expectedBucket.values()]);
   }
   return result.slice(0, limit);
+}
+
+/**
+ * 某词自己的历史错误明细：保留 expected/unitId，供判断题回放。
+ * @param {{byWordExpected?: Map<string, Map<string, Map<string, {actual: string, count: number, lastAt: number, unitId: string}>>>}|undefined} history
+ * @param {string} wordId
+ * @returns {{expected: string, actual: string, unitId: string, count: number, lastAt: number}[]}
+ */
+export function historicalErrorsForWord(history, wordId) {
+  const byExpected = history?.byWordExpected?.get(String(wordId));
+  if (!byExpected) return [];
+  const result = [];
+  for (const [expected, bucket] of byExpected) {
+    for (const item of bucket.values()) {
+      result.push({ expected, ...item });
+    }
+  }
+  return result.sort((a, b) => (b.count - a.count)
+    || (b.lastAt - a.lastAt)
+    || a.actual.localeCompare(b.actual));
 }

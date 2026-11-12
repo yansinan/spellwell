@@ -37,7 +37,7 @@
 | [0031](0031-vowel-split-fill.md) | 元音组合拆字母练习 | Accepted | T-FILL 约1/3把 ai/ea/oo 拆成字母双空；保留原 units |
 | [0032](0032-confusable-distractors.md) | 相似音/相似拼写干扰项 | Accepted | ir/er/ur、ea/ee/e/a 等；T-FILL/T-MATCH 优先同组干扰 |
 | [0033](0033-history-distractors.md) | 历史错误优先于人工相似组 | Accepted | attempts 历史 actual 优先；静态表次之 |
-| [0034](0034-judge-claim.md) | T-JUDGE-FIX 可信错误 claim | Accepted | 50%正确/50%可信错词；历史→相似组；保留判断+改错 |
+| [0034](0034-judge-claim.md) | T-JUDGE-FIX 历史错题回放 | Accepted | 仅该词有历史错误时出现；claim 用自己的 actual |
 | [0035](0035-visual-polish.md) | P9 视觉收口/后台入口 | Accepted | 去标签/去重复提示；圆角主按钮；/admin |
 
 新增 ADR 的模板：

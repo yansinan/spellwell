@@ -20,7 +20,7 @@
 
 ### 2.1 不是“判断题偏多”
 
-T-JUDGE-FIX 只在 probe 状态、且该词没有句子时出现。
+T-JUDGE-FIX 只在 probe 状态、该词没有句子、且该词有历史错误时出现；否则用 T-TYPE。
 普通新词/复习/错词修复分别进入：
 
 ```text
@@ -40,11 +40,11 @@ claim: String(word.text)
 固定传给 T-JUDGE-FIX，因此 claim 永远是正确词，
 孩子只要点 Correct 就能过。
 
-已修复为约一半正确、一半由历史错误/相似组生成的可信错词：
+已修复为只在该词有历史错误时生成，claim 回放该词自己的错误：
 
 ```text
-bird → berd / burd
-bread → bred / brad
+bird 曾经 ir → er
+→ b _ _ d 的判断题 claim = berd
 ```
 
 ### 2.3 为什么不改成“两个完整单词二选一”

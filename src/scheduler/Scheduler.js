@@ -15,7 +15,7 @@ import { ContractError } from '../core/errors.js';
 import { addDays, isDayKey, toDayKey } from '../core/time.js';
 import { createRng, hashSeed } from '../core/seedRandom.js';
 import { confusableGraphemes } from './ConfusableGraphemes.js';
-import { buildErrorHistory, historicalActuals } from './ErrorHistory.js';
+import { buildErrorHistory, historicalActuals, historicalErrorsForWord } from './ErrorHistory.js';
 import {
   applyWordReview,
   dueDateFor,
@@ -252,12 +252,15 @@ export class Scheduler {
       const state = stateByWord.get(String(word.id));
       const latestError = state?.errorProfile?.at(-1);
       const sentence = this.sentences[String(word.id)] ?? null;
+      const ownHistory = historicalErrorsForWord(errorHistory, word.id).filter((error) =>
+        word.units.some((unit) => (error.unitId && unit.graphemeId === error.unitId)
+          || unit.text === error.expected));
       const phase = phaseByWord.get(String(word.id)) ?? 'practice';
       let typeId;
       let typeReason;
       if (state?.status === 'probe') {
-        typeId = sentence ? 'T-CLOZE' : 'T-JUDGE-FIX';
-        typeReason = 'probe';
+        typeId = sentence ? 'T-CLOZE' : ownHistory.length > 0 ? 'T-JUDGE-FIX' : 'T-TYPE';
+        typeReason = ownHistory.length > 0 ? 'probe:history' : 'probe:recall';
       } else if (latestError) {
         typeId = candidatesForError(latestError.type).find((candidate) => P4_AVAILABLE_TYPES.includes(candidate));
         typeReason = 'repair';

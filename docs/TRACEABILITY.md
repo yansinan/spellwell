@@ -124,7 +124,7 @@
 | R-P9-18 | 元音组合拆字母 T-FILL | `QuestionSpecBuilder` + TFill | `tests/p9/focusSelection.test.js` | P9 | ✅ |
 | R-P9-19 | 相似音/相似拼写干扰项 | `ConfusableGraphemes` + builder/scheduler | `tests/p9/confusableGraphemes.test.js` + focus tests | P9 | ✅ |
 | R-P9-20 | 历史错误优先干扰项 | `ErrorHistory` + builder/scheduler | `tests/p9/errorHistory.test.js` + focus tests | P9 | ✅ |
-| R-P9-21 | T-JUDGE-FIX 可信错误 claim | `QuestionSpecBuilder` + Scheduler | `tests/p9/judgeClaim.test.js` | P9 | ✅ |
+| R-P9-21 | T-JUDGE-FIX 仅历史错题回放 | `QuestionSpecBuilder` + Scheduler | `tests/p9/judgeClaim.test.js` + probe test | P9 | ✅ |
 | R-P9-22 | 提示去标签/视觉收口与 /admin | tokens/practice/serve | 浏览器 + ADR-0035 | P9 | ✅ |
 | R-P7-12 | 例句库与混淆项预制 | `sentences.json` + `confusables.json` | content tests | P7 | ✅ |
 | R-P7-09 | 批量单元标题行切换后续词单元 | `WordImporter.parseBatch` + AdminApp | `tests/p7/import.test.js` + `tests/p7/editor.test.js` | P7 | ✅ |

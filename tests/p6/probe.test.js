@@ -101,3 +101,26 @@ test('probe：30 天满档后连续 3 次正确，60 天后进入抽查', async 
   assertEqual(Boolean(fish), true);
   assertEqual(fish.typeId, 'T-CLOZE');
 });
+
+test('probe：无历史错误不用判断题，有历史错误才回放', async () => {
+  const noHistory = await setup();
+  const state = probeState('w.schoolbag');
+  await noHistory.stateRepository.saveWordState(state);
+  const noHistorySpecs = await noHistory.scheduler.buildDailyQueue({ date: '2026-11-11' });
+  const recall = noHistorySpecs.find((spec) => spec.target.id === 'w.schoolbag');
+  assertEqual(Boolean(recall), true);
+  assertEqual(recall.typeId, 'T-TYPE');
+
+  const withHistory = await setup();
+  await withHistory.stateRepository.saveWordState(probeState('w.schoolbag'));
+  await withHistory.attemptRepository.record({
+    specId: 'old-error', wordId: 'w.schoolbag', wordCorrect: false, focusCorrect: false,
+    firstError: { type: 'SUBSTITUTION', unitKind: 'grapheme', unitId: 'g.oo', position: 3, expected: 'oo', actual: 'o' },
+    timestamp: DAY.getTime(),
+  });
+  const withHistorySpecs = await withHistory.scheduler.buildDailyQueue({ date: '2026-11-11' });
+  const judge = withHistorySpecs.find((spec) => spec.target.id === 'w.schoolbag');
+  assertEqual(Boolean(judge), true);
+  assertEqual(judge.typeId, 'T-JUDGE-FIX');
+  assertEqual(judge.params.claim.includes('o'), true);
+});
