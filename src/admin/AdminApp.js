@@ -23,6 +23,7 @@ import { applyWordLibrary, buildWordLibrary, parseWordLibrary } from './WordLibr
 import { DEFAULT_TEXTBOOK, TEXTBOOKS, readActiveTextbook, saveActiveTextbook, textbookLabel } from '../storage/textbooks.js';
 import { buildExport, validateContent } from './ContentValidator.js';
 import { autoSegment, parseBatch } from './WordImporter.js';
+import { ADMIN_LEARNING_STATUSES, LearningStateService, deriveUnitStatus } from './LearningStateService.js';
 
 async function load(name) {
   const response = await fetch(new URL(`../content/${name}.json`, import.meta.url));
@@ -65,6 +66,28 @@ async function openContent() {
   };
 }
 
+const LEARNING_LABELS = Object.freeze({
+  unstarted: '未开始',
+  reviewing: '复习中',
+  mastered: '已掌握',
+  mixed: '混合',
+  learning: '学习中',
+  probe: '抽查中',
+  '': '未设置',
+});
+
+function learningLabel(status) {
+  return LEARNING_LABELS[status] ?? status;
+}
+
+function learningOptions(current, name) {
+  const valid = ADMIN_LEARNING_STATUSES.includes(current);
+  return `
+    ${valid ? '' : `<option value="" selected>当前：${escape(learningLabel(current))}</option>`}
+    ${ADMIN_LEARNING_STATUSES.map((status) => `<option value="${status}" ${current === status ? 'selected' : ''}>${learningLabel(status)}</option>`).join('')}
+  `;
+}
+
 function escape(value) {
   return String(value)
     .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
@@ -104,6 +127,9 @@ export async function mountAdmin(root) {
   } catch {
     attemptStats = {};
   }
+  const learningService = adapter ? new LearningStateService(adapter) : null;
+  let learningStates = new Map();
+  if (learningService) learningStates = await learningService.load();
   const selectedUnit = content.words.items.find((item) => item.id === selectedWordId)?.unitId;
   const collapsedLevels = new Set(activeWords().map((item) => String(item.unitId ?? `level-${item.level ?? 1}`)));
   if (selectedUnit) collapsedLevels.delete(String(selectedUnit));
@@ -194,7 +220,11 @@ export async function mountAdmin(root) {
         || items.some((item) => item.id === selectedWordId);
       return `
         <details class="sw-admin__level-group" data-level-group="${escape(unit.id)}" ${open ? 'open' : ''}>
-          <summary><span>${escape(unit.label)}</span><strong>${items.length}</strong></summary>
+          <summary>
+            <span>${escape(unit.label)}</span>
+            <strong>${items.length}</strong>
+            ${learningService ? `<select class="sw-admin__learning-select" data-unit-learning="${escape(unit.id)}" aria-label="Unit learning status" title="学习状态（立即生效）">${learningOptions(deriveUnitStatus(items, learningStates), `unit-${unit.id}`)}</select>` : ''}
+          </summary>
           <ul class="sw-admin__word-list">
             ${items.map((item) => {
               const active = item.id === selectedWordId;
@@ -377,7 +407,15 @@ export async function mountAdmin(root) {
                   ${['unreviewed', 'reviewed', 'retired'].map((status) => `<option value="${status}" ${word.reviewStatus === status ? 'selected' : ''}>${status}</option>`).join('')}
                 </select>
               </label>
+              ${learningService ? `
+                <label>学习状态（立即生效）
+                  <select data-word-learning>
+                    ${learningOptions(learningStates.get(String(word.id))?.status ?? 'unstarted', `word-${word.id}`)}
+                  </select>
+                </label>
+              ` : ''}
             </div>
+            <p class="sw-admin__muted">学习状态只改调度，不删除历史答题记录；未开始可重新进入新词。</p>
 
             <div class="sw-admin__unit-head">
               <h3>切分</h3>
@@ -423,6 +461,44 @@ export async function mountAdmin(root) {
       unitPage += 1;
       render();
     });
+
+    for (const select of root.querySelectorAll('[data-unit-learning]')) {
+      select.addEventListener('click', (event) => event.stopPropagation());
+      select.addEventListener('change', async () => {
+        if (!learningService || !select.value) return;
+        const unit = allUnits.find((item) => item.id === select.dataset.unitLearning);
+        if (!unit) return;
+        const status = select.value;
+        const label = learningLabel(status);
+        if (!window.confirm(`将「${unit.label}」的 ${unit.items.length} 个单词设为「${label}」？\n只改学习状态，不删除历史答题记录。`)) {
+          render();
+          return;
+        }
+        try {
+          const states = await learningService.setUnitStatus(unit.items, status);
+          for (const state of states) learningStates.set(String(state.wordId), state);
+          notice = `已将「${unit.label}」设为「${label}」。`;
+        } catch (error) {
+          notice = `学习状态保存失败：${String(error.message ?? error)}`;
+        }
+        render();
+      });
+    }
+    const wordLearning = root.querySelector('[data-word-learning]');
+    if (wordLearning && word) {
+      wordLearning.addEventListener('change', async () => {
+        if (!learningService || !wordLearning.value) return;
+        const status = wordLearning.value;
+        try {
+          const state = await learningService.setWordStatus(word.id, status);
+          learningStates.set(String(state.wordId), state);
+          notice = `已将 ${word.text} 设为「${learningLabel(status)}」。`;
+        } catch (error) {
+          notice = `学习状态保存失败：${String(error.message ?? error)}`;
+        }
+        render();
+      });
+    }
 
     for (const details of root.querySelectorAll('[data-level-group]')) {
       details.addEventListener('toggle', () => {

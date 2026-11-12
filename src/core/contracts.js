@@ -25,7 +25,7 @@ export const ERROR_TYPES = Object.freeze([
   'UNKNOWN',
 ]);
 
-export const WORD_STATUS = Object.freeze(['learning', 'reviewing', 'probe', 'mastered']);
+export const WORD_STATUS = Object.freeze(['unstarted', 'learning', 'reviewing', 'probe', 'mastered']);
 export const GRAPHEME_STATUS = Object.freeze(['learning', 'reviewing', 'probe', 'steady']);
 
 export const INPUT_EVENT_KINDS = Object.freeze([
@@ -138,9 +138,10 @@ export const LAST_RESULTS = Object.freeze(['correct', 'wrong', null]);
  * @property {number} consecutiveCorrect
  * @property {'correct'|'wrong'|null} lastResult
  * @property {ErrorProfile[]} errorProfile
- * @property {'learning'|'reviewing'|'probe'|'mastered'} status
+ * @property {'unstarted'|'learning'|'reviewing'|'probe'|'mastered'} status
  * @property {string|null} dueDate YYYY-MM-DD
  * @property {string} [updatedAt] ISO datetime
+ * @property {'practice'|'admin-placement'} [source]
  */
 
 /**

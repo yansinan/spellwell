@@ -79,7 +79,7 @@ node tools/serve.mjs
 8. **颜色/圆角/动效只来自 `styles/tokens.css`。** 不使用刺眼红色，不做强阴影。
 9. **不新增依赖、不引入构建工具、不引入框架。** 纯 ESM + Node 脚本。
 10. **偏离 DESIGN 必须先写 ADR。** 先改文档再改代码；禁止“代码即文档”。
-11. **后台不写学习状态。** `src/admin/**` 不得写 `wordStates/graphemeStates/attempts`；单词列表可只读 `attempts` 聚合错/对次数。
+11. **后台不直接写学习状态。** `src/admin/**` 不得直接写 `wordStates/graphemeStates/attempts`；只允许通过 `LearningStateService` 写 `wordStates`，不删除 attempts；单词列表可只读 `attempts` 聚合错/对次数。
 12. **挑战模式不写主状态。** `RapidTapChallenge` 的结果不得进入调度/错误画像。
 13. **阶段顺序不可跳。** P9 不通过不进入 P10；当前 P9 已完成，只允许修 P9 缺陷，不提前写 P10 输入适配。
 
@@ -186,4 +186,5 @@ node tools/serve.mjs
 - 视觉：提示只显示内容（中文 + IPA），不显示 Meaning/Sounds 标签；主按钮绿色圆角；后台入口 `/admin`；见 ADR-0035。
 - 记忆周期旧单元在设置页只读自动复习；只有下一个新单元可复选；见 ADR-0036。
 - 强复习题型 T-TYPE/T-FILL 轮转；会话种子随 attempts 变化；见 ADR-0037。
+- 后台可经 `LearningStateService` 设置 unstarted/reviewing/mastered；单元状态派生；见 ADR-0038。
 - 所有例句必须有中文 `translation`；T-CLOZE 显示中文翻译；见 CONTENT_SPEC。

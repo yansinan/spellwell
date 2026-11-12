@@ -107,7 +107,7 @@ export class StateRepository extends BaseRepository {
   async listDueWords(today = todayKey()) {
     const all = await this.adapter.query('wordStates', {});
     return all
-      .filter((state) => state.status !== 'mastered')
+      .filter((state) => state.status !== 'mastered' && state.status !== 'unstarted')
       .filter((state) => typeof state.dueDate === 'string' && state.dueDate <= today)
       .sort((a, b) => {
         const dateCompare = compareStrings(String(a.dueDate), String(b.dueDate));

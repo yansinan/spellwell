@@ -61,3 +61,13 @@ test('单元进度：sampleSize 来自真实 attempts', () => {
   assertEqual(result.sampleSize, 3);
   assertEqual(result.percent > 0, true);
 });
+
+test('未开始状态：进度 0，且不算 practiced/mastered', () => {
+  const words = [{ id: 'a' }];
+  const states = [{ wordId: 'a', status: 'unstarted', intervalIndex: 0, consecutiveCorrect: 0, errorProfile: [], lastResult: null, dueDate: null }];
+  assertEqual(wordProgress(states[0]), 0);
+  const result = unitProgress(states, words);
+  assertEqual(result.percent, 0);
+  assertEqual(result.practiced, 0);
+  assertEqual(result.mastered, 0);
+});

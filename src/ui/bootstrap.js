@@ -79,7 +79,11 @@ async function readContent(adapter) {
   const activeWords = words.filter((word) =>
     (word.textbook ?? DEFAULT_TEXTBOOK) === activeTextbook && word.reviewStatus !== 'retired',
   );
-  const stateByWord = new Map(wordStates.map((state) => [String(state.wordId), state]));
+  const stateByWord = new Map(
+    wordStates
+      .filter((state) => state.status !== 'unstarted')
+      .map((state) => [String(state.wordId), state]),
+  );
   const unitMap = new Map();
   for (const word of activeWords) {
     const id = String(word.unitId ?? `level-${word.level ?? 1}`);

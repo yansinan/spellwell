@@ -16,7 +16,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# P7 191 · P8 194 · P9 236
+# P7 191 · P8 194 · P9 240
 ```
 
 ## 2. 教材与内容
@@ -89,6 +89,7 @@ src/content/confusables.json
 8. 提示去标签、练习页去阶段小标题；主按钮改圆角绿色；后台入口 `/admin`。
 9. 记忆周期旧单元在设置页只读自动复习；只有下一个新单元可复选。
 10. 强复习题型在 T-TYPE/T-FILL 间轮转；会话种子随 attempts 变化。
+11. 后台可受控设置单词/单元的 unstarted/reviewing/mastered，保留 attempts。
 4. 魔法 e 词支持 T-FILL 双空 `n_m_`（选 a、e），不是 `a_e` 非连续单块；
 6. 后台单元按 12 个/页，搜索跨全部；
 7. 一个词目前只能属于一个 unit；跨单元重复会被折叠；

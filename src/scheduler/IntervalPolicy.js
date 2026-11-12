@@ -9,27 +9,21 @@
 import { validateWordState } from '../core/contracts.js';
 import { addDays, toDayKey } from '../core/time.js';
 
-export const REVIEW_INTERVALS_DAYS = Object.freeze([1, 3, 7, 14, 30]);
-export const MAX_INTERVAL_INDEX = REVIEW_INTERVALS_DAYS.length - 1;
+export {
+  MAX_INTERVAL_INDEX,
+  PROBE_DISTINCT_WORDS,
+  PROBE_INTERVAL_DAYS,
+  PROBE_STREAK,
+  REVIEW_INTERVALS_DAYS,
+} from '../core/reviewConstants.js';
 
-/** 组合进入待抽查池的条件（P5 使用）。 */
-export const PROBE_STREAK = 3;
-export const PROBE_DISTINCT_WORDS = 2;
-export const PROBE_INTERVAL_DAYS = 60;
+import {
+  MAX_INTERVAL_INDEX,
+  PROBE_DISTINCT_WORDS,
+  PROBE_STREAK,
+  REVIEW_INTERVALS_DAYS,
+} from '../core/reviewConstants.js';
 
-/**
- * @typedef {Object} ReviewSnapshot
- * @property {number} intervalIndex
- * @property {number} consecutiveCorrect
- * @property {'correct'|'wrong'|null} lastResult
- */
-
-/**
- * 答对升一档；答错降两档（不小于 0）；若上一次也是错，则归零。
- * @param {ReviewSnapshot} state
- * @param {boolean} correct
- * @returns {{intervalIndex: number, consecutiveCorrect: number, lastResult: 'correct'|'wrong'}}
- */
 export function nextReview(state, correct) {
   if (!Number.isInteger(state.intervalIndex) || state.intervalIndex < 0) {
     throw new RangeError('intervalIndex must be a non-negative integer');

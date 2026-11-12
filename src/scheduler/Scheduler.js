@@ -170,7 +170,8 @@ export class Scheduler {
     if (words.length === 0) {
       throw new ContractError('SCHEDULER_CONTENT_EMPTY', 'no active words available for the daily queue');
     }
-    const states = await this.stateRepository.listWordStates();
+    const states = (await this.stateRepository.listWordStates())
+      .filter((state) => state.status !== 'unstarted');
     const stateByWord = new Map(states.map((state) => [state.wordId, state]));
     const attempts = this.attemptRepository?.recent ? await this.attemptRepository.recent(1000) : [];
     const historyAttempts = this.attemptRepository?.all ? await this.attemptRepository.all() : attempts;

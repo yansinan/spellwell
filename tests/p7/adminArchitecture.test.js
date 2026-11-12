@@ -12,7 +12,7 @@ import { assert, test } from '../harness.js';
 const testsDir = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(testsDir, '..', '..');
 
-test('后台不 import 学习状态仓库，不触碰状态 store', async () => {
+test('后台不直接写学习状态；只通过受控服务', async () => {
   const files = ['src/admin/AdminApp.js', 'src/admin/ContentValidator.js'];
   for (const relative of files) {
     const source = await readFile(path.join(root, relative), 'utf8');

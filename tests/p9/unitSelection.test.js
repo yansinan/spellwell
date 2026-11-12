@@ -81,3 +81,17 @@ test('真实权重：有错误历史的词在同层排序更靠前', async () =>
   assertEqual(specs[0].params.plan.calibration.sampleSize, 2);
   assert(specs[0].params.plan.calibration.wordErrorRate > 0.5);
 });
+
+test('未开始状态：调度器把它当作新词，而不是旧复习', async () => {
+  const { scheduler, adapter } = await setup();
+  const now = new Date().toISOString();
+  await adapter.put('wordStates', {
+    wordId: 'w.book', status: 'unstarted', intervalIndex: 0, consecutiveCorrect: 0,
+    lastResult: null, errorProfile: [], dueDate: null, updatedAt: now,
+  });
+  const specs = await scheduler.buildDailyQueue({ size: 20, units: ['g1-s1-u1'], mode: 'review' });
+  const book = specs.find((spec) => spec.target.id === 'w.book');
+  assertEqual(Boolean(book), true);
+  assertEqual(book.params.plan.phase, 'new');
+  assertEqual(book.typeId, 'T-SEQUENCE');
+});

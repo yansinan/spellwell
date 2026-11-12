@@ -932,3 +932,27 @@ code {
   opacity: 0.4;
   cursor: default;
 }
+
+/* 后台学习状态 */
+.sw-admin__level-group summary > span:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.sw-admin__learning-select {
+  max-width: 112px;
+  min-height: 30px;
+  padding: 3px 6px;
+  border: 1px solid var(--sw-line-strong);
+  border-radius: 999px;
+  background: var(--sw-surface-strong);
+  color: var(--sw-ink);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.sw-admin__learning-select:focus-visible {
+  outline: none;
+  box-shadow: var(--sw-focus-ring);
+}

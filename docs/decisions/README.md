@@ -41,6 +41,7 @@
 | [0035](0035-visual-polish.md) | P9 视觉收口/后台入口 | Accepted | 去标签/去重复提示；圆角主按钮；/admin |
 | [0036](0036-auto-review-rows.md) | 旧单元自动复习只读 | Accepted | 记忆周期旧单元固定加入；只复选下一个新单元 |
 | [0037](0037-type-variety.md) | 同阶段题型轮转 | Accepted | 强复习 T-TYPE/T-FILL 交替；新词穿插 T-FILL；会话种子变化 |
+| [0038](0038-admin-learning-state.md) | 后台受控维护学习状态 | Accepted | unstarted/reviewing/mastered；服务写入；单元状态派生 |
 
 新增 ADR 的模板：
 

@@ -40,7 +40,7 @@ export function collectAttemptStats(attempts) {
  * @returns {number} 0—1
  */
 export function wordProgress(state, stats, priorAccuracy = 0.5) {
-  if (!state) return 0;
+  if (!state || state.status === 'unstarted') return 0;
   if (state.status === 'mastered' && (state.errorProfile?.length ?? 0) === 0) return 1;
   const interval = Number(state.intervalIndex ?? 0);
   const memory = MAX_INTERVAL_INDEX > 0 ? Math.min(1, interval / MAX_INTERVAL_INDEX) : 0;
@@ -76,7 +76,7 @@ export function unitProgress(states, words, attempts = []) {
   for (const word of words ?? []) {
     const state = byId.get(String(word.id));
     const wordStats = stats.byWord.get(String(word.id));
-    if (state) practiced += 1;
+    if (state && state.status !== 'unstarted') practiced += 1;
     if (state?.status === 'mastered' && (state?.errorProfile?.length ?? 0) === 0) mastered += 1;
     if (wordStats) sampleSize += wordStats.correct + wordStats.wrong;
     total += wordProgress(state, wordStats, stats.globalAccuracy);
