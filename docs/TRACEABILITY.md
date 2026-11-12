@@ -122,6 +122,7 @@
 | R-P9-16 | 默认自动选择记忆周期单元/设计页默认勾选 | `selectAutoUnits` + main/setup | `tests/p9/unitProgress.test.js` + 浏览器 | P9 | ✅ |
 | R-P9-17 | 单元掌握进度条/百分比 | `masteryProgress` + PracticeSetupScreen | `tests/p9/masteryProgress.test.js` | P9 | ✅ |
 | R-P9-18 | 元音组合拆字母 T-FILL | `QuestionSpecBuilder` + TFill | `tests/p9/focusSelection.test.js` | P9 | ✅ |
+| R-P9-19 | 相似音/相似拼写干扰项 | `ConfusableGraphemes` + builder/scheduler | `tests/p9/confusableGraphemes.test.js` + focus tests | P9 | ✅ |
 | R-P7-12 | 例句库与混淆项预制 | `sentences.json` + `confusables.json` | content tests | P7 | ✅ |
 | R-P7-09 | 批量单元标题行切换后续词单元 | `WordImporter.parseBatch` + AdminApp | `tests/p7/import.test.js` + `tests/p7/editor.test.js` | P7 | ✅ |
 | R-P7-10 | 词库单独导入/导出与重复词合并/替换/不动 | `WordLibrary` + AdminApp | `tests/p7/wordLibrary.test.js` + 浏览器 | P7 | ✅ |

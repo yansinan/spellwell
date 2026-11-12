@@ -12,7 +12,7 @@ import { AttemptRepository } from '../../src/repositories/AttemptRepository.js';
 import { Scheduler } from '../../src/scheduler/Scheduler.js';
 import { createErrorProfile } from '../../src/scheduler/ErrorProfile.js';
 import { P1_AVAILABLE_TYPES } from '../../src/scheduler/QuestionSpecBuilder.js';
-import { assertDeepEqual, assertEqual, assertRejects, assertThrows, test } from '../harness.js';
+import { assert, assertDeepEqual, assertEqual, assertRejects, assertThrows, test } from '../harness.js';
 
 const DAY_ONE = new Date(2026, 10, 11, 10, 0, 0);
 const DAY_TWO = new Date(2026, 10, 12, 10, 0, 0);
@@ -164,7 +164,8 @@ test('Scheduler：题型的难度向量包含 P3 必需维度', async () => {
     assertEqual(typeof difficulty.letterCount, 'number');
     assertEqual(typeof difficulty.graphemeTierMax, 'number');
     assertEqual(typeof difficulty.distractorCount, 'number');
-    assertEqual(difficulty.confusableCount, 0);
+    assertEqual(typeof difficulty.confusableCount, 'number');
+    assert(difficulty.confusableCount >= 0);
     assertEqual(['tap', 'keyboard'].includes(difficulty.inputMode), true);
   }
   assertDeepEqual(

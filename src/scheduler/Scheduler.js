@@ -14,6 +14,7 @@ import { validateAttemptResult, validateQuestionSpec } from '../core/contracts.j
 import { ContractError } from '../core/errors.js';
 import { addDays, isDayKey, toDayKey } from '../core/time.js';
 import { createRng, hashSeed } from '../core/seedRandom.js';
+import { confusableGraphemes } from './ConfusableGraphemes.js';
 import {
   applyWordReview,
   dueDateFor,
@@ -100,9 +101,12 @@ export class Scheduler {
       const containing = words.filter((word) => word.units.some((unit) => unit.graphemeId === state.graphemeId));
       if (containing.length < 2) continue;
       const correctWords = containing.slice(0, 3);
-      const distractors = words
-        .filter((word) => !containing.some((item) => item.id === word.id))
-        .slice(0, 2);
+      const similarIds = new Set(
+        confusableGraphemes(grapheme.text, this.distractorPool).map((item) => item.id),
+      );
+      const available = words.filter((word) => !containing.some((item) => item.id === word.id));
+      const similarWords = available.filter((word) => word.units.some((unit) => similarIds.has(unit.graphemeId)));
+      const distractors = [...similarWords, ...available.filter((word) => !similarWords.includes(word))].slice(0, 2);
       if (distractors.length === 0) continue;
 
       const options = [

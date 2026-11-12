@@ -83,7 +83,7 @@ function buildFill(spec, bundle) {
         text: letter,
         kind: /** @type {const} */ ('letter'),
       })),
-      ...distractorUnits(spec, bundle),
+      ...distractorUnits(spec, bundle).filter((unit) => !vowelSplit.letters.includes(unit.text)),
     ]
     : [...allWordUnits, ...distractorUnits(spec, bundle)];
   const units = createRng(spec.seed).shuffle(candidates);

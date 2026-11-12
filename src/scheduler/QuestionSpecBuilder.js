@@ -9,6 +9,7 @@
 import { ContractError } from '../core/errors.js';
 import { validateQuestionSpec } from '../core/contracts.js';
 import { createRng, hashSeed } from '../core/seedRandom.js';
+import { confusableGraphemes } from './ConfusableGraphemes.js';
 
 export const P1_AVAILABLE_TYPES = Object.freeze(['T-SEQUENCE', 'T-FILL', 'T-TYPE']);
 export const P4_AVAILABLE_TYPES = Object.freeze([...P1_AVAILABLE_TYPES, 'T-REORDER', 'T-EDIT', 'T-SEGMENT']);
@@ -38,16 +39,26 @@ export function chooseFocusIndex(word, seed = 0) {
  * @param {number|string} seed
  * @returns {string[]}
  */
-function chooseDistractorIds(word, pool, seed) {
+function chooseDistractorIds(word, pool, seed, focusText = '') {
   const usedIds = new Set(word.units.map((unit) => unit.graphemeId));
   const usedTexts = new Set(word.units.map((unit) => unit.text));
   const candidates = pool.filter(
     (grapheme) => !usedIds.has(grapheme.id) && !usedTexts.has(grapheme.text),
   );
-  if (candidates.length === 0) return [];
-  const multi = candidates.filter((grapheme) => grapheme.text.length > 1);
-  const pickFrom = multi.length > 0 ? multi : candidates;
-  return [createRng(hashSeed(`${word.id}|distractor|${seed}`)).pick(pickFrom).id];
+  if (candidates.length === 0) return { ids: [], confusableCount: 0 };
+  const rng = createRng(hashSeed(`${word.id}|distractor|${seed}`));
+  const similar = rng.shuffle(confusableGraphemes(focusText, candidates)).slice(0, 2);
+  const ids = similar.map((grapheme) => grapheme.id);
+  if (ids.length < 2) {
+    const multi = rng.shuffle(candidates.filter(
+      (grapheme) => !ids.includes(grapheme.id) && grapheme.text.length > 1,
+    ));
+    const fallback = multi.length > 0
+      ? multi
+      : rng.shuffle(candidates.filter((grapheme) => !ids.includes(grapheme.id)));
+    if (fallback.length > 0) ids.push(fallback[0].id);
+  }
+  return { ids, confusableCount: Math.min(ids.length, similar.length) };
 }
 
 /**
@@ -162,7 +173,8 @@ export function buildWordSpec({
     }
   }
   const focusUnit = word.units[focusIndex];
-  const distractors = chooseDistractorIds(word, distractorPool, seed);
+  const distractorSelection = chooseDistractorIds(word, distractorPool, seed, focusUnit.text);
+  const distractors = distractorSelection.ids;
   const params = typeId === 'T-SEQUENCE'
     ? { distractorGraphemeIds: distractors }
     : typeId === 'T-FILL'
@@ -198,7 +210,7 @@ export function buildWordSpec({
       ...word.units.map((unit) => tierNumber(graphemeMap[unit.graphemeId]?.tier)),
     ),
     distractorCount: ['T-SEQUENCE', 'T-FILL'].includes(typeId) ? distractors.length : 0,
-    confusableCount: 0,
+    confusableCount: distractorSelection.confusableCount,
     inputMode: ['T-TYPE', 'T-EDIT', 'T-CLOZE', 'T-JUDGE-FIX'].includes(typeId) ? 'keyboard' : 'tap',
   };
 

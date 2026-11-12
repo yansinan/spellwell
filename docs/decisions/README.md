@@ -35,6 +35,7 @@
 | [0029](0029-auto-practice-selection.md) | 默认自动选择记忆周期内单元 | Accepted | 复习全选；mastered 排除；有余地加一个新单元；默认直接进入 |
 | [0030](0030-unit-mastery-progress.md) | 单元掌握总进度 | Accepted | 记忆曲线+连对+错题；整行背景条+百分比 |
 | [0031](0031-vowel-split-fill.md) | 元音组合拆字母练习 | Accepted | T-FILL 约1/3把 ai/ea/oo 拆成字母双空；保留原 units |
+| [0032](0032-confusable-distractors.md) | 相似音/相似拼写干扰项 | Accepted | ir/er/ur、ea/ee/e/a 等；T-FILL/T-MATCH 优先同组干扰 |
 
 新增 ADR 的模板：
 
