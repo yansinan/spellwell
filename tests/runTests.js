@@ -19,7 +19,7 @@ import { getRegisteredTests, setActiveFile } from './harness.js';
 
 const testsDir = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.dirname(testsDir);
-const PHASE_PATTERN = /^p(10|[0-9])$/;
+const PHASE_PATTERN = /^p(1[0-2]|[0-9])$/;
 
 /**
  * @param {number} num
@@ -46,7 +46,7 @@ function parseArgs(argv) {
     }
   }
   if (phase !== null && phase !== 'all' && !PHASE_PATTERN.test(phase)) {
-    throw new Error(`invalid --phase value: ${phase} (expected p0..p10 or all)`);
+    throw new Error(`invalid --phase value: ${phase} (expected p0..p12 or all)`);
   }
   return { phase, verbose };
 }
@@ -92,7 +92,7 @@ async function findTestFiles(dir) {
 }
 
 function usage() {
-  console.error('Usage: node tests/runTests.js [--phase=p0|p1|...|p10|all] [--verbose]');
+  console.error('Usage: node tests/runTests.js [--phase=p0|p1|...|p12|all] [--verbose]');
 }
 
 async function main() {

@@ -1,16 +1,16 @@
 # 开发路线图 · ROADMAP
 
-**当前阶段**：P9 ✅（2026-11-11）
-**下一阶段**：P10（输入适配与移动端）
-**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P9 不通过不进入 P10。
+**当前阶段**：P11 ✅（2026-11-12）
+**下一阶段**：P12（Node 平移准备）
+**纪律**：严格按序；`--phase=pN` 全绿才可把该阶段标为完成。P11 不通过不进入 P12。
 
 ---
 
 ## 1. 门禁命令
 
 ```bash
-# 当前阶段（P9，累计 p0..p9）
-node tests/runTests.js --phase=p9
+# 当前阶段（P11，累计 p0..p11）
+node tests/runTests.js --phase=p11
 
 # 后续阶段（累计运行 p0..pN）
 node tests/runTests.js --phase=p10
@@ -42,9 +42,9 @@ node tools/serve.mjs
 | **P7** | 人工标注后台系统 | `--phase=p7` PASS + 错误切分阻断导出 | ✅ 完成 |
 | **P8** | 前台学习分析（新增） | `--phase=p8` PASS + 本次/历史报告 | ✅ 完成 |
 | **P9** | 内容驱动题目生成与练习设计（新增） | `--phase=p9` PASS + 单元/模式/20题 | ✅ 完成 |
-| **P10** | 输入适配与体验（PC/移动） | `--phase=p10` PASS + 同 spec+seed 双端一致 | ⏳ 下一步 |
-| **P11** | 挑战旁路与变换预留 | `--phase=p11` PASS + 挑战不写主状态 | ⏳ |
-| **P12** | 平移准备 | `--phase=p12` PASS + 换 adapter 仓库零改动 | ⏳ |
+| **P10** | 输入适配与体验（PC/移动） | `--phase=p10` PASS + 同 spec+seed 双端一致 | ✅ 完成 |
+| **P11** | 挑战旁路与变换预留 | `--phase=p11` PASS + 挑战不写主状态 | ✅ 完成 |
+| **P12** | 平移准备 | `--phase=p12` PASS + 换 adapter 仓库零改动 | ⏳ 下一步 |
 
 ---
 
@@ -432,7 +432,7 @@ node tests/runTests.js --phase=p9
 
 ---
 
-## 13. P10 任务书（下一阶段）
+## 13. P10 任务书（已完成）
 
 **目标**：把输入适配器抽成 Pointer/Keyboard 双端，统一鼠标/触摸/键盘行为，完成移动端体验。
 
@@ -460,7 +460,28 @@ node tests/runTests.js --phase=p9
 
 ---
 
-## 14. 后续阶段要点（防止提前实现）
+## 14. P11 任务书（已完成）
+
+**目标**：挑战旁路默认关闭，绝不写主学习状态；为后续变换模式预留开关。
+
+### 交付物
+
+- [x] `RapidTapChallenge`：开始/点击/结束状态机，结果只在内存。
+- [x] 挑战结果带 `persisted: false`，没有 repository/adapter 依赖。
+- [x] `morphMode` 开关预留。
+- [x] `tests/p11/challenge.test.js`。
+- [x] 不接积分、排行榜、生命值。
+
+### 验收
+
+```bash
+node tests/runTests.js --phase=p11
+# PASS  p11 gate · 244 passed · 0 failed · 54 files
+```
+
+---
+
+## 15. 后续阶段要点（防止提前实现）
 
 | 阶段 | 关键新增 | 不得提前做的事 |
 |---|---|---|

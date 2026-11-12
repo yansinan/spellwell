@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [0.12.0] — 2026-11-12 · P10/P11 输入适配与挑战
+
+- 新增 PointerAdapter / KeyboardAdapter 双端语义事件适配与测试。
+- 新增 RapidTapChallenge 挑战内存状态机，`morphedMode=false` 默认，结果不写主状态。
+- P10/P11 门禁：242/244 passed。
+
 ## [0.10.0] — 2026-11-11 · P9 内容驱动题目生成与练习设计
 
 ### Added
@@ -59,6 +65,8 @@
 ```bash
 node tests/runTests.js --phase=p9
 # PASS  p9 gate · 240 passed · 0 failed · 52 files
+# PASS  p10 gate · 242 passed · 0 failed · 53 files
+# PASS  p11 gate · 244 passed · 0 failed · 54 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。

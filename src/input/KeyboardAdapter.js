@@ -1,18 +1,28 @@
 /**
  * @layer input
- * @phase P8
+ * @phase P10
  * @doc §3.2 三层解耦架构
  *
- * QWERTY 适配器：仅收集文本/退格/提交语义，不判定拼写。
- * 键盘解锁策略由调度层决定（连续正确后解锁），不在本文件实现。
+ * QWERTY 适配器：把输入框的文本变化翻译成 key-text，不判定拼写。
+ * Enter/IME 的提交策略由 PracticeScreen 决定，避免适配器越层。
  */
 
-import { NotImplementedError } from '../core/errors.js';
+function inputFromTarget(target) {
+  if (target && typeof target.matches === 'function' && target.matches('input, textarea')) return target;
+  if (target && typeof target.querySelector === 'function') {
+    return target.querySelector('input, textarea');
+  }
+  return null;
+}
 
 export class KeyboardAdapter {
-  /** @param {unknown} [target] */
+  /** @param {EventTarget|{addEventListener: Function, removeEventListener: Function}} target */
   constructor(target) {
+    if (!target || typeof target.addEventListener !== 'function') {
+      throw new TypeError('KeyboardAdapter needs an EventTarget');
+    }
     this.target = target;
+    this.detach = null;
   }
 
   /**
@@ -20,6 +30,27 @@ export class KeyboardAdapter {
    * @returns {() => void} detach
    */
   attach(emit) {
-    throw new NotImplementedError('P8', 'KeyboardAdapter.attach');
+    if (typeof emit !== 'function') throw new TypeError('KeyboardAdapter needs an emit function');
+    if (this.detach) return this.detach;
+    const input = inputFromTarget(this.target);
+    if (!input) throw new TypeError('KeyboardAdapter target has no input');
+    let composing = false;
+    const onChange = () => {
+      if (composing) return;
+      emit({ kind: 'key-text', text: String(input.value ?? '') });
+    };
+    const onCompositionStart = () => { composing = true; };
+    const onCompositionEnd = () => { composing = false; onChange(); };
+
+    input.addEventListener('input', onChange);
+    input.addEventListener('compositionstart', onCompositionStart);
+    input.addEventListener('compositionend', onCompositionEnd);
+    this.detach = () => {
+      input.removeEventListener('input', onChange);
+      input.removeEventListener('compositionstart', onCompositionStart);
+      input.removeEventListener('compositionend', onCompositionEnd);
+      this.detach = null;
+    };
+    return this.detach;
   }
 }

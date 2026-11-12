@@ -129,6 +129,9 @@
 | R-P9-23 | 旧单元自动复习只读/新单元可复选 | PracticeSetupScreen | 浏览器 + ADR-0036 | P9 | ✅ |
 | R-P9-24 | 同阶段题型轮转/会话种子 | `TypeVariety` + Scheduler/bootstrap | `tests/p9/typeVariety.test.js` | P9 | ✅ |
 | R-P9-25 | 后台学习状态/单元放置 | `LearningStateService` + AdminApp | `tests/p9/learningStateService.test.js` + 浏览器 | P9 | ✅ |
+| R-P10-01 | PointerAdapter 将点选/拖放/间隙翻译为 InputEvent | `PointerAdapter` | `tests/p10/adapters.test.js` | P10 | ✅ |
+| R-P10-02 | KeyboardAdapter 将输入/IME 翻译为 key-text | `KeyboardAdapter` | `tests/p10/adapters.test.js` | P10 | ✅ |
+| R-P11-01 | RapidTapChallenge 默认关闭且不写主状态 | `RapidTapChallenge` | `tests/p11/challenge.test.js` | P11 | ✅ |
 | R-P7-12 | 例句库与混淆项预制 | `sentences.json` + `confusables.json` | content tests | P7 | ✅ |
 | R-P7-09 | 批量单元标题行切换后续词单元 | `WordImporter.parseBatch` + AdminApp | `tests/p7/import.test.js` + `tests/p7/editor.test.js` | P7 | ✅ |
 | R-P7-10 | 词库单独导入/导出与重复词合并/替换/不动 | `WordLibrary` + AdminApp | `tests/p7/wordLibrary.test.js` + 浏览器 | P7 | ✅ |
@@ -194,7 +197,7 @@
 | R-UI-02 | §6.2 学习端不出现中文 | `PracticeScreen` | P1 静态扫描；P9 再扩到全部学习视图 | P1/P9 | ✅ |
 | R-UI-03 | §6.2 点选与拖拽等价（全部题型/适配器） | PointerAdapter / 其余题型；T-SEQUENCE 已由 R-P1-11 覆盖 | P8 双端测试 | P8 | ⏳ |
 | R-UI-04 | §6.2 答错温和反馈，无红色/弹窗 | `styles/practice.css` + PracticeScreen | 👁 评审 + 浏览器 | P1 | 👁 |
-| R-CHALLENGE-01 | §2.1 挑战模式不写主状态 | `RapidTapChallenge` | P9 测试 | P9 | ⏳ |
+| R-CHALLENGE-01 | §2.1 挑战模式不写主状态 | `RapidTapChallenge` | `tests/p11/challenge.test.js` | P11 | ✅ |
 | R-DOC-01 | §四 阶段门禁累计运行 | `tests/runTests.js` | `--phase=p0` 自身即验证 | P0 | ✅ |
 | R-DOC-02 | 文档条款 → 代码 → 测试可追溯 | `docs/TRACEABILITY.md` + 文件头 `@doc` | `tests/p0/traceability.test.js` | P0 | ✅ |
 | R-DOC-03 | 偏离设计必须 ADR | `docs/decisions/` | `tests/p0/traceability.test.js` 检查目录与索引 | P0 | ✅ |

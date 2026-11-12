@@ -1,7 +1,7 @@
 # AGENTS.md · 项目执行契约
 
 > 任何 agent、贡献者进入本仓库，先读本文件。它规定“怎么做事”，`docs/DESIGN.md` 规定“做什么”。
-> 当前阶段：**P9 已完成，P10 是下一步**。不要提前实现 P10 及以后的功能。
+> 当前阶段：**P10/P11 已完成，P12 是下一步**。不要提前实现 P10 及以后的功能。
 
 ---
 
@@ -31,7 +31,9 @@
 | P7 | ✅ 完成 | 修 ContentValidator/后台/导出缺陷 | 做 P10 输入适配、P11 挑战 |
 | P8 | ✅ 完成 | 修 Stats/统计口径缺陷 | 做 P10 输入适配、P11 挑战 |
 | P9 | ✅ 完成 | 修内容计划/练习设计/设置缺陷 | 做 P10 输入适配、P11 挑战 |
-| P10 | ⏳ 下一步 | Pointer/Keyboard 双适配、移动端 | 做 P11 挑战、P12 Node adapter |
+| P10 | ✅ 完成 | Pointer/Keyboard 双适配、移动端 | 做 P11 挑战、P12 Node adapter |
+| P11 | ✅ 完成 | 挑战旁路、morphMode | 做 P12 Node adapter |
+| P12 | ⏳ 下一步 | Node adapter、调度层 Node 运行 | 改仓库层接口 |
 
 **判断标准**：如果你写的代码在 `docs/ROADMAP.md` 的“P9 明确不做”或“后续阶段要点”里，停手。
 
@@ -40,8 +42,8 @@
 ## 2. 命令
 
 ```bash
-# 阶段门禁（唯一验收标准；当前 P9）
-node tests/runTests.js --phase=p9
+# 阶段门禁（唯一验收标准；当前 P11）
+node tests/runTests.js --phase=p11
 
 # 本地预览（必须 HTTP）
 node tools/serve.mjs
@@ -81,7 +83,7 @@ node tools/serve.mjs
 10. **偏离 DESIGN 必须先写 ADR。** 先改文档再改代码；禁止“代码即文档”。
 11. **后台不直接写学习状态。** `src/admin/**` 不得直接写 `wordStates/graphemeStates/attempts`；只允许通过 `LearningStateService` 写 `wordStates`，不删除 attempts；单词列表可只读 `attempts` 聚合错/对次数。
 12. **挑战模式不写主状态。** `RapidTapChallenge` 的结果不得进入调度/错误画像。
-13. **阶段顺序不可跳。** P9 不通过不进入 P10；当前 P9 已完成，只允许修 P9 缺陷，不提前写 P10 输入适配。
+13. **阶段顺序不可跳。** P11 不通过不进入 P12；当前 P11 已完成，只允许修 P11 缺陷，不提前写 P12 Node adapter。
 
 这些规则中 2/3/4/5/6/10 有自动检查（`architecture.test.js`、`traceability.test.js`、`content.test.js`）；其余靠评审。
 
@@ -140,10 +142,9 @@ node tools/serve.mjs
 
 ## 8. 下一阶段启动提示词（复制给 agent）
 
-> 只做 P10，不提前做 P11。先读 `AGENTS.md`、`docs/DESIGN.md §3.2/§6.2`、`docs/TRACEABILITY.md` 的 R-UI-03/R-INPUT-*。
-> 抽取 PointerAdapter/KeyboardAdapter，保持题型只消费 InputEvent；完成鼠标/触摸/键盘双端验收。
-> 每步运行 `node tests/runTests.js --phase=p10`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
-> 不新增依赖、不做 P11 挑战、不做 P12 Node adapter。
+> 只做 P12，不提前做后续。先读 `AGENTS.md`、`docs/DESIGN.md §3.2/§5.3`、`docs/TRACEABILITY.md` 的 R-ARCH-07。
+> 实现 Node adapter 与调度层 Node 运行验收，不修改仓库层接口。
+> 每步运行 `node tests/runTests.js --phase=p12`，最后更新 TRACEABILITY、ROADMAP、CHANGELOG。
 
 ---
 

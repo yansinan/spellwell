@@ -57,13 +57,13 @@ test('TRACEABILITY 覆盖 9 题型、9 错误类型与 7 存储方法', () => {
   assertMatch(traceability, /--phase=p0/);
 });
 
-test('ROADMAP 覆盖 P0—P12，P9 已完成、P10 为下一步', () => {
+test('ROADMAP 覆盖 P0—P12，P11 已完成、P12 为下一步', () => {
   for (let index = 0; index <= 12; index += 1) {
     assert(roadmap.includes(`P${index}`), `ROADMAP missing P${index}`);
   }
   assertMatch(roadmap, /P0\*\*.*✅ 完成/s);
   assertMatch(roadmap, /P1\*\*.*✅ 完成/s);
-  assertMatch(roadmap, /P10\*\*.*⏳ 下一步/s);
+  assertMatch(roadmap, /P12\*\*.*⏳ 下一步/s);
   assertMatch(roadmap, /node tests\/runTests\.js --phase=p0/);
 });
 
@@ -71,10 +71,10 @@ test('AGENTS 是执行入口：必读顺序、门禁命令、完成定义都在'
   assertMatch(agents, /docs\/DESIGN\.md/);
   assertMatch(agents, /docs\/TRACEABILITY\.md/);
   assertMatch(agents, /docs\/ROADMAP\.md/);
-  assertMatch(agents, /node tests\/runTests\.js --phase=p9/);
+  assertMatch(agents, /node tests\/runTests\.js --phase=p11/);
   assertMatch(agents, /完成定义/);
   assertMatch(agents, /不新增依赖/);
-  assertMatch(agents, /P9 不通过不进入 P10/);
+  assertMatch(agents, /P11 不通过不进入 P12/);
 });
 
 test('ADR：偏离设计的裁决已入库，并被追溯矩阵引用', async () => {
