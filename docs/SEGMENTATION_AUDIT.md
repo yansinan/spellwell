@@ -76,7 +76,8 @@ tokens.join('') === word.text
 ## 3.1 魔法 e
 
 CVCe 词增加 `magicE`/`magicEPattern` 标注，最终 e 标 `silent:true`。
-当前 `units` 仍必须是连续字母，所以不直接合并成 `a_e` 单块；该标注用于教学、审核和难度。
+当前 `units` 仍保持 `n/a/m/e`；T-FILL 对魔法 e 词会同时空出 a 和末尾 e，界面显示 `n_m_`，分别选择 a、e。
+因此没有破坏连续 units 契约，也不把 `a_e` 作为单块。
 共 108 词；`have/love/live/move/come/some/one/everyone/welcome/chinese` 等例外排除。
 
 ## 4. 仍在观察的点

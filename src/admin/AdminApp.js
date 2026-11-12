@@ -8,7 +8,7 @@
  */
 
 import { IndexedDBAdapter } from '../storage/IndexedDBAdapter.js';
-import { CONTENT_VERSION, importContent, migrateContentV2ToV3, readContentVersion } from '../storage/contentImport.js';
+import { CONTENT_VERSION, importContent, readContentVersion } from '../storage/contentImport.js';
 import {
   addWord,
   applySegments,
@@ -45,10 +45,7 @@ async function openContent() {
     return { adapter: null, content: await loadStatic(), error };
   }
   let version = await readContentVersion(adapter);
-  if (version === 2) {
-    await migrateContentV2ToV3(adapter);
-    version = CONTENT_VERSION;
-  } else if (version !== CONTENT_VERSION) {
+  if (version !== CONTENT_VERSION) {
     const staticContent = await loadStatic();
     await importContent(adapter, { ...staticContent, version: CONTENT_VERSION });
     version = CONTENT_VERSION;

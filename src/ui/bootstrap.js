@@ -9,7 +9,7 @@
 
 import { MemoryAdapter } from '../storage/MemoryAdapter.js';
 import { IndexedDBAdapter } from '../storage/IndexedDBAdapter.js';
-import { CONTENT_VERSION, importContent, migrateContentV2ToV3, readContentVersion } from '../storage/contentImport.js';
+import { CONTENT_VERSION, importContent, readContentVersion } from '../storage/contentImport.js';
 import { readPracticeSettings } from '../storage/practiceSettings.js';
 import { DEFAULT_TEXTBOOK, readActiveTextbook } from '../storage/textbooks.js';
 import { GraphemeRepository } from '../repositories/GraphemeRepository.js';
@@ -49,7 +49,7 @@ async function createAdapter() {
 async function ensureContent(adapter) {
   const current = await readContentVersion(adapter);
   if (current === CONTENT_VERSION) return { seeded: false, version: CONTENT_VERSION };
-  if (current === 2) return migrateContentV2ToV3(adapter);
+  // 用户选择“新静态内容覆盖旧内容”：版本不匹配时直接导入工程内静态词库。
   const [words, graphemes, sentences, confusables] = await Promise.all([
     fetchJson('../content/words.json'),
     fetchJson('../content/graphemes.json'),

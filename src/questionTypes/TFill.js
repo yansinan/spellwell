@@ -25,18 +25,25 @@ import {
  * @param {{id: string, text: string, units: {text: string, graphemeId: string}[]}} word
  * @returns {number}
  */
-function resolveBlankIndex(spec, word) {
-  if (Number.isInteger(spec.params?.blankUnitIndex)) {
-    const index = /** @type {number} */ (spec.params.blankUnitIndex);
-    if (index < 0 || index >= word.units.length) {
-      throw new ContractError('QUESTION_SPEC_INVALID', `blankUnitIndex ${index} is out of range`);
+function resolveBlankIndexes(spec, word) {
+  const list = Array.isArray(spec.params?.blankUnitIndices)
+    ? spec.params.blankUnitIndices
+    : Number.isInteger(spec.params?.blankUnitIndex)
+      ? [spec.params.blankUnitIndex]
+      : [];
+  if (list.length > 0) {
+    const unique = [...new Set(list)];
+    for (const index of unique) {
+      if (!Number.isInteger(index) || index < 0 || index >= word.units.length) {
+        throw new ContractError('QUESTION_SPEC_INVALID', `blankUnitIndex ${index} is out of range`);
+      }
     }
-    return index;
+    return unique;
   }
   const focusIndex = word.units.findIndex(
     (unit) => spec.focus && unit.graphemeId === spec.focus.id,
   );
-  return focusIndex >= 0 ? focusIndex : word.units.length - 1;
+  return [focusIndex >= 0 ? focusIndex : word.units.length - 1];
 }
 
 /**
@@ -47,17 +54,17 @@ function resolveBlankIndex(spec, word) {
 function buildFill(spec, bundle) {
   const word = getWord(bundle);
   assertFocusInWord(spec, bundle);
-  const blankIndex = resolveBlankIndex(spec, word);
+  const blankIndexes = resolveBlankIndexes(spec, word);
   const candidates = [...renderUnitsForWord(word), ...distractorUnits(spec, bundle)];
   const units = createRng(spec.seed).shuffle(candidates);
 
   return {
     layout: 'fill',
-    slots: [{
-      slotId: `slot-${blankIndex}`,
-      index: blankIndex,
+    slots: blankIndexes.map((index) => ({
+      slotId: `slot-${index}`,
+      index,
       accepts: /** @type {const} */ ('unit'),
-    }],
+    })),
     units,
     ...(spec.focus ? { focus: spec.focus } : {}),
     interactionHints: {
@@ -83,35 +90,38 @@ function buildFill(spec, bundle) {
  */
 function judgeFill({ spec, renderModel, events, bundle, now = Date.now() }) {
   const word = getWord(bundle);
-  const blankIndex = resolveBlankIndex(spec, word);
+  const blankIndexes = resolveBlankIndexes(spec, word);
   const unitById = new Map(renderModel.units.map((unit) => [unit.unitId, unit]));
-
   const taps = (Array.isArray(events) ? events : []).filter((event) => event.kind === 'tap-unit');
-  const selectedEvent = taps[taps.length - 1];
-  const selected = selectedEvent ? unitById.get(selectedEvent.unitId) : undefined;
-  if (selectedEvent && !selected) {
-    throw new ContractError('QUESTION_INPUT_INVALID', `unknown unit ${String(selectedEvent.unitId)}`);
+  const selectedBySlot = new Map();
+  for (const event of taps) {
+    if (Number.isInteger(event.slotIndex)) selectedBySlot.set(event.slotIndex, event);
+    else selectedBySlot.set(blankIndexes.find((index) => !selectedBySlot.has(index)), event);
   }
-
-  const expected = word.units[blankIndex].text;
-  const actual = selected?.text ?? '';
-  const wordCorrect = selected !== undefined && actual === expected;
-  const firstError = wordCorrect
-    ? null
-    : errorFor({
-      type: selected === undefined ? 'OMISSION' : 'SUBSTITUTION',
-      word,
-      unitIndex: blankIndex,
-      expected,
-      actual,
-    });
+  const missing = blankIndexes.find((index) => !selectedBySlot.has(index));
+  let firstError = null;
+  for (const index of blankIndexes) {
+    const event = selectedBySlot.get(index);
+    const expected = word.units[index].text;
+    const selected = event ? unitById.get(event.unitId) : undefined;
+    if (event && !selected) throw new ContractError('QUESTION_INPUT_INVALID', `unknown unit ${String(event.unitId)}`);
+    const actual = selected?.text ?? '';
+    if (!firstError && actual !== expected) {
+      firstError = errorFor({
+        type: event === undefined ? 'OMISSION' : 'SUBSTITUTION',
+        word,
+        unitIndex: index,
+        expected,
+        actual,
+      });
+    }
+  }
+  const wordCorrect = !missing && firstError === null;
 
   const focusIndexes = focusUnitIndexes(word, spec.focus);
   const focusCorrect = focusIndexes.length === 0
     ? undefined
-    : focusIndexes.every((index) => (index === blankIndex
-      ? wordCorrect
-      : true));
+    : focusIndexes.every((index) => (blankIndexes.includes(index) ? wordCorrect : true));
 
   return makeAttempt({
     spec,

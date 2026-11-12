@@ -17,7 +17,7 @@
 - 用真实 attempts 校准权重：按词/题型错误率、小样本平滑、约束优先。
 - 修复旧 DB 无 unitId 时 Start practice 空队列的问题；内容版本升到 3。
 - v2→v3 迁移保留后台已编辑词，补齐 grade/term/unit。
-- 内容版本升到 9，导入两套教材词库；新增外研词库报告。
+- 内容版本升到 10，导入两套教材词库；新增外研词库报告。
 - 组合库 96 → 152；切分审计：全字母保底 433 → 316。
 - 魔法 e 标注 108 个 CVCe 词；例句 241 条、7 组混淆项、7 组词族。
 - 填空焦点支持 _ish / f_sh / fi_h 变化，元音焦点占 50%。
@@ -42,7 +42,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 207 passed · 0 failed · 45 files
+# PASS  p9 gate · 210 passed · 0 failed · 45 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。
@@ -92,10 +92,10 @@ node tests/runTests.js --phase=p9
 
 ```bash
 node tests/runTests.js --phase=p7
-# PASS  p7 gate · 187 passed · 0 failed · 34 files
+# PASS  p7 gate · 188 passed · 0 failed · 34 files
 
 node tests/runTests.js --phase=p8
-# PASS  p8 gate · 190 passed · 0 failed · 35 files
+# PASS  p8 gate · 191 passed · 0 failed · 35 files
 ```
 
 - Stats：4 answers / 50%，按日正确率、词状态、最近 4 条答案均显示。

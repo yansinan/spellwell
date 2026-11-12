@@ -6,7 +6,7 @@
 
 import { readFile } from 'node:fs/promises';
 import { buildExport, validateContent } from '../../src/admin/ContentValidator.js';
-import { assertEqual, assertIncludes, assertThrows, test } from '../harness.js';
+import { assert, assertEqual, assertIncludes, assertThrows, test } from '../harness.js';
 
 async function load() {
   const loadOne = async (name) => JSON.parse(
@@ -78,4 +78,11 @@ test('V2/V6/V8：重复 ID、句子答案错、混淆项重复', async () => {
   assertEqual(report.errors.some((item) => item.code === 'CONTENT_ID_DUPLICATE'), true);
   assertEqual(report.errors.some((item) => item.code === 'SENTENCE_BLANK_INVALID'), true);
   assertEqual(report.errors.some((item) => item.code === 'CONFUSABLE_DUPLICATE_PAIR'), true);
+});
+
+test('IPA：全部基础词条已补齐，格式统一', async () => {
+  const current = await load();
+  for (const word of current.words.items) {
+    assert(typeof word.phonetic === 'string' && word.phonetic.startsWith('/') && word.phonetic.endsWith('/'), `${word.id} phonetic`);
+  }
 });

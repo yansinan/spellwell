@@ -282,12 +282,13 @@ export class PracticeScreen {
       `;
     }
     if (spec.typeId === 'T-FILL') {
-      const blankIndex = Number(spec.params.blankUnitIndex);
-      const selected = this.#eventForSlot(blankIndex) ? this.#unitText(this.#eventForSlot(blankIndex).unitId) : '';
+      const blankIndexes = this.#blankIndexes();
       return `
         <div class="sw-slots" data-role="slots">
           ${bundle.word.units.map((unit, index) => {
-            if (index === blankIndex) {
+            if (blankIndexes.includes(index)) {
+              const event = this.#eventForSlot(index);
+              const selected = event ? this.#unitText(event.unitId) : '';
               return `<button type="button" class="sw-slot sw-slot--blank ${selected ? 'is-filled' : ''}" data-slot-index="${index}" aria-label="Missing sound">${escapeHtml(selected)}</button>`;
             }
             return `<span class="sw-slot sw-slot--fixed">${escapeHtml(unit.text)}</span>`;
@@ -972,12 +973,28 @@ export class PracticeScreen {
     }
 
     if (spec.typeId === 'T-FILL') {
-      const blankIndex = Number(spec.params.blankUnitIndex);
+      const blankIndexes = this.#blankIndexes();
+      const nextBlank = blankIndexes.find((index) => !this.#eventForSlot(index));
+      if (nextBlank === undefined) return;
       this.#sound.tap();
-      this.#events = [{ kind: 'tap-unit', unitId, slotIndex: blankIndex }];
+      this.#events = [...this.#events, { kind: 'tap-unit', unitId, slotIndex: nextBlank }];
       this.#afterSelectionChange();
-      this.#schedule(() => this.#submit(), 320);
+      if (this.#allFillBlanksFilled()) {
+        this.#schedule(() => this.#submit(), 320);
+      }
     }
+  }
+
+  #blankIndexes() {
+    const params = this.#current.spec.params ?? {};
+    if (Array.isArray(params.blankUnitIndices) && params.blankUnitIndices.length > 0) {
+      return [...new Set(params.blankUnitIndices)];
+    }
+    return [Number(params.blankUnitIndex)];
+  }
+
+  #allFillBlanksFilled() {
+    return this.#blankIndexes().every((index) => Boolean(this.#eventForSlot(index)));
   }
 
   #clearSlot(slotIndex) {
@@ -988,11 +1005,13 @@ export class PracticeScreen {
       .filter((event) => event.slotIndex !== slotIndex)
       .sort((a, b) => a.slotIndex - b.slotIndex)
       .map((event) => event.unitId);
-    this.#events = ordered.map((id, index) => ({
-      kind: 'tap-unit',
-      unitId: id,
-      slotIndex: index,
-    }));
+    this.#events = this.#current.spec.typeId === 'T-FILL'
+      ? this.#events.filter((event) => event.slotIndex !== slotIndex)
+      : ordered.map((id, index) => ({
+        kind: 'tap-unit',
+        unitId: id,
+        slotIndex: index,
+      }));
     this.#afterSelectionChange();
   }
 
@@ -1033,7 +1052,7 @@ export class PracticeScreen {
       const text = input?.value ?? '';
       if (text.trim().length === 0) return;
       events = [{ kind: 'edit', text }];
-    } else if (spec.typeId === 'T-FILL' && events.length === 0) {
+    } else if (spec.typeId === 'T-FILL' && !this.#allFillBlanksFilled()) {
       return;
     } else if (spec.typeId === 'T-SEQUENCE' && !this.#allSlotsFilled()) {
       return;

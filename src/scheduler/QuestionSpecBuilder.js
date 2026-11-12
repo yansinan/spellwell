@@ -143,13 +143,26 @@ export function buildWordSpec({
     throw new ContractError('SPEC_BUILD_INVALID', `P6 cannot build type ${typeId}`);
   }
 
-  const focusIndex = chooseFocusIndex(word, seed);
+  let focusIndex = chooseFocusIndex(word, seed);
+  let magicBlanks = null;
+  if (typeId === 'T-FILL' && word.magicE) {
+    const vowelIndex = word.units.findIndex((unit) => unit.magicE === true);
+    const finalEIndex = word.units.findIndex((unit) => unit.silent === true);
+    if (vowelIndex >= 0 && finalEIndex >= 0) {
+      magicBlanks = [vowelIndex, finalEIndex];
+      focusIndex = vowelIndex;
+    }
+  }
   const focusUnit = word.units[focusIndex];
   const distractors = chooseDistractorIds(word, distractorPool, seed);
   const params = typeId === 'T-SEQUENCE'
     ? { distractorGraphemeIds: distractors }
     : typeId === 'T-FILL'
-      ? { blankUnitIndex: focusIndex, distractorGraphemeIds: distractors }
+      ? {
+        blankUnitIndex: focusIndex,
+        ...(magicBlanks ? { blankUnitIndices: magicBlanks } : {}),
+        distractorGraphemeIds: distractors,
+      }
       : typeId === 'T-EDIT'
         ? {
           initialText: initialEditText({

@@ -1,4 +1,4 @@
-# 预制内容清单（contentVersion 9）
+# 预制内容清单（contentVersion 10）
 
 ## 1. 已内置
 
@@ -28,7 +28,7 @@
 | 内容 | 现状 | 建议 |
 |---|---|---|
 | 剩余词例句 | 241 词有句 | 逐 unit 补 core words |
-| 音标 | 外研 1—2 年级和部分词缺失 | 补 IPA |
+| 音标 | 已补齐 1474/1474 | 仍需教研复核 |
 | Unit 标题 | 只用 `第N单元` | 可从教材目录补 `unitTitle` |
 | 全部审核 | 0 reviewed | 教研逐词确认切分/释义 |
 | 音频 | 无（按设计不引入资源） | 保持合成音/不依赖音频 |
@@ -44,5 +44,5 @@ src/content/sentences.json
 src/content/confusables.json
 ```
 
-`contentVersion=9`，首次启动从同源静态文件导入 IndexedDB；
+`contentVersion=10`，首次启动从同源静态文件导入 IndexedDB；
 不依赖外部接口、运行时网络或远程词库。

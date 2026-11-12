@@ -34,18 +34,10 @@
 
 这是可行但跨层改动，不能只改 JSON。
 
-### B. v2 内容迁移
+### B. 内容版本迁移
 
-`migrateContentV2ToV3` 只迁到 v3；当前 `CONTENT_VERSION=9`。
-老 v2 数据第一次启动会停在 v3，下一次启动才拉静态 v9。
-建议改成：
-
-```js
-await migrateV2toV3(adapter);
-if (await readContentVersion(adapter) !== CONTENT_VERSION) {
-  // 明确选择：继续迁移或导入静态内容
-}
-```
+已按“导入新静态内容”的选择：任何版本不匹配都直接导入工程静态词库。
+旧版迁移函数保留但不再作为启动路径。
 
 ### C. 数据量
 
