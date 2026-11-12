@@ -29,14 +29,23 @@ export class PracticeSetupScreen {
     this.onStart = onStart;
     const progress = visibleUnitProgress(workspace.units);
     const auto = workspace.autoSelection(workspace.settings.questionsPerPractice);
-    this.visibleUnits = progress.visible;
+    this.reviewUnitIds = new Set(
+      workspace.units
+        .filter((unit) => (unit.practiced ?? 0) > 0 && !unit.mastered)
+        .map((unit) => unit.id),
+    );
+    this.visibleUnits = [
+      ...workspace.units.filter((unit) => this.reviewUnitIds.has(unit.id)),
+      ...(progress.current && !this.reviewUnitIds.has(progress.current.id) ? [progress.current] : []),
+    ];
     this.completedUnits = progress.completed;
     this.currentUnit = progress.current;
     this.selectedUnits = new Set(
       auto.selected.length > 0
         ? auto.selected.map((unit) => unit.id)
-        : progress.current ? [progress.current.id] : progress.completed.map((unit) => unit.id),
+        : progress.current ? [progress.current.id] : [],
     );
+    for (const unitId of this.reviewUnitIds) this.selectedUnits.add(unitId);
     this.mode = workspace.settings.defaultMode;
     this.loading = false;
     const selectedForTerm = this.selectedUnits.values().next().value;
@@ -75,23 +84,34 @@ export class PracticeSetupScreen {
             <h2>年级 / 单元</h2>
             <div class="sw-setup__terms">
               ${terms.map((term) => {
-                const selectedCount = term.units.filter((unit) => this.selectedUnits.has(unit.id)).length;
-                const allSelected = term.units.length > 0 && selectedCount === term.units.length;
+                const selectableUnits = term.units.filter((unit) => !this.reviewUnitIds.has(unit.id));
+                const selectedCount = selectableUnits.filter((unit) => this.selectedUnits.has(unit.id)).length;
+                const allSelected = selectableUnits.length > 0 && selectedCount === selectableUnits.length;
                 return `
                   <details class="sw-setup__term" ${this.expandedTerms.has(term.id) ? 'open' : ''}>
                     <summary>
-                      <label class="sw-setup__term-check" data-term-label>
-                        <input type="checkbox" data-setup-term="${escape(term.id)}" ${allSelected ? 'checked' : ''} ${term.units.length === 0 ? 'disabled' : ''} />
-                      </label>
+                      ${term.units.some((unit) => !this.reviewUnitIds.has(unit.id)) ? `
+                        <label class="sw-setup__term-check" data-term-label>
+                          <input type="checkbox" data-setup-term="${escape(term.id)}" ${allSelected ? 'checked' : ''} />
+                        </label>
+                      ` : ''}
                       <span>${escape(term.label)}</span>
-                      <small>${term.units.length === 0 ? '暂无内容' : `${selectedCount}/${term.units.length} 单元`}</small>
+                      <small>${term.units.length === 0 ? '暂无内容' : term.units.every((unit) => this.reviewUnitIds.has(unit.id)) ? '自动复习' : `${selectedCount}/${selectableUnits.length} 个新单元`}</small>
                     </summary>
                     <div class="sw-setup__units">
                       ${term.units.map((unit) => {
-                        const done = Boolean(unit.completed);
-                        
+                        const review = this.reviewUnitIds.has(unit.id);
+                        if (review) {
+                          return `
+                            <div class="sw-setup__unit is-review" style="--unit-progress:${unit.percent ?? 0}%">
+                              <span class="sw-setup__unit-fill" aria-hidden="true"></span>
+                              <span>${escape(unit.label)}</span>
+                              <small>自动复习 · ${unit.percent ?? 0}%</small>
+                            </div>
+                          `;
+                        }
                         return `
-                        <label class="sw-setup__unit ${this.selectedUnits.has(unit.id) ? 'is-selected' : ''} ${done ? 'is-done' : 'is-current'}" style="--unit-progress:${unit.percent ?? 0}%">
+                        <label class="sw-setup__unit ${this.selectedUnits.has(unit.id) ? 'is-selected' : ''} is-current" style="--unit-progress:${unit.percent ?? 0}%">
                           <span class="sw-setup__unit-fill" aria-hidden="true"></span>
                           <input type="checkbox" data-setup-unit="${escape(unit.id)}" ${this.selectedUnits.has(unit.id) ? 'checked' : ''} />
                           <span>${escape(unit.label)}</span>
@@ -148,7 +168,7 @@ export class PracticeSetupScreen {
       input.addEventListener('change', () => {
         const term = this.workspace.terms.find((item) => item.id === input.dataset.setupTerm);
         if (!term) return;
-        for (const unit of term.units) {
+        for (const unit of term.units.filter((item) => !this.reviewUnitIds.has(item.id))) {
           if (input.checked) this.selectedUnits.add(unit.id);
           else this.selectedUnits.delete(unit.id);
         }

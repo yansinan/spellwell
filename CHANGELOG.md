@@ -34,6 +34,7 @@
 - T-JUDGE-FIX 改为只在有该词历史错误时出现，claim 回放自己的错误；无历史用 T-TYPE。
 - 修复 `hat` 的 IPA 和 T-JUDGE 空白历史错误生成 `h t` 的问题；内容版本升到 11。
 - 241 条例句补中文翻译；T-CLOZE 显示中文，消除答案歧义；内容版本升到 12。
+- 设置页旧单元改为只读自动复习，只有下一个新单元可复选。
 - 视觉收口：提示去 Meaning/Sounds 标签、减少重复 hint、圆角绿色主按钮；后台入口改 `/admin`。
 - `contentRevision`：后台保存递增；下一轮重新读内容。
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。

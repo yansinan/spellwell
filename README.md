@@ -210,7 +210,7 @@ tools/serve.mjs   零依赖静态服务器
 - 当前工程状态/数据/限制总览：[`docs/STATUS.md`](docs/STATUS.md)。
 - 词库来源/质量/优化报告：[`docs/PEP_VOCAB_BASE.md`](docs/PEP_VOCAB_BASE.md)、[`docs/FLTRP_VOCAB_BASE.md`](docs/FLTRP_VOCAB_BASE.md)、[`docs/SEGMENTATION_AUDIT.md`](docs/SEGMENTATION_AUDIT.md)。
 - 预制内容清单：[`docs/CONTENT_INVENTORY.md`](docs/CONTENT_INVENTORY.md)；练习流程：[`docs/SESSION_FLOW.md`](docs/SESSION_FLOW.md)。
-- 设计页保留：默认勾选所有已学但未完全掌握的单元；完全掌握不加入；旧内容完成且有余地才自动加一个新单元。
+- 设计页保留：记忆周期旧单元以只读“自动复习”显示；完全掌握不加入；只有下一个新单元可复选。
 - 练习页 `Units` 可手动调整；设计页只显示已完成 + 下一个新单元。
 - 提示中文为主、IPA 同屏辅助；低年级不单独用 IPA。
 - T-CLOZE 显示例句中文翻译，避免填空答案歧义。
