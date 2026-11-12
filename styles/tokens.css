@@ -23,15 +23,21 @@
   --sw-line: rgba(68, 68, 68, 0.08);
   --sw-line-strong: rgba(68, 68, 68, 0.18);
   --sw-white: #ffffff;
+  --sw-primary: #58cc02;
+  --sw-primary-deep: #46a302;
+  --sw-primary-soft: #eaf8d9;
 
   /* 形状 */
-  --sw-radius-sm: 20px;
-  --sw-radius-card: 28px;
-  --sw-radius-pill: 32px;
+  --sw-radius-sm: 16px;
+  --sw-radius-card: 24px;
+  --sw-radius-pill: 999px;
+  --sw-radius-button: 16px;
 
   /* 字体 */
-  --sw-font-en: "Nunito", "Quicksand", "Varela Round", "Comic Sans MS", system-ui, sans-serif;
-  --sw-font-cn: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  --sw-font-en: "Nunito", "Avenir Next Rounded", "Arial Rounded MT Bold", "Trebuchet MS", ui-rounded, system-ui, sans-serif;
+  --sw-font-cn: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --sw-font-display: var(--sw-font-en);
+  --sw-font-body: var(--sw-font-cn);
 
   /* 动效 */
   --sw-motion-tap: 200ms;
@@ -42,5 +48,7 @@
   /* 阴影：柔和、无强投影 */
   --sw-shadow-card: 0 12px 32px rgba(168, 216, 248, 0.18);
   --sw-shadow-slot: inset 0 -3px 0 rgba(68, 68, 68, 0.06);
+  --sw-shadow-button: 0 4px 0 var(--sw-primary-deep);
+  --sw-shadow-button-hover: 0 5px 0 var(--sw-primary-deep);
   --sw-focus-ring: 0 0 0 4px rgba(168, 216, 248, 0.35);
 }

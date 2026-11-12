@@ -125,6 +125,7 @@
 | R-P9-19 | 相似音/相似拼写干扰项 | `ConfusableGraphemes` + builder/scheduler | `tests/p9/confusableGraphemes.test.js` + focus tests | P9 | ✅ |
 | R-P9-20 | 历史错误优先干扰项 | `ErrorHistory` + builder/scheduler | `tests/p9/errorHistory.test.js` + focus tests | P9 | ✅ |
 | R-P9-21 | T-JUDGE-FIX 可信错误 claim | `QuestionSpecBuilder` + Scheduler | `tests/p9/judgeClaim.test.js` | P9 | ✅ |
+| R-P9-22 | 提示去标签/视觉收口与 /admin | tokens/practice/serve | 浏览器 + ADR-0035 | P9 | ✅ |
 | R-P7-12 | 例句库与混淆项预制 | `sentences.json` + `confusables.json` | content tests | P7 | ✅ |
 | R-P7-09 | 批量单元标题行切换后续词单元 | `WordImporter.parseBatch` + AdminApp | `tests/p7/import.test.js` + `tests/p7/editor.test.js` | P7 | ✅ |
 | R-P7-10 | 词库单独导入/导出与重复词合并/替换/不动 | `WordLibrary` + AdminApp | `tests/p7/wordLibrary.test.js` + 浏览器 | P7 | ✅ |

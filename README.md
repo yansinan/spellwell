@@ -19,7 +19,7 @@ node tests/runTests.js --phase=p9
 
 # 本地预览：ESM 不能走 file://，必须用 HTTP
 node tools/serve.mjs
-# → http://127.0.0.1:4173
+# → http://0.0.0.0:4173
 
 # 等价 npm 脚本（若使用 npm）
 npm test
@@ -30,13 +30,15 @@ npm start
 > `/Users/Dr/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/node/bin/node`
 > 执行上述命令。项目本身不绑定该路径。
 
-打开预览页会进入学习端：每日 5—8 个词，默认 6 个。
+打开预览页会进入学习端：题量由后台设置，默认 20，按所选单元实际词数封顶。
 `?dev=1` 仍可查看 P0 开发状态页；`?debug=1` 会在学习端显示 AttemptResult 调试面板并暴露 `__SPELLWELL_DEBUG__`（含 scheduler）。
-内容后台：`/src/admin/index.html`。
-练习设置：`/src/admin/settings.html`。
+内容后台：`http://0.0.0.0:4173/admin`。
+练习设置：`http://0.0.0.0:4173/admin/settings.html`。
 本机数据迁移：`/migration/index.html`。
 
 ![P1 学习端](docs/p1-preview.png)
+
+![P9 练习设置](docs/p9-setup-preview.png)
 
 > T-SEQUENCE 拖拽重排时，其他块实时侧滑让位，缺口随左右半边移动：
 > ![实时重排预览](docs/p1-reorder-preview.png)
@@ -174,7 +176,7 @@ tools/serve.mjs   零依赖静态服务器
 ## P7 已实现
 
 - `ContentValidator`：V1—V9 内容结构校验；V10 只导出 reviewed。
-- 内容后台 `/src/admin/index.html`：搜索/列表/编辑器、单词/unit 维护、保存到共享 IndexedDB；学习端刷新可见。
+- 内容后台 `/admin`：搜索/列表/编辑器、单词/unit 维护、保存到共享 IndexedDB；学习端刷新可见。
 - 批量录入：逗号显式切分，无逗号自动建议；支持中文翻译/音标。
 - 组合库扩充到 152 项，覆盖单字母/辅音簇/双写/后缀；基础词库已审计切分。
 - 例句 241 条、混淆项 7 组、词族 7 组；填空焦点支持 _ish / f_sh / fi_h；IPA 已补齐。
@@ -212,10 +214,10 @@ tools/serve.mjs   零依赖静态服务器
 - 练习页 `Units` 可手动调整；设计页只显示已完成 + 下一个新单元。
 - 提示中文为主、IPA 同屏辅助；低年级不单独用 IPA。
 - 答错显示正确答案并可重试，答对才进入下一题；结束页先展示正确率，再列错词。
-- 后台题量默认 20，设置页 `/src/admin/settings.html`，面包屑返回内容库。
+- 后台题量默认 20，设置页 `/admin/settings.html`，面包屑返回内容库。
 - 题量、单元、模式进入 Scheduler；真实 attempts 校准选词权重；当前会话不因内容更新中断。
 - 每个计划项带 `reason/mode/policyVersion/score/calibration`；`revise()` 接口预留。
-- 提示词优先级：句子 → 音标 → 中文翻译 → 单词保底。
+- 提示词：中文语义优先，IPA 同屏辅助；低年级不单独用 IPA；句子只留给 T-CLOZE。
 - 批量新增支持单元标题行，如 `一年级上unit2`；后续词继承该单元直到下一个标题。
 - 词库支持单独 JSON 导入/导出；重复词可合并/替换/不动。
 
@@ -223,7 +225,7 @@ tools/serve.mjs   零依赖静态服务器
 
 提示词示例（音标）：
 
-![P9 音标提示](docs/p9-prompt.png)
+![P9 中文+IPA 提示](docs/p9-preview.png)
 
 ---
 

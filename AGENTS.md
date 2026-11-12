@@ -183,3 +183,4 @@ node tools/serve.mjs
 - 干扰项优先历史错误，其次人工相似组合（ir/er/ur、ea/ee/e/a 等）；见 ADR-0032/0033。
 - T-JUDGE-FIX claim 约一半正确/一半可信错词；见 ADR-0034。
 - 输入：T-TYPE 只用语义/音标回忆，不显示目标词；句子提示留给 T-CLOZE；IME composition 回车不提交；正确自动判定；输入框自动聚焦；见 ADR-0028。
+- 视觉：提示只显示内容（中文 + IPA），不显示 Meaning/Sounds 标签；主按钮绿色圆角；后台入口 `/admin`；见 ADR-0035。

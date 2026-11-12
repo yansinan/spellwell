@@ -86,7 +86,7 @@ export async function mountAdmin(root) {
     adapter = opened.adapter;
   } catch (error) {
     const hint = window.location.protocol === 'file:'
-      ? '当前是 file://；请先运行 node tools/serve.mjs，再打开 http://127.0.0.1:4173/src/admin/index.html'
+      ? '当前是 file://；请先运行 node tools/serve.mjs，再打开 http://0.0.0.0:4173/admin'
       : '请确认静态服务器与同源 IndexedDB 可用。';
     root.innerHTML = `<section class="sw-panel"><h2>加载失败</h2><p>${escape(hint)}</p><pre>${escape(error)}</pre></section>`;
     return;
@@ -271,7 +271,7 @@ export async function mountAdmin(root) {
               ${TEXTBOOKS.map((book) => `<option value="${escape(book.id)}" ${activeTextbook === book.id ? 'selected' : ''}>${escape(book.label)}</option>`).join('')}
             </select>
           </label>
-          <a class="sw-text-button" href="/src/admin/settings.html">练习设置</a>
+          <a class="sw-text-button" href="/admin/settings.html">练习设置</a>
           <a class="sw-text-button" href="/migration/index.html">本机数据迁移</a>
           <span class="sw-admin__badge ${report.valid ? 'is-ok' : 'is-bad'}">${report.valid ? 'V1—V9 通过' : `${report.errors.length} 个问题`}</span>
         </div>

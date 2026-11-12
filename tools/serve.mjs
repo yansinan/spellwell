@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const port = Number(process.env.PORT ?? 4173);
-const host = process.env.HOST ?? '127.0.0.1';
+const host = process.env.HOST ?? '0.0.0.0';
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -54,6 +54,8 @@ const server = createServer(async (request, response) => {
     return;
   }
 
+  if (pathname === '/admin') pathname = '/src/admin/index.html';
+  else if (pathname.startsWith('/admin/')) pathname = `/src/admin/${pathname.slice('/admin/'.length)}`;
   if (pathname.endsWith('/')) pathname += 'index.html';
   const filePath = path.resolve(root, `.${pathname}`);
 
@@ -83,6 +85,7 @@ const server = createServer(async (request, response) => {
 
 server.listen(port, host, () => {
   console.log(`SpellWell dev server → http://${host}:${port}`);
+  console.log(`Admin → http://${host}:${port}/admin`);
   console.log('Press Ctrl+C to stop.');
 });
 

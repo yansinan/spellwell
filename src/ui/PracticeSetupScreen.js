@@ -69,9 +69,7 @@ export class PracticeSetupScreen {
           </div>
         </header>
         <main class="sw-practice__stage sw-setup__stage">
-          <p class="sw-eyebrow">PRACTICE SETUP</p>
           <h1 class="sw-done__title">Ready to spell?</h1>
-          <p class="sw-practice__hint">Choose your units and how hard to work.</p>
 
           <section class="sw-setup__section">
             <h2>年级 / 单元</h2>
@@ -112,10 +110,10 @@ export class PracticeSetupScreen {
             <h2>Mode</h2>
             <div class="sw-setup__modes">
               <button type="button" class="sw-setup__mode ${this.mode === 'review' ? 'is-selected' : ''}" data-setup-mode="review">
-                <strong>Review</strong><span>Keep it steady</span>
+                <strong>Review</strong>
               </button>
               <button type="button" class="sw-setup__mode ${this.mode === 'effort' ? 'is-selected' : ''}" data-setup-mode="effort">
-                <strong>Effort</strong><span>Try harder</span>
+                <strong>Effort</strong>
               </button>
             </div>
           </section>

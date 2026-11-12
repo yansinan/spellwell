@@ -74,7 +74,7 @@ node tests/runTests.js --phase=p0
 # 期望最后一行：PASS  p0 gate · N passed · 0 failed
 ```
 
-浏览器打开 `http://127.0.0.1:4173/?dev=1`，应看到 P0 状态页：契约版本、9 题型、8 集合、seed 说明、视觉样片。
+浏览器打开 `http://0.0.0.0:4173/?dev=1`，应看到 P0 状态页：契约版本、9 题型、8 集合、seed 说明、视觉样片。
 P0 **不包含**：任何题型的真实出题/判定、IndexedDB 写入、调度队列、学习端 UI。
 
 ### P0 明确不做
@@ -328,7 +328,7 @@ node tests/runTests.js --phase=p6
 - [x] `AdminApp`：按 level 折叠列表、只读错/对次数、双栏单词列表/编辑器、保存到共享 IndexedDB；后台不写状态。
 - [x] 单词库/unit 编辑器：搜索/列表/内联新增、编辑 text/unit、选择 grapheme、未保存状态、撤销、共享 IndexedDB 保存。
 - [x] 内容导出入口移除；本机迁移独立 `/migration/index.html`。
-- [x] `/src/admin/index.html` 可访问；学习端不暴露入口。
+- [x] `/admin` 可访问；学习端不暴露入口。
 - [x] `tests/p7/content.test.js`、`tests/p7/adminArchitecture.test.js`。
 - [x] ADR-0013：ContentValidator、后台与导出阻断。
 
@@ -400,13 +400,13 @@ node tests/runTests.js --phase=p8
 - [x] 真实 attempts 权重校准（按词/题型错误率、平滑、约束优先）。
 - [x] 修复旧 DB 无 unitId 时 Start practice 空队列。
 - [x] 前台练习设计页：年级学期折叠 + unit 多选、Review/Effort、后台题量；不显示题量选择。
-- [x] 默认 20 题；后台设置 `/src/admin/settings.html`，面包屑返回内容库。
+- [x] 默认 20 题；后台设置 `/admin/settings.html`，面包屑返回内容库。
 - [x] Scheduler 按 unit 过滤、retired 过滤、Review/Effort 侧重点不同。
 - [x] 题目带 `params.plan.reason/mode/policyVersion`，可解释。
 - [x] `contentRevision`：后台保存递增；下一轮重新读内容。
 - [x] 当前会话保持；内容更新只提示 `New practice`，不中途换题。
 - [x] `PlanPolicy.revise()` 兼容接口；P9 不实时改当前计划。
-- [x] 提示词按句子 → 音标 → 中文 → 单词保底；CLOZE 句子即题面。
+- [x] 提示词中文优先、IPA 同屏辅助；CLOZE 句子即题面。
 - [x] 批量单元标题：`一年级上unit2` 后续词继承，直到下一个标题。
 - [x] 词库单独导入/导出：重复词合并/替换/不动。
 - [x] `tests/p9/`：默认题量、单元过滤、retired、Review/Effort、plan hook、权重校准、提示词、批量单元、教材切换、顺序解锁。

@@ -36,7 +36,7 @@ export async function mountPracticeSettings(root) {
   const render = () => {
     root.innerHTML = `
       <nav class="sw-admin__breadcrumb" aria-label="Breadcrumb">
-        <a href="/src/admin/index.html">内容库</a><span>/</span><strong>练习设置</strong>
+        <a href="/admin">内容库</a><span>/</span><strong>练习设置</strong>
       </nav>
       <section class="sw-panel">
         <h2>练习设置</h2>

@@ -31,6 +31,7 @@
 - 干扰项优先读取真实 attempts 历史错误，其次人工相似组。
 - T-JUDGE-FIX 约一半显示可信错词，修复“永远正确 claim”的判断题。
 - 新增出题逻辑审查记录 `docs/QUESTION_AUDIT.md`。
+- 视觉收口：提示去 Meaning/Sounds 标签、减少重复 hint、圆角绿色主按钮；后台入口改 `/admin`。
 - `contentRevision`：后台保存递增；下一轮重新读内容。
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
 - 计划项带 `params.plan.reason/mode/policyVersion`。

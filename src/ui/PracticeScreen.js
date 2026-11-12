@@ -19,16 +19,16 @@ import { selectPrompt, selectRecallPrompt } from './promptSelector.js';
 const TYPE_COPY = Object.freeze({
   'T-SEQUENCE': {
     title: 'Build the word',
-    hint: 'Tap to choose. Drag to reorder. Tap a placed sound to change.',
+    hint: 'Tap the sounds in order.',
   },
-  'T-FILL': { title: 'Fill the gap', hint: 'Tap the missing sound.' },
-  'T-TYPE': { title: 'Type the word', hint: 'Type the word.' },
-  'T-REORDER': { title: 'Put the sounds in order', hint: 'Tap two sounds to swap them.' },
-  'T-EDIT': { title: 'Fix the word', hint: 'Edit the letters, then check.' },
-  'T-SEGMENT': { title: 'Mark the sounds', hint: 'Tap the gaps between sounds.' },
-  'T-MATCH': { title: 'Find the sound', hint: 'Tap every word with this sound.' },
-  'T-JUDGE-FIX': { title: 'Judge the spelling', hint: 'Is it right? If not, fix it.' },
-  'T-CLOZE': { title: 'Finish the sentence', hint: 'Type the missing word.' },
+  'T-FILL': { title: 'Fill the gap', hint: 'Choose the missing sound.' },
+  'T-TYPE': { title: 'Type the word', hint: '' },
+  'T-REORDER': { title: 'Put the sounds in order', hint: 'Tap two sounds to swap.' },
+  'T-EDIT': { title: 'Fix the word', hint: '' },
+  'T-SEGMENT': { title: 'Mark the sounds', hint: 'Tap the gaps.' },
+  'T-MATCH': { title: 'Find the sound', hint: 'Choose every matching word.' },
+  'T-JUDGE-FIX': { title: 'Judge the spelling', hint: '' },
+  'T-CLOZE': { title: 'Finish the sentence', hint: '' },
 });
 
 /**
@@ -252,12 +252,6 @@ export class PracticeScreen {
   #questionTemplate() {
     const { spec, bundle } = this.#current;
     const copy = this.#typeCopy();
-    const phaseLabel = {
-      repair: 'Warm-up',
-      review: 'Review',
-      new: 'New word',
-      practice: 'Practice',
-    }[spec.params?.plan?.phase] ?? '';
     const progress = `${this.#session.currentIndex + 1} / ${this.#session.size}`;
     const familyWords = Array.isArray(bundle.word.familyWords) ? bundle.word.familyWords : [];
     const familyHtml = familyWords.length > 1
@@ -279,12 +273,13 @@ export class PracticeScreen {
         ? selectRecallPrompt({ word: bundle.word, allowIpaOnly })
         : selectPrompt({ word: bundle.word, sentences: bundle.sentences, allowIpaOnly });
     const secondary = prompt?.secondary
-      ? `<span class="sw-practice__prompt-secondary"><span>${escapeHtml(prompt.secondary.label)}</span>${escapeHtml(prompt.secondary.text)}</span>`
+      ? `<span class="sw-practice__prompt-secondary">${escapeHtml(prompt.secondary.text)}</span>`
       : '';
     const promptHtml = prompt
-      ? `<p class="sw-practice__prompt is-${prompt.kind}" aria-label="${escapeHtml(prompt.label)} clue"><span class="sw-practice__prompt-label">${escapeHtml(prompt.label)}</span>${escapeHtml(prompt.text)}${secondary}</p>`
+      ? `<p class="sw-practice__prompt is-${prompt.kind}" aria-label="${escapeHtml(prompt.label)} clue">${escapeHtml(prompt.text)}${secondary}</p>`
       : '';
     const hint = copy.hint;
+    const hintHtml = hint ? `<p class="sw-practice__hint">${escapeHtml(hint)}</p>` : '';
     const slots = isType
       ? this.#typeInputTemplate()
       : isEdit
@@ -318,12 +313,11 @@ export class PracticeScreen {
         ${this.#headerTemplate(progress)}
 
         <main class="sw-practice__stage">
-          ${phaseLabel ? `<p class="sw-practice__phase">${phaseLabel}</p>` : ''}
           <p class="sw-practice__kind">${copy.title}</p>
           ${familyHtml}
           ${magicHtml}
           ${promptHtml}
-          <p class="sw-practice__hint">${hint}</p>
+          ${hintHtml}
 
           ${slots}
           ${tiles}
