@@ -51,7 +51,7 @@
 
 ## 5. 输入体验
 
-- T-TYPE 的句子提示会高亮目标词，提示改为“Type the highlighted word.”；
+- T-TYPE 只用中文语义/音标提示，不显示目标单词；句子提示留给 T-CLOZE；
 - T-TYPE/T-EDIT/T-CLOZE 自动聚焦输入框；
 - 输入正确时自动提交，不需回车；
 - 选择类题型在正确/齐备时自动提交；

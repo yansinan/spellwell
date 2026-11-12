@@ -18,21 +18,16 @@ T-TYPE 显示句子 “My brother can run.” 时，没有指出要拼哪个词�
 
 ## 决定
 
-### D1：T-TYPE 句子高亮目标词
+### D1：T-TYPE 不显示目标词
 
-句子提示中把目标词高亮：
+T-TYPE 的原始设计是“无候选块整词提取”，不是抄写。
+因此 T-TYPE 专用提示只使用：
 
-```text
-My [brother] can run.
-```
+1. 中文语义；
+2. 音标；
+3. 都没有时不给提示。
 
-提示改为：
-
-```text
-Type the highlighted word.
-```
-
-音标/中文/单词提示仍显示 “Type the word.”。
+句子提示只留给 T-CLOZE，避免 T-TYPE 与 T-CLOZE 重叠，也避免显示答案。
 
 ### D2：中文输入法保护
 

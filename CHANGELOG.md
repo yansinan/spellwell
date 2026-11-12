@@ -42,7 +42,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 210 passed · 0 failed · 45 files
+# PASS  p9 gate · 211 passed · 0 failed · 46 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。

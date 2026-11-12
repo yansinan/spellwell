@@ -14,7 +14,7 @@ import { insertUnit, insertionIndexForPoint, previewInsertUnit } from './sequenc
 import { createSoundPlayer } from './sound.js';
 import { buildReport, summarizeSession } from './analytics.js';
 import { buildCompletionSummary } from './completionSummary.js';
-import { selectPrompt } from './promptSelector.js';
+import { selectPrompt, selectRecallPrompt } from './promptSelector.js';
 
 const TYPE_COPY = Object.freeze({
   'T-SEQUENCE': {
@@ -44,14 +44,6 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
-function highlightAnswer(text, answer) {
-  const source = String(text ?? '');
-  const target = String(answer ?? '');
-  if (!target) return escapeHtml(source);
-  const index = source.toLowerCase().indexOf(target.toLowerCase());
-  if (index < 0) return escapeHtml(source);
-  return `${escapeHtml(source.slice(0, index))}<mark class="sw-practice__prompt-mark">${escapeHtml(source.slice(index, index + target.length))}</mark>${escapeHtml(source.slice(index + target.length))}`;
-}
 
 export class PracticeScreen {
   #root;
@@ -275,15 +267,15 @@ export class PracticeScreen {
     const isMatch = spec.typeId === 'T-MATCH';
     const isJudge = spec.typeId === 'T-JUDGE-FIX';
     const isCloze = spec.typeId === 'T-CLOZE';
-    const prompt = isCloze ? null : selectPrompt({ word: bundle.word, sentences: bundle.sentences });
-    const sentenceForType = isType && prompt?.kind === 'sentence';
-    const promptBody = sentenceForType
-      ? highlightAnswer(prompt.text, bundle.word.text)
-      : escapeHtml(prompt?.text ?? '');
+    const prompt = isCloze
+      ? null
+      : isType
+        ? selectRecallPrompt({ word: bundle.word })
+        : selectPrompt({ word: bundle.word, sentences: bundle.sentences });
     const promptHtml = prompt
-      ? `<p class="sw-practice__prompt is-${prompt.kind}" aria-label="${escapeHtml(prompt.label)} clue"><span class="sw-practice__prompt-label">${escapeHtml(prompt.label)}</span>${promptBody}</p>`
+      ? `<p class="sw-practice__prompt is-${prompt.kind}" aria-label="${escapeHtml(prompt.label)} clue"><span class="sw-practice__prompt-label">${escapeHtml(prompt.label)}</span>${escapeHtml(prompt.text)}</p>`
       : '';
-    const hint = sentenceForType ? 'Type the highlighted word.' : copy.hint;
+    const hint = copy.hint;
     const slots = isType
       ? this.#typeInputTemplate()
       : isEdit

@@ -26,3 +26,17 @@ export function selectPrompt({ word, sentences = [] }) {
   if (translation) return { kind: 'translation', label: 'Meaning', text: translation };
   return { kind: 'word', label: 'Word', text: String(word?.text ?? '') };
 }
+
+/**
+ * T-TYPE 专用回忆提示：不显示目标单词本身。
+ * 优先中文语义，其次音标；绝不返回 word.text。
+ * @param {{word: Record<string, any>, sentences?: Record<string, any>[]|null}} input
+ * @returns {{kind: 'phonetic'|'translation'|'sentence'|'none', label: string, text: string}}
+ */
+export function selectRecallPrompt({ word }) {
+  const translation = typeof word?.translation === 'string' ? word.translation.trim() : '';
+  if (translation) return { kind: 'translation', label: 'Meaning', text: translation };
+  const phonetic = typeof word?.phonetic === 'string' ? word.phonetic.trim() : '';
+  if (phonetic) return { kind: 'phonetic', label: 'Sounds', text: phonetic };
+  return { kind: 'none', label: '', text: '' };
+}
