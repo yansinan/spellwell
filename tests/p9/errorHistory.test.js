@@ -25,3 +25,12 @@ test('历史错误：跳过空 actual，保持跨词聚合', () => {
   ]);
   assertEqual(historicalActuals(history, { expected: 'ea' })[0], 'e');
 });
+
+test('历史错误：忽略空白/空格拼接的 actual', () => {
+  const history = buildErrorHistory([
+    { wordId: 'hat', firstError: { expected: 'a', actual: ' ' } },
+    { wordId: 'hat', firstError: { expected: 'a', actual: 'h t' } },
+    { wordId: 'hat', firstError: { expected: 'a', actual: 'e' } },
+  ]);
+  assertDeepEqual(historicalActuals(history, { wordId: 'hat' }), ['e']);
+});

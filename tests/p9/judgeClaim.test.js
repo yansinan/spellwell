@@ -57,3 +57,23 @@ test('T-JUDGE-FIX：有历史错误时只回放该词自己的错误', async () 
   assert(claims.has('berd'), 'expected own historical error claim');
   assert([...claims].every((claim) => claim === 'bird' || claim === 'berd'));
 });
+
+test('T-JUDGE-FIX：空白历史错误不会生成 h t', async () => {
+  const { word, map, pool } = await setup();
+  const history = buildErrorHistory([
+    { wordId: 'w.bird', firstError: { expected: 'ir', actual: ' ' } },
+    { wordId: 'w.bird', firstError: { expected: 'ir', actual: 'h t' } },
+  ]);
+  for (let seed = 0; seed < 30; seed += 1) {
+    const spec = buildWordSpec({
+      word,
+      typeId: 'T-JUDGE-FIX',
+      graphemeMap: map,
+      distractorPool: pool,
+      seed,
+      specId: `spec.test.judge.space.${seed}`,
+      errorHistory: history,
+    });
+    assertEqual(spec.params.claim.includes(' '), false);
+  }
+});

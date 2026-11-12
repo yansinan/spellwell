@@ -86,3 +86,12 @@ test('IPA：全部基础词条已补齐，格式统一', async () => {
     assert(typeof word.phonetic === 'string' && word.phonetic.startsWith('/') && word.phonetic.endsWith('/'), `${word.id} phonetic`);
   }
 });
+
+test('IPA：hat / football 不是方括号或空格拼写', async () => {
+  const current = await load();
+  for (const text of ['hat', 'football']) {
+    const word = current.words.items.find((item) => item.text === text);
+    assert(word, `${text} missing`);
+    assert(!word.phonetic.includes('[') && !word.phonetic.includes(']') && !word.phonetic.includes(' '), text);
+  }
+});

@@ -1,6 +1,6 @@
 # SpellWell 当前工程状态
 
-> 更新时间：2026-11-12 · contentVersion 10 · P9 已完成
+> 更新时间：2026-11-12 · contentVersion 11 · P9 已完成
 
 ## 1. 阶段
 
@@ -16,7 +16,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# P7 189 · P8 192 · P9 230
+# P7 190 · P8 193 · P9 233
 ```
 
 ## 2. 教材与内容

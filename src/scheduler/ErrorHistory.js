@@ -52,28 +52,31 @@ export function buildErrorHistory(attempts) {
 
   for (const [index, attempt] of (Array.isArray(attempts) ? attempts : []).entries()) {
     const error = attempt?.firstError;
-    if (!error || typeof error.actual !== 'string' || error.actual.length === 0) continue;
+    if (!error || typeof error.actual !== 'string') continue;
+    const actual = error.actual.trim();
+    // 只保留字母级错误；忽略空白、空格拼接和标点，避免出现 "h t" 这类 claim。
+    if (!/^[a-z]+$/i.test(actual)) continue;
     if (typeof error.expected !== 'string' || error.expected.length === 0) continue;
     const at = Date.parse(attempt.timestamp ?? '') || index;
     const wordId = String(attempt.wordId ?? '');
     if (wordId) {
-      bump(ensureWord(wordId), error.actual, at);
+      bump(ensureWord(wordId), actual, at);
       const detail = ensureWordExpected(wordId, error.expected);
-      const existing = detail.get(error.actual);
+      const existing = detail.get(actual);
       if (existing) {
         existing.count += 1;
         existing.lastAt = Math.max(existing.lastAt, at);
         existing.unitId = String(error.unitId ?? existing.unitId ?? '');
       } else {
-        detail.set(error.actual, {
-          actual: error.actual,
+        detail.set(actual, {
+          actual,
           count: 1,
           lastAt: at,
           unitId: String(error.unitId ?? ''),
         });
       }
     }
-    bump(ensureExpected(error.expected), error.actual, at);
+    bump(ensureExpected(error.expected), actual, at);
   }
   return { byWord, byExpected, byWordExpected };
 }
