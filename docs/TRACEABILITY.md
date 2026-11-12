@@ -117,6 +117,7 @@
 | R-P9-12 | 答错显示答案、重试到正确、结束页正确率+错词 | `PracticeSession` + `PracticeScreen` + `completionSummary` | P1/P9 retry tests + 浏览器 | P9 | ✅ |
 | R-P7-11 | 基础词库切分审计与组合库扩充 | `WordImporter` + graphemes/words | `tests/p7/segmentation.test.js` | P7 | ✅ |
 | R-P9-13 | 练习阶段顺序与题型策略 | `Scheduler` phase/typeReason + UI | `tests/p9/unitSelection.test.js` | P9 | ✅ |
+| R-P9-14 | 后台单元分页/搜索 | `AdminApp` unitPage + searchQuery | 浏览器 + ADR-0027 | P9 | ✅ |
 | R-P7-12 | 例句库与混淆项预制 | `sentences.json` + `confusables.json` | content tests | P7 | ✅ |
 | R-P7-09 | 批量单元标题行切换后续词单元 | `WordImporter.parseBatch` + AdminApp | `tests/p7/import.test.js` + `tests/p7/editor.test.js` | P7 | ✅ |
 | R-P7-10 | 词库单独导入/导出与重复词合并/替换/不动 | `WordLibrary` + AdminApp | `tests/p7/wordLibrary.test.js` + 浏览器 | P7 | ✅ |

@@ -30,6 +30,7 @@
 | [0024](0024-retry-and-session-summary.md) | 答错重试到正确与结束页 | Accepted | 首次作答记录；答错显示答案；结束时正确率+错词 |
 | [0025](0025-segmentation-audit.md) | 基础词库切分审计与组合库扩充 | Accepted | 96→152；后缀词尾约束；例外表；静态自带 |
 | [0026](0026-session-phase-order.md) | 练习阶段顺序与题型策略 | Accepted | 修复→复习→新词→巩固；新词先搭；计划带 phase |
+| [0027](0027-admin-unit-pagination.md) | 后台单元分页 | Accepted | 12 unit/页；搜索跨全部；折叠上下文保留 |
 
 新增 ADR 的模板：
 

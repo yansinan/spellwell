@@ -916,3 +916,19 @@ code {
   opacity: 0;
   cursor: pointer;
 }
+
+/* 后台单元分页 */
+.sw-admin__pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 2px 4px;
+  color: var(--sw-ink-soft);
+  font-size: 12px;
+}
+
+.sw-admin__pager button[disabled] {
+  opacity: 0.4;
+  cursor: default;
+}

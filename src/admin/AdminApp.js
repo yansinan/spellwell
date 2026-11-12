@@ -113,6 +113,8 @@ export async function mountAdmin(root) {
   let batchPreview = null;
   let duplicateMode = 'merge';
   let wordImportMode = 'merge';
+  let unitPage = 0;
+  let searchQuery = '';
   let wordLibraryStatus = '';
   let notice = '';
 
@@ -174,10 +176,21 @@ export async function mountAdmin(root) {
       }
       unitGroups.get(key).items.push(item);
     }
-    const units = [...unitGroups.values()].sort((a, b) => a.id.localeCompare(b.id));
+    const allUnits = [...unitGroups.values()].sort((a, b) => a.id.localeCompare(b.id));
+    const pageSize = 12;
+    const pageCount = Math.max(1, Math.ceil(allUnits.length / pageSize));
+    if (unitPage >= pageCount) unitPage = pageCount - 1;
+    if (unitPage < 0) unitPage = 0;
+    const matchingUnits = searchQuery
+      ? allUnits.filter((unit) => unit.label.toLowerCase().includes(searchQuery)
+        || unit.items.some((item) => `${item.text} ${item.translation ?? ''}`.toLowerCase().includes(searchQuery)))
+      : allUnits;
+    const units = searchQuery
+      ? matchingUnits
+      : allUnits.slice(unitPage * pageSize, (unitPage + 1) * pageSize);
     const wordItems = units.map((unit) => {
       const items = unit.items;
-      const open = !collapsedLevels.has(unit.id)
+      const open = Boolean(searchQuery) || !collapsedLevels.has(unit.id)
         || items.some((item) => item.id === selectedWordId);
       return `
         <details class="sw-admin__level-group" data-level-group="${escape(unit.id)}" ${open ? 'open' : ''}>
@@ -318,7 +331,14 @@ export async function mountAdmin(root) {
               <button type="button" class="sw-text-button" data-cancel-add>取消</button>
             </form>
           ` : ''}
-          <ul class="sw-admin__word-list">${wordItems || '<li class="sw-admin__muted">没有单词</li>'}</ul>
+          ${wordItems || '<p class="sw-admin__muted">没有单词</p>'}
+          ${searchQuery ? '' : `
+            <nav class="sw-admin__pager" aria-label="Unit pages">
+              <button type="button" class="sw-text-button" data-page-prev ${unitPage === 0 ? 'disabled' : ''}>上一页</button>
+              <span>${unitPage + 1} / ${pageCount}</span>
+              <button type="button" class="sw-text-button" data-page-next ${unitPage >= pageCount - 1 ? 'disabled' : ''}>下一页</button>
+            </nav>
+          `}
         </aside>
 
         <section class="sw-panel sw-admin__editor">
@@ -383,19 +403,25 @@ export async function mountAdmin(root) {
     `;
 
     const search = root.querySelector('[data-word-search]');
-    search?.addEventListener('input', () => {
-      const query = search.value.trim().toLowerCase();
-      for (const group of root.querySelectorAll('[data-level-group]')) {
-        let visible = 0;
-        for (const button of group.querySelectorAll('[data-select-word]')) {
-          const text = button.textContent?.toLowerCase() ?? '';
-          const show = !query || text.includes(query);
-          button.parentElement.style.display = show ? '' : 'none';
-          if (show) visible += 1;
-        }
-        group.style.display = visible > 0 ? '' : 'none';
-        if (query) group.open = true;
+    if (search) {
+      search.value = searchQuery;
+      if (searchQuery) {
+        search.focus();
+        search.setSelectionRange(search.value.length, search.value.length);
       }
+      search.addEventListener('input', () => {
+        searchQuery = search.value.trim().toLowerCase();
+        unitPage = 0;
+        render();
+      });
+    }
+    root.querySelector('[data-page-prev]')?.addEventListener('click', () => {
+      unitPage = Math.max(0, unitPage - 1);
+      render();
+    });
+    root.querySelector('[data-page-next]')?.addEventListener('click', () => {
+      unitPage += 1;
+      render();
     });
 
     for (const details of root.querySelectorAll('[data-level-group]')) {
@@ -421,6 +447,8 @@ export async function mountAdmin(root) {
     });
     root.querySelector('[data-textbook-select]')?.addEventListener('change', async (event) => {
       activeTextbook = event.target.value;
+      searchQuery = '';
+      unitPage = 0;
       if (adapter) await saveActiveTextbook(adapter, activeTextbook);
       selectedWordId = activeWords()[0]?.id ?? null;
       collapsedLevels.clear();
