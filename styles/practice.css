@@ -1084,3 +1084,13 @@
   color: var(--sw-ink-soft);
   font-weight: 700;
 }
+
+.sw-setup__auto-note {
+  max-width: 360px;
+  margin: 0;
+  color: var(--sw-ink-soft);
+  font-family: var(--sw-font-body);
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: center;
+}

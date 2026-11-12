@@ -52,7 +52,13 @@ export class PracticeSetupScreen {
     const currentTerm = workspace.terms.find((term) => term.units.some((unit) =>
       unit.id === (selectedForTerm ?? progress.current?.id),
     ));
-    this.expandedTerms = new Set(currentTerm ? [currentTerm.id] : []);
+    const reviewTermIds = workspace.terms
+      .filter((term) => term.units.some((unit) => this.reviewUnitIds.has(unit.id)))
+      .map((term) => term.id);
+    this.expandedTerms = new Set([
+      ...reviewTermIds,
+      ...(currentTerm ? [currentTerm.id] : []),
+    ]);
   }
 
   mount() {
@@ -69,16 +75,21 @@ export class PracticeSetupScreen {
       .filter((unit) => this.selectedUnits.has(unit.id))
       .reduce((sum, unit) => sum + unit.count, 0);
     const questions = Math.min(this.workspace.settings.questionsPerPractice, available);
+    const reviewCount = units.filter((unit) => this.reviewUnitIds.has(unit.id)).length;
+    const newCount = units.filter((unit) => !this.reviewUnitIds.has(unit.id) && this.selectedUnits.has(unit.id)).length;
     this.root.innerHTML = `
       <div class="sw-practice sw-setup">
         <header class="sw-practice__header">
           <span class="sw-brand">SpellWell</span>
           <div class="sw-practice__tools">
-            <span class="sw-progress">${questions} questions</span>
+            <span class="sw-progress">${questions} q · ${reviewCount} review + ${newCount} new</span>
           </div>
         </header>
         <main class="sw-practice__stage sw-setup__stage">
           <h1 class="sw-done__title">Ready to spell?</h1>
+          ${units.some((unit) => this.reviewUnitIds.has(unit.id)) ? `
+            <p class="sw-setup__auto-note">Review units are added automatically. Only the next new unit is optional.</p>
+          ` : ''}
 
           <section class="sw-setup__section">
             <h2>年级 / 单元</h2>
