@@ -415,7 +415,7 @@ node tests/runTests.js --phase=p8
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 213 passed · 0 failed · 46 files
+# PASS  p9 gate · 215 passed · 0 failed · 47 files
 ```
 
 - 练习设计页：12 个学期折叠、unit 多选、Review 默认、`20 questions`。

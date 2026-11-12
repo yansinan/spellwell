@@ -91,12 +91,13 @@ export class PracticeSetupScreen {
                     <div class="sw-setup__units">
                       ${term.units.map((unit) => {
                         const done = Boolean(unit.completed);
-                        const status = done ? 'Done' : (unit.practiced ?? 0) > 0 ? 'In progress' : 'Next';
+                        
                         return `
-                        <label class="sw-setup__unit ${this.selectedUnits.has(unit.id) ? 'is-selected' : ''} ${done ? 'is-done' : 'is-current'}">
+                        <label class="sw-setup__unit ${this.selectedUnits.has(unit.id) ? 'is-selected' : ''} ${done ? 'is-done' : 'is-current'}" style="--unit-progress:${unit.percent ?? 0}%">
+                          <span class="sw-setup__unit-fill" aria-hidden="true"></span>
                           <input type="checkbox" data-setup-unit="${escape(unit.id)}" ${this.selectedUnits.has(unit.id) ? 'checked' : ''} />
                           <span>${escape(unit.label)}</span>
-                          <small>${status} · ${unit.practiced ?? 0}/${unit.count}</small>
+                          <small>${unit.percent ?? 0}% · ${unit.practiced ?? 0}/${unit.count}</small>
                         </label>
                       `;
                       }).join('')}

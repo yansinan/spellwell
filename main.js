@@ -55,11 +55,6 @@ async function boot() {
     }).mount();
   };
 
-  const startPractice = async (request) => {
-    const result = await workspace.startPractice(request);
-    mountPractice(result);
-  };
-
   showSetup = async () => {
     await workspace.refresh();
     new PracticeSetupScreen({
@@ -69,15 +64,8 @@ async function boot() {
     }).mount();
   };
 
-  const auto = workspace.autoSelection();
-  if (auto.autoStart && auto.selected.length > 0) {
-    await startPractice({
-      units: auto.selected.map((unit) => unit.id),
-      mode: workspace.settings.defaultMode,
-    });
-  } else {
-    await showSetup();
-  }
+  // 保留练习设计页；默认按记忆周期自动勾选单元，由孩子点 Start。
+  await showSetup();
 }
 
 function showContentBanner() {

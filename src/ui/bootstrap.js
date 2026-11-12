@@ -20,6 +20,7 @@ import { SentenceRepository } from '../repositories/SentenceRepository.js';
 import { Scheduler } from '../scheduler/Scheduler.js';
 import { PracticeSession } from './PracticeSession.js';
 import { selectAutoUnits } from './unitProgress.js';
+import { unitProgress as computeUnitProgress } from './masteryProgress.js';
 
 export const P1_WORD_IDS = Object.freeze(['w.fish', 'w.ship', 'w.night']);
 
@@ -103,6 +104,16 @@ async function readContent(adapter) {
     unit.mastered = unit.masteredCount === unit.count;
   }
   const units = [...unitMap.values()].sort((a, b) => a.id.localeCompare(b.id));
+  for (const unit of units) {
+    const wordsInUnit = activeWords.filter((word) => String(word.unitId ?? `level-${word.level ?? 1}`) === unit.id);
+    const progress = computeUnitProgress(wordStates, wordsInUnit);
+    unit.progress = progress.progress;
+    unit.percent = progress.percent;
+    unit.practiced = progress.practiced;
+    unit.masteredCount = progress.mastered;
+    unit.completed = unit.practiced === unit.count;
+    unit.mastered = unit.masteredCount === unit.count;
+  }
   const terms = TERM_DEFINITIONS.map((definition) => ({
     ...definition,
     units: units.filter((unit) => unit.grade === definition.grade && unit.term === definition.term),

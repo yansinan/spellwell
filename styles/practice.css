@@ -1027,3 +1027,29 @@
   text-decoration-color: var(--sw-mint-deep);
   text-underline-offset: 4px;
 }
+
+/* 单元掌握进度：整行背景条 + 百分比 */
+.sw-setup__unit {
+  position: relative;
+  overflow: hidden;
+}
+
+.sw-setup__unit-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--unit-progress, 0%);
+  background: linear-gradient(90deg, var(--sw-mint-soft), rgba(180, 232, 204, 0.55));
+  pointer-events: none;
+}
+
+.sw-setup__unit > input,
+.sw-setup__unit > span:not(.sw-setup__unit-fill),
+.sw-setup__unit > small {
+  position: relative;
+  z-index: 1;
+}
+
+.sw-setup__unit small {
+  min-width: 84px;
+  text-align: right;
+}

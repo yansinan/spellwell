@@ -33,6 +33,7 @@
 | [0027](0027-admin-unit-pagination.md) | 后台单元分页 | Accepted | 12 unit/页；搜索跨全部；折叠上下文保留 |
 | [0028](0028-input-ux-auto-check.md) | 输入体验：高亮目标词/自动判定/IME | Accepted | 高亮目标；composition 防误提交；正确自动提交；自动聚焦 |
 | [0029](0029-auto-practice-selection.md) | 默认自动选择记忆周期内单元 | Accepted | 复习全选；mastered 排除；有余地加一个新单元；默认直接进入 |
+| [0030](0030-unit-mastery-progress.md) | 单元掌握总进度 | Accepted | 记忆曲线+连对+错题；整行背景条+百分比 |
 
 新增 ADR 的模板：
 
