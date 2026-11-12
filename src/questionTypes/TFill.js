@@ -20,6 +20,24 @@ import {
   renderUnitsForWord,
 } from './shared.js';
 
+
+/**
+ * @param {import('../core/contracts.js').QuestionSpec} spec
+ * @param {{units: {text: string}[]}} word
+ */
+function resolveVowelSplit(spec, word) {
+  const split = spec.params?.vowelSplit;
+  if (!split) return null;
+  const { unitIndex, letters } = split;
+  if (!Number.isInteger(unitIndex) || unitIndex < 0 || unitIndex >= word.units.length
+    || !Array.isArray(letters) || letters.length < 2
+    || letters.some((letter) => typeof letter !== 'string' || letter.length !== 1)
+    || letters.join('') !== word.units[unitIndex].text) {
+    throw new ContractError('QUESTION_SPEC_INVALID', 'vowelSplit must split an existing unit into letters');
+  }
+  return { unitIndex, letters: [...letters] };
+}
+
 /**
  * @param {import('../core/contracts.js').QuestionSpec} spec
  * @param {{id: string, text: string, units: {text: string, graphemeId: string}[]}} word
@@ -54,17 +72,35 @@ function resolveBlankIndexes(spec, word) {
 function buildFill(spec, bundle) {
   const word = getWord(bundle);
   assertFocusInWord(spec, bundle);
-  const blankIndexes = resolveBlankIndexes(spec, word);
-  const candidates = [...renderUnitsForWord(word), ...distractorUnits(spec, bundle)];
+  const vowelSplit = resolveVowelSplit(spec, word);
+  const blankIndexes = vowelSplit ? [] : resolveBlankIndexes(spec, word);
+  const allWordUnits = renderUnitsForWord(word);
+  const candidates = vowelSplit
+    ? [
+      ...allWordUnits.filter((unit, index) => index !== vowelSplit.unitIndex),
+      ...vowelSplit.letters.map((letter, index) => ({
+        unitId: `split-${vowelSplit.unitIndex}-${index}`,
+        text: letter,
+        kind: /** @type {const} */ ('letter'),
+      })),
+      ...distractorUnits(spec, bundle),
+    ]
+    : [...allWordUnits, ...distractorUnits(spec, bundle)];
   const units = createRng(spec.seed).shuffle(candidates);
 
   return {
     layout: 'fill',
-    slots: blankIndexes.map((index) => ({
-      slotId: `slot-${index}`,
-      index,
-      accepts: /** @type {const} */ ('unit'),
-    })),
+    slots: vowelSplit
+      ? vowelSplit.letters.map((_, index) => ({
+        slotId: `slot-split-${index}`,
+        index,
+        accepts: /** @type {const} */ ('unit'),
+      }))
+      : blankIndexes.map((index) => ({
+        slotId: `slot-${index}`,
+        index,
+        accepts: /** @type {const} */ ('unit'),
+      })),
     units,
     ...(spec.focus ? { focus: spec.focus } : {}),
     interactionHints: {
@@ -90,7 +126,8 @@ function buildFill(spec, bundle) {
  */
 function judgeFill({ spec, renderModel, events, bundle, now = Date.now() }) {
   const word = getWord(bundle);
-  const blankIndexes = resolveBlankIndexes(spec, word);
+  const vowelSplit = resolveVowelSplit(spec, word);
+  const blankIndexes = vowelSplit ? vowelSplit.letters.map((_, index) => index) : resolveBlankIndexes(spec, word);
   const unitById = new Map(renderModel.units.map((unit) => [unit.unitId, unit]));
   const taps = (Array.isArray(events) ? events : []).filter((event) => event.kind === 'tap-unit');
   const selectedBySlot = new Map();
@@ -102,7 +139,7 @@ function judgeFill({ spec, renderModel, events, bundle, now = Date.now() }) {
   let firstError = null;
   for (const index of blankIndexes) {
     const event = selectedBySlot.get(index);
-    const expected = word.units[index].text;
+    const expected = vowelSplit ? vowelSplit.letters[index] : word.units[index].text;
     const selected = event ? unitById.get(event.unitId) : undefined;
     if (event && !selected) throw new ContractError('QUESTION_INPUT_INVALID', `unknown unit ${String(event.unitId)}`);
     const actual = selected?.text ?? '';
@@ -110,7 +147,7 @@ function judgeFill({ spec, renderModel, events, bundle, now = Date.now() }) {
       firstError = errorFor({
         type: event === undefined ? 'OMISSION' : 'SUBSTITUTION',
         word,
-        unitIndex: index,
+        unitIndex: vowelSplit ? vowelSplit.unitIndex : index,
         expected,
         actual,
       });
@@ -121,7 +158,9 @@ function judgeFill({ spec, renderModel, events, bundle, now = Date.now() }) {
   const focusIndexes = focusUnitIndexes(word, spec.focus);
   const focusCorrect = focusIndexes.length === 0
     ? undefined
-    : focusIndexes.every((index) => (blankIndexes.includes(index) ? wordCorrect : true));
+    : vowelSplit
+      ? wordCorrect
+      : focusIndexes.every((index) => (blankIndexes.includes(index) ? wordCorrect : true));
 
   return makeAttempt({
     spec,

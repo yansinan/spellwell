@@ -145,11 +145,19 @@ export function buildWordSpec({
 
   let focusIndex = chooseFocusIndex(word, seed);
   let magicBlanks = null;
+  let vowelSplit = null;
   if (typeId === 'T-FILL' && word.magicE) {
     const vowelIndex = word.units.findIndex((unit) => unit.magicE === true);
     const finalEIndex = word.units.findIndex((unit) => unit.silent === true);
     if (vowelIndex >= 0 && finalEIndex >= 0) {
       magicBlanks = [vowelIndex, finalEIndex];
+      focusIndex = vowelIndex;
+    }
+  }
+  if (typeId === 'T-FILL' && !magicBlanks) {
+    const vowelIndex = word.units.findIndex((unit) => /^[aeiou]{2,4}$/.test(unit.text));
+    if (vowelIndex >= 0 && hashSeed(`${word.id}|vowel-split|${seed}`) % 3 === 0) {
+      vowelSplit = { unitIndex: vowelIndex, letters: [...word.units[vowelIndex].text] };
       focusIndex = vowelIndex;
     }
   }
@@ -161,6 +169,7 @@ export function buildWordSpec({
       ? {
         blankUnitIndex: focusIndex,
         ...(magicBlanks ? { blankUnitIndices: magicBlanks } : {}),
+        ...(vowelSplit ? { vowelSplit } : {}),
         distractorGraphemeIds: distractors,
       }
       : typeId === 'T-EDIT'

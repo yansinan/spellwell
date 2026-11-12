@@ -25,6 +25,7 @@
 - 设计页保留；默认勾选记忆周期内未掌握单元，mastered 排除；旧内容完成后有余地才自动加新单元。
 - 单元掌握总进度：真实 attempts 校准记忆曲线；整行背景条+百分比。
 - 提示改为中文为主、IPA 同屏辅助；低年级不单独用 IPA。
+- T-FILL 约 1/3 把纯元音组合拆成字母双空（如 r _ _ n）。
 - `contentRevision`：后台保存递增；下一轮重新读内容。
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
 - 计划项带 `params.plan.reason/mode/policyVersion`。
@@ -45,7 +46,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 219 passed · 0 failed · 47 files
+# PASS  p9 gate · 220 passed · 0 failed · 47 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。

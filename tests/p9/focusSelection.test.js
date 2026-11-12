@@ -5,7 +5,7 @@
  */
 
 import { chooseFocusIndex } from '../../src/scheduler/QuestionSpecBuilder.js';
-import { assertEqual, test } from '../harness.js';
+import { assert, assertEqual, test } from '../harness.js';
 
 test('填空焦点：fish 可在 _ish / f_sh / fi_h 间变化，元音有偏重', () => {
   const word = {
@@ -74,6 +74,45 @@ test('魔法 e 双空：T-FILL 构建两个空位并可判定 a/e', async () => 
     events: [
       { kind: 'tap-unit', unitId: a.unitId, slotIndex: 1 },
       { kind: 'tap-unit', unitId: e.unitId, slotIndex: 3 },
+    ],
+  });
+  assertEqual(result.wordCorrect, true);
+});
+
+test('元音组合拆分：T-FILL 可把 ai 拆成 a/i 两个字母空', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const words = JSON.parse(await readFile(new URL('../../src/content/words.json', import.meta.url), 'utf8'));
+  const graphemes = JSON.parse(await readFile(new URL('../../src/content/graphemes.json', import.meta.url), 'utf8'));
+  const word = words.items.find((item) => item.text === 'rain' && item.textbook === 'pep-2026');
+  const map = Object.fromEntries(graphemes.items.map((item) => [item.id, item]));
+  const { buildWordSpec } = await import('../../src/scheduler/QuestionSpecBuilder.js');
+  const { build, judge } = await import('../../src/questionTypes/TFill.js');
+  let spec = null;
+  for (let seed = 0; seed < 30; seed += 1) {
+    const candidate = buildWordSpec({
+      word,
+      typeId: 'T-FILL',
+      graphemeMap: map,
+      distractorPool: [],
+      seed,
+      specId: `spec.test.rain.${seed}`,
+    });
+    if (candidate.params.vowelSplit) { spec = candidate; break; }
+  }
+  assert(spec, 'expected at least one vowel-split seed');
+  assertEqual(spec.params.vowelSplit.letters.join(''), 'ai');
+  const bundle = { word, graphemes: map };
+  const model = build(spec, bundle);
+  assertEqual(model.slots.length, 2);
+  const a = model.units.find((unit) => unit.text === 'a');
+  const i = model.units.find((unit) => unit.text === 'i');
+  const result = judge({
+    spec,
+    renderModel: model,
+    bundle,
+    events: [
+      { kind: 'tap-unit', unitId: a.unitId, slotIndex: 0 },
+      { kind: 'tap-unit', unitId: i.unitId, slotIndex: 1 },
     ],
   });
   assertEqual(result.wordCorrect, true);

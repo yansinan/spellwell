@@ -356,10 +356,21 @@ export class PracticeScreen {
     }
     if (spec.typeId === 'T-FILL') {
       const blankIndexes = this.#blankIndexes();
+      const split = spec.params?.vowelSplit;
+      let splitSlot = 0;
       return `
         <div class="sw-slots" data-role="slots">
           ${bundle.word.units.map((unit, index) => {
-            if (blankIndexes.includes(index)) {
+            if (split && index === split.unitIndex) {
+              return split.letters.map(() => {
+                const slotIndex = splitSlot;
+                splitSlot += 1;
+                const event = this.#eventForSlot(slotIndex);
+                const selected = event ? this.#unitText(event.unitId) : '';
+                return `<button type="button" class="sw-slot sw-slot--blank ${selected ? 'is-filled' : ''}" data-slot-index="${slotIndex}" aria-label="Missing letter">${escapeHtml(selected)}</button>`;
+              }).join('');
+            }
+            if (!split && blankIndexes.includes(index)) {
               const event = this.#eventForSlot(index);
               const selected = event ? this.#unitText(event.unitId) : '';
               return `<button type="button" class="sw-slot sw-slot--blank ${selected ? 'is-filled' : ''}" data-slot-index="${index}" aria-label="Missing sound">${escapeHtml(selected)}</button>`;
@@ -1060,6 +1071,7 @@ export class PracticeScreen {
 
   #blankIndexes() {
     const params = this.#current.spec.params ?? {};
+    if (params.vowelSplit) return params.vowelSplit.letters.map((_, index) => index);
     if (Array.isArray(params.blankUnitIndices) && params.blankUnitIndices.length > 0) {
       return [...new Set(params.blankUnitIndices)];
     }
