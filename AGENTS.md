@@ -185,4 +185,5 @@ node tools/serve.mjs
 - 输入：T-TYPE 只用语义/音标回忆，不显示目标词；句子提示留给 T-CLOZE；IME composition 回车不提交；正确自动判定；输入框自动聚焦；见 ADR-0028。
 - 视觉：提示只显示内容（中文 + IPA），不显示 Meaning/Sounds 标签；主按钮绿色圆角；后台入口 `/admin`；见 ADR-0035。
 - 记忆周期旧单元在设置页只读自动复习；只有下一个新单元可复选；见 ADR-0036。
+- 强复习题型 T-TYPE/T-FILL 轮转；会话种子随 attempts 变化；见 ADR-0037。
 - 所有例句必须有中文 `translation`；T-CLOZE 显示中文翻译；见 CONTENT_SPEC。

@@ -20,6 +20,8 @@ import { SentenceRepository } from '../repositories/SentenceRepository.js';
 import { Scheduler } from '../scheduler/Scheduler.js';
 import { PracticeSession } from './PracticeSession.js';
 import { selectAutoUnits } from './unitProgress.js';
+import { hashSeed } from '../core/seedRandom.js';
+import { toDayKey } from '../core/time.js';
 import { unitProgress as computeUnitProgress } from './masteryProgress.js';
 
 export const P1_WORD_IDS = Object.freeze(['w.fish', 'w.ship', 'w.night']);
@@ -182,6 +184,8 @@ export async function createPracticeWorkspace() {
     );
     if (words.length === 0) throw new Error('no words in selected units');
     const selectedMode = mode ?? snapshot.settings.defaultMode;
+    const attempts = await adapter.query('attempts', {});
+    const sessionSeed = hashSeed(`session|${attempts.length}|${toDayKey(new Date())}|${[...selectedUnits ?? []].sort().join(',')}|${selectedMode}`);
     const bundles = buildBundles(words, snapshot.graphemeMap, snapshot.sentenceByWord);
     const wordRepository = new WordRepository(adapter);
     const stateRepository = new StateRepository(adapter);
@@ -196,7 +200,7 @@ export async function createPracticeWorkspace() {
       graphemeMap: snapshot.graphemeMap,
       distractorPool: snapshot.graphemes.map((item) => ({ id: item.id, text: item.text })),
       sentences: snapshot.sentenceByWord,
-      seed: 20261111,
+      seed: sessionSeed,
       size: snapshot.settings.questionsPerPractice,
     });
     const specs = await scheduler.buildDailyQueue({
@@ -207,7 +211,7 @@ export async function createPracticeWorkspace() {
     const session = new PracticeSession({
       bundles,
       distractorPool: snapshot.graphemes.map((item) => ({ id: item.id, text: item.text })),
-      seed: 20261111,
+      seed: sessionSeed,
       specs,
     });
     const loadReport = async () => ({

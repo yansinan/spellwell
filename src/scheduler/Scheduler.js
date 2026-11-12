@@ -16,6 +16,7 @@ import { addDays, isDayKey, toDayKey } from '../core/time.js';
 import { createRng, hashSeed } from '../core/seedRandom.js';
 import { confusableGraphemes } from './ConfusableGraphemes.js';
 import { buildErrorHistory, historicalActuals, historicalErrorsForWord } from './ErrorHistory.js';
+import { variedType } from './TypeVariety.js';
 import {
   applyWordReview,
   dueDateFor,
@@ -265,14 +266,26 @@ export class Scheduler {
         typeId = candidatesForError(latestError.type).find((candidate) => P4_AVAILABLE_TYPES.includes(candidate));
         typeReason = 'repair';
       } else if (phase === 'new') {
-        typeId = mode === 'effort' ? 'T-FILL' : 'T-SEQUENCE';
+        typeId = variedType({ phase, mode, index, seed });
         typeReason = 'new:build';
       } else if (phase === 'review') {
-        typeId = Number(state?.intervalIndex ?? 0) >= 2 ? 'T-TYPE' : 'T-FILL';
-        typeReason = 'review:recall';
+        typeId = variedType({
+          phase,
+          intervalIndex: Number(state?.intervalIndex ?? 0),
+          mode,
+          index,
+          seed,
+        });
+        typeReason = 'review:varied';
       } else {
-        typeId = mode === 'effort' ? 'T-TYPE' : 'T-FILL';
-        typeReason = 'practice:apply';
+        typeId = variedType({
+          phase: 'practice',
+          intervalIndex: Number(state?.intervalIndex ?? 0),
+          mode,
+          index,
+          seed,
+        });
+        typeReason = 'practice:varied';
       }
       if (!typeId || !P6_AVAILABLE_TYPES.includes(typeId)) {
         typeId = NEW_WORD_ROTATION[index % NEW_WORD_ROTATION.length];

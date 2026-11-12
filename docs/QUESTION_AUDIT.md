@@ -56,7 +56,11 @@ bird 曾经 ir → er
 
 因此本轮保留判断题结构，只修 claim 的真实性。
 
-## 3. 仍可观察的问题
+## 3. 题型轮转
+
+强复习不再固定全部 T-TYPE：`T-TYPE` / `T-FILL` 交替；新词仍以 `T-SEQUENCE` 为主，穿插 `T-FILL`。
+
+## 4. 仍可观察的问题
 
 - probe 词如果很多，T-CLOZE/T-JUDGE-FIX 会集中出现；
 - 新词队列可能连续大量 T-SEQUENCE，属于设计预期，但体验上可增加阶段标签；
