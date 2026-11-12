@@ -82,7 +82,7 @@ export function applyWordLibrary(content, items, mode = 'merge', textbook = 'pep
         term: item.term === '上' ? '上' : '下',
         unit: Number(item.unit ?? 1),
         unitId: item.unitId ?? `g${Number(item.grade ?? 1)}-s${item.term === '上' ? '1' : '2'}-u${Number(item.unit ?? 1)}`,
-        unitLabel: item.unitLabel ?? `${Number(item.grade ?? 1) === 1 ? '一' : '二'}年级${item.term === '上' ? '上' : '下'} · 第${Number(item.unit ?? 1)}单元`,
+        unitLabel: item.unitLabel ?? `${['一', '二', '三', '四', '五', '六'][Math.max(0, Math.min(5, Number(item.grade ?? 1) - 1))]}年级${item.term === '上' ? '上' : '下'} · 第${Number(item.unit ?? 1)}单元`,
         textbook,
         textbookLabel: labelFor(textbook),
       }, mode);

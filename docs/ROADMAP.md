@@ -339,7 +339,7 @@ node tests/runTests.js --phase=p7
 # PASS  p7 gate · 187 passed · 0 failed · 34 files
 ```
 
-- 当前种子：V1—V9 通过；V10 仍识别 112 条 unreviewed。
+- 当前种子：V1—V9 通过；V10 仍识别 1874 条 unreviewed。
 - `buildExport` 测试副本：全部 reviewed 时导出 10/22/4/2，只含 reviewed。
 - 切分不闭合、缺组合、重复 ID、句子答案错、混淆项重复均能定位。
 - 后台浏览器：双栏编辑器、单词/unit 保存到共享 IndexedDB；学习端刷新可见。

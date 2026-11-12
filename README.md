@@ -180,7 +180,7 @@ tools/serve.mjs   零依赖静态服务器
 - 例句 241 条、混淆项 7 组、词族 7 组；填空焦点支持 _ish / f_sh / fi_h。
 - 本机数据迁移独立：`/migration/index.html`，仅用于换主机时全量导出/导入 8 个 store。
 - 后台不再要求内容 JSON 导出/导入；reviewed-only 校验保留，内容导出入口移除。
-- 当前种子全部 `unreviewed`；V10 仍识别 112 条阻断，内容导出入口已移除。
+- 当前内容全部 `unreviewed`；V10 仍阻断生产导出。
 - 后台不 import 状态仓库，不触碰 wordStates/graphemeStates/attempts。
 
 ![P7 内容后台](docs/p7-preview.png)
@@ -205,6 +205,7 @@ tools/serve.mjs   零依赖静态服务器
 ## P9 已实现
 
 - 两套教材词库：人教版新起点 583 词、外研版新交际（北京专版）891 词；后台可切换当前教材。
+- 当前工程状态/数据/限制总览：[`docs/STATUS.md`](docs/STATUS.md)。
 - 词库来源/质量/优化报告：[`docs/PEP_VOCAB_BASE.md`](docs/PEP_VOCAB_BASE.md)、[`docs/FLTRP_VOCAB_BASE.md`](docs/FLTRP_VOCAB_BASE.md)、[`docs/SEGMENTATION_AUDIT.md`](docs/SEGMENTATION_AUDIT.md)。
 - 预制内容清单：[`docs/CONTENT_INVENTORY.md`](docs/CONTENT_INVENTORY.md)；练习流程：[`docs/SESSION_FLOW.md`](docs/SESSION_FLOW.md)。
 - 练习设计页：只显示已完成单元 + 下一个新单元；按学期/单元顺序解锁；完成单元可复选复习；Review/Effort；不选题量。

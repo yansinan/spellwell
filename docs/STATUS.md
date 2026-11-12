@@ -1,0 +1,86 @@
+# SpellWell 当前工程状态
+
+> 更新时间：2026-11-12 · contentVersion 9 · P9 已完成
+
+## 1. 阶段
+
+| 阶段 | 状态 |
+|---|---|
+| P0—P8 | ✅ 完成 |
+| P9 内容驱动题目生成与练习设计 | ✅ 完成 |
+| P10 输入适配/移动端 | ⏳ 下一步 |
+| P11 挑战 | 未开始 |
+| P12 平移 | 未开始 |
+
+门禁：
+
+```bash
+node tests/runTests.js --phase=p9
+# P7 187 · P8 190 · P9 207
+```
+
+## 2. 教材与内容
+
+| 内容 | 数量 |
+|---|---:|
+| 教材 | 2（人教新起点 / 外研新交际北京专版） |
+| words | 1474 |
+| graphemes | 152 |
+| sentences | 241 |
+| confusables | 7 |
+| word families | 7 |
+| units | 144（每套 72） |
+| magic-e 标注 | 108 |
+| reviewStatus | 全部 unreviewed |
+
+静态文件：
+
+```text
+src/content/words.json
+src/content/graphemes.json
+src/content/sentences.json
+src/content/confusables.json
+```
+
+首次启动从同源静态文件导入 IndexedDB；上线包自带，不依赖远程内容。
+
+## 3. 学习流程
+
+```text
+练习设计（年级学期折叠 + 已完成/下一个 unit）
+  → Warm-up 修复错词
+  → Review 到期复习
+  → New 新词（先 T-SEQUENCE）
+  → Practice 巩固
+  → 结束页：正确率 → 错词
+```
+
+- 答错显示正确答案，必须重试正确才进入下一题；
+- 只记录第一次作答；
+- 错词按记忆曲线下次回来；
+- 当前会话不因后台内容更新中断。
+
+## 4. 关键文档
+
+| 文档 | 内容 |
+|---|---|
+| [DESIGN](DESIGN.md) | 产品契约 |
+| [ROADMAP](ROADMAP.md) | 阶段任务 |
+| [TRACEABILITY](TRACEABILITY.md) | 条款→代码→测试 |
+| [CONTENT_SPEC](CONTENT_SPEC.md) | 内容格式 |
+| [CONTENT_INVENTORY](CONTENT_INVENTORY.md) | 预制内容清单 |
+| [SESSION_FLOW](SESSION_FLOW.md) | 出题顺序/题型 |
+| [SEGMENTATION_AUDIT](SEGMENTATION_AUDIT.md) | 分词审计 |
+| [PEP_VOCAB_BASE](PEP_VOCAB_BASE.md) | 人教词库来源 |
+| [FLTRP_VOCAB_BASE](FLTRP_VOCAB_BASE.md) | 外研词库来源 |
+| [decisions/](decisions/) | ADR-0001—0026 |
+
+## 5. 已知限制
+
+1. **全部内容 `unreviewed`**，V10 阻断生产导出；
+2. **275 个外研词缺 IPA**，主要来自 1—2 年级来源；人教有 10 个；
+3. 241 条例句只覆盖核心词，不是 1474 词全覆盖；
+4. 魔法 e 目前是 `magicE` 标注，不是 `a_e` 非连续单块；
+5. 一个词目前只能属于一个 unit；跨单元重复会被折叠；
+6. 7 个词族是人工示例，未覆盖全词库；
+7. 单元完成定义是“全部词练过一次”，不是“全部掌握”。
