@@ -15,6 +15,7 @@ import { createSoundPlayer } from './sound.js';
 import { buildReport, summarizeSession } from './analytics.js';
 import { buildCompletionSummary } from './completionSummary.js';
 import { selectPrompt, selectRecallPrompt } from './promptSelector.js';
+import { addSpeedRecord, bestSpeed, formatElapsed, formatPace } from './speedStats.js';
 
 const TYPE_COPY = Object.freeze({
   'T-SEQUENCE': {
@@ -67,6 +68,11 @@ export class PracticeScreen {
   #judgeDecision = null;
   #composing = false;
   #autoTimer = null;
+  #speedHistory;
+  #onSpeedRecord;
+  #startedAt = null;
+  #clockHandle = null;
+  #speedRecorded = false;
   #sound = createSoundPlayer();
 
   /**
@@ -77,16 +83,19 @@ export class PracticeScreen {
    *   onResult?: (result: import('../core/contracts.js').AttemptResult) => Promise<void>|void,
    *   loadReport?: () => Promise<{attempts: any[], wordStates: any[], graphemeStates: any[]}>,
    *   onNewPractice?: (() => void)|null,
-   *   onChangePractice?: (() => void)|null
+   *   onChangePractice?: (() => void)|null,
+   *   speedHistory?: {at: number, elapsedMs: number, questions: number, secondsPerQuestion: number}[],
+   *   onSpeedRecord?: ((record: {at: number, elapsedMs: number, questions: number, secondsPerQuestion: number}) => void)|null
    * }} input
    */
-  constructor({ root, session, debug = false, onResult = null, loadReport = null, onNewPractice = null, onChangePractice = null }) {
+  constructor({ root, session, debug = false, onResult = null, loadReport = null, onNewPractice = null, onChangePractice = null, speedHistory = [], onSpeedRecord = null }) {
     if (!root) throw new Error('PracticeScreen needs a root element');
     if (!session) throw new Error('PracticeScreen needs a PracticeSession');
     if (onResult !== null && typeof onResult !== 'function') throw new Error('onResult must be a function');
     if (loadReport !== null && typeof loadReport !== 'function') throw new Error('loadReport must be a function');
     if (onNewPractice !== null && typeof onNewPractice !== 'function') throw new Error('onNewPractice must be a function');
     if (onChangePractice !== null && typeof onChangePractice !== 'function') throw new Error('onChangePractice must be a function');
+    if (onSpeedRecord !== null && typeof onSpeedRecord !== 'function') throw new Error('onSpeedRecord must be a function');
     this.#root = root;
     this.#session = session;
     this.#debug = debug;
@@ -94,6 +103,8 @@ export class PracticeScreen {
     this.#loadReport = loadReport;
     this.#onNewPractice = onNewPractice;
     this.#onChangePractice = onChangePractice;
+    this.#speedHistory = Array.isArray(speedHistory) ? speedHistory : [];
+    this.#onSpeedRecord = onSpeedRecord;
   }
 
   mount() {
@@ -118,6 +129,7 @@ export class PracticeScreen {
       }
     });
     this.#renderCurrent();
+    this.#startClock();
   }
 
   #clearTimers() {
@@ -130,6 +142,24 @@ export class PracticeScreen {
   #clearAutoTimer() {
     if (this.#autoTimer) clearTimeout(this.#autoTimer);
     this.#autoTimer = null;
+  }
+
+  #startClock() {
+    if (this.#clockHandle) clearInterval(this.#clockHandle);
+    this.#startedAt = this.#startedAt ?? Date.now();
+    this.#updateClock();
+    this.#clockHandle = setInterval(() => this.#updateClock(), 500);
+  }
+
+  #stopClock() {
+    if (this.#clockHandle) clearInterval(this.#clockHandle);
+    this.#clockHandle = null;
+    this.#updateClock();
+  }
+
+  #updateClock() {
+    const timer = this.#root.querySelector('[data-role="timer"]');
+    if (timer) timer.textContent = formatElapsed(Date.now() - (this.#startedAt ?? Date.now()));
   }
 
   #scheduleAutoSubmit(delay = 240) {
@@ -240,6 +270,7 @@ export class PracticeScreen {
       <header class="sw-practice__header">
         <span class="sw-brand">SpellWell</span>
         <div class="sw-practice__tools">
+          <span class="sw-timer" data-role="timer" aria-label="Elapsed time">0:00</span>
           <span class="sw-progress" aria-label="Progress">${progress}</span>
           ${this.#onChangePractice ? '<button type="button" class="sw-sound" data-action="units" aria-label="Change units">Units</button>' : ''}
           ${showStats ? '<button type="button" class="sw-sound" data-action="progress" aria-label="Progress report">Stats</button>' : ''}
@@ -1282,6 +1313,28 @@ export class PracticeScreen {
 
   #renderDone() {
     this.#clearDrag();
+    this.#stopClock();
+    const elapsedMs = Math.max(0, Date.now() - (this.#startedAt ?? Date.now()));
+    const questions = Math.max(1, this.#session.size);
+    const record = {
+      at: Date.now(),
+      elapsedMs,
+      questions,
+      secondsPerQuestion: elapsedMs / 1000 / questions,
+    };
+    if (!this.#speedRecorded) {
+      this.#speedRecorded = true;
+      this.#speedHistory = addSpeedRecord(this.#speedHistory, record);
+      try {
+        Promise.resolve(this.#onSpeedRecord?.(record)).catch((error) => {
+          console.error('[SpellWell] failed to record speed', error);
+        });
+      } catch (error) {
+        console.error('[SpellWell] failed to record speed', error);
+      }
+    }
+    const best = bestSpeed(this.#speedHistory);
+    const speedHtml = `<section class="sw-done__speed"><strong>${formatElapsed(elapsedMs)}</strong><span>${formatPace(record.secondsPerQuestion)}</span><p>${best ? `Best ${formatPace(best)}` : 'First timed practice.'}</p></section>`;
     const summary = buildCompletionSummary(
       this.#session.results,
       (wordId) => this.#session.getWordText(wordId),
@@ -1301,6 +1354,7 @@ export class PracticeScreen {
             <strong>${summary.accuracy}%</strong>
             <span>${summary.firstTryLabel}</span>
           </div>
+          ${speedHtml}
           <section class="sw-done__wrong">
             <h2>Words to practice</h2>
             ${wrongHtml}
@@ -1313,11 +1367,17 @@ export class PracticeScreen {
         </main>
       </div>
     `;
+    const doneTimer = this.#root.querySelector('[data-role="timer"]');
+    if (doneTimer) doneTimer.textContent = formatElapsed(elapsedMs);
     this.#root.querySelector('[data-action="again"]')?.addEventListener('click', () => {
       this.#session.restart();
+      this.#startedAt = Date.now();
+      this.#speedRecorded = false;
       this.#renderCurrent();
+      this.#startClock();
     });
     this.#root.querySelector('[data-action="new-practice"]')?.addEventListener('click', () => {
+      this.#stopClock();
       this.#onNewPractice?.();
     });
     this.#bindSoundToggle();

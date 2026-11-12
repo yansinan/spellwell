@@ -4,7 +4,8 @@
 
 - 新增 PointerAdapter / KeyboardAdapter 双端语义事件适配与测试。
 - 新增 RapidTapChallenge 挑战内存状态机，`morphedMode=false` 默认，结果不写主状态。
-- P10/P11 门禁：242/244 passed。
+- P10/P11 门禁：242/246 passed。
+- P11 增加不限时计时器、每次练习每题速度记录与历史最佳速度。
 
 ## [0.10.0] — 2026-11-11 · P9 内容驱动题目生成与练习设计
 

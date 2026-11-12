@@ -31,7 +31,7 @@ async function boot() {
   document.documentElement.lang = 'en';
   const workspace = await createPracticeWorkspace();
 
-  const mountPractice = ({ session, scheduler, loadReport }) => {
+  const mountPractice = ({ session, scheduler, loadReport, speedHistory, recordSpeed }) => {
     if (params.get('debug') === '1') {
       window.__SPELLWELL_DEBUG__ = {
         session,
@@ -50,6 +50,8 @@ async function boot() {
       debug: params.get('debug') === '1',
       onResult: (result) => scheduler.recordAttempt(result),
       loadReport,
+      speedHistory,
+      onSpeedRecord: recordSpeed,
       onNewPractice: showSetup,
       onChangePractice: showSetup,
     }).mount();
@@ -60,7 +62,7 @@ async function boot() {
     new PracticeSetupScreen({
       root,
       workspace,
-      onStart: ({ session, scheduler, loadReport }) => mountPractice({ session, scheduler, loadReport }),
+      onStart: ({ session, scheduler, loadReport, speedHistory, recordSpeed }) => mountPractice({ session, scheduler, loadReport, speedHistory, recordSpeed }),
     }).mount();
   };
 

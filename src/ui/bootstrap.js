@@ -23,6 +23,7 @@ import { selectAutoUnits } from './unitProgress.js';
 import { hashSeed } from '../core/seedRandom.js';
 import { toDayKey } from '../core/time.js';
 import { unitProgress as computeUnitProgress } from './masteryProgress.js';
+import { addSpeedRecord, normalizeSpeedHistory } from './speedStats.js';
 
 export const P1_WORD_IDS = Object.freeze(['w.fish', 'w.ship', 'w.night']);
 
@@ -72,6 +73,7 @@ async function readContent(adapter) {
     adapter.query('attempts', {}),
   ]);
   const settings = await readPracticeSettings(adapter);
+  const speedRecord = await adapter.get('meta', 'speedHistory');
   const activeTextbook = await readActiveTextbook(adapter);
   const revisionRecord = await adapter.get('meta', 'contentRevision');
   const graphemeMap = Object.fromEntries(graphemes.map((item) => [item.id, item]));
@@ -135,6 +137,7 @@ async function readContent(adapter) {
     settings,
     activeTextbook,
     revision: Number(revisionRecord?.value ?? 0),
+    speedHistory: normalizeSpeedHistory(speedRecord?.value),
     units,
     terms,
   };
@@ -223,7 +226,18 @@ export async function createPracticeWorkspace() {
       wordStates: await stateRepository.listWordStates(),
       graphemeStates: await adapter.query('graphemeStates', {}),
     });
-    return { session, scheduler, loadReport };
+    return {
+      session,
+      scheduler,
+      loadReport,
+      speedHistory: snapshot.speedHistory,
+      recordSpeed: async (record) => {
+        const history = addSpeedRecord(snapshot.speedHistory, record);
+        await adapter.put('meta', { key: 'speedHistory', value: { version: 1, items: history } });
+        snapshot = { ...snapshot, speedHistory: history };
+        return history;
+      },
+    };
   };
 
   return {
@@ -238,6 +252,13 @@ export async function createPracticeWorkspace() {
       return selectAutoUnits(snapshot.units, target);
     },
     get settings() { return snapshot.settings; },
+    get speedHistory() { return snapshot.speedHistory; },
+    async recordSpeed(record) {
+      const history = addSpeedRecord(snapshot.speedHistory, record);
+      await adapter.put('meta', { key: 'speedHistory', value: { version: 1, items: history } });
+      snapshot = { ...snapshot, speedHistory: history };
+      return history;
+    },
     refresh,
     startPractice,
     // 兼容旧调试引用：默认全单元、后台默认模式

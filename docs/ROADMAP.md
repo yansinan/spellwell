@@ -471,12 +471,13 @@ node tests/runTests.js --phase=p9
 - [x] `morphMode` 开关预留。
 - [x] `tests/p11/challenge.test.js`。
 - [x] 不接积分、排行榜、生命值。
+- [x] 练习页显示不限时计时器；完成页记录每题秒数并与历史最佳比较。
 
 ### 验收
 
 ```bash
 node tests/runTests.js --phase=p11
-# PASS  p11 gate · 244 passed · 0 failed · 54 files
+# PASS  p11 gate · 246 passed · 0 failed · 55 files
 ```
 
 ---

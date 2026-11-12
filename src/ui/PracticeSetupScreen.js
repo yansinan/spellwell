@@ -8,6 +8,7 @@
  */
 
 import { visibleUnitProgress } from './unitProgress.js';
+import { bestSpeed, formatPace } from './speedStats.js';
 
 function escape(value) {
   return String(value)
@@ -75,6 +76,7 @@ export class PracticeSetupScreen {
       .filter((unit) => this.selectedUnits.has(unit.id))
       .reduce((sum, unit) => sum + unit.count, 0);
     const questions = Math.min(this.workspace.settings.questionsPerPractice, available);
+    const best = bestSpeed(this.workspace.speedHistory);
     const reviewCount = units.filter((unit) => this.reviewUnitIds.has(unit.id)).length;
     const newCount = units.filter((unit) => !this.reviewUnitIds.has(unit.id) && this.selectedUnits.has(unit.id)).length;
     this.root.innerHTML = `
@@ -83,6 +85,7 @@ export class PracticeSetupScreen {
           <span class="sw-brand">SpellWell</span>
           <div class="sw-practice__tools">
             <span class="sw-progress">${questions} q · ${reviewCount} review + ${newCount} new</span>
+            ${best ? `<span class="sw-progress sw-speed-best">Best ${formatPace(best)}</span>` : ''}
           </div>
         </header>
         <main class="sw-practice__stage sw-setup__stage">

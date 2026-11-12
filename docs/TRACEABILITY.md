@@ -132,6 +132,7 @@
 | R-P10-01 | PointerAdapter 将点选/拖放/间隙翻译为 InputEvent | `PointerAdapter` | `tests/p10/adapters.test.js` | P10 | ✅ |
 | R-P10-02 | KeyboardAdapter 将输入/IME 翻译为 key-text | `KeyboardAdapter` | `tests/p10/adapters.test.js` | P10 | ✅ |
 | R-P11-01 | RapidTapChallenge 默认关闭且不写主状态 | `RapidTapChallenge` | `tests/p11/challenge.test.js` | P11 | ✅ |
+| R-P11-02 | 不限时计时/每题速度/历史最佳 | `speedStats` + PracticeScreen | `tests/p11/speedStats.test.js` + 浏览器 | P11 | ✅ |
 | R-P7-12 | 例句库与混淆项预制 | `sentences.json` + `confusables.json` | content tests | P7 | ✅ |
 | R-P7-09 | 批量单元标题行切换后续词单元 | `WordImporter.parseBatch` + AdminApp | `tests/p7/import.test.js` + `tests/p7/editor.test.js` | P7 | ✅ |
 | R-P7-10 | 词库单独导入/导出与重复词合并/替换/不动 | `WordLibrary` + AdminApp | `tests/p7/wordLibrary.test.js` + 浏览器 | P7 | ✅ |

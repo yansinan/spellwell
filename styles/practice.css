@@ -1094,3 +1094,55 @@
   line-height: 1.45;
   text-align: center;
 }
+
+/* P11：不限时计时与速度激励 */
+.sw-timer {
+  min-width: 48px;
+  padding: 6px 10px;
+  border-radius: var(--sw-radius-pill);
+  background: var(--sw-primary-soft);
+  color: var(--sw-primary-deep);
+  font-family: var(--sw-font-en);
+  font-size: 12px;
+  font-weight: 900;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.sw-speed-best {
+  color: var(--sw-primary-deep);
+  background: var(--sw-primary-soft);
+}
+
+.sw-done__speed {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 16px;
+  border-radius: var(--sw-radius-sm);
+  background: var(--sw-primary-soft);
+  color: var(--sw-primary-deep);
+}
+
+.sw-done__speed strong {
+  font-family: var(--sw-font-en);
+  font-size: 22px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.sw-done__speed span {
+  font-family: var(--sw-font-en);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.sw-done__speed p {
+  flex-basis: 100%;
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
