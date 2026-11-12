@@ -1017,3 +1017,13 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
+
+.sw-practice__prompt-mark {
+  padding: 0 2px;
+  border-radius: 4px;
+  background: var(--sw-mint-soft);
+  color: var(--sw-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--sw-mint-deep);
+  text-underline-offset: 4px;
+}

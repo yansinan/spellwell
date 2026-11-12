@@ -22,7 +22,7 @@ const TYPE_COPY = Object.freeze({
     hint: 'Tap to choose. Drag to reorder. Tap a placed sound to change.',
   },
   'T-FILL': { title: 'Fill the gap', hint: 'Tap the missing sound.' },
-  'T-TYPE': { title: 'Type the word', hint: 'Type all the letters.' },
+  'T-TYPE': { title: 'Type the word', hint: 'Type the word.' },
   'T-REORDER': { title: 'Put the sounds in order', hint: 'Tap two sounds to swap them.' },
   'T-EDIT': { title: 'Fix the word', hint: 'Edit the letters, then check.' },
   'T-SEGMENT': { title: 'Mark the sounds', hint: 'Tap the gaps between sounds.' },
@@ -44,6 +44,15 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
+function highlightAnswer(text, answer) {
+  const source = String(text ?? '');
+  const target = String(answer ?? '');
+  if (!target) return escapeHtml(source);
+  const index = source.toLowerCase().indexOf(target.toLowerCase());
+  if (index < 0) return escapeHtml(source);
+  return `${escapeHtml(source.slice(0, index))}<mark class="sw-practice__prompt-mark">${escapeHtml(source.slice(index, index + target.length))}</mark>${escapeHtml(source.slice(index + target.length))}`;
+}
+
 export class PracticeScreen {
   #root;
   #session;
@@ -63,6 +72,8 @@ export class PracticeScreen {
   #reorderInitial = [];
   #reorderSelected = null;
   #judgeDecision = null;
+  #composing = false;
+  #autoTimer = null;
   #sound = createSoundPlayer();
 
   /**
@@ -94,12 +105,68 @@ export class PracticeScreen {
     this.#root.dataset.surface = 'practice';
     this.#root.addEventListener('pointerdown', () => this.#sound.unlock(), { once: true, capture: true });
     this.#root.addEventListener('keydown', () => this.#sound.unlock(), { once: true, capture: true });
+    this.#root.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' || event.isComposing || event.keyCode === 229) return;
+      const target = /** @type {HTMLElement} */ (event.target);
+      if (target instanceof HTMLInputElement) return;
+      const retry = this.#root.querySelector('[data-action="retry"]');
+      if (retry) {
+        event.preventDefault();
+        retry.click();
+        return;
+      }
+      const check = /** @type {HTMLButtonElement|null} */ (this.#root.querySelector('[data-action="check"]'));
+      if (check && !check.disabled) {
+        event.preventDefault();
+        check.click();
+      }
+    });
     this.#renderCurrent();
   }
 
   #clearTimers() {
     for (const timer of this.#timers) clearTimeout(timer);
     this.#timers.clear();
+    if (this.#autoTimer) clearTimeout(this.#autoTimer);
+    this.#autoTimer = null;
+  }
+
+  #clearAutoTimer() {
+    if (this.#autoTimer) clearTimeout(this.#autoTimer);
+    this.#autoTimer = null;
+  }
+
+  #scheduleAutoSubmit(delay = 240) {
+    if (this.#composing || this.#locked) return;
+    this.#clearAutoTimer();
+    this.#autoTimer = setTimeout(() => {
+      this.#autoTimer = null;
+      this.#submit();
+    }, delay);
+  }
+
+  #typedMatchesWord(input) {
+    return input.value.trim().toLowerCase() === this.#current.bundle.word.text.toLowerCase();
+  }
+
+  #bindTypingAutoCheck(input, button, { focus = false } = {}) {
+    const sync = () => {
+      if (button) button.disabled = input.value.trim().length === 0;
+      if (this.#typedMatchesWord(input)) this.#scheduleAutoSubmit();
+      else this.#clearAutoTimer();
+    };
+    input.addEventListener('input', sync);
+    input.addEventListener('compositionstart', () => { this.#composing = true; this.#clearAutoTimer(); });
+    input.addEventListener('compositionend', () => { this.#composing = false; sync(); });
+    input.addEventListener('keydown', (event) => {
+      if (event.isComposing || event.keyCode === 229) return;
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        this.#submit();
+      }
+    });
+    sync();
+    if (focus) input.focus();
   }
 
   /**
@@ -209,9 +276,14 @@ export class PracticeScreen {
     const isJudge = spec.typeId === 'T-JUDGE-FIX';
     const isCloze = spec.typeId === 'T-CLOZE';
     const prompt = isCloze ? null : selectPrompt({ word: bundle.word, sentences: bundle.sentences });
+    const sentenceForType = isType && prompt?.kind === 'sentence';
+    const promptBody = sentenceForType
+      ? highlightAnswer(prompt.text, bundle.word.text)
+      : escapeHtml(prompt?.text ?? '');
     const promptHtml = prompt
-      ? `<p class="sw-practice__prompt is-${prompt.kind}" aria-label="${escapeHtml(prompt.label)} clue"><span class="sw-practice__prompt-label">${escapeHtml(prompt.label)}</span>${escapeHtml(prompt.text)}</p>`
+      ? `<p class="sw-practice__prompt is-${prompt.kind}" aria-label="${escapeHtml(prompt.label)} clue"><span class="sw-practice__prompt-label">${escapeHtml(prompt.label)}</span>${promptBody}</p>`
       : '';
+    const hint = sentenceForType ? 'Type the highlighted word.' : copy.hint;
     const slots = isType
       ? this.#typeInputTemplate()
       : isEdit
@@ -250,7 +322,7 @@ export class PracticeScreen {
           ${familyHtml}
           ${magicHtml}
           ${promptHtml}
-          <p class="sw-practice__hint">${copy.hint}</p>
+          <p class="sw-practice__hint">${hint}</p>
 
           ${slots}
           ${tiles}
@@ -504,18 +576,11 @@ export class PracticeScreen {
 
     const editInput = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="edit-input"]'));
     if (editInput) {
-      const button = /** @type {HTMLButtonElement|null} */ (this.#root.querySelector('[data-action="check"]'));
-      const sync = () => {
-        if (button) button.disabled = editInput.value.trim().length === 0;
-      };
-      editInput.addEventListener('input', sync);
-      editInput.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          this.#submit();
-        }
-      });
-      sync();
+      this.#bindTypingAutoCheck(
+        editInput,
+        /** @type {HTMLButtonElement|null} */ (this.#root.querySelector('[data-action="check"]')),
+        { focus: true },
+      );
     }
 
     if (spec.typeId === 'T-JUDGE-FIX') {
@@ -524,30 +589,20 @@ export class PracticeScreen {
           this.#judgeDecision = /** @type {HTMLElement} */ (button).dataset.judge ?? null;
           this.#sound.tap();
           this.#afterSelectionChange();
+          if (this.#judgeDecision === 'correct') this.#scheduleAutoSubmit(180);
         });
       }
       const input = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="judge-input"]'));
       const check = /** @type {HTMLButtonElement|null} */ (this.#root.querySelector('[data-action="check"]'));
       if (input && check) {
-        const sync = () => { check.disabled = input.value.trim().length === 0; };
-        input.addEventListener('input', sync);
-        sync();
+        this.#bindTypingAutoCheck(input, check, { focus: true });
       }
     }
 
     if (spec.typeId === 'T-CLOZE') {
       const input = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="cloze-input"]'));
       const check = /** @type {HTMLButtonElement|null} */ (this.#root.querySelector('[data-action="check"]'));
-      if (input && check) {
-        const sync = () => { check.disabled = input.value.trim().length === 0; };
-        input.addEventListener('input', sync);
-        input.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter') {
-            event.preventDefault();
-            this.#submit();
-          }
-        });
-      }
+      if (input && check) this.#bindTypingAutoCheck(input, check, { focus: true });
     }
 
     const clear = this.#root.querySelector('[data-action="clear"]');
@@ -565,16 +620,11 @@ export class PracticeScreen {
 
     const input = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="type-input"]'));
     if (input) {
-      input.addEventListener('input', () => {
-        const button = /** @type {HTMLButtonElement|null} */ (this.#root.querySelector('[data-action="check"]'));
-        if (button) button.disabled = input.value.trim().length === 0;
-      });
-      input.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          this.#submit();
-        }
-      });
+      this.#bindTypingAutoCheck(
+        input,
+        /** @type {HTMLButtonElement|null} */ (this.#root.querySelector('[data-action="check"]')),
+        { focus: true },
+      );
     }
   }
 
@@ -931,6 +981,9 @@ export class PracticeScreen {
     this.#reorderSelected = null;
     this.#sound.tap();
     this.#afterSelectionChange();
+    if (this.#reorderOrder.map((id) => this.#unitText(id)).join('') === this.#current.bundle.word.text) {
+      this.#scheduleAutoSubmit();
+    }
   }
 
   #toggleMatch(unitId) {
@@ -942,6 +995,12 @@ export class PracticeScreen {
     else this.#events.push({ kind: 'tap-unit', unitId });
     this.#sound.tap();
     this.#afterSelectionChange();
+    const options = this.#current.spec.params?.options ?? [];
+    const correct = new Set(options.filter((option) => option.correct === true).map((option) => option.wordId));
+    const selected = new Set(this.#events.filter((event) => event.kind === 'tap-unit').map((event) => event.unitId));
+    if (correct.size === selected.size && [...correct].every((id) => selected.has(id))) {
+      this.#scheduleAutoSubmit();
+    }
   }
 
   #toggleGap(gapIndex) {
@@ -953,6 +1012,15 @@ export class PracticeScreen {
     else this.#events.push({ kind: 'tap-gap', gapIndex });
     this.#sound.tap();
     this.#afterSelectionChange();
+    const target = [];
+    let cursor = 0;
+    for (let index = 0; index < this.#current.bundle.word.units.length - 1; index += 1) {
+      const unit = this.#current.bundle.word.units[index];
+      cursor += (unit.letters ?? unit.text).length;
+      target.push(cursor);
+    }
+    const selected = this.#events.filter((event) => event.kind === 'tap-gap').map((event) => event.gapIndex).sort((a, b) => a - b);
+    if (JSON.stringify(target) === JSON.stringify(selected)) this.#scheduleAutoSubmit();
   }
 
   #activateTile(unitId) {
@@ -969,6 +1037,7 @@ export class PracticeScreen {
         slotIndex: this.#events.length,
       });
       this.#afterSelectionChange();
+      if (this.#allSlotsFilled()) this.#scheduleAutoSubmit();
       return;
     }
 
@@ -980,7 +1049,7 @@ export class PracticeScreen {
       this.#events = [...this.#events, { kind: 'tap-unit', unitId, slotIndex: nextBlank }];
       this.#afterSelectionChange();
       if (this.#allFillBlanksFilled()) {
-        this.#schedule(() => this.#submit(), 320);
+        this.#scheduleAutoSubmit(320);
       }
     }
   }

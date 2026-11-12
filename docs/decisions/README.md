@@ -31,6 +31,7 @@
 | [0025](0025-segmentation-audit.md) | 基础词库切分审计与组合库扩充 | Accepted | 96→152；后缀词尾约束；例外表；静态自带 |
 | [0026](0026-session-phase-order.md) | 练习阶段顺序与题型策略 | Accepted | 修复→复习→新词→巩固；新词先搭；计划带 phase |
 | [0027](0027-admin-unit-pagination.md) | 后台单元分页 | Accepted | 12 unit/页；搜索跨全部；折叠上下文保留 |
+| [0028](0028-input-ux-auto-check.md) | 输入体验：高亮目标词/自动判定/IME | Accepted | 高亮目标；composition 防误提交；正确自动提交；自动聚焦 |
 
 新增 ADR 的模板：
 
