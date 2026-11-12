@@ -19,6 +19,7 @@ import { AttemptRepository } from '../repositories/AttemptRepository.js';
 import { SentenceRepository } from '../repositories/SentenceRepository.js';
 import { Scheduler } from '../scheduler/Scheduler.js';
 import { PracticeSession } from './PracticeSession.js';
+import { selectAutoUnits } from './unitProgress.js';
 
 export const P1_WORD_IDS = Object.freeze(['w.fish', 'w.ship', 'w.night']);
 
@@ -88,13 +89,18 @@ async function readContent(adapter) {
         unit: Number(word.unit ?? 1),
         count: 0,
         practiced: 0,
+        masteredCount: 0,
         completed: false,
+        mastered: false,
       });
     }
     const unit = unitMap.get(id);
     unit.count += 1;
-    if (stateByWord.has(String(word.id))) unit.practiced += 1;
+    const wordState = stateByWord.get(String(word.id));
+    if (wordState) unit.practiced += 1;
+    if (wordState?.status === 'mastered' && (wordState.errorProfile?.length ?? 0) === 0) unit.masteredCount += 1;
     unit.completed = unit.practiced === unit.count;
+    unit.mastered = unit.masteredCount === unit.count;
   }
   const units = [...unitMap.values()].sort((a, b) => a.id.localeCompare(b.id));
   const terms = TERM_DEFINITIONS.map((definition) => ({
@@ -208,6 +214,9 @@ export async function createPracticeWorkspace() {
     get textbook() { return snapshot.activeTextbook; },
     get units() { return snapshot.units; },
     get terms() { return snapshot.terms; },
+    autoSelection(target = snapshot.settings.questionsPerPractice) {
+      return selectAutoUnits(snapshot.units, target);
+    },
     get settings() { return snapshot.settings; },
     refresh,
     startPractice,

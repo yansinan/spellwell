@@ -28,15 +28,21 @@ export class PracticeSetupScreen {
     this.workspace = workspace;
     this.onStart = onStart;
     const progress = visibleUnitProgress(workspace.units);
+    const auto = workspace.autoSelection(workspace.settings.questionsPerPractice);
     this.visibleUnits = progress.visible;
     this.completedUnits = progress.completed;
     this.currentUnit = progress.current;
     this.selectedUnits = new Set(
-      progress.current ? [progress.current.id] : progress.completed.map((unit) => unit.id),
+      auto.selected.length > 0
+        ? auto.selected.map((unit) => unit.id)
+        : progress.current ? [progress.current.id] : progress.completed.map((unit) => unit.id),
     );
     this.mode = workspace.settings.defaultMode;
     this.loading = false;
-    const currentTerm = workspace.terms.find((term) => term.units.some((unit) => unit.id === progress.current?.id));
+    const selectedForTerm = this.selectedUnits.values().next().value;
+    const currentTerm = workspace.terms.find((term) => term.units.some((unit) =>
+      unit.id === (selectedForTerm ?? progress.current?.id),
+    ));
     this.expandedTerms = new Set(currentTerm ? [currentTerm.id] : []);
   }
 

@@ -22,6 +22,7 @@
 - 魔法 e 标注 108 个 CVCe 词；例句 241 条、7 组混淆项、7 组词族。
 - 填空焦点支持 _ish / f_sh / fi_h 变化，元音焦点占 50%。
 - 练习阶段改为 Warm-up → Review → New → Practice；新词先搭、复习再默写；界面显示阶段标签。
+- 默认自动选择记忆周期内未掌握单元，mastered 排除；旧内容完成后有余地才自动加新单元。
 - `contentRevision`：后台保存递增；下一轮重新读内容。
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
 - 计划项带 `params.plan.reason/mode/policyVersion`。
@@ -42,7 +43,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 211 passed · 0 failed · 46 files
+# PASS  p9 gate · 213 passed · 0 failed · 46 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。

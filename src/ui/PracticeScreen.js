@@ -60,6 +60,7 @@ export class PracticeScreen {
   #onResult;
   #loadReport;
   #onNewPractice;
+  #onChangePractice;
   #reorderOrder = [];
   #reorderInitial = [];
   #reorderSelected = null;
@@ -75,21 +76,24 @@ export class PracticeScreen {
    *   debug?: boolean,
    *   onResult?: (result: import('../core/contracts.js').AttemptResult) => Promise<void>|void,
    *   loadReport?: () => Promise<{attempts: any[], wordStates: any[], graphemeStates: any[]}>,
-   *   onNewPractice?: (() => void)|null
+   *   onNewPractice?: (() => void)|null,
+   *   onChangePractice?: (() => void)|null
    * }} input
    */
-  constructor({ root, session, debug = false, onResult = null, loadReport = null, onNewPractice = null }) {
+  constructor({ root, session, debug = false, onResult = null, loadReport = null, onNewPractice = null, onChangePractice = null }) {
     if (!root) throw new Error('PracticeScreen needs a root element');
     if (!session) throw new Error('PracticeScreen needs a PracticeSession');
     if (onResult !== null && typeof onResult !== 'function') throw new Error('onResult must be a function');
     if (loadReport !== null && typeof loadReport !== 'function') throw new Error('loadReport must be a function');
     if (onNewPractice !== null && typeof onNewPractice !== 'function') throw new Error('onNewPractice must be a function');
+    if (onChangePractice !== null && typeof onChangePractice !== 'function') throw new Error('onChangePractice must be a function');
     this.#root = root;
     this.#session = session;
     this.#debug = debug;
     this.#onResult = onResult;
     this.#loadReport = loadReport;
     this.#onNewPractice = onNewPractice;
+    this.#onChangePractice = onChangePractice;
   }
 
   mount() {
@@ -237,6 +241,7 @@ export class PracticeScreen {
         <span class="sw-brand">SpellWell</span>
         <div class="sw-practice__tools">
           <span class="sw-progress" aria-label="Progress">${progress}</span>
+          ${this.#onChangePractice ? '<button type="button" class="sw-sound" data-action="units" aria-label="Change units">Units</button>' : ''}
           ${showStats ? '<button type="button" class="sw-sound" data-action="progress" aria-label="Progress report">Stats</button>' : ''}
           <button type="button" class="sw-sound" data-action="sound" aria-pressed="${muted}" aria-label="Sound effects">${muted ? 'Muted' : 'Sound'}</button>
         </div>
@@ -609,6 +614,9 @@ export class PracticeScreen {
 
     const check = this.#root.querySelector('[data-action="check"]');
     check?.addEventListener('click', () => this.#submit());
+    this.#root.querySelector('[data-action="units"]')?.addEventListener('click', () => {
+      this.#onChangePractice?.();
+    });
 
     const input = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="type-input"]'));
     if (input) {

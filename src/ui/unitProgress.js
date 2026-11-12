@@ -40,3 +40,34 @@ export function visibleUnitProgress(units) {
   const visible = current ? [...completed, current] : [...completed];
   return { visible, completed, current };
 }
+
+/**
+ * 自动练习选择：
+ * - 所有 learned && !mastered 的单元（记忆周期内）；
+ * - 如果它们都已 completed 且题量不足，补下一个新单元；
+ * - 没有复习单元时，只有已有学习历史才自动带入下一个新单元。
+ * @param {Array<{id: string, count: number, practiced?: number, completed?: boolean, mastered?: boolean}>} units
+ * @param {number} target
+ */
+export function selectAutoUnits(units, target = 20) {
+  const ordered = orderUnits(units);
+  const review = ordered.filter((unit) => (unit.practiced ?? 0) > 0 && !unit.mastered);
+  const history = ordered.some((unit) => (unit.practiced ?? 0) > 0);
+  const nextNew = ordered.find((unit) => (unit.practiced ?? 0) === 0) ?? null;
+  const selected = [...review];
+  const reviewWords = review.reduce((sum, unit) => sum + unit.count, 0);
+  const allReviewComplete = review.length > 0 && review.every((unit) => unit.completed);
+  if (review.length === 0) {
+    if (nextNew) selected.push(nextNew);
+  } else if (allReviewComplete && reviewWords < target && nextNew) {
+    selected.push(nextNew);
+  }
+  return {
+    selected,
+    review,
+    nextNew,
+    reviewWords,
+    allReviewComplete,
+    autoStart: selected.length > 0 && (review.length > 0 || history || selected.length === 1),
+  };
+}

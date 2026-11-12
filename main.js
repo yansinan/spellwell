@@ -31,37 +31,53 @@ async function boot() {
   document.documentElement.lang = 'en';
   const workspace = await createPracticeWorkspace();
 
+  const mountPractice = ({ session, scheduler, loadReport }) => {
+    if (params.get('debug') === '1') {
+      window.__SPELLWELL_DEBUG__ = {
+        session,
+        adapter: workspace.adapter,
+        scheduler,
+        storage: workspace.storage,
+        contentSeeded: workspace.contentSeeded,
+        units: workspace.units,
+        settings: workspace.settings,
+        loadReport,
+      };
+    }
+    new PracticeScreen({
+      root,
+      session,
+      debug: params.get('debug') === '1',
+      onResult: (result) => scheduler.recordAttempt(result),
+      loadReport,
+      onNewPractice: showSetup,
+      onChangePractice: showSetup,
+    }).mount();
+  };
+
+  const startPractice = async (request) => {
+    const result = await workspace.startPractice(request);
+    mountPractice(result);
+  };
+
   showSetup = async () => {
     await workspace.refresh();
     new PracticeSetupScreen({
       root,
       workspace,
-      onStart: ({ session, scheduler, loadReport }) => {
-        if (params.get('debug') === '1') {
-          window.__SPELLWELL_DEBUG__ = {
-            session,
-            adapter: workspace.adapter,
-            scheduler,
-            storage: workspace.storage,
-            contentSeeded: workspace.contentSeeded,
-            units: workspace.units,
-            settings: workspace.settings,
-            loadReport,
-          };
-        }
-        new PracticeScreen({
-          root,
-          session,
-          debug: params.get('debug') === '1',
-          onResult: (result) => scheduler.recordAttempt(result),
-          loadReport,
-          onNewPractice: showSetup,
-        }).mount();
-      },
+      onStart: ({ session, scheduler, loadReport }) => mountPractice({ session, scheduler, loadReport }),
     }).mount();
   };
 
-  await showSetup();
+  const auto = workspace.autoSelection();
+  if (auto.autoStart && auto.selected.length > 0) {
+    await startPractice({
+      units: auto.selected.map((unit) => unit.id),
+      mode: workspace.settings.defaultMode,
+    });
+  } else {
+    await showSetup();
+  }
 }
 
 function showContentBanner() {
