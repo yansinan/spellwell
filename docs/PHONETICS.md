@@ -11,7 +11,7 @@
 sentence → phonetic → translation → word
 ```
 
-所以缺 IPA 的词会降级到中文或单词。
+因此提示以中文为主，IPA 作为同屏辅助；低年级不会只给 IPA。
 
 ## 2. 当前统计
 

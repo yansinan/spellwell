@@ -20,16 +20,19 @@
 
 ## 决定
 
-新增纯函数 `selectPrompt({ word, sentences })`，按固定顺序选择：
+新增纯函数 `selectPrompt({ word, sentences, allowIpaOnly })`，采用中文优先：
 
 ```text
-sentence → phonetic → translation → word.text
+translation → phonetic（同屏辅助）
 ```
 
-- 句子：取该词第一条非空 sentence；
-- 音标：`word.phonetic`；
-- 中文：`word.translation`；
-- 单词：`word.text` 保底。
+- 中文：主提示；
+- 音标：中文存在时作为副提示同时展示，帮助熟悉 IPA；
+- 低年级不允许“纯音标”提示；
+- 句子提示只留给 T-CLOZE；
+- 单词只作为最后保底。
+
+T-TYPE 使用 `selectRecallPrompt`，同样中文主提示 + 音标副提示，不显示目标单词。
 
 显示时带短标签：
 

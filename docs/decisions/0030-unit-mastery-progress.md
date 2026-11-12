@@ -12,18 +12,23 @@
 
 ## 决定
 
-### D1：单词进度
+### D1：单词进度（真实数据校准）
 
 ```text
-memory = intervalIndex / MAX_INTERVAL_INDEX
-streak = min(consecutiveCorrect, 3) / 3
-errorPenalty = min(errorProfile.length, 4) / 4 × 0.35
-wrongPenalty = lastResult === 'wrong' ? 0.1 : 0
-progress = memory × 0.55 + streak × 0.45 - errorPenalty - wrongPenalty
+model = memory × 0.55 + streak × 0.45 - errorPenalty - wrongPenalty
+observed = correct + wrong
+empirical = (correct + globalAccuracy × 4) / (observed + 4)
+confidence = min(1, observed / 8)
+progress = model × (1 - 0.45 × confidence)
+         + empirical × (0.45 × confidence)
 ```
 
+- `memory = intervalIndex / MAX_INTERVAL_INDEX`；
+- `streak = min(consecutiveCorrect, 3) / 3`；
+- `errorPenalty` 按 errorProfile 有界惩罚；
+- `empirical` 来自真实 attempts，`globalAccuracy` 作为小样本先验；
+- 样本越多，真实答题准确率权重越高；
 - `status=mastered` 且 `errorProfile=[]` → 100%；
-- 其他情况限制在 0—100%；
 - 未练词 → 0%。
 
 ### D2：单元进度
@@ -54,4 +59,4 @@ unit.percent = round(progress × 100)
 - 正面：进度同时反映记忆曲线和错题；
 - 正面：单元之间可横向比较；
 - 正面：默认选择与视觉进度一致；
-- 负面：公式是启发式，不是严格统计概率，需要后续用真实数据校准。
+- 负面：公式现在由真实 attempts 校准；仍是可解释的统计模型，不是黑箱。

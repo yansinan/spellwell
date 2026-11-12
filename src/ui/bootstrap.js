@@ -62,11 +62,12 @@ async function ensureContent(adapter) {
 }
 
 async function readContent(adapter) {
-  const [words, graphemes, sentences, wordStates] = await Promise.all([
+  const [words, graphemes, sentences, wordStates, attempts] = await Promise.all([
     adapter.query('words', {}),
     adapter.query('graphemes', {}),
     adapter.query('sentences', {}),
     adapter.query('wordStates', {}),
+    adapter.query('attempts', {}),
   ]);
   const settings = await readPracticeSettings(adapter);
   const activeTextbook = await readActiveTextbook(adapter);
@@ -106,7 +107,7 @@ async function readContent(adapter) {
   const units = [...unitMap.values()].sort((a, b) => a.id.localeCompare(b.id));
   for (const unit of units) {
     const wordsInUnit = activeWords.filter((word) => String(word.unitId ?? `level-${word.level ?? 1}`) === unit.id);
-    const progress = computeUnitProgress(wordStates, wordsInUnit);
+    const progress = computeUnitProgress(wordStates, wordsInUnit, attempts);
     unit.progress = progress.progress;
     unit.percent = progress.percent;
     unit.practiced = progress.practiced;

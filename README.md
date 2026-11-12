@@ -210,6 +210,7 @@ tools/serve.mjs   零依赖静态服务器
 - 预制内容清单：[`docs/CONTENT_INVENTORY.md`](docs/CONTENT_INVENTORY.md)；练习流程：[`docs/SESSION_FLOW.md`](docs/SESSION_FLOW.md)。
 - 设计页保留：默认勾选所有已学但未完全掌握的单元；完全掌握不加入；旧内容完成且有余地才自动加一个新单元。
 - 练习页 `Units` 可手动调整；设计页只显示已完成 + 下一个新单元。
+- 提示中文为主、IPA 同屏辅助；低年级不单独用 IPA。
 - 答错显示正确答案并可重试，答对才进入下一题；结束页先展示正确率，再列错词。
 - 后台题量默认 20，设置页 `/src/admin/settings.html`，面包屑返回内容库。
 - 题量、单元、模式进入 Scheduler；真实 attempts 校准选词权重；当前会话不因内容更新中断。

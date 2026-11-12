@@ -1053,3 +1053,23 @@
   min-width: 84px;
   text-align: right;
 }
+
+.sw-practice__prompt-secondary {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 2px;
+  color: var(--sw-ink-soft);
+  font-family: var(--sw-font-en);
+  font-size: 0.55em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.sw-practice__prompt-secondary span {
+  font-family: var(--sw-font-body);
+  font-size: 0.55em;
+  letter-spacing: 0.1em;
+  opacity: 0.75;
+  text-transform: uppercase;
+}

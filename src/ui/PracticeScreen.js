@@ -272,13 +272,17 @@ export class PracticeScreen {
     const isMatch = spec.typeId === 'T-MATCH';
     const isJudge = spec.typeId === 'T-JUDGE-FIX';
     const isCloze = spec.typeId === 'T-CLOZE';
+    const allowIpaOnly = Number(bundle.word.grade ?? 0) >= 5;
     const prompt = isCloze
       ? null
       : isType
-        ? selectRecallPrompt({ word: bundle.word })
-        : selectPrompt({ word: bundle.word, sentences: bundle.sentences });
+        ? selectRecallPrompt({ word: bundle.word, allowIpaOnly })
+        : selectPrompt({ word: bundle.word, sentences: bundle.sentences, allowIpaOnly });
+    const secondary = prompt?.secondary
+      ? `<span class="sw-practice__prompt-secondary"><span>${escapeHtml(prompt.secondary.label)}</span>${escapeHtml(prompt.secondary.text)}</span>`
+      : '';
     const promptHtml = prompt
-      ? `<p class="sw-practice__prompt is-${prompt.kind}" aria-label="${escapeHtml(prompt.label)} clue"><span class="sw-practice__prompt-label">${escapeHtml(prompt.label)}</span>${escapeHtml(prompt.text)}</p>`
+      ? `<p class="sw-practice__prompt is-${prompt.kind}" aria-label="${escapeHtml(prompt.label)} clue"><span class="sw-practice__prompt-label">${escapeHtml(prompt.label)}</span>${escapeHtml(prompt.text)}${secondary}</p>`
       : '';
     const hint = copy.hint;
     const slots = isType

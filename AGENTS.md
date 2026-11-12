@@ -172,7 +172,7 @@ node tools/serve.mjs
 - 后台列表按 unit 折叠，展示错/对次数；只读 attempts，不写学习状态。
 - P9 练习设计：年级学期折叠 + unit 多选 + Review/Effort；题量后台设置（默认20，5—30）；计划项带 reason；`revise()` 预留但不实时改题。
 - P9 权重：按真实 attempts 的词/题型错误率 + 小样本平滑；同层排序，约束优先；见 ADR-0019。
-- P9 提示词：句子 → 音标 → 中文 → 单词；CLOZE 句子即题面；见 ADR-0020。
+- P9 提示词：中文为主，IPA 同屏辅助；低年级不单独用 IPA；CLOZE 句子即题面；见 ADR-0020。
 - 词库可单独导入/导出（只含 words）；重复词合并/替换/不动；全量迁移仍走 migration；见 ADR-0021。
 - 两套教材词库：`pep-2026` 583 词、`fltrp-2026` 891 词；后台 `meta.activeTextbook` 切换；全部 unreviewed；见 ADR-0022。
 - 练习单元顺序解锁：完成=全部词练过；只显示已完成+下一个；不足20不跨单元凑数；见 ADR-0023。
