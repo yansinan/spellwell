@@ -145,6 +145,34 @@ function initialEditText({ word, focusIndex, errorType, distractorPool = [] }) {
  * }} input
  * @returns {import('../core/contracts.js').QuestionSpec}
  */
+/**
+ * T-JUDGE-FIX 的 claim：约一半正确，一半用历史/相似组合制造可信错词。
+ * @param {{word: any, focusIndex: number, pool: {id: string, text: string}[], errorHistory: any, seed: number|string}} input
+ * @returns {{claim: string, focusIndex: number}|null}
+ */
+function buildWrongClaim({ word, focusIndex, pool, errorHistory, seed }) {
+  if (hashSeed(`${word.id}|claim-side|${seed}`) % 2 !== 0) return null;
+  const indexes = word.units.map((_, index) => index);
+  const ranked = [];
+  for (const index of indexes) {
+    const unit = word.units[index];
+    const actuals = [
+      ...historicalActuals(errorHistory, { wordId: String(word.id), expected: unit.text }, 2),
+      ...confusableGraphemes(unit.text, pool).map((item) => item.text),
+    ].filter((text) => text && text !== unit.text);
+    for (const actual of actuals) {
+      if (!ranked.some((item) => item.actual === actual && item.index === index)) {
+        ranked.push({ index, actual });
+      }
+    }
+  }
+  if (ranked.length === 0) return null;
+  const pick = ranked[hashSeed(`${word.id}|claim-pick|${seed}`) % ranked.length];
+  const claim = word.units.map((unit, index) => (index === pick.index ? pick.actual : unit.text)).join('');
+  if (claim === word.text || claim.length === 0) return null;
+  return { claim, focusIndex: pick.index };
+}
+
 export function buildWordSpec({
   word,
   typeId,
@@ -182,6 +210,20 @@ export function buildWordSpec({
       focusIndex = vowelIndex;
     }
   }
+  let judgeClaim = null;
+  if (typeId === 'T-JUDGE-FIX' && typeof claim !== 'string') {
+    const wrong = buildWrongClaim({
+      word,
+      focusIndex,
+      pool: distractorPool,
+      errorHistory,
+      seed,
+    });
+    if (wrong) {
+      judgeClaim = wrong.claim;
+      focusIndex = wrong.focusIndex;
+    }
+  }
   const focusUnit = word.units[focusIndex];
   const distractorSelection = chooseDistractorIds(word, distractorPool, seed, focusUnit.text, errorHistory);
   const distractors = distractorSelection.ids;
@@ -205,7 +247,7 @@ export function buildWordSpec({
           operation: errorType ?? 'replace',
         }
         : typeId === 'T-JUDGE-FIX'
-          ? { claim: claim ?? word.text }
+          ? { claim: typeof claim === 'string' ? claim : (judgeClaim ?? word.text) }
           : typeId === 'T-CLOZE'
             ? { sentence: sentence?.text ?? word.text }
             : {};

@@ -284,7 +284,6 @@ export class Scheduler {
         seed,
         errorType: latestError?.type,
         sentence,
-        claim: String(word.text),
         errorHistory,
         specId: `spec.daily.${String(word.id)}.${typeId}.${index}`,
       });

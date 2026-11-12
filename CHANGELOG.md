@@ -29,6 +29,8 @@
 - 干扰项优先相似音/相似拼写组合（ir/er/ur、ea/ee/e/a），T-MATCH 同步。
 - T-FILL 候选池去掉固定骨架字母，只保留空位答案 + 相关干扰项。
 - 干扰项优先读取真实 attempts 历史错误，其次人工相似组。
+- T-JUDGE-FIX 约一半显示可信错词，修复“永远正确 claim”的判断题。
+- 新增出题逻辑审查记录 `docs/QUESTION_AUDIT.md`。
 - `contentRevision`：后台保存递增；下一轮重新读内容。
 - 当前会话不被内容更新打断；BroadcastChannel 提示 `New practice`。
 - 计划项带 `params.plan.reason/mode/policyVersion`。
@@ -49,7 +51,7 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 227 passed · 0 failed · 49 files
+# PASS  p9 gate · 228 passed · 0 failed · 50 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。
