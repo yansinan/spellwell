@@ -116,3 +116,13 @@ test('复习间隔：未到期旧词不再作为 filler 重复刷', async () => 
   assertEqual(specs.some((spec) => spec.params.plan?.reason === 'filler'), false);
   assertEqual(specs.length > 0, true);
 });
+
+test('错题强化：同一词可生成不同题型的复习 spec', async () => {
+  const { scheduler } = await setup();
+  const spec = await scheduler.buildRepairSpec({
+    wordId: 'w.book', originalType: 'T-SEQUENCE', errorType: 'OMISSION', seed: 7,
+  });
+  assertEqual(spec.target.id, 'w.book');
+  assertEqual(spec.typeId !== 'T-SEQUENCE', true);
+  assertEqual(spec.params.plan.reason, 'in-session-repair');
+});

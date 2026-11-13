@@ -17,6 +17,7 @@ import { createRng, hashSeed } from '../core/seedRandom.js';
 import { confusableGraphemes } from './ConfusableGraphemes.js';
 import { buildErrorHistory, historicalActuals, historicalErrorsForWord } from './ErrorHistory.js';
 import { variedType } from './TypeVariety.js';
+import { chooseRepairType } from './RepairAlternative.js';
 import {
   applyWordReview,
   dueDateFor,
@@ -332,6 +333,37 @@ export class Scheduler {
     const drill = await this.#buildGraphemeDrill(today, seed, words, errorHistory);
     if (drill && specs.length < MAX_QUEUE_SIZE) specs.push(drill);
     return specs;
+  }
+
+  /**
+   * 为当次练习中的错题生成“换一种题型”的强化 spec。
+   * 不写学习状态，插入位置由 PracticeSession 决定。
+   * @param {{wordId: string, originalType: string, errorType?: string, seed?: number|string}} input
+   * @returns {Promise<import('../core/contracts.js').QuestionSpec|null>}
+   */
+  async buildRepairSpec({ wordId, originalType, errorType, seed = this.seed }) {
+    const word = await this.wordRepository.get(wordId);
+    if (!word) return null;
+    const typeId = chooseRepairType(originalType, errorType, seed);
+    const spec = buildWordSpec({
+      word: /** @type {{id: string, text: string, units: {text: string, graphemeId: string}[]}} */ (word),
+      typeId,
+      graphemeMap: this.graphemeMap,
+      distractorPool: this.distractorPool,
+      seed,
+      errorType,
+      sentence: this.sentences[String(word.id)] ?? null,
+      specId: `spec.in-session.${String(word.id)}.${typeId}.${String(seed)}`,
+    });
+    spec.params.plan = {
+      reason: 'in-session-repair',
+      phase: 'repair',
+      typeReason: 'repair:alternate',
+      mode: 'review',
+      policyVersion: 1,
+    };
+    validateQuestionSpec(spec);
+    return spec;
   }
 
   /**

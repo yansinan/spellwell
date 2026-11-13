@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.12.2] — 2026-11-13 · 当次错题强化
+
+- 首次错题插入同词不同题型到当次练习后半段。
+- 不改变原题重试和首答记录；不额外写学习状态。
+
 ## [0.12.1] — 2026-11-12 · 复习间隔与进度修正
 
 - 未到期旧词不再作为 filler 补题；优先到期/新词。
@@ -71,9 +76,9 @@
 
 ```bash
 node tests/runTests.js --phase=p9
-# PASS  p9 gate · 242 passed · 0 failed · 52 files
-# PASS  p10 gate · 244 passed · 0 failed · 53 files
-# PASS  p11 gate · 248 passed · 0 failed · 55 files
+# PASS  p9 gate · 245 passed · 0 failed · 52 files
+# PASS  p10 gate · 247 passed · 0 failed · 54 files
+# PASS  p11 gate · 251 passed · 0 failed · 56 files
 ```
 
 - 练习设计：3 单元全选、Review、20 questions；开始后 `1 / 20`。

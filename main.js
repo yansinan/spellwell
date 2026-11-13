@@ -52,6 +52,7 @@ async function boot() {
       loadReport,
       speedHistory,
       onSpeedRecord: recordSpeed,
+      buildRepairSpec: (input) => scheduler.buildRepairSpec(input),
       onNewPractice: showSetup,
       onChangePractice: showSetup,
     }).mount();

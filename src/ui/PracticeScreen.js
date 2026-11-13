@@ -70,6 +70,8 @@ export class PracticeScreen {
   #autoTimer = null;
   #speedHistory;
   #onSpeedRecord;
+  #buildRepairSpec;
+  #repairWords = new Set();
   #startedAt = null;
   #clockHandle = null;
   #speedRecorded = false;
@@ -85,10 +87,11 @@ export class PracticeScreen {
    *   onNewPractice?: (() => void)|null,
    *   onChangePractice?: (() => void)|null,
    *   speedHistory?: {at: number, elapsedMs: number, questions: number, secondsPerQuestion: number}[],
-   *   onSpeedRecord?: ((record: {at: number, elapsedMs: number, questions: number, secondsPerQuestion: number}) => void)|null
+   *   onSpeedRecord?: ((record: {at: number, elapsedMs: number, questions: number, secondsPerQuestion: number}) => void)|null,
+   *   buildRepairSpec?: ((input: {wordId: string, originalType: string, errorType?: string, seed?: number|string}) => Promise<import('../core/contracts.js').QuestionSpec|null>)|null
    * }} input
    */
-  constructor({ root, session, debug = false, onResult = null, loadReport = null, onNewPractice = null, onChangePractice = null, speedHistory = [], onSpeedRecord = null }) {
+  constructor({ root, session, debug = false, onResult = null, loadReport = null, onNewPractice = null, onChangePractice = null, speedHistory = [], onSpeedRecord = null, buildRepairSpec = null }) {
     if (!root) throw new Error('PracticeScreen needs a root element');
     if (!session) throw new Error('PracticeScreen needs a PracticeSession');
     if (onResult !== null && typeof onResult !== 'function') throw new Error('onResult must be a function');
@@ -96,6 +99,7 @@ export class PracticeScreen {
     if (onNewPractice !== null && typeof onNewPractice !== 'function') throw new Error('onNewPractice must be a function');
     if (onChangePractice !== null && typeof onChangePractice !== 'function') throw new Error('onChangePractice must be a function');
     if (onSpeedRecord !== null && typeof onSpeedRecord !== 'function') throw new Error('onSpeedRecord must be a function');
+    if (buildRepairSpec !== null && typeof buildRepairSpec !== 'function') throw new Error('buildRepairSpec must be a function');
     this.#root = root;
     this.#session = session;
     this.#debug = debug;
@@ -105,6 +109,7 @@ export class PracticeScreen {
     this.#onChangePractice = onChangePractice;
     this.#speedHistory = Array.isArray(speedHistory) ? speedHistory : [];
     this.#onSpeedRecord = onSpeedRecord;
+    this.#buildRepairSpec = buildRepairSpec;
   }
 
   mount() {
@@ -1134,6 +1139,23 @@ export class PracticeScreen {
     this.#bindProgressButton();
   }
 
+  #scheduleRepair(result, spec) {
+    if (!this.#buildRepairSpec || this.#repairWords.has(result.wordId)) return;
+    this.#repairWords.add(result.wordId);
+    Promise.resolve(this.#buildRepairSpec({
+      wordId: result.wordId,
+      originalType: spec.typeId,
+      errorType: result.firstError?.type,
+      seed: `${spec.seed}|in-session|${result.wordId}`,
+    })).then((repair) => {
+      if (!repair) return;
+      this.#session.insertRepair(repair);
+    }).catch((error) => {
+      this.#repairWords.delete(result.wordId);
+      console.error('[SpellWell] failed to insert repair', error);
+    });
+  }
+
   async #submit() {
     if (this.#locked || this.#session.isComplete) return;
     const { spec } = this.#current;
@@ -1174,6 +1196,7 @@ export class PracticeScreen {
     this.#clearDrag();
     const record = this.#session.results.length === this.#session.currentIndex;
     const result = this.#session.submit(events, { record });
+    if (record && !result.wordCorrect) this.#scheduleRepair(result, spec);
     this.#updateDebug(result);
     if (record && this.#onResult) {
       try {

@@ -43,6 +43,7 @@
 | [0037](0037-type-variety.md) | 同阶段题型轮转 | Accepted | 强复习 T-TYPE/T-FILL 交替；新词穿插 T-FILL；会话种子变化 |
 | [0038](0038-admin-learning-state.md) | 后台受控维护学习状态 | Accepted | unstarted/reviewing/mastered；服务写入；单元状态派生 |
 | [0039](0039-review-spacing-and-progress-cap.md) | 复习间隔优先/进度封顶 | Accepted | 未到期不 filler；未 mastered 不显示 100% |
+| [0040](0040-in-session-repair.md) | 当次错题后半段换题型强化 | Accepted | 首次错词插入同词不同题型；最多一次 |
 
 新增 ADR 的模板：
 

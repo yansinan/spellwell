@@ -247,6 +247,23 @@ export class PracticeSession {
     return this.isComplete;
   }
 
+  /**
+   * 把同词强化题插入到本轮后半部分。
+   * @param {import('../core/contracts.js').QuestionSpec} spec
+   * @param {{afterRatio?: number}} [options]
+   * @returns {number} 插入位置
+   */
+  insertRepair(spec, { afterRatio = 0.5 } = {}) {
+    validateQuestionSpec(spec);
+    if (!this.#bundles.has(spec.target.id)) {
+      throw new ContractError('PRACTICE_CONTENT_INVALID', `missing bundle for repair ${spec.target.id}`);
+    }
+    const half = Math.ceil(this.#specs.length * afterRatio);
+    const at = Math.min(this.#specs.length, Math.max(this.#index + 1, half));
+    this.#specs.splice(at, 0, spec);
+    return at;
+  }
+
   /** 原地重开一轮，不持久化任何记录。 */
   restart() {
     this.#index = 0;
