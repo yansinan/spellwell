@@ -11,8 +11,11 @@
 - 点击字母块（tile）朗读该字母/组合；T-REORDER 点击也朗读；
 - 朗读按钮为高对比 pill，带喇叭图标；
 - Feedbacks 提供 `Hear word` / `Hear sentence`；
-- T-TYPE 答前不自动朗读、不显示单词按钮，避免泄露答案；
-- T-EDIT/T-JUDGE-FIX/T-CLOZE 答前也不直接朗读目标词；
+- 所有题型都显示 `Hear word` 按钮；
+- T-TYPE 等答案隐藏题型不自动朗读，但用户可主动点击听音；
+- 浏览器不支持 SpeechSynthesis 时显示禁用的 `Voice unavailable` 按钮；
+- T-EDIT/T-JUDGE-FIX/T-CLOZE 答前不自动朗读目标词；
+- 手动点击播放按钮属于用户主动提示，可能会听到答案；
 - T-SEQUENCE/T-FILL/T-SEGMENT/T-MATCH/T-REORDER 答前可 `Hear word`；
 - 例句只在答题后朗读，避免 T-CLOZE 直接读出空格答案。
 

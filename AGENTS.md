@@ -193,5 +193,5 @@ node tools/serve.mjs
 - 未到期词不 filler 补题；未 mastered 进度封顶（learning 88/reviewing 92/probe 96）；见 ADR-0039。
 - 单元选择按年级/学期分组，每个序列以最后一个已练单元推导下一个新单元；未启动序列不显示；序列练到末尾时激活下一学期；见 ADR-0039。
 - 首次错词在本轮后半段换题型强化一次；不额外写状态；见 ADR-0040。
-- 朗读使用 `src/ui/speech.js` 的原生 speechSynthesis；T-TYPE 等答前禁止读目标词；字母块点击朗读；按钮高对比；见 docs/SPEECH.md。
+- 朗读使用 `src/ui/speech.js` 的原生 speechSynthesis；所有题型都有 Hear word；T-TYPE 等只关闭自动朗读，手动可提示；字母块点击朗读；按钮高对比；见 docs/SPEECH.md。
 - 后台做题分析只读 attempts/wordStates，不改状态；场次按 30 分钟间隔估算；练习场次可展开错误详情；见 `src/admin/HistoryAnalytics.js`。

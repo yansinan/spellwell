@@ -322,9 +322,12 @@ export class PracticeScreen {
       : '';
     const hint = copy.hint;
     const hintHtml = hint ? `<p class="sw-practice__hint">${escapeHtml(hint)}</p>` : '';
-    const wordSpeechHtml = this.#speech.supported && canSpeakWordBeforeAnswer(spec.typeId)
+    // 所有题型都显示播放入口；自动朗读仍受 canSpeakWordBeforeAnswer 限制，
+    // 隐藏答案的题型由用户主动点击听音。
+    const speechButton = this.#speech.supported
       ? `<div class="sw-speech-actions"><button type="button" class="sw-speech-button" data-action="speak-word" aria-label="Hear word">${SPEAKER_ICON}<span>Hear word</span></button></div>`
-      : '';
+      : `<div class="sw-speech-actions"><button type="button" class="sw-speech-button" disabled aria-disabled="true" title="Speech is not available in this browser" aria-label="Hear word unavailable">${SPEAKER_ICON}<span>Voice unavailable</span></button></div>`;
+    const wordSpeechHtml = speechButton;
     const slots = isType
       ? this.#typeInputTemplate()
       : isEdit
@@ -1155,7 +1158,7 @@ export class PracticeScreen {
   }
 
   #autoSpeakWord() {
-    if (!this.#speech.supported || this.#sound.isMuted()) return false;
+    if (!this.#speech.supported) return false;
     const typeId = this.#current?.spec?.typeId;
     if (!typeId || !canSpeakWordBeforeAnswer(typeId)) return false;
     return this.#speakWord();
@@ -1255,7 +1258,7 @@ export class PracticeScreen {
     if (record && !result.wordCorrect) this.#scheduleRepair(result, spec);
     this.#updateDebug(result);
     // 在 await 之前调用，确保移动端仍处于用户手势上下文。
-    if (!this.#sound.isMuted()) this.#speakWord();
+    this.#speakWord();
     this.#root.querySelector('.sw-speech-actions')?.remove();
     if (record && this.#onResult) {
       try {

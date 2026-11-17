@@ -37,11 +37,11 @@ test('朗读：优先英语自然 voice，词和句子使用不同语速', () =>
     { name: '中文', lang: 'zh-CN', localService: true, voiceURI: 'zh' },
   ]);
   const service = createSpeechService({ synth, Utterance: FakeUtterance, storage: null });
-  assertEqual(service.voice.name, 'Microsoft Aria Online (Natural)');
+  assertEqual(service.voice.name, 'English Local');
   assertEqual(service.speakWord('apple'), true);
   assertEqual(service.speakSentence('I eat an apple.'), true);
   assertEqual(service.speakGrapheme('sh'), true);
-  assertEqual(synth.cancelled, 3);
+  assertEqual(synth.cancelled, 0);
   assertEqual(synth.spoken[0].text, 'apple');
   assertEqual(synth.spoken[0].lang, 'en-US');
   assertEqual(synth.spoken[0].rate, 0.86);

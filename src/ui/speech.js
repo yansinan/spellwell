@@ -24,7 +24,8 @@ function preferredVoice(storage, voices) {
     if (lang === 'en-US') value += 5;
     else if (lang === 'en-GB') value += 4;
     else if (lang.startsWith('en')) value += 2;
-    if (voice.localService) value += 2;
+    // 本地 voice 优先：在线自然语音在部分网络/区域会静默失败。
+    if (voice.localService) value += 10;
     if (NATURAL_VOICE.test(String(voice.name ?? ''))) value += 3;
     return value;
   };
@@ -46,6 +47,7 @@ export function createSpeechService({
   const supported = Boolean(synth && Utterance && typeof synth.speak === 'function');
   let voices = [];
   let voice = null;
+  let activeUtterance = null;
 
   const refresh = () => {
     if (!supported) return;
@@ -65,19 +67,40 @@ export function createSpeechService({
     setTimeout(refresh, 600);
   }
 
-  const speak = (text, rate) => {
+  const makeUtterance = (text, rate, selectedVoice) => {
+    const utterance = new Utterance(text);
+    utterance.lang = selectedVoice?.lang ?? 'en-US';
+    utterance.rate = rate;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+    if (selectedVoice) utterance.voice = selectedVoice;
+    return utterance;
+  };
+
+  const speak = (text, rate, selectedVoice = voice, allowFallback = true) => {
     if (!supported || typeof text !== 'string' || text.trim().length === 0) return false;
     try {
-      synth.cancel();
-      const utterance = new Utterance(text);
-      utterance.lang = voice?.lang ?? 'en-US';
-      utterance.rate = rate;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      if (voice) utterance.voice = voice;
+      // 只取消正在播放的内容；部分浏览器在没有 active speech 时 cancel 会吞掉首个 utterance。
+      if (synth.speaking || synth.pending) synth.cancel();
+      if (synth.paused) synth.resume();
+      const utterance = makeUtterance(text, rate, selectedVoice);
+      activeUtterance = utterance;
+      utterance.addEventListener?.('end', () => {
+        if (activeUtterance === utterance) activeUtterance = null;
+      });
+      utterance.addEventListener?.('error', (event) => {
+        if (event.error === 'canceled' || event.error === 'interrupted') return;
+        console.warn('[SpellWell] speech failed', event.error ?? event);
+        // 在线 voice 失败时自动退回本地 voice / 默认语音。
+        if (allowFallback && selectedVoice && !selectedVoice.localService) {
+          const fallback = voices.find((item) => item.localService) ?? null;
+          if (fallback) speak(text, rate, fallback, false);
+        }
+      });
       synth.speak(utterance);
       return true;
-    } catch {
+    } catch (error) {
+      console.warn('[SpellWell] speech unavailable', error);
       return false;
     }
   };
@@ -92,6 +115,7 @@ export function createSpeechService({
     stop() {
       if (!supported) return;
       try { synth.cancel(); } catch { /* ignore */ }
+      activeUtterance = null;
     },
   };
 }
