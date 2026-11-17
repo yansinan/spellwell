@@ -15,7 +15,7 @@ import { createSoundPlayer } from './sound.js';
 import { buildReport, summarizeSession } from './analytics.js';
 import { buildCompletionSummary } from './completionSummary.js';
 import { selectPrompt, selectRecallPrompt } from './promptSelector.js';
-import { createSpeechService, canSpeakWordBeforeAnswer } from './speech.js';
+import { createSpeechService } from './speech.js';
 import { addSpeedRecord, bestSpeed, formatElapsed, formatPace } from './speedStats.js';
 
 const TYPE_COPY = Object.freeze({
@@ -322,8 +322,7 @@ export class PracticeScreen {
       : '';
     const hint = copy.hint;
     const hintHtml = hint ? `<p class="sw-practice__hint">${escapeHtml(hint)}</p>` : '';
-    // 所有题型都显示播放入口；自动朗读仍受 canSpeakWordBeforeAnswer 限制，
-    // 隐藏答案的题型由用户主动点击听音。
+    // 所有题型都显示播放入口；朗读作为拼写提示，不承担中英文对照考察。
     const speechButton = this.#speech.supported
       ? `<div class="sw-speech-actions"><button type="button" class="sw-speech-button" data-action="speak-word" aria-label="Hear word">${SPEAKER_ICON}<span>Hear word</span></button></div>`
       : `<div class="sw-speech-actions"><button type="button" class="sw-speech-button" disabled aria-disabled="true" title="Speech is not available in this browser" aria-label="Hear word unavailable">${SPEAKER_ICON}<span>Voice unavailable</span></button></div>`;
@@ -1159,8 +1158,6 @@ export class PracticeScreen {
 
   #autoSpeakWord() {
     if (!this.#speech.supported) return false;
-    const typeId = this.#current?.spec?.typeId;
-    if (!typeId || !canSpeakWordBeforeAnswer(typeId)) return false;
     return this.#speakWord();
   }
 

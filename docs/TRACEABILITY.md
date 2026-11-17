@@ -142,7 +142,7 @@
 | R-ADMIN-HISTORY-01 | 历次做题分析/家长关注 | `HistoryAnalytics` + AdminApp | `tests/p12/historyAnalytics.test.js` + 后台浏览器 | P12 | ✅ |
 | R-ADMIN-HISTORY-02 | 练习场次展开错误详情 | `HistoryAnalytics` | `tests/p12/historyAnalytics.test.js` + 后台浏览器 | P12 | ✅ |
 | R-SPEECH-01 | 原生单词/例句朗读 | `src/ui/speech.js` + PracticeScreen | `tests/p12/speech.test.js` | P12 | ✅ |
-| R-SPEECH-02 | 答前防泄题边界 | `canSpeakWordBeforeAnswer` | `tests/p12/speech.test.js` | P12 | ✅ |
+| R-SPEECH-02 | 所有题型自动朗读 | `PracticeScreen` 自动朗读 | 浏览器 | P12 | ✅ |
 | R-SPEECH-03 | 自动单词/字母块朗读 | `PracticeScreen` + `speech.speakGrapheme` | `tests/p12/speech.test.js` + 浏览器 | P12 | ✅ |
 | R-SYNC-03 | 首次绑定远端优先，之后设备平等 | `mergeSnapshots` + `SyncManager.firstBind` | `tests/p12/sync.test.js` / `syncManager.test.js` | P12 | ✅ |
 | R-P9-28 | 每个年级/学期独立推导下一个新单元 | `unitProgress` + `PracticeSetupScreen` | `tests/p9/unitProgress.test.js` | P9 | ✅ |

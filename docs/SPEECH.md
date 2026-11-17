@@ -12,12 +12,11 @@
 - 朗读按钮为高对比 pill，带喇叭图标；
 - Feedbacks 提供 `Hear word` / `Hear sentence`；
 - 所有题型都显示 `Hear word` 按钮；
-- T-TYPE 等答案隐藏题型不自动朗读，但用户可主动点击听音；
+- 所有题型都自动朗读目标词；朗读作为拼写提示，不承担中英文对照考察；
 - 浏览器不支持 SpeechSynthesis 时显示禁用的 `Voice unavailable` 按钮；
-- T-EDIT/T-JUDGE-FIX/T-CLOZE 答前不自动朗读目标词；
 - 手动点击播放按钮属于用户主动提示，可能会听到答案；
 - T-SEQUENCE/T-FILL/T-SEGMENT/T-MATCH/T-REORDER 答前可 `Hear word`；
-- 例句只在答题后朗读，避免 T-CLOZE 直接读出空格答案。
+- 例句在答题后朗读。
 
 ## 字母组合限制
 
@@ -44,4 +43,4 @@ node tests/runTests.js --phase=p12
 - voice 选择；
 - 单词/例句语速；
 - 不支持时返回 false；
-- T-TYPE/T-EDIT/T-JUDGE/T-CLOZE 答前禁止朗读。
+- 所有题型自动朗读。

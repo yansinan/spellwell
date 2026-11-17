@@ -119,19 +119,3 @@ export function createSpeechService({
     },
   };
 }
-
-const WORD_BEFORE_ANSWER = new Set([
-  'T-SEQUENCE',
-  'T-FILL',
-  'T-SEGMENT',
-  'T-MATCH',
-  'T-REORDER',
-]);
-
-/**
- * 答前只有目标词已经部分/完整可见的题型才允许朗读，避免 T-TYPE/T-EDIT/T-JUDGE/T-CLOZE 泄题。
- * @param {string} typeId
- */
-export function canSpeakWordBeforeAnswer(typeId) {
-  return WORD_BEFORE_ANSWER.has(String(typeId));
-}
