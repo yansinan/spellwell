@@ -6,12 +6,21 @@
 
 - 单词：优先选择英语自然 voice，语速约 `0.86`；
 - 例句：完整句子朗读，保留标点，语速约 `0.94`；
+- 题面出现时自动尝试朗读目标词（仅答前可见词的题型）；
 - 答对/答错后自动朗读正确单词；
+- 点击字母块（tile）朗读该字母/组合；T-REORDER 点击也朗读；
+- 朗读按钮为高对比 pill，带喇叭图标；
 - Feedbacks 提供 `Hear word` / `Hear sentence`；
-- T-TYPE 答前不显示单词按钮，避免泄露答案；
+- T-TYPE 答前不自动朗读、不显示单词按钮，避免泄露答案；
 - T-EDIT/T-JUDGE-FIX/T-CLOZE 答前也不直接朗读目标词；
 - T-SEQUENCE/T-FILL/T-SEGMENT/T-MATCH/T-REORDER 答前可 `Hear word`；
 - 例句只在答题后朗读，避免 T-CLOZE 直接读出空格答案。
+
+## 字母组合限制
+
+`speechSynthesis` 对 `sh`、`ue`、`ea` 等孤立组合的发音依赖语音引擎，
+可能读成字母名或近似音，而不是精确音素。当前为 best-effort；
+若要稳定的自然发音，需要后续为 152 个 grapheme 预生成音频。
 
 ## 兼容性
 

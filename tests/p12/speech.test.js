@@ -40,12 +40,15 @@ test('朗读：优先英语自然 voice，词和句子使用不同语速', () =>
   assertEqual(service.voice.name, 'Microsoft Aria Online (Natural)');
   assertEqual(service.speakWord('apple'), true);
   assertEqual(service.speakSentence('I eat an apple.'), true);
-  assertEqual(synth.cancelled, 2);
+  assertEqual(service.speakGrapheme('sh'), true);
+  assertEqual(synth.cancelled, 3);
   assertEqual(synth.spoken[0].text, 'apple');
   assertEqual(synth.spoken[0].lang, 'en-US');
   assertEqual(synth.spoken[0].rate, 0.86);
   assertEqual(synth.spoken[1].text, 'I eat an apple.');
   assertEqual(synth.spoken[1].rate, 0.94);
+  assertEqual(synth.spoken[2].text, 'sh');
+  assertEqual(synth.spoken[2].rate, 0.8);
 });
 
 test('朗读：不支持时返回 false，不抛错', () => {

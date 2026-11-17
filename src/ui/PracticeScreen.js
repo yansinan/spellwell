@@ -46,6 +46,8 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
+const SPEAKER_ICON = `<svg class="sw-speech-button__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`;
+
 
 export class PracticeScreen {
   #root;
@@ -234,6 +236,7 @@ export class PracticeScreen {
     this.#bindQuestion();
     this.#bindSoundToggle();
     this.#bindProgressButton();
+    this.#autoSpeakWord();
   }
 
   #typeCopy() {
@@ -320,7 +323,7 @@ export class PracticeScreen {
     const hint = copy.hint;
     const hintHtml = hint ? `<p class="sw-practice__hint">${escapeHtml(hint)}</p>` : '';
     const wordSpeechHtml = this.#speech.supported && canSpeakWordBeforeAnswer(spec.typeId)
-      ? `<div class="sw-speech-actions"><button type="button" class="sw-text-button" data-action="speak-word">Hear word</button></div>`
+      ? `<div class="sw-speech-actions"><button type="button" class="sw-speech-button" data-action="speak-word" aria-label="Hear word">${SPEAKER_ICON}<span>Hear word</span></button></div>`
       : '';
     const slots = isType
       ? this.#typeInputTemplate()
@@ -1018,6 +1021,7 @@ export class PracticeScreen {
 
   #onReorderTap(index) {
     if (this.#locked) return;
+    this.#speakGrapheme(this.#reorderOrder[index]);
     if (this.#reorderSelected === null) {
       this.#reorderSelected = index;
       this.#sound.tap();
@@ -1082,6 +1086,7 @@ export class PracticeScreen {
   #activateTile(unitId) {
     if (this.#locked || !unitId) return;
     if (this.#events.some((event) => event.unitId === unitId)) return;
+    this.#speakGrapheme(unitId);
     const { spec } = this.#current;
 
     if (spec.typeId === 'T-SEQUENCE') {
@@ -1149,6 +1154,18 @@ export class PracticeScreen {
     this.#bindProgressButton();
   }
 
+  #autoSpeakWord() {
+    if (!this.#speech.supported || this.#sound.isMuted()) return false;
+    const typeId = this.#current?.spec?.typeId;
+    if (!typeId || !canSpeakWordBeforeAnswer(typeId)) return false;
+    return this.#speakWord();
+  }
+
+  #speakGrapheme(unitId) {
+    const text = this.#unitText(unitId) || String(unitId ?? '').replace(/^g\./, '');
+    return this.#speech.speakGrapheme(text);
+  }
+
   #speakWord() {
     return this.#speech.speakWord(String(this.#current?.bundle?.word?.text ?? ''));
   }
@@ -1163,8 +1180,8 @@ export class PracticeScreen {
     const sentence = this.#current?.bundle?.sentences?.[0]?.text;
     return `
       <div class="sw-feedback__speech">
-        <button type="button" class="sw-text-button" data-action="speak-word">Hear word</button>
-        ${sentence ? '<button type="button" class="sw-text-button" data-action="speak-sentence">Hear sentence</button>' : ''}
+        <button type="button" class="sw-speech-button" data-action="speak-word" aria-label="Hear word">${SPEAKER_ICON}<span>Hear word</span></button>
+        ${sentence ? `<button type="button" class="sw-speech-button sw-speech-button--secondary" data-action="speak-sentence" aria-label="Hear sentence">${SPEAKER_ICON}<span>Hear sentence</span></button>` : ''}
       </div>
     `;
   }

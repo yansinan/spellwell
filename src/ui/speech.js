@@ -88,6 +88,7 @@ export function createSpeechService({
     get voices() { return [...voices]; },
     speakWord(text) { refresh(); return speak(text, WORD_RATE); },
     speakSentence(text) { refresh(); return speak(text, SENTENCE_RATE); },
+    speakGrapheme(text) { refresh(); return speak(text, 0.8); },
     stop() {
       if (!supported) return;
       try { synth.cancel(); } catch { /* ignore */ }

@@ -978,17 +978,50 @@ code {
   letter-spacing: 0.08em;
 }
 
-/* Native speech controls */
+
+/* Prominent speech control */
 .sw-speech-actions,
 .sw-feedback__speech {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
-  margin: 6px 0;
+  margin: 8px 0;
 }
 
-.sw-speech-actions .sw-text-button,
-.sw-feedback__speech .sw-text-button {
-  min-height: 34px;
+.sw-speech-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 8px 16px;
+  border: 1px solid var(--sw-primary);
+  border-radius: var(--sw-radius-pill);
+  background: var(--sw-primary-soft);
+  color: var(--sw-primary-deep);
+  font-family: var(--sw-font-en);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.sw-speech-button:hover {
+  background: var(--sw-primary);
+  color: var(--sw-surface-strong);
+}
+
+.sw-speech-button:focus-visible {
+  outline: 2px solid var(--sw-primary-deep);
+  outline-offset: 2px;
+}
+
+.sw-speech-button--secondary {
+  background: var(--sw-surface-strong);
+  color: var(--sw-ink);
+  border-color: var(--sw-line-strong);
+}
+
+.sw-speech-button__icon {
+  flex: 0 0 auto;
 }
