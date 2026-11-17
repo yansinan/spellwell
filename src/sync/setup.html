@@ -12,105 +12,23 @@
       <header class="sw-hero">
         <p class="sw-eyebrow">SYNC SETUP</p>
         <h1 class="sw-title">同步设置</h1>
-        <p class="sw-lede">浏览器仍使用本机 IndexedDB；同步服务只负责在设备之间交换快照。</p>
-      </header>
-      <section class="sw-panel">
-        <form id="sync-form" class="sw-admin__field-row">
-          <label>服务器地址
-            <input name="baseUrl" value="/sync" autocomplete="off" />
-          </label>
-          <label>Bootstrap Code（首次）
-            <input name="bootstrapCode" placeholder="BOOT-..." autocomplete="off" />
-          </label>
-          <p class="sw-admin__muted">固定项目：<code id="fixed-project-id"></code></p>
-          <label>Pairing Code（同一用户的新设备）
-            <input name="pairingCode" placeholder="ABCD-EFGH" autocomplete="off" />
-          </label>
-          <label>已有 Device Token（恢复本机）
-            <input name="deviceToken" placeholder="dev_..." autocomplete="off" />
-          </label>
-          <label>用户名
-            <input name="userName" value="SpellWell" autocomplete="off" />
-          </label>
-          <label>设备名
-            <input name="deviceName" value="浏览器" autocomplete="off" />
-          </label>
-          <button type="submit" class="sw-check">连接并启用同步</button>
-        </form>
-        <p id="sync-status" class="sw-admin__muted">首次使用 Bootstrap Code 创建项目；第二台设备使用第一台生成的 Pairing Code；设备 token 只保存在本机 localStorage。</p>
-        <button type="button" id="pairing-code" class="sw-text-button" hidden>生成配对码</button>
-        <pre id="pairing-output" class="sw-admin__muted"></pre>
+        <p class="sw-lede">配对已有用户，或创建一个独立的新用户。浏览器仍使用本机 IndexedDB。</p>
         <p class="sw-admin__muted"><a href="/">返回练习</a></p>
-      </section>
+      </header>
+      <div id="sync-panel"></div>
     </main>
     <script type="module">
-      import { createSyncClient } from './client.js';
-      import { SYNC_STORAGE_KEYS } from './SyncManager.js';
-      import { SYNC_PROJECT_ID } from './config.js';
+      import { IndexedDBAdapter } from '/src/storage/IndexedDBAdapter.js';
+      import { mountSyncAdmin } from '/src/admin/SyncAdmin.js';
 
-      const form = document.querySelector('#sync-form');
-      document.querySelector('#fixed-project-id').textContent = SYNC_PROJECT_ID;
-      const status = document.querySelector('#sync-status');
-      const query = new URLSearchParams(location.search);
-      const bootstrap = query.get('bootstrap');
-      form.elements.bootstrapCode.value = bootstrap ?? '';
-      const existing = localStorage.getItem(SYNC_STORAGE_KEYS.TOKEN);
-      const pairButton = document.querySelector('#pairing-code');
-      const pairOutput = document.querySelector('#pairing-output');
-      if (existing) {
-        status.textContent = '本机已配置同步。可以重新 enrollment，或直接返回练习。';
-        pairButton.hidden = false;
+      let adapter = null;
+      try {
+        adapter = new IndexedDBAdapter();
+        await adapter.init();
+      } catch (error) {
+        console.warn('[SpellWell] IndexedDB unavailable on sync setup', error);
       }
-      pairButton?.addEventListener('click', async () => {
-        try {
-          const client = createSyncClient({
-            baseUrl: form.elements.baseUrl.value.trim() || '/sync',
-            deviceToken: localStorage.getItem(SYNC_STORAGE_KEYS.TOKEN),
-          });
-          const pairing = await client.createPairingCode({ ttlSeconds: 600 });
-          pairOutput.textContent = `Pairing Code: ${pairing.code}\nExpires: ${pairing.expiresAt}`;
-        } catch (error) {
-          pairOutput.textContent = `生成失败：${error.message ?? error}`;
-        }
-      });
-
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const baseUrl = form.elements.baseUrl.value.trim() || '/sync';
-        const existingToken = form.elements.deviceToken.value.trim();
-        if (existingToken) {
-          localStorage.setItem(SYNC_STORAGE_KEYS.BASE_URL, baseUrl);
-          localStorage.setItem(SYNC_STORAGE_KEYS.TOKEN, existingToken);
-          localStorage.removeItem(SYNC_STORAGE_KEYS.FIRST_BIND);
-          status.textContent = '已导入本机 Device Token，正在返回练习。';
-          setTimeout(() => { location.href = '/'; }, 400);
-          return;
-        }
-        status.textContent = '正在连接同步服务…';
-        try {
-          const client = createSyncClient({ baseUrl });
-          const credential = {
-            ...(form.elements.bootstrapCode.value.trim() ? { bootstrapCode: form.elements.bootstrapCode.value.trim() } : {}),
-            ...(form.elements.pairingCode.value.trim() ? { pairingCode: form.elements.pairingCode.value.trim() } : {}),
-            userName: form.elements.userName.value.trim() || 'SpellWell',
-            deviceName: form.elements.deviceName.value.trim() || '浏览器',
-          };
-          const result = await client.enroll(credential);
-          if (result.projectId !== SYNC_PROJECT_ID) {
-            throw new Error(`配对返回了其他项目：${result.projectId}`);
-          }
-          localStorage.setItem(SYNC_STORAGE_KEYS.BASE_URL, baseUrl);
-          localStorage.setItem(SYNC_STORAGE_KEYS.TOKEN, result.deviceToken);
-          localStorage.setItem(SYNC_STORAGE_KEYS.PROJECT, result.projectId);
-          localStorage.setItem(SYNC_STORAGE_KEYS.DEVICE, result.device?.name ?? '');
-          if (credential.pairingCode) localStorage.setItem(SYNC_STORAGE_KEYS.FIRST_BIND, '1');
-          else localStorage.removeItem(SYNC_STORAGE_KEYS.FIRST_BIND);
-          status.textContent = `同步已启用：${result.user?.name ?? '用户'} / ${result.device?.name ?? '设备'}`;
-          setTimeout(() => { location.href = '/'; }, 800);
-        } catch (error) {
-          status.textContent = `连接失败：${error.message ?? error}。练习仍可离线使用，稍后重试即可。`;
-        }
-      });
+      await mountSyncAdmin(document.querySelector('#sync-panel'), { adapter, deviceName: '浏览器' });
     </script>
   </body>
 </html>

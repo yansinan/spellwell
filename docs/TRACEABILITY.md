@@ -137,6 +137,7 @@
 | R-P9-27 | 当次错题换题型插入后半段 | `PracticeScreen` + `PracticeSession` + `buildRepairSpec` | `tests/p9/repairAlternative.test.js` | P9 | ✅ |
 | R-SYNC-01 | IndexedDB 快照同步/离线容错 | `src/sync` + `/sync` proxy | `tests/p12/sync.test.js` / `syncManager.test.js` + 浏览器 | P12 | ✅ |
 | R-SYNC-02 | 固定 projectId、后台 pairing/状态 | `config.js` + `SyncAdmin.js` | `tests/p12/config.test.js` + 后台浏览器 | P12 | ✅ |
+| R-SYNC-04 | 双入口注册/配对码期限/资料禁用 | `SyncAdmin` + `/sync-setup` | 浏览器 | P12 | ✅ |
 | R-SYNC-03 | 首次绑定远端优先，之后设备平等 | `mergeSnapshots` + `SyncManager.firstBind` | `tests/p12/sync.test.js` / `syncManager.test.js` | P12 | ✅ |
 | R-P9-28 | 每个年级/学期独立推导下一个新单元 | `unitProgress` + `PracticeSetupScreen` | `tests/p9/unitProgress.test.js` | P9 | ✅ |
 | R-P9-29 | 学期末自动激活下一学期 | `unitProgress` | `tests/p9/unitProgress.test.js` | P9 | ✅ |

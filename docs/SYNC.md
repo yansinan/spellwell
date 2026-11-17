@@ -95,13 +95,22 @@ BOOT-REV41qXQbBbxjxwnhBPAABdDrISGQ4Mm
 
 > Bootstrap Code 是一次性的；使用成功后会轮换。不要把 token 或 code 提交到仓库。后续设备使用 `/sync-setup` 的 Pairing Code，或粘贴已有 Device Token。
 
-## 后台同步面板
+## 同步账户面板
 
-`/admin` 顶部有同步面板：
+`/admin` 和 `/sync-setup` 使用同一个同步账户面板：
 
-- 未注册：输入 Pairing Code，完成本机配对；
-- 已注册：显示项目、用户、设备、同步状态；
-- 已注册：可生成 10 分钟 Pairing Code。
+未注册：
+
+1. 配对已有用户：输入 Pairing Code；
+2. 创建新用户：输入用户名/设备名，使用固定 projectId 创建独立用户；
+3. 显示配对码：完成配对/创建后可用。
+
+已注册：
+
+- 显示项目、用户、设备、同步状态；
+- 编辑资料暂不可用：服务端没有修改用户名/设备名的 API；
+- 生成 10 分钟、一次性的 Pairing Code；
+- 显示倒计时，过期后禁用复制，可重新生成。
 
 ## deviceToken 的现状
 

@@ -956,3 +956,24 @@ code {
   outline: none;
   box-shadow: var(--sw-focus-ring);
 }
+
+/* P12 sync account cards */
+.sw-admin__sync-card {
+  display: grid;
+  gap: 10px;
+  flex: 1 1 300px;
+  align-content: start;
+}
+
+.sw-admin__sync-card h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.sw-admin__sync-card code,
+[data-sync-code] {
+  font-family: var(--sw-font-en);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
