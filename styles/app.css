@@ -1167,3 +1167,113 @@ code {
 @media (max-width: 700px) {
   .sw-admin__analytics-grid { grid-template-columns: 1fr; }
 }
+
+/* Expandable practice sessions */
+.sw-analytics__sessions {
+  display: grid;
+  gap: 8px;
+}
+
+.sw-analytics__session {
+  border: 1px solid var(--sw-line);
+  border-radius: var(--sw-radius-sm);
+  background: var(--sw-surface-strong);
+}
+
+.sw-analytics__session > summary {
+  display: grid;
+  grid-template-columns: minmax(150px, 1.5fr) 60px 64px 70px 60px 16px;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.sw-analytics__session > summary::-webkit-details-marker { display: none; }
+
+.sw-analytics__session > summary:hover {
+  background: var(--sw-primary-soft);
+}
+
+.sw-analytics__session > summary strong {
+  color: var(--sw-primary-deep);
+  font-family: var(--sw-font-en);
+  font-size: 15px;
+}
+
+.sw-analytics__chevron {
+  font-size: 20px;
+  line-height: 1;
+  transition: transform 120ms ease;
+}
+
+.sw-analytics__session[open] .sw-analytics__chevron {
+  transform: rotate(90deg);
+}
+
+.sw-analytics__session-detail {
+  padding: 0 12px 12px;
+  border-top: 1px solid var(--sw-line);
+}
+
+.sw-analytics__session-detail h4 {
+  margin: 10px 0 6px;
+  font-size: 12px;
+}
+
+.sw-analytics__session-errors {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sw-analytics__session-errors li {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) auto;
+  gap: 2px 10px;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--sw-line);
+  font-size: 12px;
+}
+
+.sw-analytics__session-errors li > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.sw-analytics__session-errors small,
+.sw-analytics__session-errors time {
+  color: var(--sw-ink-soft);
+  font-size: 11px;
+}
+
+.sw-analytics__session-errors time {
+  grid-column: 2;
+  text-align: right;
+}
+
+.sw-analytics__error-type {
+  align-self: start;
+  padding: 2px 7px;
+  border-radius: var(--sw-radius-pill);
+  background: var(--sw-primary-soft);
+  color: var(--sw-primary-deep);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+@media (max-width: 700px) {
+  .sw-analytics__session > summary {
+    grid-template-columns: 1fr auto auto;
+  }
+  .sw-analytics__session > summary span:nth-child(2),
+  .sw-analytics__session > summary span:nth-child(4),
+  .sw-analytics__session > summary span:nth-child(5) { display: none; }
+}

@@ -59,6 +59,8 @@ test('做题分析：正确率、趋势、薄弱词与到期复习', () => {
   assertEqual(analysis.summary.accuracyDelta, 67);
   assertEqual(analysis.focusWords[0].wordId, 'w.b');
   assertEqual(analysis.focusWords[0].wrong, 2);
+  assertEqual(analysis.sessions[1].errorDetails.length, 2);
+  assertEqual(analysis.sessions[1].errorDetails[0].word, 'book');
   assertEqual(analysis.dueCount, 1);
   assertEqual(analysis.statusCounts.mastered, 1);
 });

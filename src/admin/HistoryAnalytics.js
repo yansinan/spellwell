@@ -76,6 +76,7 @@ export function groupPracticeSessions(attempts, gapMs = SESSION_GAP_MS) {
         correct: 0,
         wrong: 0,
         errors: {},
+        wrongAttempts: [],
         wordIds: new Set(),
       };
       sessions.push(current);
@@ -85,6 +86,7 @@ export function groupPracticeSessions(attempts, gapMs = SESSION_GAP_MS) {
     if (attempt.wordCorrect) current.correct += 1;
     else {
       current.wrong += 1;
+      current.wrongAttempts.push(attempt);
       const type = attempt.firstError?.type;
       if (type) current.errors[type] = (current.errors[type] ?? 0) + 1;
     }
@@ -101,6 +103,7 @@ export function groupPracticeSessions(attempts, gapMs = SESSION_GAP_MS) {
     durationMs: Math.max(0, session.endedAt - session.startedAt),
     wordCount: session.wordIds.size,
     errors: session.errors,
+    wrongAttempts: session.wrongAttempts,
   })).sort((a, b) => b.startedAt - a.startedAt);
 }
 
@@ -183,12 +186,32 @@ export function buildHistoryAnalytics({
 } = {}) {
   const list = Array.isArray(attempts) ? attempts : [];
   const stateList = Array.isArray(states) && states.length > 0 ? states : (Array.isArray(wordStates) ? wordStates : []);
-  const sessions = groupPracticeSessions(list, sessionGapMs);
+  const rawSessions = groupPracticeSessions(list, sessionGapMs);
   const daily = buildDailyTrend(list, now);
   const total = list.length;
   const correct = list.filter((attempt) => attempt.wordCorrect).length;
   const wordsById = new Map((Array.isArray(words) ? words : []).map((word) => [String(word.id), word]));
   const statesById = new Map(stateList.map((state) => [String(state.wordId), state]));
+  const sessions = rawSessions.map((session) => ({
+    ...session,
+    errorDetails: session.wrongAttempts.map((attempt) => {
+      const word = wordsById.get(String(attempt.wordId));
+      const error = attempt.firstError ?? {};
+      return {
+        wordId: String(attempt.wordId ?? ''),
+        word: String(word?.text ?? String(attempt.wordId ?? '').replace(/^w\./, '')),
+        translation: String(word?.translation ?? ''),
+        timestamp: Number(attempt.timestamp),
+        type: error.type ?? null,
+        label: ERROR_LABELS[error.type] ?? error.type ?? '错误',
+        unitKind: error.unitKind ?? null,
+        unitId: error.unitId ?? null,
+        position: Number.isFinite(Number(error.position)) ? Number(error.position) : null,
+        expected: error.expected ?? '',
+        actual: error.actual ?? '',
+      };
+    }).sort((a, b) => a.timestamp - b.timestamp),
+  }));
   const focusWords = buildFocusWords(list, wordsById, statesById);
   const errorTypes = {};
   for (const attempt of list) {
@@ -266,15 +289,34 @@ export function renderHistoryAnalytics(data) {
   }).join('');
   const delta = data.summary.accuracyDelta;
   const deltaText = delta === null ? '暂无对比' : `${delta > 0 ? '+' : ''}${delta}%`;
-  const sessions = data.sessions.map((session) => `
-    <tr>
-      <td>${escape(formatDateTime(session.startedAt))}</td>
-      <td>${session.total}</td>
-      <td><strong>${session.accuracy}%</strong></td>
-      <td>${escape(formatDuration(session.durationMs))}</td>
-      <td>${session.wordCount}</td>
-    </tr>
-  `).join('');
+  const sessions = data.sessions.map((session) => {
+    const errors = session.errorDetails.length > 0
+      ? `<ul class="sw-analytics__session-errors">${session.errorDetails.map((error) => `
+          <li>
+            <div><strong>${escape(error.word)}</strong>${error.translation ? `<small>${escape(error.translation)}</small>` : ''}</div>
+            <span class="sw-analytics__error-type">${escape(error.label)}</span>
+            <small>期望 <code>${escape(error.expected || '∅')}</code> · 实际 <code>${escape(error.actual || '∅')}</code>${error.position !== null ? ` · 位置 ${error.position + 1}` : ''}</small>
+            <time>${escape(formatDateTime(error.timestamp))}</time>
+          </li>
+        `).join('')}</ul>`
+      : '<p class="sw-admin__muted">本轮没有错误。</p>';
+    return `
+      <details class="sw-analytics__session">
+        <summary>
+          <span>${escape(formatDateTime(session.startedAt))}</span>
+          <span>${session.total} 题</span>
+          <strong>${session.accuracy}%</strong>
+          <span>${escape(formatDuration(session.durationMs))}</span>
+          <span>${session.wordCount} 词</span>
+          <span class="sw-analytics__chevron" aria-hidden="true">›</span>
+        </summary>
+        <div class="sw-analytics__session-detail">
+          <h4>错误详情</h4>
+          ${errors}
+        </div>
+      </details>
+    `;
+  }).join('');
   const focus = data.focusWords.map((word) => `
     <li>
       <div>
@@ -320,10 +362,7 @@ export function renderHistoryAnalytics(data) {
       <div class="sw-admin__analytics-grid">
         <div>
           <h3>历次练习</h3>
-          <table class="sw-admin__units sw-analytics__table">
-            <thead><tr><th>开始时间</th><th>题数</th><th>正确率</th><th>用时</th><th>词数</th></tr></thead>
-            <tbody>${sessions}</tbody>
-          </table>
+          <div class="sw-analytics__sessions">${sessions}</div>
         </div>
         <div>
           <h3>错误类型</h3>
