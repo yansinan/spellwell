@@ -108,6 +108,9 @@ BOOT-REV41qXQbBbxjxwnhBPAABdDrISGQ4Mm
 已注册：
 
 - 显示项目、用户、设备、同步状态；
+- 显示服务器 revision、本机上次同步 revision、本地待同步状态；
+- 单独显示最后同步日期时间；
+- 远端 revision 更新时提示“远端有新版本”。
 - 编辑资料暂不可用：服务端没有修改用户名/设备名的 API；
 - 生成 10 分钟、一次性的 Pairing Code；
 - 显示倒计时，过期后禁用复制，可重新生成。

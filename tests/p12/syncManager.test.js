@@ -41,12 +41,16 @@ test('SyncManager：无远端时推送本地快照，成功后标记 synced', as
     }
     throw new Error(`unexpected ${url}`);
   };
-  const manager = new SyncManager({ adapter, storage: storageWithToken(), fetchImpl, timeoutMs: 1000 });
+  const storage = storageWithToken();
+  const manager = new SyncManager({ adapter, storage, fetchImpl, timeoutMs: 1000 });
   const result = await manager.syncOnce();
   assertEqual(result.state, 'synced');
   assertEqual(pushed.baseRevision, 0);
   assertEqual(pushed.snapshot.stores.words[0].id, 'w.a');
   assertEqual(manager.status.state, 'synced');
+  assertEqual(manager.lastRevision, 1);
+  assertEqual(storage.getItem(SYNC_STORAGE_KEYS.LAST_REVISION), '1');
+  assertEqual(storage.getItem(SYNC_STORAGE_KEYS.PENDING), null);
 });
 
 test('SyncManager：服务不可用时保持离线且不抛错', async () => {

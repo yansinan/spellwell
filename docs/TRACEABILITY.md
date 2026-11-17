@@ -138,6 +138,7 @@
 | R-SYNC-01 | IndexedDB 快照同步/离线容错 | `src/sync` + `/sync` proxy | `tests/p12/sync.test.js` / `syncManager.test.js` + 浏览器 | P12 | ✅ |
 | R-SYNC-02 | 固定 projectId、后台 pairing/状态 | `config.js` + `SyncAdmin.js` | `tests/p12/config.test.js` + 后台浏览器 | P12 | ✅ |
 | R-SYNC-04 | 双入口注册/配对码期限/资料禁用 | `SyncAdmin` + `/sync-setup` | 浏览器 | P12 | ✅ |
+| R-SYNC-05 | 后台显示 revision/最后同步时间/待同步状态 | `SyncManager` + `SyncAdmin` | 后台浏览器 | P12 | ✅ |
 | R-SPEECH-01 | 原生单词/例句朗读 | `src/ui/speech.js` + PracticeScreen | `tests/p12/speech.test.js` | P12 | ✅ |
 | R-SPEECH-02 | 答前防泄题边界 | `canSpeakWordBeforeAnswer` | `tests/p12/speech.test.js` | P12 | ✅ |
 | R-SPEECH-03 | 自动单词/字母块朗读 | `PracticeScreen` + `speech.speakGrapheme` | `tests/p12/speech.test.js` + 浏览器 | P12 | ✅ |

@@ -1025,3 +1025,18 @@ code {
 .sw-speech-button__icon {
   flex: 0 0 auto;
 }
+
+
+.sw-admin__sync-status {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0;
+}
+
+.sw-admin__sync-last {
+  margin: 0;
+  color: var(--sw-ink);
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}

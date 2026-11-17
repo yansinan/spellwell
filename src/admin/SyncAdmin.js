@@ -46,6 +46,7 @@ function statusLabel(state) {
     synced: '已同步',
     offline: '离线，等待重试',
     unconfigured: '未启用',
+    'remote-newer': '远端有新版本',
   }[state] ?? state;
 }
 
@@ -213,7 +214,11 @@ async function renderRegistered(container, { adapter = null, deviceName = '浏�
         <button type="button" class="sw-text-button" data-sync-forget>清除本机 token</button>
       </div>
       <p class="sw-admin__muted">编辑资料暂不可用：当前同步服务端没有修改用户名/设备名的接口。</p>
-      <p class="sw-admin__muted" data-sync-status>${manager ? '同步状态：待同步' : '本机 IndexedDB 不可用，仅能查看身份。'}</p>
+      <div class="sw-admin__sync-status">
+        <p class="sw-admin__muted" data-sync-status>正在读取同步版本…</p>
+        <p class="sw-admin__muted" data-sync-version></p>
+        <p class="sw-admin__sync-last" data-sync-last></p>
+      </div>
 
       <div class="sw-admin__sync-card">
         <h3>3. 配对码</h3>
@@ -229,13 +234,68 @@ async function renderRegistered(container, { adapter = null, deviceName = '浏�
     </section>
   `;
   const status = container.querySelector('[data-sync-status]');
+  const version = container.querySelector('[data-sync-version]');
+  const lastLine = container.querySelector('[data-sync-last]');
   const codeBox = container.querySelector('[data-sync-code-box]');
   const pairingMessage = container.querySelector('[data-sync-pairing-message]');
+  let remoteRevision = null;
+  let remoteError = null;
+
+  const renderSyncStatus = () => {
+    if (!status || !version) return;
+    const lastRevision = manager?.lastRevision ?? 0;
+    const lastAt = manager?.lastSyncAt ?? 0;
+    const pending = manager?.pending ?? false;
+    const remoteNewer = remoteRevision !== null && lastRevision > 0 && remoteRevision > lastRevision;
+    const state = manager?.status?.state === 'syncing'
+      ? 'syncing'
+      : pending
+        ? 'pending'
+        : remoteNewer
+          ? 'remote-newer'
+          : remoteRevision !== null && lastRevision > 0 && remoteRevision === lastRevision
+            ? 'synced'
+            : manager?.status?.state === 'offline' ? 'offline' : 'idle';
+    status.textContent = `同步状态：${statusLabel(state)}`;
+    const remoteLabel = remoteError
+      ? `服务器版本读取失败：${remoteError}`
+      : remoteRevision === null
+        ? '服务器版本读取中…'
+        : remoteRevision === 0
+          ? '服务器暂无快照'
+          : `服务器 revision ${remoteRevision}`;
+    const localLabel = lastRevision > 0
+      ? `本机上次同步 revision ${lastRevision}`
+      : '本机尚未完成同步';
+    const pendingLabel = pending ? '本地有待同步变更' : '本地无待同步变更';
+    version.textContent = `${remoteLabel} · ${localLabel} · ${pendingLabel}`;
+    if (lastLine) {
+      lastLine.textContent = lastAt
+        ? `最后同步：${formatTime(new Date(lastAt).toISOString())}`
+        : '最后同步：尚未完成';
+    }
+  };
+
+  const loadRemoteRevision = async () => {
+    remoteError = null;
+    try {
+      const remote = await client.pull();
+      remoteRevision = remote?.revision ?? 0;
+    } catch (error) {
+      remoteError = String(error.message ?? error);
+    }
+    renderSyncStatus();
+  };
+
+  renderSyncStatus();
+  await loadRemoteRevision();
 
   container.querySelector('[data-sync-now]')?.addEventListener('click', async () => {
     if (!manager) return;
     status.textContent = '同步中…';
     const result = await manager.syncOnce();
+    await loadRemoteRevision();
+    renderSyncStatus();
     status.textContent = `同步状态：${statusLabel(result.state)}${result.revision === null ? '' : ` · revision ${result.revision}`}`;
   });
 

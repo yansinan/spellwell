@@ -189,7 +189,7 @@ node tools/serve.mjs
 - 强复习题型 T-TYPE/T-FILL 轮转；会话种子随 attempts 变化；见 ADR-0037。
 - 后台可经 `LearningStateService` 设置 unstarted/reviewing/mastered；单元状态派生；见 ADR-0038。
 - 所有例句必须有中文 `translation`；T-CLOZE 显示中文翻译；见 CONTENT_SPEC。
-- 同步服务为 P12 接入：浏览器 IndexedDB + `/sync` 代理 + 快照 merge；固定 projectId 见 `src/sync/config.js`；首次 Pairing 远端优先，之后设备平等；配对面板见 `SyncAdmin`；见 ADR-0041。
+- 同步服务为 P12 接入：浏览器 IndexedDB + `/sync` 代理 + 快照 merge；固定 projectId 见 `src/sync/config.js`；首次 Pairing 远端优先，之后设备平等；配对面板/版本状态见 `SyncAdmin`；见 ADR-0041。
 - 未到期词不 filler 补题；未 mastered 进度封顶（learning 88/reviewing 92/probe 96）；见 ADR-0039。
 - 单元选择按年级/学期分组，每个序列以最后一个已练单元推导下一个新单元；未启动序列不显示；序列练到末尾时激活下一学期；见 ADR-0039。
 - 首次错词在本轮后半段换题型强化一次；不额外写状态；见 ADR-0040。

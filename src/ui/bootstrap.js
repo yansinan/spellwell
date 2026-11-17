@@ -251,6 +251,7 @@ export async function createPracticeWorkspace() {
       recordSpeed: async (record) => {
         const history = addSpeedRecord(snapshot.speedHistory, record);
         await adapter.put('meta', { key: 'speedHistory', value: { version: 1, items: history } });
+        sync.requestSync();
         snapshot = { ...snapshot, speedHistory: history };
         return history;
       },
@@ -274,6 +275,7 @@ export async function createPracticeWorkspace() {
     async recordSpeed(record) {
       const history = addSpeedRecord(snapshot.speedHistory, record);
       await adapter.put('meta', { key: 'speedHistory', value: { version: 1, items: history } });
+      sync.requestSync();
       snapshot = { ...snapshot, speedHistory: history };
       return history;
     },

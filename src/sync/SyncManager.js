@@ -17,6 +17,9 @@ export const SYNC_STORAGE_KEYS = Object.freeze({
   PROJECT: 'spellwell.sync.projectId',
   DEVICE: 'spellwell.sync.deviceName',
   FIRST_BIND: 'spellwell.sync.firstBind',
+  LAST_REVISION: 'spellwell.sync.lastRevision',
+  LAST_SYNC_AT: 'spellwell.sync.lastSyncAt',
+  PENDING: 'spellwell.sync.pending',
 });
 
 const DEFAULT_BASE_URL = SYNC_BASE_URL;
@@ -71,6 +74,28 @@ export class SyncManager {
     return Boolean(this.storage?.getItem(SYNC_STORAGE_KEYS.TOKEN));
   }
 
+  get lastRevision() {
+    return Number(this.storage?.getItem(SYNC_STORAGE_KEYS.LAST_REVISION) ?? 0) || 0;
+  }
+
+  get lastSyncAt() {
+    return Number(this.storage?.getItem(SYNC_STORAGE_KEYS.LAST_SYNC_AT) ?? 0) || 0;
+  }
+
+  get pending() {
+    return this.storage?.getItem(SYNC_STORAGE_KEYS.PENDING) === '1';
+  }
+
+  markPending() {
+    this.storage?.setItem(SYNC_STORAGE_KEYS.PENDING, '1');
+  }
+
+  #markSynced(revision) {
+    this.storage?.setItem(SYNC_STORAGE_KEYS.LAST_REVISION, String(revision));
+    this.storage?.setItem(SYNC_STORAGE_KEYS.LAST_SYNC_AT, String(Date.now()));
+    this.storage?.removeItem(SYNC_STORAGE_KEYS.PENDING);
+  }
+
   get firstBind() {
     return this.storage?.getItem(SYNC_STORAGE_KEYS.FIRST_BIND) === '1';
   }
@@ -109,6 +134,7 @@ export class SyncManager {
     this.storage?.setItem(SYNC_STORAGE_KEYS.TOKEN, result.deviceToken);
     this.storage?.setItem(SYNC_STORAGE_KEYS.PROJECT, result.projectId);
     this.storage?.setItem(SYNC_STORAGE_KEYS.DEVICE, result.device?.name ?? '');
+    this.storage?.removeItem(SYNC_STORAGE_KEYS.PENDING);
     if (input.pairingCode) this.markFirstBind();
     else this.clearFirstBind();
     this.#setStatus('idle');
@@ -141,6 +167,7 @@ export class SyncManager {
             snapshot: merged,
           });
           this.clearFirstBind();
+          this.#markSynced(pushed.revision);
           this.#setStatus('synced');
           return { state: 'synced', revision: pushed.revision };
         } catch (error) {
@@ -164,6 +191,7 @@ export class SyncManager {
   /** 防抖请求一次同步；失败不抛出。 */
   requestSync(delayMs = 800) {
     if (!this.configured) return;
+    this.markPending();
     if (this.retryTimer) clearTimeout(this.retryTimer);
     this.retryTimer = setTimeout(() => {
       this.retryTimer = null;
