@@ -977,3 +977,18 @@ code {
   font-weight: 900;
   letter-spacing: 0.08em;
 }
+
+/* Native speech controls */
+.sw-speech-actions,
+.sw-feedback__speech {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.sw-speech-actions .sw-text-button,
+.sw-feedback__speech .sw-text-button {
+  min-height: 34px;
+}

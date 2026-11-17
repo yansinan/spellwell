@@ -15,6 +15,7 @@ import { createSoundPlayer } from './sound.js';
 import { buildReport, summarizeSession } from './analytics.js';
 import { buildCompletionSummary } from './completionSummary.js';
 import { selectPrompt, selectRecallPrompt } from './promptSelector.js';
+import { createSpeechService, canSpeakWordBeforeAnswer } from './speech.js';
 import { addSpeedRecord, bestSpeed, formatElapsed, formatPace } from './speedStats.js';
 
 const TYPE_COPY = Object.freeze({
@@ -76,6 +77,7 @@ export class PracticeScreen {
   #clockHandle = null;
   #speedRecorded = false;
   #sound = createSoundPlayer();
+  #speech = createSpeechService();
 
   /**
    * @param {{
@@ -216,6 +218,7 @@ export class PracticeScreen {
   #renderCurrent() {
     this.#clearTimers();
     this.#clearDrag();
+    this.#speech.stop();
     if (this.#session.isComplete) {
       this.#renderDone();
       return;
@@ -316,6 +319,9 @@ export class PracticeScreen {
       : '';
     const hint = copy.hint;
     const hintHtml = hint ? `<p class="sw-practice__hint">${escapeHtml(hint)}</p>` : '';
+    const wordSpeechHtml = this.#speech.supported && canSpeakWordBeforeAnswer(spec.typeId)
+      ? `<div class="sw-speech-actions"><button type="button" class="sw-text-button" data-action="speak-word">Hear word</button></div>`
+      : '';
     const slots = isType
       ? this.#typeInputTemplate()
       : isEdit
@@ -354,6 +360,7 @@ export class PracticeScreen {
           ${magicHtml}
           ${promptHtml}
           ${hintHtml}
+          ${wordSpeechHtml}
 
           ${slots}
           ${tiles}
@@ -662,6 +669,9 @@ export class PracticeScreen {
     check?.addEventListener('click', () => this.#submit());
     this.#root.querySelector('[data-action="units"]')?.addEventListener('click', () => {
       this.#onChangePractice?.();
+    });
+    this.#root.querySelector('[data-action="speak-word"]')?.addEventListener('click', () => {
+      this.#speakWord();
     });
 
     const input = /** @type {HTMLInputElement|null} */ (this.#root.querySelector('[data-role="type-input"]'));
@@ -1139,6 +1149,35 @@ export class PracticeScreen {
     this.#bindProgressButton();
   }
 
+  #speakWord() {
+    return this.#speech.speakWord(String(this.#current?.bundle?.word?.text ?? ''));
+  }
+
+  #speakSentence() {
+    const sentence = this.#current?.bundle?.sentences?.[0]?.text;
+    return sentence ? this.#speech.speakSentence(String(sentence)) : false;
+  }
+
+  #feedbackSpeechHtml() {
+    if (!this.#speech.supported) return '';
+    const sentence = this.#current?.bundle?.sentences?.[0]?.text;
+    return `
+      <div class="sw-feedback__speech">
+        <button type="button" class="sw-text-button" data-action="speak-word">Hear word</button>
+        ${sentence ? '<button type="button" class="sw-text-button" data-action="speak-sentence">Hear sentence</button>' : ''}
+      </div>
+    `;
+  }
+
+  #bindFeedbackSpeech(container) {
+    container?.querySelector('[data-action="speak-word"]')?.addEventListener('click', () => {
+      this.#speakWord();
+    });
+    container?.querySelector('[data-action="speak-sentence"]')?.addEventListener('click', () => {
+      this.#speakSentence();
+    });
+  }
+
   #scheduleRepair(result, spec) {
     if (!this.#buildRepairSpec || this.#repairWords.has(result.wordId)) return;
     this.#repairWords.add(result.wordId);
@@ -1198,6 +1237,9 @@ export class PracticeScreen {
     const result = this.#session.submit(events, { record });
     if (record && !result.wordCorrect) this.#scheduleRepair(result, spec);
     this.#updateDebug(result);
+    // 在 await 之前调用，确保移动端仍处于用户手势上下文。
+    if (!this.#sound.isMuted()) this.#speakWord();
+    this.#root.querySelector('.sw-speech-actions')?.remove();
     if (record && this.#onResult) {
       try {
         await this.#onResult(result);
@@ -1213,14 +1255,16 @@ export class PracticeScreen {
     if (result.wordCorrect) {
       this.#sound.correct();
       stage?.classList.add('is-correct');
-      if (feedback) feedback.innerHTML = `<strong>Yes! ${answer}.</strong>`;
+      if (feedback) feedback.innerHTML = `<strong>Yes! ${answer}.</strong>${this.#feedbackSpeechHtml()}`;
+      this.#bindFeedbackSpeech(feedback);
       for (const button of this.#root.querySelectorAll('button, input')) {
+        if (/** @type {HTMLElement} */ (button).dataset.action?.startsWith('speak')) continue;
         /** @type {HTMLButtonElement|HTMLInputElement} */ (button).disabled = true;
       }
       this.#schedule(() => {
         this.#session.advance();
         this.#renderCurrent();
-      }, 900);
+      }, 1500);
       return;
     }
 
@@ -1232,8 +1276,10 @@ export class PracticeScreen {
       feedback.innerHTML = `
         <span class="sw-feedback__title">Not quite.</span>
         <span class="sw-feedback__answer">The word is <strong>${answer}</strong>.</span>
+        ${this.#feedbackSpeechHtml()}
         <button type="button" class="sw-text-button" data-action="retry">Try again</button>
       `;
+      this.#bindFeedbackSpeech(feedback);
       feedback.querySelector('[data-action="retry"]')?.addEventListener('click', () => {
         this.#renderCurrent();
       });
@@ -1336,6 +1382,7 @@ export class PracticeScreen {
 
   #renderDone() {
     this.#clearDrag();
+    this.#speech.stop();
     this.#stopClock();
     const elapsedMs = Math.max(0, Date.now() - (this.#startedAt ?? Date.now()));
     const questions = Math.max(1, this.#session.size);
