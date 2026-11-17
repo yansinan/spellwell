@@ -1,0 +1,47 @@
+# spellwell — 最小 docker compose（不构建自定义镜像，直接用官方 node 镜像）
+# ────────────────────────────────────────────────────────────────
+# Usage:
+#   sudo docker compose up -d      # 启动（首次会拉 node:24-alpine）
+#   sudo docker compose logs -f    # 看日志
+#   sudo docker compose down       # 停止
+#
+# 设计原则：
+#   - 不写 Dockerfile：直接用现成 node:24-alpine 跑 tools/serve.mjs
+#   - 源码 bind mount 到 /app（只读），改代码刷新页面即生效
+#   - 纯静态前端，无运行时数据，不挂载任何状态目录
+#   - 以宿主机 uid 1000 运行；HOME=/tmp 避免任何 ~/.cache 外溢
+#   - 宿主 4173 已被源码 dev server 占用，容器对外用 4273
+#   - /sync 反代到宿主 :8787（indexDB-snapshot-sync），helix 经 host-gateway 解析
+#   - 最小权限：cap_drop ALL（非特权端口，无需任何 cap）
+
+services:
+  spellwell:
+    image: node:24-alpine
+    container_name: spellwell
+    restart: on-failure:10
+    user: "1000:1000"
+    working_dir: /app
+    command: ["node", "tools/serve.mjs"]
+    ports:
+      - "4173:4173"
+    volumes:
+      - ./:/app:ro
+    environment:
+      - HOME=/tmp
+      - TZ=Asia/Shanghai
+      - SYNC_SERVER_URL=http://helix:8787
+    extra_hosts:
+      - "helix:host-gateway"
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4173/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
