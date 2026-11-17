@@ -39,3 +39,19 @@ test('快照合并：schema 不一致会拒绝', () => {
   }
   assertEqual(failed, true);
 });
+
+test('新设备同步：本地空状态不会清空远端已有 attempts/wordStates', () => {
+  const local = snapshot({
+    attempts: [],
+    wordStates: [],
+    meta: [{ key: 'contentRevision', value: 0 }],
+  });
+  const remote = snapshot({
+    attempts: [{ id: 'a1', wordId: 'w.a', timestamp: 1 }],
+    wordStates: [{ wordId: 'w.a', updatedAt: '2026-01-01T00:00:00Z', intervalIndex: 3 }],
+    meta: [{ key: 'contentRevision', value: 0 }],
+  });
+  const merged = mergeSnapshots(local, remote);
+  assertEqual(merged.stores.attempts.length, 1);
+  assertEqual(merged.stores.wordStates[0].intervalIndex, 3);
+});
