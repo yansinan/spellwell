@@ -55,3 +55,18 @@ test('新设备同步：本地空状态不会清空远端已有 attempts/wordSta
   assertEqual(merged.stores.attempts.length, 1);
   assertEqual(merged.stores.wordStates[0].intervalIndex, 3);
 });
+
+test('首次绑定：远端已有用户数据覆盖新设备本地数据', () => {
+  const local = snapshot({
+    attempts: [{ id: 'local', wordId: 'w.local', timestamp: 99 }],
+    wordStates: [{ wordId: 'w.a', updatedAt: '2099-01-01T00:00:00Z', intervalIndex: 4 }],
+  });
+  const remote = snapshot({
+    attempts: [{ id: 'remote', wordId: 'w.a', timestamp: 1 }],
+    wordStates: [{ wordId: 'w.a', updatedAt: '2026-01-01T00:00:00Z', intervalIndex: 2 }],
+  });
+  const merged = mergeSnapshots(local, remote, { preferRemote: true });
+  assertEqual(merged.stores.attempts.length, 1);
+  assertEqual(merged.stores.attempts[0].id, 'remote');
+  assertEqual(merged.stores.wordStates[0].intervalIndex, 2);
+});

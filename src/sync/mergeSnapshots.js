@@ -79,9 +79,10 @@ function mergeMeta(local, remote, contentSource) {
 /**
  * @param {Record<string, any>|null|undefined} local
  * @param {Record<string, any>|null|undefined} remote
+ * @param {{preferRemote?: boolean}} [options] 首次绑定以远端已有用户数据为准
  * @returns {Record<string, any>}
  */
-export function mergeSnapshots(local, remote) {
+export function mergeSnapshots(local, remote, { preferRemote = false } = {}) {
   if (!local || local.schemaVersion !== SCHEMA_VERSION) {
     throw new Error(`local snapshot schemaVersion must be ${SCHEMA_VERSION}`);
   }
@@ -89,6 +90,12 @@ export function mergeSnapshots(local, remote) {
     throw new Error(`remote snapshot schemaVersion must be ${SCHEMA_VERSION}`);
   }
   if (!remote) return local;
+  if (preferRemote) {
+    // 首次绑定：远端用户已有数据优先，避免新设备绑定前的本地练习污染原用户。
+    const stores = {};
+    for (const store of STORE_NAMES) stores[store] = records(remote, store);
+    return { schemaVersion: SCHEMA_VERSION, exportedAt: new Date().toISOString(), stores };
+  }
   const localRevision = Number(metaValue(local, 'contentRevision') ?? 0);
   const remoteRevision = Number(metaValue(remote, 'contentRevision') ?? 0);
   const contentSource = remoteRevision > localRevision ? remote : local;

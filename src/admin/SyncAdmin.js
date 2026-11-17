@@ -83,6 +83,7 @@ export async function mountSyncAdmin(container, { adapter = null } = {}) {
         localStorage.setItem(SYNC_STORAGE_KEYS.TOKEN, result.deviceToken);
         localStorage.setItem(SYNC_STORAGE_KEYS.PROJECT, result.projectId);
         localStorage.setItem(SYNC_STORAGE_KEYS.DEVICE, result.device?.name ?? deviceName);
+        localStorage.setItem(SYNC_STORAGE_KEYS.FIRST_BIND, '1');
         await mountSyncAdmin(container, { adapter });
       } catch (error) {
         message.textContent = `配对失败：${error.message ?? error}`;
@@ -106,6 +107,7 @@ export async function mountSyncAdmin(container, { adapter = null } = {}) {
     `;
     container.querySelector('[data-sync-reset]')?.addEventListener('click', () => {
       localStorage.removeItem(SYNC_STORAGE_KEYS.TOKEN);
+      localStorage.removeItem(SYNC_STORAGE_KEYS.FIRST_BIND);
       void mountSyncAdmin(container, { adapter });
     });
     return;
@@ -148,6 +150,7 @@ export async function mountSyncAdmin(container, { adapter = null } = {}) {
   });
   container.querySelector('[data-sync-reset]')?.addEventListener('click', () => {
     localStorage.removeItem(SYNC_STORAGE_KEYS.TOKEN);
+    localStorage.removeItem(SYNC_STORAGE_KEYS.FIRST_BIND);
     localStorage.removeItem(SYNC_STORAGE_KEYS.PROJECT);
     localStorage.removeItem(SYNC_STORAGE_KEYS.DEVICE);
     void mountSyncAdmin(container, { adapter });

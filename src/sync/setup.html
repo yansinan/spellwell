@@ -81,6 +81,7 @@
         if (existingToken) {
           localStorage.setItem(SYNC_STORAGE_KEYS.BASE_URL, baseUrl);
           localStorage.setItem(SYNC_STORAGE_KEYS.TOKEN, existingToken);
+          localStorage.removeItem(SYNC_STORAGE_KEYS.FIRST_BIND);
           status.textContent = '已导入本机 Device Token，正在返回练习。';
           setTimeout(() => { location.href = '/'; }, 400);
           return;
@@ -102,6 +103,8 @@
           localStorage.setItem(SYNC_STORAGE_KEYS.TOKEN, result.deviceToken);
           localStorage.setItem(SYNC_STORAGE_KEYS.PROJECT, result.projectId);
           localStorage.setItem(SYNC_STORAGE_KEYS.DEVICE, result.device?.name ?? '');
+          if (credential.pairingCode) localStorage.setItem(SYNC_STORAGE_KEYS.FIRST_BIND, '1');
+          else localStorage.removeItem(SYNC_STORAGE_KEYS.FIRST_BIND);
           status.textContent = `同步已启用：${result.user?.name ?? '用户'} / ${result.device?.name ?? '设备'}`;
           setTimeout(() => { location.href = '/'; }, 800);
         } catch (error) {

@@ -129,12 +129,28 @@ enroll / pairing → 返回一次 deviceToken
 
 同一项目的新用户可使用 Project ID，但会获得独立用户命名空间。
 
+## 首次绑定与后续同步
+
+`Pairing` 成功后设置一次性 first-bind 标记：
+
+- 第一次同步以远端已有用户数据为准；
+- 新设备本地的未绑定数据不参与合并；
+- 第一次 push 成功后清除标记；
+- 之后所有设备平等：attempts 并集、状态按 updatedAt、meta/speedHistory 合并。
+
+`pairing`、`projectId`、Bootstrap 的区别：
+
+- Pairing：加入已有用户，first-bind 远端优先；
+- projectId：创建新用户，不适用 first-bind；
+- Bootstrap：创建新项目。
+
 ## 同步内容
 
 `StorageAdapter.exportAll()` 的完整快照：
 
 - 内容库：按 contentRevision 取较新一侧；
-- attempts：按 id 取并集；
+- 首次绑定：远端优先；
+- attempts：绑定后按 id 取并集；
 - wordStates / graphemeStates：按 updatedAt 取较新；
 - meta：contentVersion/contentRevision/speedHistory 合并。
 

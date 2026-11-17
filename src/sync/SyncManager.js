@@ -16,6 +16,7 @@ export const SYNC_STORAGE_KEYS = Object.freeze({
   TOKEN: 'spellwell.sync.deviceToken',
   PROJECT: 'spellwell.sync.projectId',
   DEVICE: 'spellwell.sync.deviceName',
+  FIRST_BIND: 'spellwell.sync.firstBind',
 });
 
 const DEFAULT_BASE_URL = SYNC_BASE_URL;
@@ -70,6 +71,18 @@ export class SyncManager {
     return Boolean(this.storage?.getItem(SYNC_STORAGE_KEYS.TOKEN));
   }
 
+  get firstBind() {
+    return this.storage?.getItem(SYNC_STORAGE_KEYS.FIRST_BIND) === '1';
+  }
+
+  markFirstBind() {
+    this.storage?.setItem(SYNC_STORAGE_KEYS.FIRST_BIND, '1');
+  }
+
+  clearFirstBind() {
+    this.storage?.removeItem(SYNC_STORAGE_KEYS.FIRST_BIND);
+  }
+
   get deviceToken() {
     return this.storage?.getItem(SYNC_STORAGE_KEYS.TOKEN) ?? null;
   }
@@ -96,6 +109,8 @@ export class SyncManager {
     this.storage?.setItem(SYNC_STORAGE_KEYS.TOKEN, result.deviceToken);
     this.storage?.setItem(SYNC_STORAGE_KEYS.PROJECT, result.projectId);
     this.storage?.setItem(SYNC_STORAGE_KEYS.DEVICE, result.device?.name ?? '');
+    if (input.pairingCode) this.markFirstBind();
+    else this.clearFirstBind();
     this.#setStatus('idle');
     return result;
   }
@@ -119,12 +134,13 @@ export class SyncManager {
         try {
           const remote = await client.pull();
           const local = await this.adapter.exportAll();
-          const merged = mergeSnapshots(local, remote?.snapshot ?? null);
+          const merged = mergeSnapshots(local, remote?.snapshot ?? null, { preferRemote: this.firstBind });
           await this.adapter.importAll(merged);
           const pushed = await client.push({
             baseRevision: remote?.revision ?? 0,
             snapshot: merged,
           });
+          this.clearFirstBind();
           this.#setStatus('synced');
           return { state: 'synced', revision: pushed.revision };
         } catch (error) {
