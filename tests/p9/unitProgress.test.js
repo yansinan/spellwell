@@ -59,9 +59,25 @@ test('手动复习后续单元：每个年级/学期各给出下一个新单元'
     { id: 'g2-s1-u2', grade: 2, term: '上', unit: 2, count: 5, practiced: 5, completed: true, mastered: false },
     { id: 'g2-s1-u3', grade: 2, term: '上', unit: 3, count: 5, practiced: 5, completed: true, mastered: false },
     { id: 'g2-s1-u4', grade: 2, term: '上', unit: 4, count: 5, practiced: 0, completed: false, mastered: false },
+    { id: 'g1-s2-u1', grade: 1, term: '下', unit: 1, count: 5, practiced: 0, completed: false, mastered: false },
+    { id: 'g3-s1-u1', grade: 3, term: '上', unit: 1, count: 5, practiced: 0, completed: false, mastered: false },
   ];
   const progress = visibleUnitProgress(units);
   assertDeepEqual(progress.nextNews.map((unit) => unit.id), ['g1-s1-u3', 'g2-s1-u4']);
   const selection = selectAutoUnits(units, 20);
   assertDeepEqual(selection.nextNews.map((unit) => unit.id), ['g1-s1-u3', 'g2-s1-u4']);
+});
+
+
+test('未启动的年级/学期不显示新单元；全新用户只显示第一个序列', () => {
+  const untouched = [
+    { id: 'g1-s1-u1', grade: 1, term: '上', unit: 1, count: 5, practiced: 0, completed: false, mastered: false },
+    { id: 'g1-s1-u2', grade: 1, term: '上', unit: 2, count: 5, practiced: 0, completed: false, mastered: false },
+    { id: 'g1-s2-u1', grade: 1, term: '下', unit: 1, count: 5, practiced: 0, completed: false, mastered: false },
+    { id: 'g2-s1-u1', grade: 2, term: '上', unit: 1, count: 5, practiced: 0, completed: false, mastered: false },
+  ];
+  const progress = visibleUnitProgress(untouched);
+  assertDeepEqual(progress.nextNews.map((unit) => unit.id), ['g1-s1-u1']);
+  const selection = selectAutoUnits(untouched, 20);
+  assertDeepEqual(selection.nextNews.map((unit) => unit.id), ['g1-s1-u1']);
 });

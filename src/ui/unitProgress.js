@@ -45,13 +45,16 @@ export function groupSequences(units) {
 
 /**
  * 每个序列以最后一个“已练过”的单元为基准，计算下一个未开始单元。
+ * 未启动过的序列不提供新单元，避免把每个年级/学期都展开。
  * @param {Record<string, any>[]} seq
+ * @param {boolean} allowFirst 全新用户只允许第一个序列的首单元
  */
-function sequenceNextNew(seq) {
+function sequenceNextNew(seq, allowFirst = false) {
   let lastActive = -1;
   seq.forEach((unit, index) => {
     if ((unit.practiced ?? 0) > 0) lastActive = index;
   });
+  if (lastActive < 0 && !allowFirst) return null;
   const after = lastActive >= 0 ? seq.slice(lastActive + 1) : seq;
   return after.find((unit) => (unit.practiced ?? 0) === 0 && !unit.completed) ?? null;
 }
@@ -65,15 +68,21 @@ export function visibleUnitProgress(units) {
   const currents = [];
   const nextNews = [];
   const sequences = groupSequences(units);
+  const hasHistory = units.some((unit) => (unit.practiced ?? 0) > 0);
+  let firstSequence = true;
   for (const seq of sequences.values()) {
     let lastActive = -1;
     seq.forEach((unit, index) => {
       if ((unit.practiced ?? 0) > 0) lastActive = index;
     });
+    // 没启动过的序列默认不展开；全新用户只展示第一个序列。
+    const shouldShow = lastActive >= 0 || (!hasHistory && firstSequence);
+    firstSequence = false;
+    if (!shouldShow) continue;
     const after = lastActive >= 0 ? seq.slice(lastActive + 1) : seq;
     const current = after.find((unit) => !unit.completed) ?? null;
     if (current) currents.push(current);
-    const next = sequenceNextNew(seq);
+    const next = sequenceNextNew(seq, !hasHistory);
     if (next) nextNews.push(next);
     const cutoff = current ? seq.indexOf(current) : seq.length;
     for (const unit of seq.slice(0, cutoff)) {
@@ -106,9 +115,14 @@ export function selectAutoUnits(units, target = 20) {
   const history = ordered.some((unit) => (unit.practiced ?? 0) > 0);
   const sequences = groupSequences(units);
   const nextNews = [];
+  let firstSequence = true;
   for (const seq of sequences.values()) {
-    const next = sequenceNextNew(seq);
-    if (next) nextNews.push(next);
+    const hasActive = seq.some((unit) => (unit.practiced ?? 0) > 0);
+    if (hasActive || (!history && firstSequence)) {
+      const next = sequenceNextNew(seq, !history);
+      if (next) nextNews.push(next);
+    }
+    firstSequence = false;
   }
   const selected = [...review];
   const reviewWords = review.reduce((sum, unit) => sum + unit.count, 0);
