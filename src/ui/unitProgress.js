@@ -22,23 +22,74 @@ export function orderUnits(units) {
 }
 
 /**
+ * 按年级/学期分组；每个序列独立计算“已完成 + 下一个新单元”。
+ * @param {Record<string, any>} unit
+ */
+export function sequenceKey(unit) {
+  return `${Number(unit.grade ?? 0)}|${String(unit.term ?? '上')}`;
+}
+
+/**
+ * @param {Record<string, any>[]} units
+ * @returns {Map<string, Record<string, any>[]>}
+ */
+export function groupSequences(units) {
+  const groups = new Map();
+  for (const unit of orderUnits(units)) {
+    const key = sequenceKey(unit);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(unit);
+  }
+  return groups;
+}
+
+/**
+ * 每个序列以最后一个“已练过”的单元为基准，计算下一个未开始单元。
+ * @param {Record<string, any>[]} seq
+ */
+function sequenceNextNew(seq) {
+  let lastActive = -1;
+  seq.forEach((unit, index) => {
+    if ((unit.practiced ?? 0) > 0) lastActive = index;
+  });
+  const after = lastActive >= 0 ? seq.slice(lastActive + 1) : seq;
+  return after.find((unit) => (unit.practiced ?? 0) === 0 && !unit.completed) ?? null;
+}
+
+/**
  * @param {Array<{id: string, count: number, practiced?: number, completed?: boolean}>} units
- * @returns {{visible: any[], completed: any[], current: any|null}}
+ * @returns {{visible: any[], completed: any[], current: any|null, currents: any[], nextNews: any[], sequences: Map<string, any[]>}}
  */
 export function visibleUnitProgress(units) {
-  const ordered = orderUnits(units);
   const completed = [];
-  let current = null;
-  for (const unit of ordered) {
-    if (unit.completed) {
-      completed.push(unit);
-      continue;
+  const currents = [];
+  const nextNews = [];
+  const sequences = groupSequences(units);
+  for (const seq of sequences.values()) {
+    let lastActive = -1;
+    seq.forEach((unit, index) => {
+      if ((unit.practiced ?? 0) > 0) lastActive = index;
+    });
+    const after = lastActive >= 0 ? seq.slice(lastActive + 1) : seq;
+    const current = after.find((unit) => !unit.completed) ?? null;
+    if (current) currents.push(current);
+    const next = sequenceNextNew(seq);
+    if (next) nextNews.push(next);
+    const cutoff = current ? seq.indexOf(current) : seq.length;
+    for (const unit of seq.slice(0, cutoff)) {
+      if (unit.completed) completed.push(unit);
     }
-    current = unit;
-    break;
   }
-  const visible = current ? [...completed, current] : [...completed];
-  return { visible, completed, current };
+  completed.sort((a, b) => orderUnits([a, b])[0].id === a.id ? -1 : 1);
+  const current = currents[0] ?? null;
+  return {
+    visible: [...completed, ...currents],
+    completed,
+    current,
+    currents,
+    nextNews,
+    sequences,
+  };
 }
 
 /**
@@ -53,19 +104,25 @@ export function selectAutoUnits(units, target = 20) {
   const ordered = orderUnits(units);
   const review = ordered.filter((unit) => (unit.practiced ?? 0) > 0 && !unit.mastered);
   const history = ordered.some((unit) => (unit.practiced ?? 0) > 0);
-  const nextNew = ordered.find((unit) => (unit.practiced ?? 0) === 0) ?? null;
+  const sequences = groupSequences(units);
+  const nextNews = [];
+  for (const seq of sequences.values()) {
+    const next = sequenceNextNew(seq);
+    if (next) nextNews.push(next);
+  }
   const selected = [...review];
   const reviewWords = review.reduce((sum, unit) => sum + unit.count, 0);
   const allReviewComplete = review.length > 0 && review.every((unit) => unit.completed);
   if (review.length === 0) {
-    if (nextNew) selected.push(nextNew);
-  } else if (allReviewComplete && reviewWords < target && nextNew) {
-    selected.push(nextNew);
+    selected.push(...nextNews);
+  } else if (allReviewComplete && reviewWords < target) {
+    selected.push(...nextNews);
   }
   return {
     selected,
     review,
-    nextNew,
+    nextNew: nextNews[0] ?? null,
+    nextNews,
     reviewWords,
     allReviewComplete,
     autoStart: selected.length > 0 && (review.length > 0 || history || selected.length === 1),

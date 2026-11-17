@@ -49,3 +49,19 @@ test('自动练习：复习单元完成后有余地才加新单元', () => {
   const result = selectAutoUnits(units, 20);
   assertDeepEqual(result.selected.map((unit) => unit.id), ['review', 'new']);
 });
+
+test('手动复习后续单元：每个年级/学期各给出下一个新单元', () => {
+  const units = [
+    { id: 'g1-s1-u1', grade: 1, term: '上', unit: 1, count: 5, practiced: 5, completed: true, mastered: false },
+    { id: 'g1-s1-u2', grade: 1, term: '上', unit: 2, count: 5, practiced: 5, completed: true, mastered: false },
+    { id: 'g1-s1-u3', grade: 1, term: '上', unit: 3, count: 5, practiced: 0, completed: false, mastered: false },
+    { id: 'g2-s1-u1', grade: 2, term: '上', unit: 1, count: 5, practiced: 5, completed: true, mastered: false },
+    { id: 'g2-s1-u2', grade: 2, term: '上', unit: 2, count: 5, practiced: 5, completed: true, mastered: false },
+    { id: 'g2-s1-u3', grade: 2, term: '上', unit: 3, count: 5, practiced: 5, completed: true, mastered: false },
+    { id: 'g2-s1-u4', grade: 2, term: '上', unit: 4, count: 5, practiced: 0, completed: false, mastered: false },
+  ];
+  const progress = visibleUnitProgress(units);
+  assertDeepEqual(progress.nextNews.map((unit) => unit.id), ['g1-s1-u3', 'g2-s1-u4']);
+  const selection = selectAutoUnits(units, 20);
+  assertDeepEqual(selection.nextNews.map((unit) => unit.id), ['g1-s1-u3', 'g2-s1-u4']);
+});

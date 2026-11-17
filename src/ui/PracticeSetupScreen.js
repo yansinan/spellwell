@@ -37,29 +37,25 @@ export class PracticeSetupScreen {
     );
     this.visibleUnits = [
       ...workspace.units.filter((unit) => this.reviewUnitIds.has(unit.id)),
-      ...(progress.current && !this.reviewUnitIds.has(progress.current.id) ? [progress.current] : []),
+      ...progress.nextNews.filter((unit) => !this.reviewUnitIds.has(unit.id)),
     ];
     this.completedUnits = progress.completed;
-    this.currentUnit = progress.current;
+    this.currentUnit = progress.nextNews[0] ?? null;
     this.selectedUnits = new Set(
       auto.selected.length > 0
         ? auto.selected.map((unit) => unit.id)
-        : progress.current ? [progress.current.id] : [],
+        : progress.nextNews.map((unit) => unit.id),
     );
     for (const unitId of this.reviewUnitIds) this.selectedUnits.add(unitId);
     this.mode = workspace.settings.defaultMode;
     this.loading = false;
-    const selectedForTerm = this.selectedUnits.values().next().value;
-    const currentTerm = workspace.terms.find((term) => term.units.some((unit) =>
-      unit.id === (selectedForTerm ?? progress.current?.id),
-    ));
+    const currentTermIds = workspace.terms
+      .filter((term) => term.units.some((unit) => progress.nextNews.some((next) => next.id === unit.id)))
+      .map((term) => term.id);
     const reviewTermIds = workspace.terms
       .filter((term) => term.units.some((unit) => this.reviewUnitIds.has(unit.id)))
       .map((term) => term.id);
-    this.expandedTerms = new Set([
-      ...reviewTermIds,
-      ...(currentTerm ? [currentTerm.id] : []),
-    ]);
+    this.expandedTerms = new Set([...reviewTermIds, ...currentTermIds]);
   }
 
   mount() {
@@ -91,7 +87,7 @@ export class PracticeSetupScreen {
         <main class="sw-practice__stage sw-setup__stage">
           <h1 class="sw-done__title">Ready to spell?</h1>
           ${units.some((unit) => this.reviewUnitIds.has(unit.id)) ? `
-            <p class="sw-setup__auto-note">Review units are added automatically. Only the next new unit is optional.</p>
+            <p class="sw-setup__auto-note">Review units are added automatically. The next new unit in each grade/term is optional.</p>
           ` : ''}
 
           <section class="sw-setup__section">
