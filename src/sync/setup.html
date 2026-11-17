@@ -28,6 +28,9 @@
           <label>Pairing Code（同一用户的新设备）
             <input name="pairingCode" placeholder="ABCD-EFGH" autocomplete="off" />
           </label>
+          <label>已有 Device Token（恢复本机）
+            <input name="deviceToken" placeholder="dev_..." autocomplete="off" />
+          </label>
           <label>用户名
             <input name="userName" value="SpellWell" autocomplete="off" />
           </label>
@@ -73,8 +76,16 @@
 
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        status.textContent = '正在连接同步服务…';
         const baseUrl = form.elements.baseUrl.value.trim() || '/sync';
+        const existingToken = form.elements.deviceToken.value.trim();
+        if (existingToken) {
+          localStorage.setItem(SYNC_STORAGE_KEYS.BASE_URL, baseUrl);
+          localStorage.setItem(SYNC_STORAGE_KEYS.TOKEN, existingToken);
+          status.textContent = '已导入本机 Device Token，正在返回练习。';
+          setTimeout(() => { location.href = '/'; }, 400);
+          return;
+        }
+        status.textContent = '正在连接同步服务…';
         try {
           const client = createSyncClient({ baseUrl });
           const credential = {

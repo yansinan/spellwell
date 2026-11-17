@@ -69,13 +69,21 @@ http://<spellwell-host>:4173/sync-setup
 
 成功后 device token 只保存到浏览器 `localStorage`，不会写入同步快照。
 
-本次提供的 code 使用行：
+本次已经完成首个项目的 enrollment；一次性 code 已轮换。项目凭据保存在工作区外的本机文件：
+
+```text
+../sync-enrollment.local.json
+```
+
+权限为 600，不进入 Git，也不会被静态服务器提供。
+
+原始 code（已失效，仅记录使用过）：
 
 ```text
 BOOT-REV41qXQbBbxjxwnhBPAABdDrISGQ4Mm
 ```
 
-> Bootstrap Code 是一次性的；使用成功后会轮换。不要把 token 或 code 提交到仓库。
+> Bootstrap Code 是一次性的；使用成功后会轮换。不要把 token 或 code 提交到仓库。后续设备使用 `/sync-setup` 的 Pairing Code，或粘贴已有 Device Token。
 
 ## 第二台设备
 

@@ -5,6 +5,7 @@
 - 接入 `indexDB-snapshot-sync`，浏览器继续使用 IndexedDB 和本地调度。
 - 增加同源 `/sync` 代理、快照合并、enrollment/pairing、离线容错。
 - 增加 `/sync-setup`。
+- 已完成 Bootstrap Code 消费与真实 pull/push 验证；Bootstrap Code 已轮换。
 
 ## [0.12.2] — 2026-11-13 · 当次错题强化
 

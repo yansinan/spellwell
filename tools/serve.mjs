@@ -43,11 +43,6 @@ function sendText(response, status, message) {
 }
 
 const server = createServer(async (request, response) => {
-  if (request.method !== 'GET' && request.method !== 'HEAD') {
-    sendText(response, 405, 'Method Not Allowed');
-    return;
-  }
-
   let pathname;
   try {
     pathname = decodeURIComponent(new URL(request.url ?? '/', 'http://localhost').pathname);
@@ -86,6 +81,10 @@ const server = createServer(async (request, response) => {
       response.end(JSON.stringify({ error: 'sync_unavailable', message: String(error.message ?? error) }));
     });
     request.pipe(upstream);
+    return;
+  }
+  if (request.method !== 'GET' && request.method !== 'HEAD') {
+    sendText(response, 405, 'Method Not Allowed');
     return;
   }
   if (pathname.endsWith('/')) pathname += 'index.html';
