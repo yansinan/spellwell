@@ -25,6 +25,7 @@ import { buildExport, validateContent } from './ContentValidator.js';
 import { autoSegment, parseBatch } from './WordImporter.js';
 import { ADMIN_LEARNING_STATUSES, LearningStateService, deriveUnitStatus } from './LearningStateService.js';
 import { mountSyncAdmin } from './SyncAdmin.js';
+import { buildHistoryAnalytics, renderHistoryAnalytics } from './HistoryAnalytics.js';
 
 async function load(name) {
   const response = await fetch(new URL(`../content/${name}.json`, import.meta.url));
@@ -123,10 +124,15 @@ export async function mountAdmin(root) {
   let saved = cloneContent(content);
   let selectedWordId = activeWords()[0]?.id ?? null;
   let attemptStats = {};
-  try {
-    if (adapter) attemptStats = countAttemptsByWord(await adapter.query('attempts', {}));
-  } catch {
-    attemptStats = {};
+  let attempts = [];
+  if (adapter) {
+    try {
+      attempts = await adapter.query('attempts', {});
+      attemptStats = countAttemptsByWord(attempts);
+    } catch {
+      attemptStats = {};
+      attempts = [];
+    }
   }
   const learningService = adapter ? new LearningStateService(adapter) : null;
   let learningStates = new Map();
@@ -309,6 +315,8 @@ export async function mountAdmin(root) {
       </section>
 
       <div id="sync-admin-root"></div>
+
+      ${renderHistoryAnalytics(buildHistoryAnalytics({ attempts, states: [...learningStates.values()], words: content.words.items }))}
 
       <section class="sw-panel sw-admin__batch ${batchOpen ? 'is-open' : ''}">
         <div class="sw-admin__batch-head">
