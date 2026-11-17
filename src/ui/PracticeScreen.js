@@ -236,7 +236,7 @@ export class PracticeScreen {
     this.#bindQuestion();
     this.#bindSoundToggle();
     this.#bindProgressButton();
-    this.#autoSpeakWord();
+    void this.#autoSpeakWord();
   }
 
   #typeCopy() {
@@ -1156,8 +1156,12 @@ export class PracticeScreen {
     this.#bindProgressButton();
   }
 
-  #autoSpeakWord() {
+  async #autoSpeakWord() {
     if (!this.#speech.supported) return false;
+    const specId = this.#current?.spec?.specId;
+    // 首轮 voice 列表可能还没就绪；等待 voiceschanged，避免先用默认音色。
+    await this.#speech.ready();
+    if (!this.#current || this.#current.spec.specId !== specId || this.#locked) return false;
     return this.#speakWord();
   }
 

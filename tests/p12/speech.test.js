@@ -57,3 +57,12 @@ test('朗读：不支持时返回 false，不抛错', () => {
   assertEqual(service.speakWord('apple'), false);
   assertEqual(service.speakSentence('I eat an apple.'), false);
 });
+
+test('朗读：voice 就绪 Promise 在初始 voice 存在时立即完成', async () => {
+  const synth = fakeSynth([
+    { name: 'English Local', lang: 'en-US', localService: true, voiceURI: 'local' },
+  ]);
+  const service = createSpeechService({ synth, Utterance: FakeUtterance, storage: null });
+  await service.ready();
+  assertEqual(service.voice.name, 'English Local');
+});

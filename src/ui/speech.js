@@ -48,12 +48,21 @@ export function createSpeechService({
   let voices = [];
   let voice = null;
   let activeUtterance = null;
+  let voicesReadySettled = false;
+  let resolveVoicesReady;
+  const voicesReady = new Promise((resolve) => { resolveVoicesReady = resolve; });
+  const markVoicesReady = () => {
+    if (voicesReadySettled) return;
+    voicesReadySettled = true;
+    resolveVoicesReady?.();
+  };
 
   const refresh = () => {
     if (!supported) return;
     try {
       voices = (synth.getVoices?.() ?? []).filter((item) => /^en(?:[-_]|$)/i.test(String(item.lang ?? '')));
       voice = preferredVoice(storage, voices);
+      if (voices.length > 0) markVoicesReady();
     } catch {
       voices = [];
       voice = null;
@@ -62,9 +71,15 @@ export function createSpeechService({
 
   if (supported) {
     refresh();
+    if (voices.length > 0) markVoicesReady();
     synth.addEventListener?.('voiceschanged', refresh);
-    // Safari 首次可能只返回空列表；下一次点击会再 refresh。
-    setTimeout(refresh, 600);
+    // Safari 首次可能只返回空列表；超时后允许用默认语音兜底。
+    setTimeout(() => {
+      refresh();
+      markVoicesReady();
+    }, 800);
+  } else {
+    markVoicesReady();
   }
 
   const makeUtterance = (text, rate, selectedVoice) => {
@@ -107,6 +122,7 @@ export function createSpeechService({
 
   return {
     supported,
+    ready() { return voicesReady; },
     get voice() { return voice; },
     get voices() { return [...voices]; },
     speakWord(text) { refresh(); return speak(text, WORD_RATE); },
