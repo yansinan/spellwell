@@ -70,20 +70,25 @@ export function visibleUnitProgress(units) {
   const sequences = groupSequences(units);
   const hasHistory = units.some((unit) => (unit.practiced ?? 0) > 0);
   let firstSequence = true;
+  let bridgeNext = false;
   for (const seq of sequences.values()) {
     let lastActive = -1;
     seq.forEach((unit, index) => {
       if ((unit.practiced ?? 0) > 0) lastActive = index;
     });
     // 没启动过的序列默认不展开；全新用户只展示第一个序列。
-    const shouldShow = lastActive >= 0 || (!hasHistory && firstSequence);
+    // 前一序列已经练到末尾时，允许激活紧邻的下一序列。
+    const activated = bridgeNext;
+    const shouldShow = lastActive >= 0 || (!hasHistory && firstSequence) || activated;
     firstSequence = false;
+    bridgeNext = false;
     if (!shouldShow) continue;
     const after = lastActive >= 0 ? seq.slice(lastActive + 1) : seq;
     const current = after.find((unit) => !unit.completed) ?? null;
     if (current) currents.push(current);
-    const next = sequenceNextNew(seq, !hasHistory);
+    const next = sequenceNextNew(seq, !hasHistory || activated);
     if (next) nextNews.push(next);
+    if (lastActive >= 0 && !next) bridgeNext = true;
     const cutoff = current ? seq.indexOf(current) : seq.length;
     for (const unit of seq.slice(0, cutoff)) {
       if (unit.completed) completed.push(unit);
@@ -116,13 +121,17 @@ export function selectAutoUnits(units, target = 20) {
   const sequences = groupSequences(units);
   const nextNews = [];
   let firstSequence = true;
+  let bridgeNext = false;
   for (const seq of sequences.values()) {
     const hasActive = seq.some((unit) => (unit.practiced ?? 0) > 0);
-    if (hasActive || (!history && firstSequence)) {
-      const next = sequenceNextNew(seq, !history);
-      if (next) nextNews.push(next);
-    }
+    const activated = bridgeNext;
+    const shouldShow = hasActive || (!history && firstSequence) || activated;
     firstSequence = false;
+    bridgeNext = false;
+    if (!shouldShow) continue;
+    const next = sequenceNextNew(seq, !history || activated);
+    if (next) nextNews.push(next);
+    if (hasActive && !next) bridgeNext = true;
   }
   const selected = [...review];
   const reviewWords = review.reduce((sum, unit) => sum + unit.count, 0);

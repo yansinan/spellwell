@@ -81,3 +81,16 @@ test('未启动的年级/学期不显示新单元；全新用户只显示第一�
   const selection = selectAutoUnits(untouched, 20);
   assertDeepEqual(selection.nextNews.map((unit) => unit.id), ['g1-s1-u1']);
 });
+
+test('跨学期：当前学期最后一个单元复习后，激活下一学期第一单元', () => {
+  const units = [
+    { id: 'g2-s1-u6', grade: 2, term: '上', unit: 6, count: 5, practiced: 5, completed: true, mastered: false },
+    { id: 'g2-s2-u1', grade: 2, term: '下', unit: 1, count: 5, practiced: 0, completed: false, mastered: false },
+    { id: 'g2-s2-u2', grade: 2, term: '下', unit: 2, count: 5, practiced: 0, completed: false, mastered: false },
+    { id: 'g3-s1-u1', grade: 3, term: '上', unit: 1, count: 5, practiced: 0, completed: false, mastered: false },
+  ];
+  const progress = visibleUnitProgress(units);
+  assertDeepEqual(progress.nextNews.map((unit) => unit.id), ['g2-s2-u1']);
+  const selection = selectAutoUnits(units, 20);
+  assertDeepEqual(selection.nextNews.map((unit) => unit.id), ['g2-s2-u1']);
+});

@@ -139,6 +139,7 @@
 | R-SYNC-02 | 固定 projectId、后台 pairing/状态 | `config.js` + `SyncAdmin.js` | `tests/p12/config.test.js` + 后台浏览器 | P12 | ✅ |
 | R-SYNC-03 | 首次绑定远端优先，之后设备平等 | `mergeSnapshots` + `SyncManager.firstBind` | `tests/p12/sync.test.js` / `syncManager.test.js` | P12 | ✅ |
 | R-P9-28 | 每个年级/学期独立推导下一个新单元 | `unitProgress` + `PracticeSetupScreen` | `tests/p9/unitProgress.test.js` | P9 | ✅ |
+| R-P9-29 | 学期末自动激活下一学期 | `unitProgress` | `tests/p9/unitProgress.test.js` | P9 | ✅ |
 | R-P7-12 | 例句库与混淆项预制 | `sentences.json` + `confusables.json` | content tests | P7 | ✅ |
 | R-P7-09 | 批量单元标题行切换后续词单元 | `WordImporter.parseBatch` + AdminApp | `tests/p7/import.test.js` + `tests/p7/editor.test.js` | P7 | ✅ |
 | R-P7-10 | 词库单独导入/导出与重复词合并/替换/不动 | `WordLibrary` + AdminApp | `tests/p7/wordLibrary.test.js` + 浏览器 | P7 | ✅ |
