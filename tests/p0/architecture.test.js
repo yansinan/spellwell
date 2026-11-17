@@ -88,7 +88,7 @@ const ALLOWED_LAYERS = {
   scheduler: ['core', 'repositories', 'scheduler', 'questionTypes'],
   questionTypes: ['core', 'questionTypes'],
   input: ['core', 'input'],
-  admin: ['core', 'storage', 'repositories', 'admin'],
+  admin: ['core', 'storage', 'repositories', 'admin', 'sync'],
   sync: ['core', 'storage', 'sync'],
 };
 

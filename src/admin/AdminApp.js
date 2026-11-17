@@ -24,6 +24,7 @@ import { DEFAULT_TEXTBOOK, TEXTBOOKS, readActiveTextbook, saveActiveTextbook, te
 import { buildExport, validateContent } from './ContentValidator.js';
 import { autoSegment, parseBatch } from './WordImporter.js';
 import { ADMIN_LEARNING_STATUSES, LearningStateService, deriveUnitStatus } from './LearningStateService.js';
+import { mountSyncAdmin } from './SyncAdmin.js';
 
 async function load(name) {
   const response = await fetch(new URL(`../content/${name}.json`, import.meta.url));
@@ -306,6 +307,8 @@ export async function mountAdmin(root) {
           <span class="sw-admin__badge ${report.valid ? 'is-ok' : 'is-bad'}">${report.valid ? 'V1—V9 通过' : `${report.errors.length} 个问题`}</span>
         </div>
       </section>
+
+      <div id="sync-admin-root"></div>
 
       <section class="sw-panel sw-admin__batch ${batchOpen ? 'is-open' : ''}">
         <div class="sw-admin__batch-head">
@@ -720,6 +723,8 @@ export async function mountAdmin(root) {
         render();
       });
     }
+
+    void mountSyncAdmin(root.querySelector('#sync-admin-root'), { adapter });
   };
 
   window.addEventListener('beforeunload', (event) => {

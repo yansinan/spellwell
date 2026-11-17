@@ -53,6 +53,16 @@ http://helix:8787
 SYNC_SERVER_URL=http://127.0.0.1:8787 node tools/serve.mjs
 ```
 
+## 固定项目
+
+SpellWell 内置固定项目：
+
+```text
+proj_ZRzMM2YkwEg8Q3AEDPjs_g
+```
+
+定义在 `src/sync/config.js`。Pairing 成功后如果返回其他项目，客户端会拒绝写入 token。
+
 ## 首次 enrollment
 
 打开：
@@ -84,6 +94,33 @@ BOOT-REV41qXQbBbxjxwnhBPAABdDrISGQ4Mm
 ```
 
 > Bootstrap Code 是一次性的；使用成功后会轮换。不要把 token 或 code 提交到仓库。后续设备使用 `/sync-setup` 的 Pairing Code，或粘贴已有 Device Token。
+
+## 后台同步面板
+
+`/admin` 顶部有同步面板：
+
+- 未注册：输入 Pairing Code，完成本机配对；
+- 已注册：显示项目、用户、设备、同步状态；
+- 已注册：可生成 10 分钟 Pairing Code。
+
+## deviceToken 的现状
+
+当前 `indexDB-snapshot-sync` 的协议：
+
+```text
+enroll / pairing → 返回一次 deviceToken
+服务端只保存 token hash
+没有 token 恢复接口
+```
+
+所以浏览器必须自行保存 token（当前存在 localStorage），无法做到“刷新后向服务器重新取回同一 token”。
+`projectId` 只能创建新用户，不能恢复已有设备的 token。
+
+要实现真正的“无需保存 token”，需要服务端增加：
+
+1. enrollment/pairing 同时设置 HttpOnly cookie，后续用 cookie 认证；或
+2. 可恢复的设备密钥协议；或
+3. 长期项目级共享 token（不推荐，会失去按设备隔离）。
 
 ## 第二台设备
 

@@ -9,6 +9,7 @@
 
 import { createSyncClient, SyncHttpError } from './client.js';
 import { mergeSnapshots } from './mergeSnapshots.js';
+import { SYNC_BASE_URL } from './config.js';
 
 export const SYNC_STORAGE_KEYS = Object.freeze({
   BASE_URL: 'spellwell.sync.baseUrl',
@@ -17,7 +18,7 @@ export const SYNC_STORAGE_KEYS = Object.freeze({
   DEVICE: 'spellwell.sync.deviceName',
 });
 
-const DEFAULT_BASE_URL = '/sync';
+const DEFAULT_BASE_URL = SYNC_BASE_URL;
 const MAX_CONFLICT_RETRIES = 3;
 
 function safeStorage(storage) {

@@ -22,9 +22,7 @@
           <label>Bootstrap Code（首次）
             <input name="bootstrapCode" placeholder="BOOT-..." autocomplete="off" />
           </label>
-          <label>Project ID（同一项目的新用户）
-            <input name="projectId" placeholder="proj_..." autocomplete="off" />
-          </label>
+          <p class="sw-admin__muted">固定项目：<code id="fixed-project-id"></code></p>
           <label>Pairing Code（同一用户的新设备）
             <input name="pairingCode" placeholder="ABCD-EFGH" autocomplete="off" />
           </label>
@@ -48,8 +46,10 @@
     <script type="module">
       import { createSyncClient } from './client.js';
       import { SYNC_STORAGE_KEYS } from './SyncManager.js';
+      import { SYNC_PROJECT_ID } from './config.js';
 
       const form = document.querySelector('#sync-form');
+      document.querySelector('#fixed-project-id').textContent = SYNC_PROJECT_ID;
       const status = document.querySelector('#sync-status');
       const query = new URLSearchParams(location.search);
       const bootstrap = query.get('bootstrap');
@@ -90,12 +90,14 @@
           const client = createSyncClient({ baseUrl });
           const credential = {
             ...(form.elements.bootstrapCode.value.trim() ? { bootstrapCode: form.elements.bootstrapCode.value.trim() } : {}),
-            ...(form.elements.projectId.value.trim() ? { projectId: form.elements.projectId.value.trim() } : {}),
             ...(form.elements.pairingCode.value.trim() ? { pairingCode: form.elements.pairingCode.value.trim() } : {}),
             userName: form.elements.userName.value.trim() || 'SpellWell',
             deviceName: form.elements.deviceName.value.trim() || '浏览器',
           };
           const result = await client.enroll(credential);
+          if (result.projectId !== SYNC_PROJECT_ID) {
+            throw new Error(`配对返回了其他项目：${result.projectId}`);
+          }
           localStorage.setItem(SYNC_STORAGE_KEYS.BASE_URL, baseUrl);
           localStorage.setItem(SYNC_STORAGE_KEYS.TOKEN, result.deviceToken);
           localStorage.setItem(SYNC_STORAGE_KEYS.PROJECT, result.projectId);
