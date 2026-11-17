@@ -7,7 +7,8 @@
  * 用法：node tools/serve.mjs  （PORT=4173 可覆盖）
  */
 
-import { createServer } from 'node:http';
+import { createServer, request as httpRequest } from 'node:http';
+import { request as httpsRequest } from 'node:https';
 import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -15,6 +16,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const port = Number(process.env.PORT ?? 4173);
 const host = process.env.HOST ?? '0.0.0.0';
+const syncServer = process.env.SYNC_SERVER_URL ?? 'http://helix:8787';
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -56,6 +58,36 @@ const server = createServer(async (request, response) => {
 
   if (pathname === '/admin') pathname = '/src/admin/index.html';
   else if (pathname.startsWith('/admin/')) pathname = `/src/admin/${pathname.slice('/admin/'.length)}`;
+  if (pathname === '/sync-setup' || pathname === '/sync-setup/') pathname = '/src/sync/setup.html';
+  if (pathname === '/sync' || pathname.startsWith('/sync/')) {
+    const search = new URL(request.url ?? '/', 'http://localhost').search;
+    const target = new URL(syncServer);
+    const targetPath = `${pathname.slice('/sync'.length) || '/'}${search}`;
+    const transport = target.protocol === 'https:' ? httpsRequest : httpRequest;
+    const upstream = transport({
+      protocol: target.protocol,
+      hostname: target.hostname,
+      port: target.port || (target.protocol === 'https:' ? 443 : 80),
+      method: request.method,
+      path: targetPath,
+      headers: { ...request.headers, host: target.host },
+      timeout: 10000,
+    }, (upstreamResponse) => {
+      response.writeHead(upstreamResponse.statusCode ?? 502, upstreamResponse.headers);
+      upstreamResponse.pipe(response);
+    });
+    upstream.on('timeout', () => upstream.destroy(new Error('sync server timeout')));
+    upstream.on('error', (error) => {
+      if (response.headersSent) {
+        response.destroy();
+        return;
+      }
+      response.writeHead(502, { 'content-type': 'application/json; charset=utf-8' });
+      response.end(JSON.stringify({ error: 'sync_unavailable', message: String(error.message ?? error) }));
+    });
+    request.pipe(upstream);
+    return;
+  }
   if (pathname.endsWith('/')) pathname += 'index.html';
   const filePath = path.resolve(root, `.${pathname}`);
 
@@ -86,6 +118,7 @@ const server = createServer(async (request, response) => {
 server.listen(port, host, () => {
   console.log(`SpellWell dev server → http://${host}:${port}`);
   console.log(`Admin → http://${host}:${port}/admin`);
+  console.log(`Sync proxy → ${syncServer}`);
   console.log('Press Ctrl+C to stop.');
 });
 

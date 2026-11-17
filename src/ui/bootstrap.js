@@ -24,6 +24,7 @@ import { hashSeed } from '../core/seedRandom.js';
 import { toDayKey } from '../core/time.js';
 import { unitProgress as computeUnitProgress } from './masteryProgress.js';
 import { addSpeedRecord, normalizeSpeedHistory } from './speedStats.js';
+import { SyncManager } from '../sync/SyncManager.js';
 
 export const P1_WORD_IDS = Object.freeze(['w.fish', 'w.ship', 'w.night']);
 
@@ -181,6 +182,22 @@ export async function createPracticeWorkspace() {
   const refresh = async () => {
     snapshot = await readContent(adapter);
   };
+  const sync = new SyncManager({
+    adapter,
+    timeoutMs: 2500,
+    onChange: (status) => {
+      if (status.state === 'synced') void refresh();
+    },
+  });
+  if (sync.configured) {
+    try {
+      await sync.syncOnce();
+      await refresh();
+    } catch (error) {
+      console.warn('[SpellWell] initial sync failed; continuing offline', error);
+    }
+    sync.start();
+  }
 
   const startPractice = async ({ units = null, mode = null } = {}) => {
     // 下一轮练习开始前重新读内容；当前会话不会因为后台编辑而重建。
@@ -253,6 +270,7 @@ export async function createPracticeWorkspace() {
     },
     get settings() { return snapshot.settings; },
     get speedHistory() { return snapshot.speedHistory; },
+    sync,
     async recordSpeed(record) {
       const history = addSpeedRecord(snapshot.speedHistory, record);
       await adapter.put('meta', { key: 'speedHistory', value: { version: 1, items: history } });

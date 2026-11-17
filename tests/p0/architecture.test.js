@@ -89,6 +89,7 @@ const ALLOWED_LAYERS = {
   questionTypes: ['core', 'questionTypes'],
   input: ['core', 'input'],
   admin: ['core', 'storage', 'repositories', 'admin'],
+  sync: ['core', 'storage', 'sync'],
 };
 
 test('架构：每个 src 文件都有 @layer/@phase/@doc 头，且 layer 与目录一致', () => {
@@ -100,7 +101,7 @@ test('架构：每个 src 文件都有 @layer/@phase/@doc 头，且 layer 与目
       continue;
     }
     const layerMatch = header[1].match(/@layer\s+([A-Za-z]+)/);
-    const phaseMatch = header[1].match(/@phase\s+(P(?:10|[0-9]))/);
+    const phaseMatch = header[1].match(/@phase\s+(P(?:1[0-2]|[0-9]))/);
     const docMatch = header[1].match(/@doc\s+§(\d+(?:\.\d+)?)/);
     if (!layerMatch) violations.push(`${relative}: missing @layer`);
     if (!phaseMatch) violations.push(`${relative}: missing @phase`);
@@ -235,9 +236,9 @@ test('架构：每个 src 文件声明了已知 phase，且与目录头一致', 
   const violations = [];
   for (const [relative, source] of sources) {
     const header = source.match(/^\s*\/\*\*([\s\S]*?)\*\//);
-    const phase = header?.[1].match(/@phase\s+(P(?:10|[0-9]))/)?.[1];
+    const phase = header?.[1].match(/@phase\s+(P(?:1[0-2]|[0-9]))/)?.[1];
     if (!phase) continue;
-    if (Number(phase.slice(1)) > 10) violations.push(`${relative}: invalid phase ${phase}`);
+    if (Number(phase.slice(1)) > 12) violations.push(`${relative}: invalid phase ${phase}`);
     assertEqual(headerOf(relative), path.join('src', layerOf(relative)));
   }
   assertDeepEqual(violations, []);

@@ -34,6 +34,7 @@ npm start
 `?dev=1` 仍可查看 P0 开发状态页；`?debug=1` 会在学习端显示 AttemptResult 调试面板并暴露 `__SPELLWELL_DEBUG__`（含 scheduler）。
 内容后台：`http://0.0.0.0:4173/admin`。
 练习设置：`http://0.0.0.0:4173/admin/settings.html`。
+同步设置：`http://0.0.0.0:4173/sync-setup`（详见 `docs/SYNC.md`）。
 本机数据迁移：`/migration/index.html`。
 
 ![P1 学习端](docs/p1-preview.png)

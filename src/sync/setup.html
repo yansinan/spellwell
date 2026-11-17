@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SpellWell · 同步设置</title>
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/app.css" />
+  </head>
+  <body class="sw-app">
+    <main class="sw-shell">
+      <header class="sw-hero">
+        <p class="sw-eyebrow">SYNC SETUP</p>
+        <h1 class="sw-title">同步设置</h1>
+        <p class="sw-lede">浏览器仍使用本机 IndexedDB；同步服务只负责在设备之间交换快照。</p>
+      </header>
+      <section class="sw-panel">
+        <form id="sync-form" class="sw-admin__field-row">
+          <label>服务器地址
+            <input name="baseUrl" value="/sync" autocomplete="off" />
+          </label>
+          <label>Bootstrap Code（首次）
+            <input name="bootstrapCode" placeholder="BOOT-..." autocomplete="off" />
+          </label>
+          <label>Project ID（同一项目的新用户）
+            <input name="projectId" placeholder="proj_..." autocomplete="off" />
+          </label>
+          <label>Pairing Code（同一用户的新设备）
+            <input name="pairingCode" placeholder="ABCD-EFGH" autocomplete="off" />
+          </label>
+          <label>用户名
+            <input name="userName" value="SpellWell" autocomplete="off" />
+          </label>
+          <label>设备名
+            <input name="deviceName" value="浏览器" autocomplete="off" />
+          </label>
+          <button type="submit" class="sw-check">连接并启用同步</button>
+        </form>
+        <p id="sync-status" class="sw-admin__muted">首次使用 Bootstrap Code 创建项目；第二台设备使用第一台生成的 Pairing Code；设备 token 只保存在本机 localStorage。</p>
+        <button type="button" id="pairing-code" class="sw-text-button" hidden>生成配对码</button>
+        <pre id="pairing-output" class="sw-admin__muted"></pre>
+        <p class="sw-admin__muted"><a href="/">返回练习</a></p>
+      </section>
+    </main>
+    <script type="module">
+      import { createSyncClient } from './client.js';
+      import { SYNC_STORAGE_KEYS } from './SyncManager.js';
+
+      const form = document.querySelector('#sync-form');
+      const status = document.querySelector('#sync-status');
+      const query = new URLSearchParams(location.search);
+      const bootstrap = query.get('bootstrap');
+      form.elements.bootstrapCode.value = bootstrap ?? '';
+      const existing = localStorage.getItem(SYNC_STORAGE_KEYS.TOKEN);
+      const pairButton = document.querySelector('#pairing-code');
+      const pairOutput = document.querySelector('#pairing-output');
+      if (existing) {
+        status.textContent = '本机已配置同步。可以重新 enrollment，或直接返回练习。';
+        pairButton.hidden = false;
+      }
+      pairButton?.addEventListener('click', async () => {
+        try {
+          const client = createSyncClient({
+            baseUrl: form.elements.baseUrl.value.trim() || '/sync',
+            deviceToken: localStorage.getItem(SYNC_STORAGE_KEYS.TOKEN),
+          });
+          const pairing = await client.createPairingCode({ ttlSeconds: 600 });
+          pairOutput.textContent = `Pairing Code: ${pairing.code}\nExpires: ${pairing.expiresAt}`;
+        } catch (error) {
+          pairOutput.textContent = `生成失败：${error.message ?? error}`;
+        }
+      });
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        status.textContent = '正在连接同步服务…';
+        const baseUrl = form.elements.baseUrl.value.trim() || '/sync';
+        try {
+          const client = createSyncClient({ baseUrl });
+          const credential = {
+            ...(form.elements.bootstrapCode.value.trim() ? { bootstrapCode: form.elements.bootstrapCode.value.trim() } : {}),
+            ...(form.elements.projectId.value.trim() ? { projectId: form.elements.projectId.value.trim() } : {}),
+            ...(form.elements.pairingCode.value.trim() ? { pairingCode: form.elements.pairingCode.value.trim() } : {}),
+            userName: form.elements.userName.value.trim() || 'SpellWell',
+            deviceName: form.elements.deviceName.value.trim() || '浏览器',
+          };
+          const result = await client.enroll(credential);
+          localStorage.setItem(SYNC_STORAGE_KEYS.BASE_URL, baseUrl);
+          localStorage.setItem(SYNC_STORAGE_KEYS.TOKEN, result.deviceToken);
+          localStorage.setItem(SYNC_STORAGE_KEYS.PROJECT, result.projectId);
+          localStorage.setItem(SYNC_STORAGE_KEYS.DEVICE, result.device?.name ?? '');
+          status.textContent = `同步已启用：${result.user?.name ?? '用户'} / ${result.device?.name ?? '设备'}`;
+          setTimeout(() => { location.href = '/'; }, 800);
+        } catch (error) {
+          status.textContent = `连接失败：${error.message ?? error}。练习仍可离线使用，稍后重试即可。`;
+        }
+      });
+    </script>
+  </body>
+</html>

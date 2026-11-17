@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [0.13.0] — 2026-11-17 · 自建快照同步
+
+- 接入 `indexDB-snapshot-sync`，浏览器继续使用 IndexedDB 和本地调度。
+- 增加同源 `/sync` 代理、快照合并、enrollment/pairing、离线容错。
+- 增加 `/sync-setup`。
+
 ## [0.12.2] — 2026-11-13 · 当次错题强化
 
 - 首次错题插入同词不同题型到当次练习后半段。

@@ -48,7 +48,10 @@ async function boot() {
       root,
       session,
       debug: params.get('debug') === '1',
-      onResult: (result) => scheduler.recordAttempt(result),
+      onResult: async (result) => {
+        await scheduler.recordAttempt(result);
+        workspace.sync?.requestSync();
+      },
       loadReport,
       speedHistory,
       onSpeedRecord: recordSpeed,
