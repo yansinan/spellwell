@@ -92,6 +92,18 @@ test('T-MATCH：多选分类判对，选错集合判错', () => {
   assertEqual(wrong.wordCorrect, false);
 });
 
+test('T-MATCH：只选一个正确词仍判错，必须选全', () => {
+  const model = TMatch.build(spec(), bundle);
+  const one = TMatch.judge({
+    spec: spec(),
+    renderModel: model,
+    events: [{ kind: 'tap-unit', unitId: 'w.fish' }],
+    bundle,
+    now: 1,
+  });
+  assertEqual(one.wordCorrect, false);
+});
+
 test('组合状态：答对词写入 wordsPassed 与独立间隔', async () => {
   const { scheduler, stateRepository } = await setup();
   await scheduler.recordAttempt(correct('w.fish'));
@@ -129,22 +141,3 @@ test('每日队列：到期组合追加最多 1 道 T-MATCH', async () => {
   assertEqual(specs.length <= 8, true);
 });
 
-test('T-MATCH：选中任意一个正确词即可，不要求穷举全部', () => {
-  const model = TMatch.build(spec(), bundle);
-  const one = TMatch.judge({
-    spec: spec(),
-    renderModel: model,
-    events: [{ kind: 'tap-unit', unitId: 'w.fish' }],
-    bundle,
-    now: 1,
-  });
-  assertEqual(one.wordCorrect, true);
-  const mixed = TMatch.judge({
-    spec: spec(),
-    renderModel: model,
-    events: [{ kind: 'tap-unit', unitId: 'w.fish' }, { kind: 'tap-unit', unitId: 'w.cat' }],
-    bundle,
-    now: 1,
-  });
-  assertEqual(mixed.wordCorrect, false);
-});

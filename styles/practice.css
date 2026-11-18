@@ -1155,3 +1155,16 @@
   box-shadow: var(--sw-focus-ring);
   border-radius: var(--sw-radius-sm);
 }
+
+/* T-MATCH keyboard/instruction clarity */
+.sw-match__help,
+.sw-match__count {
+  margin: 0;
+  color: var(--sw-ink-soft);
+  font-size: 12px;
+}
+
+.sw-match__count {
+  font-weight: 800;
+  color: var(--sw-primary-deep);
+}

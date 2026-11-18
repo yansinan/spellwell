@@ -45,7 +45,7 @@
 | [0039](0039-review-spacing-and-progress-cap.md) | 复习间隔优先/进度封顶 | Accepted | 未到期不 filler；未 mastered 不显示 100% |
 | [0040](0040-in-session-repair.md) | 当次错题后半段换题型强化 | Accepted | 首次错词插入同词不同题型；最多一次 |
 | [0041](0041-snapshot-sync.md) | 浏览器 IndexedDB 快照同步 | Accepted | /sync 代理；浏览器 merge；离线容错 |
-| [0042](0042-tmatch-correct-subset.md) | T-MATCH 接受正确子集 | Accepted | 任一正确词即可；错误词仍判错 |
+| [0042](0042-tmatch-select-all.md) | T-MATCH 必须选全并明确提示 | Accepted | 选中全部正确词；提示/反馈明确 |
 | [0043](0043-keyboard-operability.md) | 全键盘操作与焦点恢复 | Accepted | Enter/Space、焦点恢复、focus ring |
 
 新增 ADR 的模板：

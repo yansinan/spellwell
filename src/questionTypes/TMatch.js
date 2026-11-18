@@ -66,9 +66,7 @@ function judgeMatch({ spec, renderModel, events, bundle, now = Date.now() }) {
   for (const event of Array.isArray(events) ? events : []) {
     if (event.kind === 'tap-unit' && typeof event.unitId === 'string') selected.add(event.unitId);
   }
-  // 只要选中的词全部属于正确集合且至少选一个，就算完成；
-  // 不再要求穷举所有包含 focus 的词，避免只选目标词被误判。
-  const wordCorrect = selected.size > 0 && [...selected].every((id) => correct.has(id));
+  const wordCorrect = selected.size === correct.size && [...correct].every((id) => selected.has(id));
   if (wordCorrect) {
     return makeAttempt({ spec, wordCorrect: true, firstError: null, now });
   }

@@ -119,7 +119,7 @@ test('ADR：偏离设计的裁决已入库，并被追溯矩阵引用', async ()
   assert(decisionFiles.includes('0039-review-spacing-and-progress-cap.md'));
   assert(decisionFiles.includes('0040-in-session-repair.md'));
   assert(decisionFiles.includes('0041-snapshot-sync.md'));
-  assert(decisionFiles.includes('0042-tmatch-correct-subset.md'));
+  assert(decisionFiles.includes('0042-tmatch-select-all.md'));
   assert(decisionFiles.includes('0043-keyboard-operability.md'));
   const adr1 = await read('docs/decisions/0001-storage-contract.md');
   const adr2 = await read('docs/decisions/0002-docs-as-code.md');

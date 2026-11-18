@@ -28,7 +28,7 @@ const TYPE_COPY = Object.freeze({
   'T-REORDER': { title: 'Put the sounds in order', hint: 'Tap two sounds to swap.' },
   'T-EDIT': { title: 'Fix the word', hint: '' },
   'T-SEGMENT': { title: 'Mark the sounds', hint: 'Tap the gaps.' },
-  'T-MATCH': { title: 'Find the sound', hint: 'Choose one or more matching words.' },
+  'T-MATCH': { title: 'Find the sound', hint: 'Select every word with the target sound, then Check.' },
   'T-JUDGE-FIX': { title: 'Judge the spelling', hint: '' },
   'T-CLOZE': { title: 'Finish the sentence', hint: '' },
 });
@@ -145,6 +145,24 @@ export class PracticeScreen {
       if (!control || /** @type {HTMLButtonElement} */ (control).disabled) return;
       event.preventDefault();
       /** @type {HTMLButtonElement} */ (control).click();
+    });
+    this.#root.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      if (event.isComposing || event.keyCode === 229) return;
+      const target = /** @type {HTMLElement} */ (event.target);
+      const control = target instanceof Element ? target.closest('[data-focus-key]') : null;
+      if (!control) return;
+      const key = String(/** @type {HTMLElement} */ (control).dataset.focusKey ?? '');
+      const prefix = key.split(':')[0];
+      if (!prefix) return;
+      const items = [...this.#root.querySelectorAll(`[data-focus-key^="${prefix}:"]`)]
+        .filter((item) => !(/** @type {HTMLButtonElement} */ (item).disabled));
+      if (items.length === 0) return;
+      event.preventDefault();
+      const index = items.indexOf(control);
+      const delta = event.key === 'ArrowRight' ? 1 : -1;
+      const next = items[(index + delta + items.length) % items.length];
+      next?.focus?.({ preventScroll: true });
     });
     this.#renderCurrent();
     this.#startClock();
@@ -518,7 +536,9 @@ export class PracticeScreen {
     );
     return `
       <div class="sw-match" data-role="match">
-        <p class="sw-match__focus">Words with <strong>${focusText}</strong>?</p>
+        <p class="sw-match__focus">Select <strong>every</strong> word with <strong>${focusText}</strong>.</p>
+        <p class="sw-match__help">Use ← → to move, Enter/Space to choose, then Tab to Check.</p>
+        <p class="sw-match__count">${selected.size} selected</p>
         <div class="sw-match__options">
           ${this.#current.renderModel.units.map((unit) => {
             const on = selected.has(unit.unitId);
@@ -1326,16 +1346,26 @@ export class PracticeScreen {
     stage?.classList.add('is-wrong');
     if (feedback) {
       feedback.classList.add('is-wrong-feedback');
-      feedback.innerHTML = `
-        <span class="sw-feedback__title">Not quite.</span>
-        <span class="sw-feedback__answer">The word is <strong>${answer}</strong>.</span>
-        ${this.#feedbackSpeechHtml()}
-        <button type="button" class="sw-text-button" data-action="retry">Try again</button>
-      `;
+      const focusText = escapeHtml(spec.params?.focusText ?? '');
+      feedback.innerHTML = spec.typeId === 'T-MATCH'
+        ? `
+          <span class="sw-feedback__title">Not quite.</span>
+          <span class="sw-feedback__answer">Select <strong>every</strong> word with <strong>${focusText}</strong>.</span>
+          ${this.#feedbackSpeechHtml()}
+          <button type="button" class="sw-text-button" data-action="retry">Try again</button>
+        `
+        : `
+          <span class="sw-feedback__title">Not quite.</span>
+          <span class="sw-feedback__answer">The word is <strong>${answer}</strong>.</span>
+          ${this.#feedbackSpeechHtml()}
+          <button type="button" class="sw-text-button" data-action="retry">Try again</button>
+        `;
       this.#bindFeedbackSpeech(feedback);
-      feedback.querySelector('[data-action="retry"]')?.addEventListener('click', () => {
+      const retry = feedback.querySelector('[data-action="retry"]');
+      retry?.addEventListener('click', () => {
         this.#renderCurrent();
       });
+      retry?.focus();
     }
     this.#session.retry();
     this.#locked = false;
@@ -1430,7 +1460,9 @@ export class PracticeScreen {
     `;
     this.#bindSoundToggle();
     this.#bindProgressButton();
-    this.#root.querySelector('[data-action="back"]')?.addEventListener('click', () => this.#renderCurrent());
+    const back = this.#root.querySelector('[data-action="back"]');
+    back?.addEventListener('click', () => this.#renderCurrent());
+    back?.focus?.({ preventScroll: true });
   }
 
   #renderDone() {
@@ -1503,6 +1535,7 @@ export class PracticeScreen {
       this.#stopClock();
       this.#onNewPractice?.();
     });
+    this.#root.querySelector('[data-action="again"]')?.focus?.({ preventScroll: true });
     this.#bindSoundToggle();
     this.#bindProgressButton();
     this.#sound.complete();
