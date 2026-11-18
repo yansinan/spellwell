@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const port = Number(process.env.PORT ?? 4173);
 const host = process.env.HOST ?? '0.0.0.0';
-const syncServer = process.env.SYNC_SERVER_URL ?? 'http://helix:8787';
+const syncServer = process.env.SYNC_SERVER_URL ?? 'http://helix:4010';
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',

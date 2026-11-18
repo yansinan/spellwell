@@ -10,8 +10,7 @@
 #   - 源码 bind mount 到 /app（只读），改代码刷新页面即生效
 #   - 纯静态前端，无运行时数据，不挂载任何状态目录
 #   - 以宿主机 uid 1000 运行；HOME=/tmp 避免任何 ~/.cache 外溢
-#   - 宿主 4173 已被源码 dev server 占用，容器对外用 4273
-#   - /sync 反代到宿主 :8787（indexDB-snapshot-sync），helix 经 host-gateway 解析
+#   - /sync 反代到宿主 :4010（indexDB-snapshot-sync），helix 经 host-gateway 解析
 #   - 最小权限：cap_drop ALL（非特权端口，无需任何 cap）
 
 services:
@@ -29,7 +28,7 @@ services:
     environment:
       - HOME=/tmp
       - TZ=Asia/Shanghai
-      - SYNC_SERVER_URL=http://helix:8787
+      - SYNC_SERVER_URL=http://helix:4010
     extra_hosts:
       - "helix:host-gateway"
     cap_drop:

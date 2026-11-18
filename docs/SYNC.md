@@ -16,7 +16,7 @@ IndexedDB A                       IndexedDB B
     │                                 │
     └──── /sync 同源代理 ──────────────┘
                    │
-          http://helix:8787
+          http://helix:4010
           indexDB-snapshot-sync
 ```
 
@@ -38,19 +38,19 @@ node tools/serve.mjs
 同步服务已由另一台主机运行：
 
 ```text
-http://helix:8787
+http://helix:4010
 ```
 
 `tools/serve.mjs` 默认代理：
 
 ```text
-/sync/* → http://helix:8787/*
+/sync/* → http://helix:4010/*
 ```
 
 也可覆盖：
 
 ```bash
-SYNC_SERVER_URL=http://127.0.0.1:8787 node tools/serve.mjs
+SYNC_SERVER_URL=http://127.0.0.1:4010 node tools/serve.mjs
 ```
 
 ## 固定项目
@@ -177,13 +177,13 @@ enroll / pairing → 返回一次 deviceToken
 ## 生产部署
 
 浏览器所在静态站点需要把 `/sync/*` 反向代理到同步服务；
-否则浏览器会因为跨域无法直接访问 `helix:8787`。
+否则浏览器会因为跨域无法直接访问 `helix:4010`。
 
 示例 Nginx：
 
 ```nginx
 location /sync/ {
-  proxy_pass http://helix:8787/;
+  proxy_pass http://helix:4010/;
   proxy_set_header Host $host;
 }
 ```
