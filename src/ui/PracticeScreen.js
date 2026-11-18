@@ -28,7 +28,7 @@ const TYPE_COPY = Object.freeze({
   'T-REORDER': { title: 'Put the sounds in order', hint: 'Tap two sounds to swap.' },
   'T-EDIT': { title: 'Fix the word', hint: '' },
   'T-SEGMENT': { title: 'Mark the sounds', hint: 'Tap the gaps.' },
-  'T-MATCH': { title: 'Find the sound', hint: 'Choose every matching word.' },
+  'T-MATCH': { title: 'Find the sound', hint: 'Choose one or more matching words.' },
   'T-JUDGE-FIX': { title: 'Judge the spelling', hint: '' },
   'T-CLOZE': { title: 'Finish the sentence', hint: '' },
 });
@@ -124,7 +124,7 @@ export class PracticeScreen {
     this.#root.addEventListener('keydown', (event) => {
       if (event.key !== 'Enter' || event.isComposing || event.keyCode === 229) return;
       const target = /** @type {HTMLElement} */ (event.target);
-      if (target instanceof HTMLInputElement) return;
+      if (target instanceof Element && target.closest('button, a, input, textarea, select, [contenteditable="true"], [role="button"]')) return;
       const retry = this.#root.querySelector('[data-action="retry"]');
       if (retry) {
         event.preventDefault();
@@ -136,6 +136,15 @@ export class PracticeScreen {
         event.preventDefault();
         check.click();
       }
+    });
+    // 答案控件的 Enter/Space 由我们统一激活，避免浏览器差异或全局 Enter 抢走。
+    this.#root.addEventListener('keydown', (event) => {
+      if ((event.key !== 'Enter' && event.key !== ' ') || event.isComposing || event.keyCode === 229) return;
+      const target = /** @type {HTMLElement} */ (event.target);
+      const control = target instanceof Element ? target.closest('[data-focus-key]') : null;
+      if (!control || /** @type {HTMLButtonElement} */ (control).disabled) return;
+      event.preventDefault();
+      /** @type {HTMLButtonElement} */ (control).click();
     });
     this.#renderCurrent();
     this.#startClock();
@@ -236,6 +245,7 @@ export class PracticeScreen {
     this.#bindQuestion();
     this.#bindSoundToggle();
     this.#bindProgressButton();
+    this.#focusQuestionStart();
     void this.#autoSpeakWord();
   }
 
@@ -391,7 +401,7 @@ export class PracticeScreen {
           ${this.#reorderOrder.map((unitId, index) => {
             const text = this.#unitText(unitId);
             const selected = this.#reorderSelected === index;
-            return `<button type="button" class="sw-slot is-filled ${selected ? 'is-selected' : ''}" data-reorder-index="${index}" aria-pressed="${selected}" aria-label="Swap ${escapeHtml(text)}">${escapeHtml(text)}</button>`;
+            return `<button type="button" class="sw-slot is-filled ${selected ? 'is-selected' : ''}" data-reorder-index="${index}" data-focus-key="reorder:${index}" aria-pressed="${selected}" aria-label="Swap ${escapeHtml(text)}">${escapeHtml(text)}</button>`;
           }).join('')}
         </div>
       `;
@@ -409,13 +419,13 @@ export class PracticeScreen {
                 splitSlot += 1;
                 const event = this.#eventForSlot(slotIndex);
                 const selected = event ? this.#unitText(event.unitId) : '';
-                return `<button type="button" class="sw-slot sw-slot--blank ${selected ? 'is-filled' : ''}" data-slot-index="${slotIndex}" aria-label="Missing letter">${escapeHtml(selected)}</button>`;
+                return `<button type="button" class="sw-slot sw-slot--blank ${selected ? 'is-filled' : ''}" data-slot-index="${slotIndex}" data-focus-key="fill:${slotIndex}" aria-label="Missing letter">${escapeHtml(selected)}</button>`;
               }).join('');
             }
             if (!split && blankIndexes.includes(index)) {
               const event = this.#eventForSlot(index);
               const selected = event ? this.#unitText(event.unitId) : '';
-              return `<button type="button" class="sw-slot sw-slot--blank ${selected ? 'is-filled' : ''}" data-slot-index="${index}" aria-label="Missing sound">${escapeHtml(selected)}</button>`;
+              return `<button type="button" class="sw-slot sw-slot--blank ${selected ? 'is-filled' : ''}" data-slot-index="${index}" data-focus-key="fill:${index}" aria-label="Missing sound">${escapeHtml(selected)}</button>`;
             }
             return `<span class="sw-slot sw-slot--fixed">${escapeHtml(unit.text)}</span>`;
           }).join('')}
@@ -429,7 +439,7 @@ export class PracticeScreen {
         ${this.#current.renderModel.slots.map((slot) => {
           const text = selected[slot.index] ?? '';
           const label = text ? `Remove ${text}` : `Slot ${slot.index + 1}`;
-          return `<button type="button" class="sw-slot ${text ? 'is-filled' : ''}" data-slot-index="${slot.index}" tabindex="${text ? '0' : '-1'}" aria-label="${escapeHtml(label)}">${escapeHtml(text)}</button>`;
+          return `<button type="button" class="sw-slot ${text ? 'is-filled' : ''}" data-slot-index="${slot.index}" data-focus-key="slot:${slot.index}" tabindex="${text ? '0' : '-1'}" aria-label="${escapeHtml(label)}">${escapeHtml(text)}</button>`;
         }).join('')}
       </div>
     `;
@@ -441,7 +451,7 @@ export class PracticeScreen {
       <div class="sw-tiles" data-role="tiles">
         ${this.#current.renderModel.units.map((unit) => {
           const isUsed = used.has(unit.unitId);
-          return `<button type="button" class="sw-tile ${isUsed ? 'is-used' : ''}" data-unit-id="${escapeHtml(unit.unitId)}" data-text="${escapeHtml(unit.text)}" aria-pressed="${isUsed}" ${isUsed ? 'disabled aria-disabled="true"' : ''}>${escapeHtml(unit.text)}</button>`;
+          return `<button type="button" class="sw-tile ${isUsed ? 'is-used' : ''}" data-unit-id="${escapeHtml(unit.unitId)}" data-focus-key="tile:${escapeHtml(unit.unitId)}" data-text="${escapeHtml(unit.text)}" aria-pressed="${isUsed}" ${isUsed ? 'disabled aria-disabled="true"' : ''}>${escapeHtml(unit.text)}</button>`;
         }).join('')}
       </div>
     `;
@@ -495,7 +505,7 @@ export class PracticeScreen {
       if (index < text.length - 1) {
         const gapIndex = index + 1;
         const on = selected.has(gapIndex);
-        parts.push(`<button type="button" class="sw-gap ${on ? 'is-on' : ''}" data-gap-index="${gapIndex}" aria-pressed="${on}" aria-label="Gap ${gapIndex}"></button>`);
+        parts.push(`<button type="button" class="sw-gap ${on ? 'is-on' : ''}" data-gap-index="${gapIndex}" data-focus-key="gap:${gapIndex}" aria-pressed="${on}" aria-label="Gap ${gapIndex}"></button>`);
       }
     }
     return `<div class="sw-segments" data-role="segments">${parts.join('')}</div>`;
@@ -512,7 +522,7 @@ export class PracticeScreen {
         <div class="sw-match__options">
           ${this.#current.renderModel.units.map((unit) => {
             const on = selected.has(unit.unitId);
-            return `<button type="button" class="sw-match__option ${on ? 'is-selected' : ''}" data-match-id="${escapeHtml(unit.unitId)}" aria-pressed="${on}">${escapeHtml(unit.text)}</button>`;
+            return `<button type="button" class="sw-match__option ${on ? 'is-selected' : ''}" data-match-id="${escapeHtml(unit.unitId)}" data-focus-key="match:${escapeHtml(unit.unitId)}" aria-pressed="${on}">${escapeHtml(unit.text)}</button>`;
           }).join('')}
         </div>
       </div>
@@ -527,8 +537,8 @@ export class PracticeScreen {
       <div class="sw-judge" data-role="judge">
         <p class="sw-judge__claim">${claim}</p>
         <div class="sw-judge__choices">
-          <button type="button" class="sw-judge__choice ${decision === 'correct' ? 'is-selected' : ''}" data-judge="correct" aria-pressed="${decision === 'correct'}">Correct</button>
-          <button type="button" class="sw-judge__choice ${wrong ? 'is-selected' : ''}" data-judge="wrong" aria-pressed="${wrong}">Wrong</button>
+          <button type="button" class="sw-judge__choice ${decision === 'correct' ? 'is-selected' : ''}" data-judge="correct" data-focus-key="judge:correct" aria-pressed="${decision === 'correct'}">Correct</button>
+          <button type="button" class="sw-judge__choice ${wrong ? 'is-selected' : ''}" data-judge="wrong" data-focus-key="judge:wrong" aria-pressed="${wrong}">Wrong</button>
         </div>
         ${wrong ? `
           <div class="sw-type-row">
@@ -1149,11 +1159,33 @@ export class PracticeScreen {
   }
 
   #afterSelectionChange() {
+    const focusKey = /** @type {HTMLElement|null} */ (document.activeElement)?.dataset?.focusKey ?? null;
     this.#clearTimers();
     this.#root.innerHTML = this.#questionTemplate();
     this.#bindQuestion();
     this.#bindSoundToggle();
     this.#bindProgressButton();
+    // 如果 bind 已经把焦点放进输入框，不要抢回。
+    if (!this.#root.contains(document.activeElement)) this.#restoreFocus(focusKey);
+  }
+
+  #restoreFocus(focusKey) {
+    let target = null;
+    if (focusKey) {
+      target = this.#root.querySelector(`[data-focus-key="${CSS.escape(focusKey)}"]`);
+    }
+    if (focusKey?.startsWith('tile:') || !target || /** @type {HTMLButtonElement} */ (target).disabled) {
+      target = this.#root.querySelector('[data-focus-key^="tile:"]:not(:disabled)')
+        ?? this.#root.querySelector('[data-action="check"]:not(:disabled)')
+        ?? this.#root.querySelector('[data-focus-key]:not(:disabled)');
+    }
+    target?.focus?.({ preventScroll: true });
+  }
+
+  #focusQuestionStart() {
+    if (this.#root.contains(document.activeElement)) return;
+    const target = this.#root.querySelector('.sw-practice__stage [data-focus-key]:not([tabindex="-1"]):not(:disabled), .sw-practice__stage input:not(:disabled)');
+    target?.focus?.({ preventScroll: true });
   }
 
   async #autoSpeakWord() {

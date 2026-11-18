@@ -141,6 +141,8 @@
 | R-SYNC-05 | 后台显示 revision/最后同步时间/待同步状态 | `SyncManager` + `SyncAdmin` | 后台浏览器 | P12 | ✅ |
 | R-ADMIN-HISTORY-01 | 历次做题分析/家长关注 | `HistoryAnalytics` + AdminApp | `tests/p12/historyAnalytics.test.js` + 后台浏览器 | P12 | ✅ |
 | R-ADMIN-HISTORY-02 | 练习场次展开错误详情 | `HistoryAnalytics` | `tests/p12/historyAnalytics.test.js` + 后台浏览器 | P12 | ✅ |
+| R-P5-04 | T-MATCH 选任一正确词即通过 | `TMatch.js` | `tests/p5/match.test.js` | P5 | ✅ |
+| R-UI-04 | 全键盘操作/焦点恢复 | `PracticeScreen.js` + CSS | 浏览器键盘实测 | P12 | ✅ |
 | R-SPEECH-01 | 原生单词/例句朗读 | `src/ui/speech.js` + PracticeScreen | `tests/p12/speech.test.js` | P12 | ✅ |
 | R-SPEECH-02 | 所有题型自动朗读 | `PracticeScreen` 自动朗读 | 浏览器 | P12 | ✅ |
 | R-SPEECH-03 | 自动单词/字母块朗读 | `PracticeScreen` + `speech.speakGrapheme` | `tests/p12/speech.test.js` + 浏览器 | P12 | ✅ |

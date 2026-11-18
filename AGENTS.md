@@ -195,3 +195,4 @@ node tools/serve.mjs
 - 首次错词在本轮后半段换题型强化一次；不额外写状态；见 ADR-0040。
 - 朗读使用 `src/ui/speech.js` 的原生 speechSynthesis；所有题型自动朗读单词，首轮等待 voice 就绪；字母块点击朗读；按钮高对比；见 docs/SPEECH.md。
 - 后台做题分析只读 attempts/wordStates，不改状态；场次按 30 分钟间隔估算；练习场次可展开错误详情；见 `src/admin/HistoryAnalytics.js`。
+- T-MATCH 选中任一正确词即通过；全键盘使用 Enter/Space + 焦点恢复；见 ADR-0042/0043。

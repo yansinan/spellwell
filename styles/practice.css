@@ -1146,3 +1146,12 @@
   font-size: 12px;
   font-weight: 700;
 }
+
+/* Keyboard focus for all answer controls */
+.sw-match__option:focus-visible,
+.sw-judge__choice:focus-visible,
+.sw-gap:focus-visible {
+  outline: none;
+  box-shadow: var(--sw-focus-ring);
+  border-radius: var(--sw-radius-sm);
+}

@@ -128,3 +128,23 @@ test('每日队列：到期组合追加最多 1 道 T-MATCH', async () => {
   assertEqual(matches[0].params.options.filter((option) => option.correct).length >= 2, true);
   assertEqual(specs.length <= 8, true);
 });
+
+test('T-MATCH：选中任意一个正确词即可，不要求穷举全部', () => {
+  const model = TMatch.build(spec(), bundle);
+  const one = TMatch.judge({
+    spec: spec(),
+    renderModel: model,
+    events: [{ kind: 'tap-unit', unitId: 'w.fish' }],
+    bundle,
+    now: 1,
+  });
+  assertEqual(one.wordCorrect, true);
+  const mixed = TMatch.judge({
+    spec: spec(),
+    renderModel: model,
+    events: [{ kind: 'tap-unit', unitId: 'w.fish' }, { kind: 'tap-unit', unitId: 'w.cat' }],
+    bundle,
+    now: 1,
+  });
+  assertEqual(mixed.wordCorrect, false);
+});
